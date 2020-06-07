@@ -1218,7 +1218,7 @@ select.form-control.has-value{
 .gradient-overlay:before{
     position: absolute;
     content: '';
-    background-image: linear-gradient(75deg, rgba(19, 81, 168, 0.85) 10%, rgba(22, 46, 102, 0.85));
+    background-image: linear-gradient(75deg, rgba(19, 81, 168, 0.15) 10%, rgba(22, 46, 102, 0.15));
     width: 100%;
     height: 100%;
     top: 0;
