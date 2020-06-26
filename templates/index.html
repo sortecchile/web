@@ -1,55 +1,4 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- SEO Meta description -->
-    <meta name="description"
-          content="BizBite corporate business template or agency and marketing template helps you easily create websites for your business.">
-    <meta name="author" content="ThemeTags">
-
-    <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
-    <meta property="og:site_name" content=""/> <!-- website name -->
-    <meta property="og:site" content=""/> <!-- website link -->
-    <meta property="og:title" content=""/> <!-- title shown in the actual shared post -->
-    <meta property="og:description" content=""/> <!-- description shown in the actual shared post -->
-    <meta property="og:image" content=""/> <!-- image link, make sure it's jpg -->
-    <meta property="og:url" content=""/> <!-- where do you want your post to link to -->
-    <meta property="og:type" content="article"/>
-
-    <!--title-->
-    <title>Citylink - Soluciones Smart Cities</title>
-
-    <!--favicon icon-->
-    <link rel="icon" href="img/favicon.png" type="image/png" sizes="16x16">
-
-    <!--google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700%7COpen+Sans:400,600&display=swap" rel="stylesheet">
-
-    <!--Bootstrap css-->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <!--Magnific popup css-->
-    <link rel="stylesheet" href="css/magnific-popup.css">
-    <!--Themify icon css-->
-    <link rel="stylesheet" href="css/themify-icons.css">
-    <!--Fontawesome icon css-->
-    <link rel="stylesheet" href="css/all.min.css">
-    <!--animated css-->
-    <link rel="stylesheet" href="css/animate.min.css">
-    <!--ytplayer css-->
-    <link rel="stylesheet" href="css/jquery.mb.YTPlayer.min.css">
-    <!--Owl carousel css-->
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <!--custom css-->
-    <link rel="stylesheet" href="css/style.css">
-    <!--responsive css-->
-    <link rel="stylesheet" href="css/responsive.css">
-
-</head>
-<body>
+{% extends "layout.html" %}
 
 <!--loader start-->
 <div id="preloader">
@@ -62,14 +11,14 @@
     </div>
 </div>
 <!--loader end-->
-
+{% block heading %}
 <!--header section start-->
 <header class="header">
     <!--start navbar-->
     <nav class="navbar navbar-expand-lg fixed-top bg-transparent">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <img src="img/logo-white4.png" alt="logo" class="img-fluid"/>
+            <a class="navbar-brand" href="{{url_for('index')}}">
+                <img src="{{ url_for('static', filename='img/logo-white4.png')}}" alt="logo" class="img-fluid"/>
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,8 +27,8 @@
             <div class="collapse navbar-collapse h-auto" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto menu">
                     <li><a href="#">Inicio</a></li>
-                    <li><a  href="#">Conócenos</a></li>
-                    <li><a  href="#">Servicios</a></li>
+                    <li><a  href="#about">Conócenos</a></li>
+                    <li><a  href="#services">Servicios</a></li>
                     <!--header section end
                     <li><a  href="#" class="dropdown-toggle">Pages</a>
                         <ul class="sub-menu">
@@ -102,7 +51,7 @@
                         </ul>
                     </li>
                 <!-->
-                    <li><a  href="#">Proyectos</a></li>
+                    <li><a  href="#team">Equipo</a></li>
                     <!--<li><a  href="#" class="dropdown-toggle">Blog</a>
                         <ul class="sub-menu">
                             <li><a href="blog-default.html">Blog Grid</a></li>
@@ -115,7 +64,7 @@
                         </ul>
                     </li>
                 -->
-                    <li><a  href="contact-us.html">Contáctanos</a></li>
+                    <li><a  href="{{url_for( 'contact' )}}">Contáctanos</a></li>
                 </ul>
             </div>
         </div>
@@ -123,11 +72,14 @@
 </header>
 <!--header section end-->
 
+{% endblock %}
+{% block body %}
+
 <!--body content wrap start-->
 <div class="main">
     <!--hero section start-->
-    <section class="hero-equal-height pt-165 pb-100" style="background: url('img/bg-illustration.svg')no-repeat center center / cover">
-        <div class="hero-bottom-shape-two" style="background: url('img/hero-bottom-shape.svg')no-repeat bottom center"></div>
+    <section class="hero-equal-height pt-165 pb-100" style="background: url('static/img/bg-illustration.svg')no-repeat center center / cover">
+        <div class="hero-bottom-shape-two" style="background: url('static/img/hero-bottom-shape.svg')no-repeat bottom center"></div>
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-12 col-lg-6">
@@ -136,14 +88,14 @@
                         <p class="lead">Optimizamos el uso de recursos como el agua, para obtener soluciones reales.</p>
 
                         <div class="action-btns mt-3">
-                            <a href="#" class="btn accent-solid-btn">Conócenos!</a>
+                            <a href="#about" class="btn accent-solid-btn">Conócenos!</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-12 col-lg-6">
                     <div class="hero-animation-img">
-                        <img src="img/hero-animation-01.svg" alt="hero" class="img-fluid d-none d-lg-block animation-two" width="180">
-                        <img src="img/hero-single-img-5.svg" alt="hero" class="animation-one img-fluid custom-width">
+                        <img src="{{url_for('static', filename= 'img/hero-animation-01.svg')}}" alt="hero" class="img-fluid d-none d-lg-block animation-two" width="180">
+                        <img src="{{url_for('static', filename='img/hero-single-img-5.svg')}}" alt="hero" class="animation-one img-fluid custom-width">
                     </div>
                 </div>
             </div>
@@ -194,7 +146,7 @@
     <!--promo section end-->
 
     <!--about us section start-->
-    <section class="about-us-section pb-100">
+    <section id="about" class="about-us-section pb-100">
         <div class="container">
             <div class="row justify-content-between align-items-center">
                 <div class="col-md-12 col-lg-6">
@@ -212,7 +164,7 @@
                 </div>
                 <div class="col-md-12 col-lg-6">
                     <div class="image-wrap">
-                        <img src="img/hero-single-img-1.svg" alt="video" class="img-fluid">
+                        <img src="{{url_for('static', filename='img/hero-single-img-1.svg')}}" alt="video" class="img-fluid">
                     </div>
                 </div>
             </div>
@@ -221,7 +173,7 @@
     <!--about us section end-->
 
     <!--services section start-->
-    <section class="services-section ptb-100 gray-light-bg">
+    <section id="services" class="services-section ptb-100 gray-light-bg">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8">
@@ -234,7 +186,7 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="services-single animated-hover text-center p-5 my-md-3 my-lg-3 my-sm-0 shadow-sm white-bg rounded">
-                        <img src="img/consult.svg" alt="consulting" width="80" class="mb-3">
+                        <img src="{{url_for('static', filename='img/consult.svg')}}" alt="consulting" width="80" class="mb-3">
                         <h5>Riego inteligente</h5>
                         <p class="mb-0">Sistemas que permiten ahorrar hasta un 50% en gasto de agua.</p>
                         <a href="services-details.html" target="_blank" class="detail-link mt-4">Leer más <span class="ti-arrow-right"></span></a>
@@ -242,7 +194,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="services-single animated-hover text-center p-5 my-md-3 my-lg-3 my-sm-0 shadow-sm white-bg rounded">
-                        <img src="img/machine-learning.svg" alt="consulting" width="80" class="mb-3">
+                        <img src="{{url_for('static', filename='img/machine-learning.svg')}}" alt="consulting" width="80" class="mb-3">
                         <h5>Luminarias inteligente</h5>
                         <p class="mb-0">Iluminación regulada para reducir el coste energético.</p>
                         <a href="services-details.html" target="_blank" class="detail-link mt-4">Read more <span class="ti-arrow-right"></span></a>
@@ -250,7 +202,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="services-single animated-hover text-center p-5 my-md-3 my-lg-3 my-sm-0 shadow-sm white-bg rounded">
-                        <img src="img/data-analytics.svg" alt="consulting" width="80" class="mb-3">
+                        <img src="{{url_for('static', filename='img/data-analytics.svg')}}" alt="consulting" width="80" class="mb-3">
                         <h5>Sistemas inteligentes de aparcamiento</h5>
                         <p class="mb-0">Medición en base a sensores de los estados de los aparcamientos, dismuyendo tiempos de busqueda.</p>
                         <a href="services-details.html" target="_blank" class="detail-link mt-4">Read more <span class="ti-arrow-right"></span></a>
@@ -258,7 +210,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="services-single animated-hover text-center p-5 my-md-3 my-lg-3 my-sm-0 shadow-sm white-bg rounded">
-                        <img src="img/data-security.svg" alt="consulting" width="80" class="mb-3">
+                        <img src="{{url_for('static', filename='img/data-security.svg')}}" alt="consulting" width="80" class="mb-3">
                         <h5>Data Segura</h5>
                         <p class="mb-0">Nos encargamos de encriptar la data obtenida por nuestros sensores.</p>
                         <a href="services-details.html" target="_blank" class="detail-link mt-4">Read more <span class="ti-arrow-right"></span></a>
@@ -266,7 +218,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="services-single animated-hover text-center p-5 my-md-3 my-lg-3 my-sm-0 shadow-sm white-bg rounded">
-                        <img src="img/artificial-intelligence.svg" alt="consulting" width="80" class="mb-3">
+                        <img src="{{url_for('static', filename='img/artificial-intelligence.svg')}}" alt="consulting" width="80" class="mb-3">
                         <h5>Machine Learning</h5>
                         <p class="mb-0">Apoyo en el proceso de toma de decisiones utilizando Machine Learning.</p>
                         <a href="services-details.html" target="_blank" class="detail-link mt-4">Leer más <span class="ti-arrow-right"></span></a>
@@ -274,7 +226,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="services-single animated-hover text-center p-5 my-md-3 my-lg-3 my-sm-0 shadow-sm white-bg rounded">
-                        <img src="img/internet-things.svg" alt="consulting" width="80" class="mb-3">
+                        <img src="{{url_for('static', filename='img/internet-things.svg')}}" alt="consulting" width="80" class="mb-3">
                         <h5>Internet de las cosas</h5>
                         <p class="mb-0">Desarrollamos nuestros servicios basados en IOT.</p>
                         <a href="services-details.html" target="_blank" class="detail-link mt-4">Read more <span class="ti-arrow-right"></span></a>
@@ -286,7 +238,7 @@
     <!--services section end-->
 
     <!--promo section start-->
-    <section class="promo-section gradient-overlay ptb-100" style="background: url('img/graficos-web1.jpg')no-repeat center center / cover fixed">
+    <section class="promo-section gradient-overlay ptb-100" style="background: url('static/img/graficos-web1.jpg')no-repeat center center / cover fixed">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-10 col-lg-8">
@@ -516,7 +468,7 @@
                 <div class="col-md-4">
                     <div class="single-blog-card card border-0 shadow-sm">
                         <span class="category position-absolute badge badge-pill badge-primary">Fondos</span>
-                        <img src="img/blog/demo-day.jpg" class="card-img-top position-relative" alt="blog">
+                        <img src="{{url_for('static', filename='img/blog/demo-day.jpg')}}" class="card-img-top position-relative" alt="blog">
                         <div class="card-body">
                             <h3 class="h5 mb-2 card-title"><a href="https://www.udd.cl/noticias/2020/01/10/damo-day-2020-emprendimientos-udd-destacaron-en-diferentes-categorias/">Fondo Demo Day</a></h3>
                             <div class="post-meta mb-2">
@@ -534,7 +486,7 @@
                 <div class="col-md-4">
                     <div class="single-blog-card card border-0 shadow-sm">
                         <span class="category position-absolute badge badge-pill badge-danger">Interacción</span>
-                        <img src="img/blog/FIP.png" class="card-img-top position-relative" alt="blog">
+                        <img src="{{url_for('static', filename='img/blog/FIP.png')}}" class="card-img-top position-relative" alt="blog">
                         <div class="card-body">
                             <h3 class="h5 mb-2 card-title"><a href="https://providencia.cl/provi/site/artic/20191112/pags/20191112132441.html">Participación programa FIP Providencia</a></h3>
                             <div class="post-meta mb-2">
@@ -552,7 +504,7 @@
                 <div class="col-md-4">
                     <div class="single-blog-card card border-0 shadow-sm">
                         <span class="category position-absolute badge badge-pill badge-info">Noticias</span>
-                        <img src="img/blog/logo-udd.png" class="card-img-top" alt="blog">
+                        <img src="{{url_for('static', filename='img/blog/logo-udd.png')}}" class="card-img-top" alt="blog">
                         <div class="card-body">
                             <h3 class="h5 mb-2 card-title"><a href="#">Alianza Estratégica Innova UDD</a></h3>
                             <div class="post-meta mb-2">
@@ -674,7 +626,7 @@
 
 
     <!--team two section start-->
-    <section class="team-two-section ptb-100 gray-light-bg">
+    <section id="team" class="team-two-section ptb-100 gray-light-bg">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-8">
@@ -688,7 +640,7 @@
                 <div class="col-md-3">
                     <div class="staff-member">
                         <div class="card text-center border-0">
-                            <img src="img/nicolas2.jpeg" alt="team image" class="card-img-top">
+                            <img src="{{url_for('static', filename='img/nicolas2.jpeg')}}" alt="team image" class="card-img-top">
                             <div class="card-body">
                                 <h5 class="teacher mb-0">Nicolás Castellón</h5>
                                 <span>Co-Founder/Ingeniería Civil Industrial</span>
@@ -726,7 +678,7 @@
                 <div class="col-md-3">
                     <div class="staff-member">
                         <div class="card text-center border-0">
-                            <img src="img/Ricky.jpg" alt="team image" class="card-img-top">
+                            <img src="{{url_for('static', filename='img/Ricky.jpg')}}" alt="team image" class="card-img-top">
                             <div class="card-body">
                                 <h5 class="teacher mb-0">Ricardo Silva</h5>
                                 <span>Co-Founder</span>
@@ -763,7 +715,7 @@
                 <div class="col-md-3">
                     <div class="staff-member">
                         <div class="card text-center border-0">
-                            <img src="img/javier.png" alt="team image" class="img-fluid">
+                            <img src="{{url_for('static', filename='img/javier.png')}}" alt="team image" class="img-fluid">
                             <div class="card-body">
                                 <h5 class="teacher mb-0">Javier Ortiz </h5>
                                 <span>Managing Director</span>
@@ -801,7 +753,7 @@
                     <div class="col-md-3">
                     <div class="staff-member">
                         <div class="card text-center border-0">
-                            <img src="img/benja.jpeg" alt="team image" class="card-img-top">
+                            <img src="{{url_for('static', filename='img/benja.jpeg')}}" alt="team image" class="card-img-top">
                             <div class="card-body">
                                 <h5 class="teacher mb-0">Benjamín Martinez</h5>
                                 <span>Co-Founder/Ingeniería Civil Industrial</span>
@@ -854,7 +806,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="action-btn text-lg-right text-sm-left">
-                        <a href="#" class="btn secondary-solid-btn">Contáctanos!</a>
+                        <a href="{{url_for( 'contact' )}}" class="btn secondary-solid-btn">Contáctanos!</a>
                     </div>
                 </div>
             </div>
@@ -1014,27 +966,5 @@
 <!--bottom to top button end-->
 
 
-<!--jQuery-->
-<script src="js/jquery-3.4.1.min.js"></script>
-<!--Popper js-->
-<script src="js/popper.min.js"></script>
-<!--Bootstrap js-->
-<script src="js/bootstrap.min.js"></script>
-<!--Magnific popup js-->
-<script src="js/jquery.magnific-popup.min.js"></script>
-<!--jquery easing js-->
-<script src="js/jquery.easing.min.js"></script>
-<!--jquery ytplayer js-->
-<script src="js/jquery.mb.YTPlayer.min.js"></script>
-<!--Isotope filter js-->
-<script src="js/mixitup.min.js"></script>
-<!--wow js-->
-<script src="js/wow.min.js"></script>
-<!--owl carousel js-->
-<script src="js/owl.carousel.min.js"></script>
-<!--countdown js-->
-<script src="js/jquery.countdown.min.js"></script>
-<!--custom js-->
-<script src="js/scripts.js"></script>
-</body>
-</html>
+
+{% endblock %}
