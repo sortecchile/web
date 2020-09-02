@@ -77,9 +77,9 @@
             </button>
             <div class="collapse navbar-collapse h-auto" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto menu">
-                    <li><a href="#">Inicio</a></li>
-                    <li><a  href="#">Conócenos</a></li>
-                    <li><a  href="#">Servicios</a></li>
+                    <li class="scroll-to-target" data-target="#inicio"><a href="#inicio">Inicio</a></liclass="scroll-to-target" data-target="#conocenos">
+                    <li class="scroll-to-target" data-target="#conocenos"><a  href="#conocenos">Conócenos</a></li>
+                    <li class="scroll-to-target" data-target="#servicios"><a  href="#servicios">Servicios</a></li>
                     <!--header section end
                     <li><a  href="#" class="dropdown-toggle">Pages</a>
                         <ul class="sub-menu">
@@ -102,7 +102,7 @@
                         </ul>
                     </li>
                 <!-->
-                    <li><a  href="#">Proyectos</a></li>
+                    <li class="scroll-to-target" data-target="#proyectos"><a  href="#proyectos">Proyectos</a></liclass="scroll-to-target" data-target="#conocenos">
                     <!--<li><a  href="#" class="dropdown-toggle">Blog</a>
                         <ul class="sub-menu">
                             <li><a href="blog-default.html">Blog Grid</a></li>
@@ -126,17 +126,17 @@
 <!--body content wrap start-->
 <div class="main">
     <!--hero section start-->
-    <section class="hero-equal-height pt-165 pb-100" style="background: url('img/bg-illustration.svg')no-repeat center center / cover">
+    <section class="hero-equal-height pt-165 pb-100" style="background: url('img/bg-illustration.svg')no-repeat center center / cover" id="inicio">
         <div class="hero-bottom-shape-two" style="background: url('img/hero-bottom-shape.svg')no-repeat bottom center"></div>
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-12 col-lg-6">
                     <div class="hero-slider-content text-white z-index position-relative">
                         <h1 class="text-white">Desarrollo de IOT para Smart Cities</h1>
-                        <p class="lead">Optimizamos el uso de recursos como el agua, para obtener soluciones reales.</p>
+                        <p class="lead">Optimizamos el uso de recursos como el agua, generar un ahorro real en nuestros clientes.</p>
 
                         <div class="action-btns mt-3">
-                            <a href="#" class="btn accent-solid-btn">Conócenos!</a>
+                            <a href="#nosotros" class="btn accent-solid-btn">Conócenos!</a>
                         </div>
                     </div>
                 </div>
@@ -152,7 +152,8 @@
     <!--hero section end-->
 
     <!--promo section start-->
-    <section class="promo-block ptb-100">
+    
+    <section class="promo-block ptb-100" >
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6 col-lg-4 dot-bg-shape dot-bg-1">
@@ -194,7 +195,7 @@
     <!--promo section end-->
 
     <!--about us section start-->
-    <section class="about-us-section pb-100">
+    <section class="about-us-section pb-100" id="nosotros">
         <div class="container">
             <div class="row justify-content-between align-items-center">
                 <div class="col-md-12 col-lg-6">
@@ -221,13 +222,13 @@
     <!--about us section end-->
 
     <!--services section start-->
-    <section class="services-section ptb-100 gray-light-bg">
+    <section class="services-section ptb-100 gray-light-bg" id="servicios">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="section-heading text-center mb-5">
-                        <h2>Te preveemos los mejores servicios</h2>
-                        <p class="lead">Soluciones dinámicas y adaptables a las necesidades de cada cliente.</p>
+                        <h2>SOLUCIONES IOT - INDUSTRIA 4.0</h2>
+                        <p class="lead">Servicios dinámicos y adaptables a las necesidades de cada cliente.</p>
                     </div>
                 </div>
             </div>
@@ -397,14 +398,14 @@
     </section>
     <!--our work process section end-->
 
-    <!--our work or portfolio section start
-    <section class="our-portfolio-section ptb-100">
+    <!--our work or portfolio section start-->
+    <section class="our-portfolio-section ptb-100"  id="proyectos">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="section-heading text-center mb-5">
-                        <h2>Echa un vistazo a la calidad de nuestro trabajo</h2>
-                        <p class="lead">Contamos con servicios de instalación, mantención, visualización de data y machine learning para la toma de desiciones  </p>
+                        <h2>Proyectos Actuales</h2>
+                        <p class="lead">Actualmente nos encontramos en fase de pilotaje</p>
                     </div>
                 </div>
             </div>
@@ -412,79 +413,79 @@
                 <div class="col-md-12">
                     <div class="text-center pb-2">
                         <button type="button" class="filter-btn" data-mixitup-control data-filter="all">Todo</button>
-                        <button type="button" class="filter-btn" data-mixitup-control data-filter=".branding">Dashboard</button>
-                        <button type="button" class="filter-btn" data-mixitup-control data-filter=".animation">Sensores</button>
+                        <button type="button" class="filter-btn" data-mixitup-control data-filter=".branding">Pilotos</button>
+                        <button type="button" class="filter-btn" data-mixitup-control data-filter=".animation">Premios</button>
                         <button type="button" class="filter-btn" data-mixitup-control data-filter=".other">Otros</button>
                     </div>
                     <div class="portfolio-container" id="MixItUp">
                         <div class="mix portfolio-item branding" data-ref="mixitup-target">
                             <div class="portfolio-wrapper">
-                                <a href="project-details.html" target="_blank">
+                                <a href="#" target="_blank">
                                     <div class="content-overlay"></div>
-                                    <img class="img-fluid" src="img/portfolios/3.jpg" alt="portfolio"/>
+                                    <img class="img-fluid" src="img/portfolios/piloto-1.JPG" alt="portfolio"/>
                                     <div class="content-details fadeIn-bottom text-white">
-                                        <h5 class="text-white mb-1">Dashboard para visualización de data</h5>
-                                        <p>Dashboard</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="mix portfolio-item other animation" data-ref="mixitup-target">
-                            <div class="portfolio-wrapper">
-                                <a href="project-details.html" target="_blank">
-                                    <div class="content-overlay"></div>
-                                    <img class="img-fluid" src="img/portfolios/2.jpg" alt="portfolio"/>
-                                    <div class="content-details fadeIn-bottom text-white">
-                                        <h5 class="text-white mb-1">Mediciones sensores área verde</h5>
-                                        <p>Sensores</p>
+                                        <h5 class="text-white mb-1">Controlador</h5>
+                                        <p>CityLink</p>
                                     </div>
                                 </a>
                             </div>
                         </div>
                         <div class="mix portfolio-item animation" data-ref="mixitup-target">
                             <div class="portfolio-wrapper">
-                                <a href="project-details.html" target="_blank">
+                                <a href="#" target="_blank">
                                     <div class="content-overlay"></div>
-                                    <img class="img-fluid" src="img/portfolios/4.jpg" alt="portfolio"/>
+                                    <img class="img-fluid" src="img/portfolios/demo_day.JPG" alt="portfolio"/>
                                     <div class="content-details fadeIn-bottom text-white">
-                                        <h5 class="text-white mb-1">Corporate Flyer Design</h5>
-                                        <p>Flyer Design</p>
+                                        <h5 class="text-white mb-1">Demo Day UDD</h5>
+                                        <p>Universidad del Desarrollo</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="mix portfolio-item animation" data-ref="mixitup-target">
+                            <div class="portfolio-wrapper">
+                                <a href="#" target="_blank">
+                                    <div class="content-overlay"></div>
+                                    <img class="img-fluid" src="img/portfolios/fip.jpg" alt="portfolio"/>
+                                    <div class="content-details fadeIn-bottom text-white">
+                                        <h5 class="text-white mb-1">Fábrica de la innovación Providencia</h5>
+                                        <p>Hub Providencia</p>
                                     </div>
                                 </a>
                             </div>
                         </div>
                         <div class="mix portfolio-item branding" data-ref="mixitup-target">
                             <div class="portfolio-wrapper">
-                                <a href="project-details.html" target="_blank">
+                                <a href="#" target="_blank">
                                     <div class="content-overlay"></div>
-                                    <img class="img-fluid" src="img/portfolios/1.jpg" alt="portfolio"/>
+                                    <img class="img-fluid" src="img/portfolios/piloto-2.JPG" alt="portfolio"/>
                                     <div class="content-details fadeIn-bottom text-white">
-                                        <h5 class="text-white mb-1">Web UI/UX Design</h5>
-                                        <p>Web, Design</p>
+                                        <h5 class="text-white mb-1">Controlador</h5>
+                                        <p>CityLink</p>
                                     </div>
                                 </a>
                             </div>
                         </div>
-                        <div class="mix portfolio-item animation other" data-ref="mixitup-target">
+                        <div class="mix portfolio-item animation branding" data-ref="mixitup-target">
                             <div class="portfolio-wrapper">
-                                <a href="project-details.html" target="_blank">
+                                <a href="#" target="_blank">
                                     <div class="content-overlay"></div>
-                                    <img class="img-fluid" src="img/portfolios/5.jpg" alt="portfolio"/>
+                                    <img class="img-fluid" src="img/portfolios/piloto-4.JPG" alt="portfolio"/>
                                     <div class="content-details fadeIn-bottom text-white">
-                                        <h5 class="text-white mb-1">Wall Painting Design</h5>
-                                        <p>Painting Design</p>
+                                        <h5 class="text-white mb-1">Controlador</h5>
+                                        <p>CityLink</p>
                                     </div>
                                 </a>
                             </div>
                         </div>
                         <div class="mix portfolio-item branding " data-ref="mixitup-target">
                             <div class="portfolio-wrapper">
-                                <a href="project-details.html" target="_blank">
+                                <a href="#" target="_blank">
                                     <div class="content-overlay"></div>
-                                    <img class="img-fluid" src="img/portfolios/6.jpg" alt="portfolio"/>
+                                    <img class="img-fluid" src="img/portfolios/piloto-3.JPG" alt="portfolio"/>
                                     <div class="content-details fadeIn-bottom text-white">
-                                        <h5 class="text-white mb-1">Corporate Identity Design</h5>
-                                        <p>Corporate Design</p>
+                                        <h5 class="text-white mb-1">Controlador</h5>
+                                        <p>CityLink</p>
                                     </div>
                                 </a>
                             </div>
@@ -497,7 +498,7 @@
             </div>
         </div>
     </section>
-    our work or portfolio section end-->
+    <!--our work or portfolio section end-->
 
     <!--blog section start-->
     <section class="our-blog-section ptb-100 gray-light-bg">
@@ -518,7 +519,7 @@
                         <span class="category position-absolute badge badge-pill badge-primary">Fondos</span>
                         <img src="img/blog/demo-day.jpg" class="card-img-top position-relative" alt="blog">
                         <div class="card-body">
-                            <h3 class="h5 mb-2 card-title"><a href="https://www.udd.cl/noticias/2020/01/10/damo-day-2020-emprendimientos-udd-destacaron-en-diferentes-categorias/">Fondo Demo Day</a></h3>
+                            <h3 class="h5 mb-2 card-title"><a href="https://www.udd.cl/noticias/2020/01/10/damo-day-2020-emprendimientos-udd-destacaron-en-diferentes-categorias/">Primer lugar - Demo Day</a></h3>
                             <div class="post-meta mb-2">
                                 <ul class="list-inline meta-list">
                                     <li class="list-inline-item">1 de Enero, 2020</li>
@@ -526,7 +527,7 @@
                                     <li class="list-inline-item"><span>3</span> premios</li>
                                 </ul>
                             </div>
-                            <p class="card-text">Nos adjudicamos el fondo del Demo del Day UDD, proporcionado por banco Santander</p>
+                            <p class="card-text">Nos adjudicamos el primer lugar del fondo del Demo del Day UDD, proporcionado por banco Santander</p>
                             <a href="https://www.udd.cl/noticias/2020/01/10/damo-day-2020-emprendimientos-udd-destacaron-en-diferentes-categorias/" class="detail-link">Leer más <span class="ti-arrow-right"></span></a>
                         </div>
                     </div>
@@ -534,17 +535,17 @@
                 <div class="col-md-4">
                     <div class="single-blog-card card border-0 shadow-sm">
                         <span class="category position-absolute badge badge-pill badge-danger">Interacción</span>
-                        <img src="img/blog/FIP.png" class="card-img-top position-relative" alt="blog">
+                        <img src="img/portfolios/fip.JPG" class="card-img-top position-relative" alt="blog">
                         <div class="card-body">
-                            <h3 class="h5 mb-2 card-title"><a href="https://providencia.cl/provi/site/artic/20191112/pags/20191112132441.html">Participación programa FIP Providencia</a></h3>
+                            <h3 class="h5 mb-2 card-title"><a href="https://providencia.cl/provi/site/artic/20191112/pags/20191112132441.html">Primer lugar - FIP Providencia</a></h3>
                             <div class="post-meta mb-2">
                                 <ul class="list-inline meta-list">
-                                    <li class="list-inline-item">20 de Abril, 2020</li>
+                                    <li class="list-inline-item">12 de Agosto, 2020</li>
                                     <li class="list-inline-item"><span>50</span> Equipos</li>
                                     <li class="list-inline-item"><span>3</span> Premios</li>
                                 </ul>
                             </div>
-                            <p class="card-text">Nos encontramos en proceso de participación de este increíble programa, que nos permitirá generar nuestros primeros Pilotos!</p>
+                            <p class="card-text">Primer lugar Fábrica de la Innoación Providencia. Esto nos permite generar pilaje en área pública de la comuna. </p>
                             <a href="https://providencia.cl/provi/site/artic/20191112/pags/20191112132441.html" class="detail-link">Leer más <span class="ti-arrow-right"></span></a>
                         </div>
                     </div>
@@ -674,7 +675,7 @@
 
 
     <!--team two section start-->
-    <section class="team-two-section ptb-100 gray-light-bg">
+    <section class="team-two-section ptb-100 gray-light-bg" id="conocenos">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-8">
@@ -960,7 +961,7 @@
                                 <h4 class="text-white">GET IN TOUCH</h4>
                                 <ul class="get-in-touch-list">
                                     <li class="d-flex align-items-center py-2"><span class="fas fa-map-marker-alt mr-2"></span> 1234 San miguel, Santiago, Chile</li>
-                                    <li class="d-flex align-items-center py-2"><span class="fas fa-envelope mr-2"></span> nicolas@citylink.cl</li>
+                                    <li class="d-flex align-items-center py-2"><span class="fas fa-envelope mr-2"></span> ncastellonb@citylink.cl</li>
                                     <li class="d-flex align-items-center py-2"><span class="fas fa-phone-alt mr-2"></span> (+569) 66163647 - (+569) 84309564</li>
                                 </ul>
                             </div>
