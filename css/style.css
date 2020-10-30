@@ -4513,15 +4513,16 @@ button.scroll-top:focus{
 }
 
 .margin-left{
-    margin-left: 600px;
+    margin-left: 700px;
 }
 .margin-right{
-    margin-left: -100px;
+    margin-left: 20px;
+    margin-bottom: 0px;
 }
 .margin-top{
-    margin-top: 100px;
+    margin-top: 0px;
 }
 
 .margin-bottom{
-    margin-bottom: -250px;
+    margin-bottom: 0px;
 }
