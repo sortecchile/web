@@ -4511,3 +4511,17 @@ button.scroll-top:focus{
 .subscribe-form-footer.subscribe-form-two{
     top: 0;
 }
+
+.margin-left{
+    margin-left: 600px;
+}
+.margin-right{
+    margin-left: -100px;
+}
+.margin-top{
+    margin-top: 100px;
+}
+
+.margin-bottom{
+    margin-bottom: -250px;
+}
