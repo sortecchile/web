@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 24.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="illustration" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-	 y="0px" viewBox="0 0 1656.3 2247.9" style="enable-background:new 0 0 1656.3 2247.9;" xml:space="preserve">
+	 y="0px" viewBox="0 0 1656.3 1198.9" style="enable-background:new 0 0 1656.3 1198.9;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:#E2F0F9;}
 	.st1{fill:#9ECAEF;}
@@ -1217,16 +1217,6 @@
 	.st1211{fill:#2B59B3;}
 	.st1212{fill:#352920;}
 	.st1213{fill:#2965C6;}
-	.st1214{font-family:'Montserrat-Medium';}
-	.st1215{font-size:150px;}
-	.st1216{font-family:'Montserrat-Light';}
-	.st1217{font-size:80px;}
-	.st1218{fill:#002CA7;}
-	.st1219{fill:none;}
-	.st1220{fill:#B7B7B7;}
-	.st1221{fill:url(#SVGID_1206_);}
-	.st1222{fill:url(#SVGID_1207_);}
-	.st1223{fill:url(#SVGID_1208_);}
 </style>
 <g id="platform">
 	<polygon class="st0" points="192.5,713.9 787.5,1058.7 1464,668.1 865.4,324.2 	"/>
@@ -16431,39 +16421,4 @@
 		c0.7-0.7,1.4,1.1-0.1,5.9C801.6,767.6,799.9,770.4,799.3,771.9z"/>
 	<path class="st1213" d="M825.3,723.9c6.4,4.8,19.1,8.6,19.1,8.6v16.8c-10.9,0.6-18.1-7.8-18.1-7.8L825.3,723.9z"/>
 </g>
-<text transform="matrix(1 0 0 1 430.2321 1352.739)" class="st1214 st1215">Agronomía</text>
-<text transform="matrix(1 0 0 1 465.5873 1555.4717)" class="st10"><tspan x="0" y="0" class="st1216 st1217">Instalación de centrales de</tspan><tspan x="572.3" y="96" class="st1218 st1216 st1217">meterología</tspan></text>
-<polygon class="st1219" points="1592.2,1632.6 1034.8,1632.6 1034.8,1632.6 1592.2,1632.6 "/>
-<text transform="matrix(1 0 0 1 270.3755 1807.3718)" class="st10"><tspan x="0" y="0" class="st1216 st1217">Mediciones de parametros para</tspan><tspan x="-53.8" y="96" class="st1216 st1217">obtención de</tspan><tspan x="474.3" y="96" class="st1220 st1216 st1217"> </tspan><tspan x="494.9" y="96" class="st1218 st1216 st1217">evapotranspiración</tspan></text>
-<text transform="matrix(1 0 0 1 44.7457 2051.7488)" class="st10"><tspan x="0" y="0" class="st1216 st1217">Plataforma para visualización de</tspan><tspan x="1283.4" y="0" class="st1220 st1216 st1217"> </tspan><tspan x="1304" y="0" class="st1218 st1216 st1217">data</tspan></text>
-<linearGradient id="SVGID_1206_" gradientUnits="userSpaceOnUse" x1="1587.1863" y1="1545.2426" x2="1587.1863" y2="1519.436">
-	<stop  offset="0" style="stop-color:#56B7B9"/>
-	<stop  offset="0.1135" style="stop-color:#4BABBD"/>
-	<stop  offset="0.3162" style="stop-color:#2F8CC7"/>
-	<stop  offset="0.5056" style="stop-color:#106AD2"/>
-	<stop  offset="0.5973" style="stop-color:#0E80CC"/>
-	<stop  offset="0.7889" style="stop-color:#07B9BC"/>
-	<stop  offset="1" style="stop-color:#00FFA9"/>
-</linearGradient>
-<circle class="st1221" cx="1587.2" cy="1532.3" r="12.9"/>
-<linearGradient id="SVGID_1207_" gradientUnits="userSpaceOnUse" x1="1586.173" y1="1799.6307" x2="1586.173" y2="1773.8242">
-	<stop  offset="0" style="stop-color:#56B7B9"/>
-	<stop  offset="0.1135" style="stop-color:#4BABBD"/>
-	<stop  offset="0.3162" style="stop-color:#2F8CC7"/>
-	<stop  offset="0.5056" style="stop-color:#106AD2"/>
-	<stop  offset="0.5973" style="stop-color:#0E80CC"/>
-	<stop  offset="0.7889" style="stop-color:#07B9BC"/>
-	<stop  offset="1" style="stop-color:#00FFA9"/>
-</linearGradient>
-<circle class="st1222" cx="1586.2" cy="1786.7" r="12.9"/>
-<linearGradient id="SVGID_1208_" gradientUnits="userSpaceOnUse" x1="1586.173" y1="2044.7257" x2="1586.173" y2="2018.9191">
-	<stop  offset="0" style="stop-color:#56B7B9"/>
-	<stop  offset="0.1135" style="stop-color:#4BABBD"/>
-	<stop  offset="0.3162" style="stop-color:#2F8CC7"/>
-	<stop  offset="0.5056" style="stop-color:#106AD2"/>
-	<stop  offset="0.5973" style="stop-color:#0E80CC"/>
-	<stop  offset="0.7889" style="stop-color:#07B9BC"/>
-	<stop  offset="1" style="stop-color:#00FFA9"/>
-</linearGradient>
-<circle class="st1223" cx="1586.2" cy="2031.8" r="12.9"/>
 </svg>
