@@ -802,7 +802,7 @@ select.form-control.has-value{
         background: #ffffff;
     }
     .navbar.custom-nav .navbar-toggler{
-        color: #162e66 !important;
+        color: #90B764 !important;
     }
     .navbar.custom-nav .navbar-toggler:focus{
         outline: none;
@@ -817,13 +817,13 @@ select.form-control.has-value{
     }
 
     .white-bg.custom-nav ul li a, .custom-nav ul li a {
-        color: #162e66 !important;
+        color: #90B764 !important;
     }
     .white-bg.custom-nav ul li ul.sub-menu li a:hover, .custom-nav ul li ul.sub-menu li a:hover{
         color: #ffffff !important;
     }
     .white-bg.navbar .navbar-toggler span {
-        color: #162e66;
+        color: #90B764;
     }
 
     .ptb-100 {
