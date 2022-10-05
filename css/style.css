@@ -3713,7 +3713,7 @@ figure {
     font-family: "themify";
 }
 .pricing-value.card-footer:hover {
-    background: #162e66;
+    background: #2F3D44;
     color: #ffffff;
 }
 .pricing-value.card-footer:hover::after {
@@ -4088,7 +4088,7 @@ a.pricing-value {
     transition: all .3s ease-in-out;
 }
 .post-content blockquote:hover {
-    border-color: #1351a8;
+    border-color: #2F3D44;
 }
 .blockquote {
     font-weight: 500;
@@ -4138,7 +4138,7 @@ a.pricing-value {
     opacity: .6;
 }
 .comment-meta-date a:hover, .comment-meta-date a:focus, .comment-meta-date-shop a:hover, .comment-meta-date-shop a:focus {
-    color: #162e66;
+    color: #2F3D44;
     opacity: 1;
 }
 
@@ -4157,7 +4157,7 @@ a.pricing-value {
     color: #222;
 }
 .comment-reply > a:hover, .comment-reply > a:focus, .comment-reply-shop > a:hover, .comment-reply-shop > a:focus {
-    background: #1351a8;
+    background: #2F3D44;
     color: #fff;
 }
 
@@ -4186,7 +4186,7 @@ a.pricing-value {
     color: #162e66;
 }
 .custom-pagination-nav ul li a.page-link:hover{
-    background: #1351a8;
+    background: #2F3D44;
     color: #FFFFFF;
 }
 .custom-pagination-nav ul li.page-item:first-child .page-link,
@@ -4197,11 +4197,11 @@ a.pricing-value {
 }
 .custom-pagination-nav ul li.page-item:first-child .page-link:hover,
 .custom-pagination-nav ul li.page-item:last-child .page-link:hover{
-    color: #1351a8;
+    color: #2F3D44;
 }
 .custom-pagination-nav ul li.page-item.active .page-link{
-    background-color: #1351a8;
-    border-color: #1351a8;
+    background-color: #2F3D44;
+    border-color: #2F3D44;
 }
 /*blog sidebar*/
 
@@ -4264,7 +4264,7 @@ button, [type="button"], [type="reset"], [type="submit"] {
     font-size: 14px;
 }
 .widget a:hover{
-    color: #1351a8;
+    color: #2F3D44;
 }
 .widget-recent-entries-custom .wi {
     float: left;
@@ -4298,7 +4298,7 @@ button, [type="button"], [type="reset"], [type="submit"] {
     font-family: 'Montserrat', sans-serif;
 }
 .tag-cloud > a:hover, .post-tags > a:hover {
-    background: #162e66;
+    background: #2F3D44;
     color: #fff;
     opacity: 1;
 }
@@ -4448,7 +4448,7 @@ button.scroll-top:focus{
     border-radius: .375rem;
 }
 .form-control:focus{
-    border-color: #162e66;
+    border-color: #2F3D44;
 }
 .btn.border-radius{
     border-radius: 4px;
