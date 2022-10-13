@@ -7,7 +7,7 @@
 
     <!-- SEO Meta description -->
     <meta name="description"
-          content="Desarrollo de tecnología para optimización de agua.">
+          content="Desarrollo de tecnología para optimización de fertilizantes.">
     <meta name="author" content="ThemeTags">
 
     <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
@@ -28,8 +28,13 @@
     <!--google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700%7COpen+Sans:400,600&display=swap" rel="stylesheet">
 
+
+ 
+
     <!--Bootstrap css-->
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!--COMPANIES css-->
+    <link rel="stylesheet" href="css/companies.css">
     <!--Magnific popup css-->
     <link rel="stylesheet" href="css/magnific-popup.css">
     <!--Themify icon css-->
@@ -47,6 +52,8 @@
     <link rel="stylesheet" href="css/style.css">
     <!--responsive css-->
     <link rel="stylesheet" href="css/responsive.css">
+
+    
 
 </head>
 <body>
@@ -77,9 +84,9 @@
             </button>
             <div class="collapse navbar-collapse h-auto" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto menu">
-                    <li class="scroll-to-target" data-target="#inicio"><a href="#inicio">Inicio</a></li class="scroll-to-target" data-target="#conocenos">
-                    <li class="scroll-to-target" data-target="#conocenos"><a  href="#conocenos">Conócenos</a></li>
-                    <li class="scroll-to-target" data-target="#servicios"><a  href="#servicios">Servicios</a></li>
+                    <li class="scroll-to-target" data-target="#inicio"><a href="#inicio">Inicio</a></li class="scroll-to-target" data-target="#inicio">
+                    <li class="scroll-to-target" data-target="#conocenos"><a  href="#conocenos">Team</a></li>
+                    <li class="scroll-to-target" data-target="#nosotros"><a  href="#nosotros">Cómo funciona?</a></li>
                     <!--header section end
                     <li><a  href="#" class="dropdown-toggle">Pages</a>
                         <ul class="sub-menu">
@@ -102,7 +109,7 @@
                         </ul>
                     </li>
                 <!-->
-                    <li class="scroll-to-target" data-target="#proyectos"><a  href="#proyectos">Proyectos</a></liclass="scroll-to-target" data-target="#conocenos">
+                    <li class="scroll-to-target" data-target="#noticias"><a  href="#noticias">Noticias</a></liclass="scroll-to-target" data-target="#noticias">
                     <!--<li><a  href="#" class="dropdown-toggle">Blog</a>
                         <ul class="sub-menu">
                             <li><a href="blog-default.html">Blog Grid</a></li>
@@ -255,10 +262,21 @@
                         </ul>
                     </div>
                 </div>
+                <!--Opción video-->
+                <div class="col-md-12 col-lg-6">
+                    <div class="about-img-wrap-2">
+                        <img src="img/video2.png" alt="video" class="img-fluid rounded shadow-sm">
+                        <div class="card-img-overlay text-center">
+                            <a href="https://www.youtube.com/watch?v=uVk6irihllQ" class="popup-youtube video-play-icon color-bip shadow"><span class="ti-control-play"></span> </a>
+                        </div>
+                    </div>
+                </div>
+                <!--opción imágen
                 <div class="col-md-12 col-lg-6">
                     <div class="image-wrap">
                         <img src="img/hero-single-img-miido.svg" alt="video" class="img-fluid">
                     </div>
+                -->
                 </div>
             </div>
         </div>
@@ -384,6 +402,7 @@
             </div>
         </div>
     </section>
+
     <!--promo section end-->
 
     <!--our work process section start
@@ -709,11 +728,11 @@
     our work or portfolio section end-->
 
     <!--blog section start-->
-    <section class="our-blog-section ptb-100 gray-light-bg">
+    <section class="services-section ptb-100 " id="noticias" >
         <div class="container">
-            <div class="row">
+            <div class="row justify-content-center">
                 <div class="col-md-8">
-                    <div class="section-heading mb-5">
+                    <div class="section-heading text-center mb-5">
                         <h2>Ultimas noticias</h2>
                         <p class="lead">
                             Cada hito histórico de la empresa nos genera gran motivación para seguir creciendo y optimizando los recursos que todos necesitamos.
@@ -722,6 +741,42 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-md-4">
+                    <div class="single-blog-card card border-0 shadow-sm">
+                        <span class="category position-absolute badge badge-pill badge-info">Noticias</span>
+                        <img src="img/portfolios/MIIDO-SUPP-03.png" class="card-img-top" alt="blog">
+                        <div class="card-body">
+                            <h3 class="h5 mb-2 card-title"><a href="#">Seleccionados por Startup Chile</a></h3>
+                            <div class="post-meta mb-2">
+                                <ul class="list-inline meta-list">
+                                    <li class="list-inline-item">Jun , 2021</li>
+                                    <li class="list-inline-item"><span></span></li>
+                                    <li class="list-inline-item"><span></span> </li>
+                                </ul>
+                            </div>
+                            <p class="card-text">Fuimos seleccionados para el programa Build2 de Startup Chile, una de las mejores aceleradoras de negocios del mundo. </p>
+                            <a href="https://www.startupchile.org/es/con-mayoria-chilena-start-up-chile-selecciono-nueva-generacion-de-sus-tres-lineas-de-financiamiento/" class="detail-link">Leer más <span class="ti-arrow-right"></span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="single-blog-card card border-0 shadow-sm">
+                        <span class="category position-absolute badge badge-pill badge-info">Noticias</span>
+                        <img src="img/portfolios/Babson Post-06.png" class="card-img-top" alt="blog">
+                        <div class="card-body">
+                            <h3 class="h5 mb-2 card-title"><a href="#">Primer lugar competencia mundial "Babson Collaborative Global student Challenge"</a></h3>
+                            <div class="post-meta mb-2">
+                                <ul class="list-inline meta-list">
+                                    <li class="list-inline-item">Jun , 2022</li>
+                                    <li class="list-inline-item"><span>2000 equipos</span></li>
+                                    <li class="list-inline-item"><span>3 premios</span> </li>
+                                </ul>
+                            </div>
+                            <p class="card-text">Competimos con más de 2000 emprendedores de todo el mundo y ganamos el primer lugar, permitiéndonos estudiar en la Universidad #1 de emprendimiento en el mundo </p>
+                            <a href="https://www.babsoncollaborative.org/student-challenge.html" class="detail-link">Leer más <span class="ti-arrow-right"></span></a>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-md-4">
                     <div class="single-blog-card card border-0 shadow-sm">
                         <span class="category position-absolute badge badge-pill badge-primary">Fondos</span>
@@ -776,42 +831,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="single-blog-card card border-0 shadow-sm">
-                        <span class="category position-absolute badge badge-pill badge-info">Noticias</span>
-                        <img src="img/portfolios/MIIDO-SUPP-03.png" class="card-img-top" alt="blog">
-                        <div class="card-body">
-                            <h3 class="h5 mb-2 card-title"><a href="#">Seleccionados por Startup Chile</a></h3>
-                            <div class="post-meta mb-2">
-                                <ul class="list-inline meta-list">
-                                    <li class="list-inline-item">Jun , 2021</li>
-                                    <li class="list-inline-item"><span></span></li>
-                                    <li class="list-inline-item"><span></span> </li>
-                                </ul>
-                            </div>
-                            <p class="card-text">Fuimos seleccionados para el programa Build2 de Startup Chile, una de las mejores aceleradoras de negocios del mundo. </p>
-                            <a href="https://www.startupchile.org/es/con-mayoria-chilena-start-up-chile-selecciono-nueva-generacion-de-sus-tres-lineas-de-financiamiento/" class="detail-link">Leer más <span class="ti-arrow-right"></span></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="single-blog-card card border-0 shadow-sm">
-                        <span class="category position-absolute badge badge-pill badge-info">Noticias</span>
-                        <img src="img/portfolios/Babson Post-06.png" class="card-img-top" alt="blog">
-                        <div class="card-body">
-                            <h3 class="h5 mb-2 card-title"><a href="#">Primer lugar competencia mundial "Babson Collaborative Global student Challenge"</a></h3>
-                            <div class="post-meta mb-2">
-                                <ul class="list-inline meta-list">
-                                    <li class="list-inline-item">Jun , 2022</li>
-                                    <li class="list-inline-item"><span></span></li>
-                                    <li class="list-inline-item"><span></span> </li>
-                                </ul>
-                            </div>
-                            <p class="card-text">Competimos con más de 2000 emprendedores de todo el mundo y ganamos el primer lugar, permitiéndonos estudiar en la Universidad #1 de emprendimiento en el mundo </p>
-                            <a href="https://www.babsoncollaborative.org/student-challenge.html" class="detail-link">Leer más <span class="ti-arrow-right"></span></a>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </section>
@@ -917,6 +937,24 @@
     </section>
     testimonial section end-->
 
+     <!--CLIENTS SECTION-->
+
+ <div class="container">
+    <h2>Somos amigos de</h2>
+     <section class="customer-logos slider">
+        <div class="slide"><img src="img/Carozzi.png"></div>
+        <div class="slide"><img src="img/logo-agro.webp"></div>
+        <div class="slide"><img src="img/errazuriz-logo.jpg"></div>
+        <div class="slide"><img src="img/Logo_Corfo.png"></div>
+        <div class="slide"><img src="img/Logo_Start-Chile1.png"></div>
+        <div class="slide"><img src="img/udd.png"></div>
+        <div class="slide"><img src="img/exploratec-01.png"></div>
+     </section>
+  </div>
+
+
+ 
+  <!--ENDS CLIENTS SECTION-->
 
     <!--team two section start-->
     <section class="team-two-section ptb-100 gray-light-bg" id="conocenos">
@@ -933,7 +971,7 @@
                 <div class="col-md-3">
                     <div class="staff-member">
                         <div class="card text-center border-0">
-                            <img src="img/nicolas3.JPEG" alt="team image" class="card-img-top">
+                            <img src="img/nicolas5-01.jpg" alt="team image" class="card-img-top">
                             <div class="card-body">
                                 <h5 class="teacher mb-0">Nicolás Castellón</h5>
                                 <span>CEO</span>
@@ -950,7 +988,7 @@
                         </div>
                         <div class="overlay d-flex align-items-center justify-content-center">
                             <div class="overlay-inner">
-                                <p class="teacher-quote">"Podemos acabar grandes problemáticas actuales con el uso de IOT" </p><a
+                                <p class="teacher-quote"></p><a
                                     href="#" class="teacher-name">
                                 <h5 class="mb-0 teacher text-white">Nicolás Castellón</h5></a>
                                 <span class="teacher-field text-white">CEO</span>
@@ -1055,7 +1093,7 @@
                     <div class="col-md-3">
                     <div class="staff-member">
                         <div class="card text-center border-0">
-                            <img src="img/benja.jpeg" alt="team image" class="card-img-top">
+                            <img src="img/benja2-01.jpg" alt="team image" class="card-img-top">
                             <div class="card-body">
                                 <h5 class="teacher mb-0">Benjamín Martinez</h5>
                                 <span>COO</span>
@@ -1099,9 +1137,12 @@
     </section>
     <!--team two section end-->
 
+
+
+
     <!--call to action section start-->
     <section class="call-to-action py-5">
-        <div class="container">
+        <div class="container section-heading mb-5">
             <div class="row justify-content-around align-items-center">
                 <div class="col-md-7">
                     <div class="subscribe-content">
@@ -1111,7 +1152,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="action-btn text-lg-right text-sm-left">
-                        <a href="#" class="btn secondary-solid-btn">Contáctanos!</a>
+                        <a href="contact-us.html" class="btn secondary-solid-btn">Contáctanos!</a>
                     </div>
                 </div>
             </div>
@@ -1295,6 +1336,9 @@
 <script src="js/scripts.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-174564519-1"></script>
+<!--COMPANIES -->
+<script src="js/companies.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
