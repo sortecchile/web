@@ -47,6 +47,35 @@
     <link rel="stylesheet" href="css/style.css">
     <!--responsive css-->
     <link rel="stylesheet" href="css/responsive.css">
+    <!-- css form -->
+    <style>
+        #myForm {
+            width: 300px;
+            margin: 0 auto;
+            }
+        #myForm label {
+            display: block;
+            margin-top: 5px;
+             /* Agregado margen superior */
+        }
+        #myForm input, #myForm textarea {
+            width: 100%;
+            padding: 5px;
+             /* Agregado margen superior */
+        }
+        #myForm button {
+            display: block;
+            width: 100%;
+            margin-top: 5px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #myForm button:hover {
+            background-color: #45a049;
+        }
+    </style>
 
 </head>
 <body>
@@ -213,7 +242,7 @@
                 <div class="col-md-6">
                     <div class="contact-us-form gray-light-bg rounded p-5">
                         <h4>Llena este formulario!</h4>
-                        <iframe height="820" width="450" src="https://us1.list-manage.com/contact-form?u=d20f1991906447fb7fbb0b4cb&form_id=eeb0f2d2b5e4ccf6bf357e27d3d2bf48" ></iframe>
+                        <!-- <iframe height="820" width="450" src="https://us1.list-manage.com/contact-form?u=d20f1991906447fb7fbb0b4cb&form_id=eeb0f2d2b5e4ccf6bf357e27d3d2bf48" ></iframe> -->
                         <!-- <form action="#" method="POST" id="contactForm1" class="contact-us-form" novalidate="novalidate">
                             <div class="form-row">
                                 <div class="col-12">
@@ -238,6 +267,31 @@
                                 </div>
                             </div>
                         </form> -->
+                        <h2>Formulario de Ejemplo</h2>
+                        <form id="myForm">
+                            <label for="nombre">Nombre:</label>
+                            <input type="text" id="nombre" name="nombre" required>
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
+                            <label for="empresa">Empresa:</label>
+                            <input type="text" id="empresa" name="empresa" required>
+                            <label for="numero">Número de contacto:</label>
+                            <input type="text" id="numero" name="numero" required>
+                            <label for="mensaje">Mensaje:</label>
+                            <textarea id="mensaje" name="mensaje"></textarea>
+                            <button type="submit">Enviar</button>
+                        </form>
+
+                    <!-- Si deseas agregar un mensaje de confirmación o error, aquí puedes hacerlo -->
+                    <script>
+                        document.getElementById('myForm').addEventListener('submit', function(e) {
+                            e.preventDefault(); // Esto evita que la página se recargue
+                            alert('Formulario enviado con éxito'); // Aquí se muestra el mensaje de confirmación
+                        });
+                        </script>
+
+                    
+                    <script src="datasheet.js"></script> <!-- Enlaza tu archivo de script JS -->
                     </div>
                 </div>
                 <div class="col-md-5">
