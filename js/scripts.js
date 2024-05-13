@@ -27,6 +27,35 @@ jQuery(function ($) {
 
   'use strict';
 
+  function setTopCircles(circles){
+    circles.forEach(circle => {
+      const style = window.getComputedStyle(circle);
+      circle.style.top = style.top;
+    });
+  }
+
+  function scrollAnimation(e) {
+    const circle = document.querySelectorAll(".circle");
+    circle.forEach(circle => {
+      let top = parseInt(circle.style.top);
+      if(e.deltaY > 0){
+        top = top -10;
+      } else {
+        top = top + 10;
+      }
+      circle.style.top = String(top) + "px";
+    });
+  }
+
+  function setScrollEvent(){
+    const circles = document.querySelectorAll(".circle");
+    setTopCircles(circles);
+    document.addEventListener("wheel", scrollAnimation);
+  }
+
+  setScrollEvent();
+
+
   // 1. preloader
   $(window).ready(function () {
     $('#preloader').delay(200).fadeOut('fade');
@@ -424,5 +453,7 @@ jQuery(function ($) {
       '</div>' +
       '</div>'));
   });
+
+  
 
 }); // JQuery end
