@@ -11,7 +11,7 @@ document.getElementById("myForm").addEventListener("submit", function(event) {
     // Aquí puedes validar los datos del formulario si es necesario
     
     // Enviar los datos a Google Sheets utilizando Fetch API
-    fetch('https://script.google.com/macros/s/AKfycbzYGPNxGiNAXdBXrEzHngmyVYCzTxsyA3VL0gH2_-kVtvOpcwRkJ9XXJBNZDygUoRsb/exec', {
+    fetch('https://script.google.com/macros/s/AKfycbzFH4zsGqL3K-P5BOA9CrnKdFxgwSdsNUPSzGAAfWyOhIqPpudXiochDCIY5JZhshit/exec', {
       method: 'POST',
       mode: 'no-cors',
       headers: {
