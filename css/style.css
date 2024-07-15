@@ -2926,6 +2926,10 @@ a.video-play-icon-without-bip:hover{
     }
 }
 
+.about-us-section{
+    margin-top: 100px;
+}
+
 .about-img-wrap{
     position: relative;
     display: block;
