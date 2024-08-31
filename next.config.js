@@ -9,3 +9,5 @@ const nextConfig = {
   },
   assetPrefix: 'https://www.miido.cl/', // Asegúrate de usar tu dominio personalizado
 }
+
+module.exports = nextConfig;
