@@ -177,7 +177,7 @@ export default function Component() {
         <div className="flex items-center justify-between w-full">
           <Link className="flex items-center justify-center" href="#">
             <Image
-              src="/web/logo.svg"
+              src="./logo.svg"
               alt="Company Logo"
               width={150}
               height={150}
@@ -235,7 +235,7 @@ export default function Component() {
               </div>
               <div className='w-full max-w-sm space-y-2 flex items-center justify-center'>
                 <Image
-                  src="/web/whatsapp.svg"
+                  src="./whatsapp.svg"
                   alt="Company Logo"
                   width={150}
                   height={150}
@@ -264,12 +264,12 @@ export default function Component() {
         <section className="w-full py-8 bg-gray-1"> 
           <div className="container px-4 md:px-6">
             <div className="flex flex-wrap justify-center items-center gap-20">
-              <Image src="/web/errazuriz-logo.png" alt="Figma" width={120} height={40} />
-              <Image src="/web/LCP.png" alt="Substack" width={140} height={40} />
-              <Image src="/web/cyt.png" alt="Discord" width={140} height={40} />
-              <Image src="/web/taglespa.svg" alt="Airbnb" width={100} height={40} />
-              <Image src="/web/startup-chile.png" alt="Spotify" width={120} height={40} />
-              <Image src="/web/start-fellowship.png" alt="Toyota" width={120} height={40} />
+              <Image src="./errazuriz-logo.png" alt="Figma" width={120} height={40} />
+              <Image src="./LCP.png" alt="Substack" width={140} height={40} />
+              <Image src="./cyt.png" alt="Discord" width={140} height={40} />
+              <Image src="./taglespa.svg" alt="Airbnb" width={100} height={40} />
+              <Image src="./startup-chile.png" alt="Spotify" width={120} height={40} />
+              <Image src="./start-fellowship.png" alt="Toyota" width={120} height={40} />
             </div>
           </div>
         </section>
@@ -313,7 +313,7 @@ export default function Component() {
                       <div className="bg-gray-100 p-4 flex items-center gap-2">
                         <div className="w-10 h-10 rounded-full overflow-hidden">
                           <Image
-                            src="/web/logo2.svg"
+                            src="./logo2.svg"
                             alt="Company Logo"
                             width={5}
                             height={10}
