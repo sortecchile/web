@@ -4,7 +4,7 @@ const nextConfig = {
   images: {
     unoptimized: true, // Evita optimizaciones de imágenes en tiempo de construcción
   },
-  basePath: '/web', // Reemplaza <REPO_NAME> con el nombre de tu repositorio
+  basePath: '/web', // Usa el nombre de tu repositorio
 };
 
 export default nextConfig;

@@ -177,7 +177,7 @@ export default function Component() {
         <div className="flex items-center justify-between w-full">
           <Link className="flex items-center justify-center" href="#">
             <Image
-              src="/logo.svg"
+              src="/web/logo.svg"
               alt="Company Logo"
               width={150}
               height={150}
