@@ -7,6 +7,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  assetPrefix: './', // Asegura que los recursos estáticos se carguen correctamente
+  basePath: '', // Deja vacío si estás usando el dominio raíz
 }
- 
-module.exports = nextConfig
+
+module.exports = nextConfig;
