@@ -19,7 +19,7 @@ const NewsSection = () => {
         id: 6,
         title: "GTT Maule",
         description: "Encuentro regional de GTT del Maule realizado ayer en el Liceo Agrícola San José de Duao. #agrotech.",
-        image: "/gtt.png",
+        image: "/gtt.svg",
       },
     {
       id: 1,

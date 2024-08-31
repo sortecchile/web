@@ -267,7 +267,7 @@ export default function Component() {
               <Image src="/errazuriz-logo.png" alt="Figma" width={120} height={40} />
               <Image src="/LCP.png" alt="Substack" width={140} height={40} />
               <Image src="/cyt.png" alt="Discord" width={140} height={40} />
-              <Image src="/tagleSPA.jpeg" alt="Airbnb" width={100} height={40} />
+              <Image src="/taglespa.svg" alt="Airbnb" width={100} height={40} />
               <Image src="/startup-chile.png" alt="Spotify" width={120} height={40} />
               <Image src="/start-fellowship.png" alt="Toyota" width={120} height={40} />
             </div>
