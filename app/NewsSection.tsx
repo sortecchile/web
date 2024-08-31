@@ -13,31 +13,31 @@ const NewsSection = () => {
         id: 7,
         title: "Agricultura 4.0 para cerezos",
         description: "Participamos en MIIDO en el Seminario Agricultura 4.0 para cerezos, organizado por Copeval. ",
-        image: "/web/Cerezas.svg",
+        image: "./Cerezas.svg",
       },
     {
         id: 6,
         title: "GTT Maule",
         description: "Encuentro regional de GTT del Maule realizado ayer en el Liceo Agrícola San José de Duao. #agrotech.",
-        image: "/web/gtt.svg",
+        image: "./gtt.svg",
       },
     {
       id: 1,
       title: "Seleccionados por Startup Chile",
       description: "Fuimos seleccionados para el programa Build2 e ignite 5 de Startup Chile, una de las mejores aceleradoras de negocios del mundo.",
-      image: "/web/StartupChile.svg",
+      image: "./StartupChile.svg",
     },
     {
       id: 2,
       title: "Primer lugar competencia mundial Babson Collaborative Global student Challenge",
       description: "Competimos con más de 2000 emprendedores de todo el mundo y ganamos el primer lugar, permitiéndonos estudiar en la Universidad #1 de emprendimiento en el mundo.",
-      image: "/web/babson.svg",
+      image: "./babson.svg",
     },
     {
       id: 3,
       title: "Acelerados en Suiza 🇨🇭 - START Fellowship",
       description: "Acelerados en Suiza con la posibilidad de conocer el ecosistema europeo y la industria agro en el continente viejo.",
-      image: "/web/START.svg",
+      image: "./START.svg",
     },
     // Add more news items as needed
   ]
