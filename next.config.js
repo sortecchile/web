@@ -7,8 +7,5 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  assetPrefix: './', // Asegura que los recursos estáticos se carguen correctamente
-  basePath: '', // Deja vacío si estás usando el dominio raíz
+  assetPrefix: 'https://www.miido.cl/', // Asegúrate de usar tu dominio personalizado
 }
-
-module.exports = nextConfig;
