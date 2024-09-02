@@ -86,7 +86,23 @@ export default function Component() {
     }
   ]
 
+// Texto principal 
 
+  const [typedText, setTypedText] = useState('')
+  const fullText = "Controla tus procesos con la voz"
+
+  useEffect(() => {
+    let index = 0
+    const intervalId = setInterval(() => {
+      setTypedText(fullText.slice(0, index))
+      index++
+      if (index > fullText.length) {
+        clearInterval(intervalId)
+      }
+    }, 150) // Ajusta este valor para cambiar la velocidad de escritura
+
+    return () => clearInterval(intervalId)
+  }, [])
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen)
@@ -226,8 +242,9 @@ export default function Component() {
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none" style={{ color: '#2F3D44' }}>
-                  Controla tus procesos con la voz
+              <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none bg-gradient-to-r from-[#38507E] via-[#51A09A] to-[#C2DB64] bg-clip-text text-transparent h-24 flex items-center justify-center">
+                  {typedText}
+                  <span className="animate-blink">|</span>
                 </h1>
                 <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
                 Optimiza tu flujo de trabajo con la herramienta que ya conoces. Crea tareas, registra y accede a información detallada, todo mediante mensajes de voz en WhatsApp.
@@ -590,7 +607,7 @@ export default function Component() {
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl" style={{ color: '#2F3D44' }}>Sube a tu gente al tren de la tecnología.</h2>
+                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none bg-gradient-to-r from-[#38507E] via-[#51A09A] to-[#C2DB64] bg-clip-text text-transparent">Sube a tu gente al tren de la tecnología.</h2>
                 <p className="mx-auto max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400">
                   Únete a una digitalización inclusiva y optimiza los procesos de tu compañía hoy mismo.
                 </p>
