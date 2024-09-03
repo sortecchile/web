@@ -8,6 +8,42 @@ import Link from 'next/link'
 import Image from 'next/image'
 import NewsSection from './NewsSection'
 
+
+  // Waves
+
+  function MultiWaveAudio() {
+    const waveColors = ['#38507E', '#51A09A', '#C2DB64']
+    const waveCount = 3
+
+  const createWavePath = (offset: number) => {
+      const points = []
+      for (let i = 0; i <= 100; i++) {
+        const x = i / 100
+        const y = Math.sin(x * Math.PI * 4 + offset) * 0.15 + 0.5
+        points.push(`${x * 100},${y * 100}`)
+      }
+      return `M0,50 ${points.join(' ')} 100,50`
+    }
+    return (
+      <div className="w-full bg-white overflow-hidden" style={{ height: '100px' }}>
+        <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+          {[...Array(waveCount)].map((_, index) => (
+            <path
+              key={index}
+              d={createWavePath(index * 0.5)}
+              fill="none"
+              stroke={waveColors[index % waveColors.length]}
+              strokeWidth="0.5"
+              strokeOpacity="0.5"
+              vectorEffect="non-scaling-stroke"
+            />
+          ))}
+        </svg>
+      </div>
+    )
+  }
+
+
 export default function Component() {
   const [email, setEmail] = useState('')
   const [scrollProgress, setScrollProgress] = useState(0)
@@ -99,7 +135,7 @@ export default function Component() {
       if (index > fullText.length) {
         clearInterval(intervalId)
       }
-    }, 150) // Ajusta este valor para cambiar la velocidad de escritura
+    }, 100) // Ajusta este valor para cambiar la velocidad de escritura
 
     return () => clearInterval(intervalId)
   }, [])
@@ -117,6 +153,10 @@ export default function Component() {
     closeMobileMenu();
   }
 
+
+
+
+  
   useEffect(() => {
     const handleScroll = () => {
       if (demoRef.current) {
@@ -238,7 +278,7 @@ export default function Component() {
       </div>
 
       <main className="flex-1 pt-14">
-        <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
+        <section className="w-full py-32 md:py-24 lg:py-32 xl:py-48">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
@@ -277,10 +317,11 @@ export default function Component() {
               </div>
             </div>
           </div>
+          <MultiWaveAudio />
         </section>
-        <section className="w-full py-8 bg-gray-1"> 
+        <section className="w-full py-2 bg-gray-1 md:-mt-24 sm:-mt-32 overflow-x-auto"> 
           <div className="container px-4 md:px-6">
-            <div className="flex flex-wrap justify-center items-center gap-20">
+            <div className="flex flex-nowrap md:justify-center sm:justify-center  items-center gap-20">
               <Image src="./errazuriz-logo.png" alt="Figma" width={120} height={40} />
               <Image src="./LCP.png" alt="Substack" width={140} height={40} />
               <Image src="./cyt.png" alt="Discord" width={140} height={40} />
@@ -296,21 +337,21 @@ export default function Component() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="flex flex-col items-center text-center">
                 <div className="mb-4">
-                  <Mic className="h-12 w-12 text-primary" />
+                  <Mic className="h-12 w-12 text-primary" style={ { color: '#38507E'}} />
                 </div>
                 <h3 className="text-xl font-bold mb-2" style={{ color: '#2F3D44' }}>Envia un audio en Whatsapp</h3>
                 <p className="text-gray-500 dark:text-gray-400">Usa WhatsApp para enviar mensajes de voz para tareas, información o consultas.</p>
               </div>
               <div className="flex flex-col items-center text-center">
                 <div className="mb-4">
-                  <CheckCircle className="h-12 w-12 text-primary" />
+                  <CheckCircle className="h-12 w-12 text-primary" style={ { color :  '51A09A' }} />
                 </div>
                 <h3 className="text-xl font-bold mb-2" style={{ color: '#2F3D44' }}>Procesamiento automatizado</h3>
                 <p className="text-gray-500 dark:text-gray-400">Nuestro sistema procesa los mensajes de voz y organiza la información.</p>
               </div>
               <div className="flex flex-col items-center text-center">
                 <div className="mb-4">
-                  <BarChart2 className="h-12 w-12 text-primary" />
+                  <BarChart2 className="h-12 w-12 text-primary" style={ { color: '#C2DB64'}} />
                 </div>
                 <h3 className="text-xl font-bold mb-2" style={{ color: '#2F3D44' }}>Obtén información detallada</h3>
                 <p className="text-gray-500 dark:text-gray-400">Accede a datos organizados y obtén información detallada a través de nuestro intuitivo dashboard.</p>
@@ -543,28 +584,28 @@ export default function Component() {
             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12" style={{ color: '#2F3D44' }}>Principales beneficios</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="flex items-start space-x-4">
-                <Users className="h-6 w-6 text-primary mt-1" />
+                <Users className="h-6 w-6 text-primary mt-1" style={{color: '#38507E'}} />
                 <div>
                   <h3 className="text-xl font-bold mb-2" style={{ color: '#2F3D44' }}>Amigable con el usuario</h3>
                   <p className="text-gray-500 dark:text-gray-400">Aprovecha la familiaridad de WhatsApp para una adopción fácil en todo tu equipo.</p>
                 </div>
               </div>
               <div className="flex items-start space-x-4">
-                <BarChart2 className="h-6 w-6 text-primary mt-1" />
+                <BarChart2 className="h-6 w-6 text-primary mt-1" style={{ color: '#51A09A'}} />
                 <div>
                   <h3 className="text-xl font-bold mb-2" style={{ color: '#2F3D44' }}>Información accionable</h3>
                   <p className="text-gray-500 dark:text-gray-400">Convierte los mensajes de voz en datos estructurados para una mejor toma de decisiones.</p>
                 </div>
               </div>
               <div className="flex items-start space-x-4">
-                <Mic className="h-6 w-6 text-primary mt-1" />
+                <Mic className="h-6 w-6 text-primary mt-1" style={{ color:'#51A09A'}}/>
                 <div>
                   <h3 className="text-xl font-bold mb-2" style={{ color: '#2F3D44' }}>Enfoque centrado en la voz</h3>
                   <p className="text-gray-500 dark:text-gray-400">Ideal para industrias donde escribir no siempre es conveniente o posible.</p>
                 </div>
               </div>
               <div className="flex items-start space-x-4">
-                <CheckCircle className="h-6 w-6 text-primary mt-1" />
+                <CheckCircle className="h-6 w-6 text-primary mt-1" style={{ color: '#C2DB64'}}/>
                 <div>
                   <h3 className="text-xl font-bold mb-2" style={{ color: '#2F3D44' }}>Flujos de trabajo optimizados</h3>
                   <p className="text-gray-500 dark:text-gray-400">Simplifica la creación de tareas, el seguimiento y la recopilación de información en un solo lugar.</p>
@@ -601,13 +642,14 @@ export default function Component() {
             </div>
           </div>
         </section>
+       
 
-
-        <section ref={contactRef} className="w-full py-12 md:py-24 lg:py-32 bg-gray-1 dark:bg-gray-800">
-          <div className="container px-4 md:px-6">
+        <section ref={contactRef} className="w-full py-12 md:py-24 bg-gray-1 dark:bg-gray-800">
+        <MultiWaveAudio />
+          <div className="container px-2 md:px-6">
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none bg-gradient-to-r from-[#38507E] via-[#51A09A] to-[#C2DB64] bg-clip-text text-transparent">Sube a tu gente al tren de la tecnología.</h2>
+                <h2 className=" pb-4 text-3xl font-bold tracking-tighter mb:px-60 sm:text-4xl md:text-5xl lg:text-6xl leading-[1.2] bg-gradient-to-r from-[#38507E] via-[#51A09A] to-[#C2DB64] bg-clip-text text-transparent ">Sube a tu gente al tren de la tecnología.</h2>
                 <p className="mx-auto max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400">
                   Únete a una digitalización inclusiva y optimiza los procesos de tu compañía hoy mismo.
                 </p>
