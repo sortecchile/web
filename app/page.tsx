@@ -93,11 +93,36 @@ export default function Component() {
     }
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log('Submitted email:', email)
-    setEmail('')
-  }
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+  
+    if (!email) {
+      alert('Por favor, ingresa tu correo electrónico');
+      return;
+    }
+    try {
+      const response = await fetch('https://script.google.com/macros/s/AKfycbyZubcnX9yAltdVrXwN7htNZwC75a4aysJxkVmKxlP0KQoL31Vv-iNGNXcOUJffE6ww/exec', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+  
+      const result = await response.json();
+  
+      if (response.ok && result.result === 'success') {
+        alert('Correo guardado exitosamente!');
+      } else {
+        alert('Algo salió mal. Inténtalo de nuevo.');
+      }
+    } catch (error) {
+      console.error('Error al guardar el correo:', error);
+      alert('Error al guardar el correo. Por favor, inténtalo de nuevo.');
+    }
+  
+    setEmail('');
+  };
 
   //Q&A:
 
