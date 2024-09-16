@@ -60,6 +60,8 @@ export default function Component() {
   const aboutRef = useRef<HTMLDivElement>(null)
   const howtRef = useRef<HTMLDivElement>(null)
   const [playingVideo, setPlayingVideo] = useState<string | null>(null)
+  const [showAlert, setShowAlert] = useState(false);
+const [alertMessage, setAlertMessage] = useState('');
 
   const handlePlayVideo = (videoId: string) => {
     setPlayingVideo(videoId)
@@ -97,28 +99,30 @@ export default function Component() {
     e.preventDefault();
   
     if (!email) {
-      alert('Por favor, ingresa tu correo electrónico');
+      setAlertMessage('Por favor, ingresa tu correo electrónico');
+      setShowAlert(true);
+      setTimeout(() => setShowAlert(false), 3000);
       return;
     }
+  
     try {
-      const response = await fetch('https://script.google.com/macros/s/AKfycbyZubcnX9yAltdVrXwN7htNZwC75a4aysJxkVmKxlP0KQoL31Vv-iNGNXcOUJffE6ww/exec', {
+      await fetch('https://script.google.com/macros/s/AKfycbyZubcnX9yAltdVrXwN7htNZwC75a4aysJxkVmKxlP0KQoL31Vv-iNGNXcOUJffE6ww/exec', {
         method: 'POST',
+        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email }),
       });
   
-      const result = await response.json();
-  
-      if (response.ok && result.result === 'success') {
-        alert('Correo guardado exitosamente!');
-      } else {
-        alert('Algo salió mal. Inténtalo de nuevo.');
-      }
+      setAlertMessage('¡Gracias por registrarte en MIIDO! Te contactaremos en breve');
+      setShowAlert(true);
+      setTimeout(() => setShowAlert(false), 3000);
     } catch (error) {
       console.error('Error al guardar el correo:', error);
-      alert('Error al guardar el correo. Por favor, inténtalo de nuevo.');
+      setAlertMessage('Error al guardar el correo. Por favor, inténtalo de nuevo.');
+      setShowAlert(true);
+      setTimeout(() => setShowAlert(false), 3000);
     }
   
     setEmail('');
@@ -278,6 +282,11 @@ export default function Component() {
 
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
+      {showAlert && (
+  <div className="fixed top-0 left-0 right-0 z-[9999] p-4 bg-green-500 text-white text-center transition-all duration-300 ease-in-out transform translate-y-0">
+    <p>{alertMessage}</p>
+  </div>
+)}
       <header className="fixed top-0 left-0 right-0 z-50 px-4 lg:px-6 h-14 flex items-center justify-between border-b bg-white">
         <div className="flex items-center justify-between w-full">
           <Link className="flex items-center justify-center" href="#">
