@@ -10,6 +10,12 @@ const NewsSection = () => {
 
   const newsItems = [
     {
+      id: 8,
+      title: "1er foro LATAM para jóvenes en agricultura",
+      description: "Participamos en este increíble evento donde se conversó de nuevas tecnologías, tendencias en la industria, liderazgo y más en la CEPAL, Chile. ",
+      image: "./CEPAL.svg",
+    },
+    {
         id: 7,
         title: "Agricultura 4.0 para cerezos",
         description: "Participamos en MIIDO en el Seminario Agricultura 4.0 para cerezos, organizado por Copeval. ",

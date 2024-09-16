@@ -3,10 +3,13 @@
 import { useState, useEffect, useRef } from 'react'
 import { Button } from "@/src/components/ui/button"
 import { Input } from "@/src/components/ui/input"
-import { CheckCircle, BarChart2, Users, ArrowUp, Send, ChevronLeft, ChevronRight, MoreHorizontal, Edit2, Mic, MessageCircle, Menu, X, Plus, Minus } from 'lucide-react'
+import { CheckCircle, BarChart2, Users, ArrowUp, Send, ChevronLeft, ChevronRight, MoreHorizontal, Edit2, Mic, MessageCircle, Menu, X, Plus, Minus, PlayCircle } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import NewsSection from './NewsSection'
+import dynamic from 'next/dynamic'
+
+const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
 
 
   // Waves
@@ -47,13 +50,20 @@ import NewsSection from './NewsSection'
 export default function Component() {
   const [email, setEmail] = useState('')
   const [scrollProgress, setScrollProgress] = useState(0)
+  const [scrollProgressNewSection, setScrollProgressNewSection] = useState(0) 
   const [weekOffset, setWeekOffset] = useState(0)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [openQuestion, setOpenQuestion] = useState<number | null>(null)
   const demoRef = useRef<HTMLElement>(null)
+  const newSectionRef = useRef<HTMLElement>(null)
   const contactRef = useRef<HTMLDivElement>(null)
   const aboutRef = useRef<HTMLDivElement>(null)
   const howtRef = useRef<HTMLDivElement>(null)
+  const [playingVideo, setPlayingVideo] = useState<string | null>(null)
+
+  const handlePlayVideo = (videoId: string) => {
+    setPlayingVideo(videoId)
+  }
 
   const [titles, setTitles] = useState({
     diagram: "Diagrama",
@@ -163,14 +173,28 @@ export default function Component() {
         const rect = demoRef.current.getBoundingClientRect()
         const sectionHeight = rect.height
         const viewportHeight = window.innerHeight
-        
+
         const startOffset = sectionHeight * 0.4
         const scrolled = viewportHeight - rect.top - startOffset
         const totalScrollDistance = sectionHeight - startOffset
-        
+
         const progress = Math.max(0, Math.min(1, scrolled / totalScrollDistance))
-        
+
         setScrollProgress(progress)
+      }
+
+      if (newSectionRef.current) {
+        const rect = newSectionRef.current.getBoundingClientRect()
+        const sectionHeight = rect.height
+        const viewportHeight = window.innerHeight
+
+        const startOffset = sectionHeight * 0.4
+        const scrolled = viewportHeight - rect.top - startOffset
+        const totalScrollDistance = sectionHeight - startOffset
+
+        const progressNewSection = Math.max(0, Math.min(1, scrolled / totalScrollDistance))
+
+        setScrollProgressNewSection(progressNewSection)
       }
     }
 
@@ -344,7 +368,7 @@ export default function Component() {
               </div>
               <div className="flex flex-col items-center text-center">
                 <div className="mb-4">
-                  <CheckCircle className="h-12 w-12 text-primary" style={ { color :  '51A09A' }} />
+                  <CheckCircle className="h-12 w-12 text-primary" style={ { color :  '#51A09A' }} />
                 </div>
                 <h3 className="text-xl font-bold mb-2" style={{ color: '#2F3D44' }}>Procesamiento automatizado</h3>
                 <p className="text-gray-500 dark:text-gray-400">Nuestro sistema procesa los mensajes de voz y organiza la información.</p>
@@ -581,7 +605,8 @@ export default function Component() {
           
         </section>
         <MultiWaveAudio />
-        <section className="w-full py-12 md:py-24 lg:py-32">
+        
+        <section className="w-full py-12 md:py-24 lg:py-32"> 
     
           <div className="container px-4 md:px-6">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12" style={{ color: '#2F3D44' }}>Principales beneficios</h2>
@@ -618,6 +643,179 @@ export default function Component() {
           </div>
         </section>
 
+        <MultiWaveAudio />
+{/* Haz preguntas sobre la data Seccion  */}
+
+<section ref={newSectionRef} className="w-full py-12 md:py-24 lg:py-32 overflow-hidden">
+  <div className="container px-4 md:px-6">
+    <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-6" style={{ color: '#2F3D44' }}>
+      Haz preguntas sobre la data levantada
+    </h2>
+    <p className="mb-6 text-gray-500 dark:text-gray-400 text-center">Puedes hacer preguntas en el mismo chat, sobre toda la información que las personas están levantando. ¡Mira este ejemplo!</p>
+    <div className="flex flex-col lg:flex-row items-start justify-center gap-8">
+      <div className="w-full max-w-sm">
+        <div className="border-2 border-gray-200 rounded-[3rem] p-2 bg-white shadow-xl">
+          <div className="bg-gray-100 rounded-[2.5rem] p-2">
+            <div className="bg-white rounded-[2rem] h-[500px] overflow-y-auto flex flex-col">
+              <div className="bg-gray-100 p-4 flex items-center gap-2">
+                <div className="w-10 h-10 rounded-full overflow-hidden">
+                  <Image
+                    src="./logo2.svg"
+                    alt="Company Logo"
+                    width={5}
+                    height={10}
+                    className="w-full h-full"
+                  />
+                </div>
+                <div className="flex items-center">
+                  <p className="font-semibold">MIIDO</p>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-blue-500 ml-1">
+                    <path fillRule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div><p className="text-xs text-gray-500 ml-auto">Online</p></div>
+              </div>
+              <div className="flex-1 p-4 space-y-4">
+                {["Pregunta: ¿Cuándo empezamos la cosecha la temporada anterior?",
+                  "Respuesta: La cosecha empezó el 15 de diciembre del año pasado.",
+                  "Pregunta: ¿Cómo va avanzando la cosecha?",
+                  "Respuesta: La cosecha va en un 30% del total.",
+                  "Pregunta: ¿Cuál fue el rendimiento del último trimestre?"].map((message, index) => (
+                  <div
+                    key={index}
+                    className={`flex items-center gap-2 ${index % 2 === 0 ? 'justify-end' : 'justify-start'}`}
+                    style={{
+                      opacity: scrollProgressNewSection > index / 5 ? 1 : 0,
+                      transform: `translateY(${scrollProgressNewSection > index / 5 ? 0 : 20}px)`,
+                      transition: 'opacity 0.3s ease-out, transform 0.3s ease-out'
+                    }}
+                  >
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${index % 2 === 0 ? 'bg-blue-500' : 'bg-green-500'}`}>
+                      <Mic className="h-4 w-4 text-primary " />
+                    </div>
+                    <div className={`rounded-lg p-2 max-w-[80%] ${index % 2 === 0 ? 'bg-blue-100' : 'bg-green-100'}`}>
+                      <p className="text-sm">{message}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="bg-gray-100 p-4 flex items-center gap-2">
+                <Input className="flex-1" placeholder="Type a message" />
+                <Button size="icon">
+                  <Send className="h-4 w-4" />
+                  <span className="sr-only">Enviar mensaje</span>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+{/* Nuestros clientes nos aman  *
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50">
+          <div className="container px-4 md:px-6">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12" style={{ color: '#2F3D44' }}>
+              Nuestros clientes nos aman
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+              <div className="bg-white shadow-md rounded-lg overflow-hidden">
+                <div className="relative aspect-[2/4]">
+                  {playingVideo === 'ted-wright' ? (
+                    <ReactPlayer
+                      url="/control_procesos.mp4"
+                      width="100%"
+                      height="100%"
+                      playing
+                      controls
+                      style={{ position: 'relative', top: 0, left: 0 }}
+                    />
+                  ) : (
+                    <>
+                      <Image
+                        src="/Guillermo.jpg"
+                        alt="Ted Wright"
+                        layout="fill"
+                        objectFit="cover"
+                      />
+                      <div 
+                        className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 cursor-pointer"
+                        onClick={() => handlePlayVideo('ted-wright')}
+                      >
+                        <PlayCircle className="w-12 h-12 text-white opacity-80" />
+                      </div>
+                    </>
+                  )}
+                </div>
+                <div className="p-4">
+                  <h3 className="font-semibold text-base">Guillermo Baeza</h3>
+                  <p className="text-sm text-gray-600">Jefe de campo en Agrícola Manantiales (Curicó)</p>
+                </div>
+              </div>
+
+              <div className=" shadow-md rounded-lg overflow-hidden">
+                <div className="p-6">
+                  <blockquote className="text-sm italic mb-4 mt-40">
+                    "MIIDO se ha convertido en nuestra herramienta más valiable para las operaciones de campo. Es fácil de usar para todos. Nos ayuda a eliminar el papel y convertir nuestros datos en formato digital. También reduce los errores de transcripción."
+                  </blockquote>
+                  <div className="flex items-center">
+                    <Image
+                      src="/placeholder.svg?height=40&width=40"
+                      alt="Cristian Duran"
+                      width={40}
+                      height={40}
+                      className="rounded-full mr-3"
+                    />
+                    <div>
+                      <h3 className="font-semibold text-sm">Cristian Duran</h3>
+                      <p className="text-xs text-gray-600">DEPUTY MANAGER OF FORESTRY ASSETS, ARAUCO FORESTRY</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white shadow-md rounded-lg overflow-hidden">
+                <div className="relative aspect-[2/4]">
+                  {playingVideo === 'cesar-farias' ? (
+                    <ReactPlayer
+                      url="/control_procesos.mp4"
+                      width="100%"
+                      height="100%"
+                      playing
+                      controls
+                    />
+                  ) : (
+                    <>
+                      <Image
+                        src="/Guillermo.jpg"
+                        alt="César Farías"
+                        layout="fill"
+                        objectFit="cover"
+                      />
+                      <div 
+                        className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 cursor-pointer"
+                        onClick={() => handlePlayVideo('cesar-farias')}
+                      >
+                        <PlayCircle className="w-12 h-12 text-white opacity-80" />
+                      </div>
+                    </>
+                  )}
+                </div>
+                <div className="p-4">
+                  <h3 className="font-semibold text-base">César Farías</h3>
+                  <p className="text-sm text-gray-600">Director of Quality Control and Standardization, ENAP Refineries</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        */}
+
         <section ref={aboutRef}>
           <NewsSection />
         </section>
@@ -645,6 +843,7 @@ export default function Component() {
             </div>
           </div>
         </section>
+
        
 
         <section ref={contactRef} className="w-full py-12 md:py-24 bg-gray-1 dark:bg-gray-800">
