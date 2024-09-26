@@ -291,7 +291,7 @@ const [alertMessage, setAlertMessage] = useState('');
         <div className="flex items-center justify-between w-full">
           <Link className="flex items-center justify-center" href="#">
             <Image
-              src="./logo.svg"
+              src="./miido-logo.png"
               alt="Company Logo"
               width={150}
               height={150}
@@ -384,6 +384,7 @@ const [alertMessage, setAlertMessage] = useState('');
               <Image src="./LCP.png" alt="Substack" width={140} height={40} />
               <Image src="./cyt.png" alt="Discord" width={140} height={40} />
               <Image src="./taglespa.svg" alt="Airbnb" width={100} height={40} />
+              <Image src="./tmv.png" alt="Airbnb" width={100} height={40} />
               <Image src="./startup-chile.png" alt="Spotify" width={120} height={40} />
               <Image src="./start-fellowship.png" alt="Toyota" width={120} height={40} />
             </div>
@@ -429,11 +430,12 @@ const [alertMessage, setAlertMessage] = useState('');
                       <div className="bg-gray-100 p-4 flex items-center gap-2">
                         <div className="w-10 h-10 rounded-full overflow-hidden">
                           <Image
-                            src="./logo2.svg"
+                            src="./logo2.png"
                             alt="Company Logo"
                             width={5}
                             height={10}
                             className="w-full h-full"
+                            
                           />
                         </div>
                         <div className="flex items-center">
@@ -775,8 +777,8 @@ const [alertMessage, setAlertMessage] = useState('');
               <Image
                 src="/Guillermo.jpg"
                 alt="Ted Wright"
-                layout="fill"
-                objectFit="cover"
+                fill
+                style={{ objectFit: 'cover' }}
               />
               <div 
                 className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 cursor-pointer"
@@ -829,8 +831,8 @@ const [alertMessage, setAlertMessage] = useState('');
               <Image
                 src="/tatiana.jpg"
                 alt="Tatiana"
-                layout="fill"
-                objectFit="cover"
+                fill
+                style={{ objectFit: 'cover' }}
               />
               <div 
                 className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 cursor-pointer"
