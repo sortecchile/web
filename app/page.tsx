@@ -381,12 +381,12 @@ const [alertMessage, setAlertMessage] = useState('');
           <div className="container px-4 md:px-6">
             <div className="flex flex-nowrap md:justify-center sm:justify-center  items-center gap-20">
               <Image src="./errazuriz-logo.png" alt="Figma" width={120} height={40} />
-              <Image src="./LCP.png" alt="Substack" width={140} height={40} />
-              <Image src="./cyt.png" alt="Discord" width={140} height={40} />
-              <Image src="./taglespa.svg" alt="Airbnb" width={100} height={40} />
-              <Image src="./tmv.png" alt="Airbnb" width={100} height={40} />
-              <Image src="./startup-chile.png" alt="Spotify" width={120} height={40} />
-              <Image src="./start-fellowship.png" alt="Toyota" width={120} height={40} />
+              <Image src="./LCP.png" alt="La ciudad posible" width={140} height={40} />
+              <Image src="./cyt.png" alt="Concha y Toro" width={140} height={40} />
+              <Image src="./taglespa.svg" alt="Fundo Santa Eugenia" width={100} height={40} />
+              <Image src="./TMV.png" alt="TMV Agroexportació" width={100} height={40} />
+              <Image src="./startup-chile.png" alt="Startup Chile" width={120} height={40} />
+              <Image src="./start-fellowship.png" alt="Start Fellowship" width={120} height={40} />
             </div>
           </div>
         </section>
