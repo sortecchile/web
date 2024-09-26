@@ -751,104 +751,105 @@ const [alertMessage, setAlertMessage] = useState('');
 
 
 
-{/* Nuestros clientes nos aman  *
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50">
-          <div className="container px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12" style={{ color: '#2F3D44' }}>
-              Nuestros clientes nos aman
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-              <div className="bg-white shadow-md rounded-lg overflow-hidden">
-                <div className="relative aspect-[2/4]">
-                  {playingVideo === 'ted-wright' ? (
-                    <ReactPlayer
-                      url="/control_procesos.mp4"
-                      width="100%"
-                      height="100%"
-                      playing
-                      controls
-                      style={{ position: 'relative', top: 0, left: 0 }}
-                    />
-                  ) : (
-                    <>
-                      <Image
-                        src="/Guillermo.jpg"
-                        alt="Ted Wright"
-                        layout="fill"
-                        objectFit="cover"
-                      />
-                      <div 
-                        className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 cursor-pointer"
-                        onClick={() => handlePlayVideo('ted-wright')}
-                      >
-                        <PlayCircle className="w-12 h-12 text-white opacity-80" />
-                      </div>
-                    </>
-                  )}
-                </div>
-                <div className="p-4">
-                  <h3 className="font-semibold text-base">Guillermo Baeza</h3>
-                  <p className="text-sm text-gray-600">Jefe de campo en Agrícola Manantiales (Curicó)</p>
-                </div>
+{/* Nuestros clientes nos aman  **/}
+        {/* Nuestros clientes nos aman */}
+<section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50">
+  <div className="container px-4 md:px-6">
+    <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12" style={{ color: '#2F3D44' }}>
+      Nuestros clientes nos aman
+    </h2>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+      <div className="bg-white shadow-md rounded-lg overflow-hidden">
+        <div className="relative aspect-[2/4]">
+          {playingVideo === 'ted-wright' ? (
+            <ReactPlayer
+              url="https://youtu.be/5L_QTMlP-8ohttps://youtube.com/shorts/5L_QTMlP-8o?feature=share"
+              width="100%"
+              height="100%"
+              playing
+              controls
+              style={{ position: 'relative', top: 0, left: 0 }}
+            />
+          ) : (
+            <>
+              <Image
+                src="/Guillermo.jpg"
+                alt="Ted Wright"
+                layout="fill"
+                objectFit="cover"
+              />
+              <div 
+                className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 cursor-pointer"
+                onClick={() => handlePlayVideo('ted-wright')}
+              >
+                <PlayCircle className="w-12 h-12 text-white opacity-80" />
               </div>
+            </>
+          )}
+        </div>
+        <div className="p-4">
+          <h3 className="font-semibold text-base">Guillermo Baeza</h3>
+          <p className="text-sm text-gray-600">Jefe de campo en Agrícola Manantiales (Curicó) 🇨🇱</p>
+        </div>
+      </div>
 
-              <div className=" shadow-md rounded-lg overflow-hidden">
-                <div className="p-6">
-                  <blockquote className="text-sm italic mb-4 mt-40">
-                    "MIIDO se ha convertido en nuestra herramienta más valiable para las operaciones de campo. Es fácil de usar para todos. Nos ayuda a eliminar el papel y convertir nuestros datos en formato digital. También reduce los errores de transcripción."
-                  </blockquote>
-                  <div className="flex items-center">
-                    <Image
-                      src="/placeholder.svg?height=40&width=40"
-                      alt="Cristian Duran"
-                      width={40}
-                      height={40}
-                      className="rounded-full mr-3"
-                    />
-                    <div>
-                      <h3 className="font-semibold text-sm">Cristian Duran</h3>
-                      <p className="text-xs text-gray-600">DEPUTY MANAGER OF FORESTRY ASSETS, ARAUCO FORESTRY</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-white shadow-md rounded-lg overflow-hidden">
-                <div className="relative aspect-[2/4]">
-                  {playingVideo === 'cesar-farias' ? (
-                    <ReactPlayer
-                      url="/control_procesos.mp4"
-                      width="100%"
-                      height="100%"
-                      playing
-                      controls
-                    />
-                  ) : (
-                    <>
-                      <Image
-                        src="/Guillermo.jpg"
-                        alt="César Farías"
-                        layout="fill"
-                        objectFit="cover"
-                      />
-                      <div 
-                        className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 cursor-pointer"
-                        onClick={() => handlePlayVideo('cesar-farias')}
-                      >
-                        <PlayCircle className="w-12 h-12 text-white opacity-80" />
-                      </div>
-                    </>
-                  )}
-                </div>
-                <div className="p-4">
-                  <h3 className="font-semibold text-base">César Farías</h3>
-                  <p className="text-sm text-gray-600">Director of Quality Control and Standardization, ENAP Refineries</p>
-                </div>
-              </div>
+      <div className="shadow-md rounded-lg overflow-hidden">
+        <div className="p-6">
+          <blockquote className="text-sm italic mb-4 mt-40">
+            "MIIDO se ha convertido en nuestra herramienta más valiosa para dar inteligencia a los datos que se levantan en el día a día de la operación."
+          </blockquote>
+          <div className="flex items-center">
+            <Image
+              src="/taglespa.svg"
+              alt="Felipe Sanchez"
+              width={40}
+              height={40}
+              className="rounded-full mr-3"
+            />
+            <div>
+              <h3 className="font-semibold text-sm">Felipe Sanchez</h3>
+              <p className="text-xs text-gray-600">Gerente General - Fundo Santa Eugenia (Paine) 🇨🇱</p>
             </div>
           </div>
-        </section>
-        */}
+        </div>
+      </div>
+
+      <div className="bg-white shadow-md rounded-lg overflow-hidden">
+        <div className="relative aspect-[2/4]">
+          {playingVideo === 'Tatiana Morera' ? (
+            <ReactPlayer
+              url="https://youtu.be/nDjZ9ySfCkc"
+              width="100%"
+              height="100%"
+              playing
+              controls
+            />
+          ) : (
+            <>
+              <Image
+                src="/tatiana.jpg"
+                alt="Tatiana"
+                layout="fill"
+                objectFit="cover"
+              />
+              <div 
+                className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 cursor-pointer"
+                onClick={() => handlePlayVideo('Tatiana Morera')}
+              >
+                <PlayCircle className="w-12 h-12 text-white opacity-80" />
+              </div>
+            </>
+          )}
+        </div>
+        <div className="p-4">
+          <h3 className="font-semibold text-sm">Tatiana Morera</h3>
+          <p className="text-xs text-gray-600">Fundadora de TMV Agroexportación (Costa Rica) 🇨🇷🍍</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+        
 
         <section ref={aboutRef}>
           <NewsSection />
