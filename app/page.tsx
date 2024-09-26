@@ -795,9 +795,9 @@ const [alertMessage, setAlertMessage] = useState('');
 
       <div className="shadow-md rounded-lg overflow-hidden">
         <div className="p-6">
-          <blockquote className="text-sm italic mb-4 mt-40">
-            "MIIDO se ha convertido en nuestra herramienta más valiosa para dar inteligencia a los datos que se levantan en el día a día de la operación."
-          </blockquote>
+        <blockquote className="text-sm italic mb-4 mt-40">
+  &quot;MIIDO se ha convertido en nuestra herramienta más valiosa para dar inteligencia a los datos que se levantan en el día a día de la operación.&quot;
+</blockquote>
           <div className="flex items-center">
             <Image
               src="/taglespa.svg"
