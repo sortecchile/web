@@ -384,7 +384,7 @@ const [alertMessage, setAlertMessage] = useState('');
               <Image src="./LCP.png" alt="La ciudad posible" width={140} height={40} />
               <Image src="./cyt.png" alt="Concha y Toro" width={140} height={40} />
               <Image src="./taglespa.svg" alt="Fundo Santa Eugenia" width={100} height={40} />
-              <Image src="./TMV.png" alt="TMV Agroexportació" width={100} height={40} />
+              <Image src="./TMV.png" alt="TMV Agroexportació" width={140} height={40} />
               <Image src="./startup-chile.png" alt="Startup Chile" width={120} height={40} />
               <Image src="./start-fellowship.png" alt="Start Fellowship" width={120} height={40} />
             </div>
