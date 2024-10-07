@@ -7,6 +7,7 @@ import { CheckCircle, BarChart2, Users, ArrowUp, Send, ChevronLeft, ChevronRight
 import Link from 'next/link'
 import Image from 'next/image'
 import NewsSection from './NewsSection'
+
 import dynamic from 'next/dynamic'
 
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
