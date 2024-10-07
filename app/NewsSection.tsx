@@ -10,40 +10,53 @@ const NewsSection = () => {
 
   const newsItems = [
     {
+      id: 9,
+      title: "MIIDO dentro de las 15 startups seleccionadas por IICA",
+      description: "Seleccionados para participar de la Semana de la Agricultura digital en IICA Costa Rica, una instancia única donde pudimos conectar con actores relevantes del ecosistema Agrotech. ",
+      image: "./IICA.png",
+      link: "https://www.linkedin.com/posts/miido_digitalizaciaejn-agtech-innovaciaejn-activity-7249010677158150144-_mdr?utm_source=share&utm_medium=member_desktop",
+    },
+    {
       id: 8,
       title: "1er foro LATAM para jóvenes en agricultura",
       description: "Participamos en este increíble evento donde se conversó de nuevas tecnologías, tendencias en la industria, liderazgo y más en la CEPAL, Chile. ",
       image: "./CEPAL.svg",
+      link: "https://iica.int/es/prensa/noticias/primer-foro-latam-de-jovenes-lideres-rurales-innovacion-y-sustentabilidad-en-el",
     },
     {
         id: 7,
         title: "Agricultura 4.0 para cerezos",
         description: "Participamos en MIIDO en el Seminario Agricultura 4.0 para cerezos, organizado por Copeval. ",
         image: "./Cerezas.svg",
+        link: "https://corporativo.copeval.cl/agricultura-inteligente/agricultura-4-0-para-cerezos/",
       },
     {
         id: 6,
         title: "GTT Maule",
         description: "Encuentro regional de GTT del Maule realizado ayer en el Liceo Agrícola San José de Duao. #agrotech.",
         image: "./gtt.svg",
+        link: "https://www.snaeduca.cl/consejo-regional-gtt-region-del-maule-en-escuela-agricola-san-jose-de-duao/",
       },
     {
       id: 1,
       title: "Seleccionados por Startup Chile",
       description: "Fuimos seleccionados para el programa Build2 e ignite 5 de Startup Chile, una de las mejores aceleradoras de negocios del mundo.",
       image: "./StartupChile.svg",
+      link: "https://startupchile.org/en/blog/big-5-new-generation/",
     },
     {
       id: 2,
       title: "Primer lugar competencia mundial Babson Collaborative Global student Challenge",
       description: "Competimos con más de 2000 emprendedores de todo el mundo y ganamos el primer lugar, permitiéndonos estudiar en la Universidad #1 de emprendimiento en el mundo.",
       image: "./babson.svg",
+      link: "https://entrepreneurship.babson.edu/global-student-challenge-2022/",
     },
     {
       id: 3,
       title: "Acelerados en Suiza 🇨🇭 - START Fellowship",
       description: "Acelerados en Suiza con la posibilidad de conocer el ecosistema europeo y la industria agro en el continente viejo.",
       image: "./START.svg",
+      link: "https://www.startglobal.org/fellowship/fellows",
     },
     // Add more news items as needed
   ]
@@ -109,7 +122,9 @@ const NewsSection = () => {
                   <div className="p-6">
                     <h3 className="text-xl font-bold mb-2">{item.title}</h3>
                     <p className="text-gray-600 dark:text-gray-400 mb-4">{item.description}</p>
-                    
+                    <Link href={item.link} className="inline-block bg-primary text-white py-2 px-4 rounded hover:bg-primary-dark">
+                       Leer más
+                      </Link>
                   </div>
                 </div>
               </div>
