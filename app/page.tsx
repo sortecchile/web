@@ -886,6 +886,7 @@ const [alertMessage, setAlertMessage] = useState('');
 
         <section ref={contactRef} className="w-full py-12 md:py-24 bg-gray-1 dark:bg-gray-800">
         <MultiWaveAudio />
+        
           <div className="container px-2 md:px-6">
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">

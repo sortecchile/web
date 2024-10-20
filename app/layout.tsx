@@ -16,7 +16,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {/* Aquí agregamos el menú de navegación */}
+        <header>
+          <nav>
+            <ul>
+              <li><a href="/"></a></li>
+              <li><a href="/deck"></a></li> {/* Enlace a la nueva página */}
+              {/* Puedes agregar más enlaces aquí según sea necesario */}
+            </ul>
+          </nav>
+        </header>
+        {/* El contenido de la página */}
+        {children}
+      </body>
     </html>
   );
 }
