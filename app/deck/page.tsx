@@ -2,8 +2,7 @@ import React from 'react';
 
 const DeckPage = () => {
   return (
-    <div className="container px-2 md:px-6">
-      
+    <div>
       <div
         style={{
           position: 'relative',
@@ -17,7 +16,6 @@ const DeckPage = () => {
           overflow: 'hidden',
           borderRadius: '8px',
           willChange: 'transform',
-          
         }}
       >
         <iframe
@@ -42,7 +40,6 @@ const DeckPage = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        
       </a>
     </div>
   );
