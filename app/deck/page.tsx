@@ -2,8 +2,7 @@ import React from 'react';
 
 const DeckPage = () => {
   return (
-    <div>
-      <h1>PitchDeck MIIDO</h1>
+    <div className="container px-2 md:px-6">
       <div
         style={{
           position: 'relative',
@@ -41,7 +40,7 @@ const DeckPage = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        PitchDeck MIIDO
+        
       </a>
     </div>
   );
