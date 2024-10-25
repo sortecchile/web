@@ -1,19 +1,14 @@
 import React from 'react';
 
-const VideoPage = () => {
+const Video2Page = () => {
   return (
     <div className="container px-2 md:px-6">
-      <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0 }}>
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
         <iframe
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            border: 0,
-          }}
-          src="https://www.tella.tv/video/cm2nrgrjk000003l0csmid62g/embed?b=1&title=0&a=1&loop=0&t=0&muted=0&wt=1"
+          style={{ border: 0 }}
+          width="800"
+          height="450"
+          src="https://www.tella.tv/video/cm2ow0qmm000803mq4ju91bq0/embed?b=1&title=0&a=1&loop=0&t=0&muted=0&wt=1"
           allowFullScreen
           allowTransparency
         ></iframe>
@@ -22,4 +17,4 @@ const VideoPage = () => {
   );
 };
 
-export default VideoPage;
+export default Video2Page;
