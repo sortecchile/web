@@ -24,6 +24,7 @@ export default function RootLayout({
               <li><a href="/"></a></li>
               <li><a href="/deck"></a></li> {/* Enlace a la nueva página */}
               <li><a href="/demo"></a></li> {/* Enlace a la nueva página */}
+              <li><a href="/newsletter"></a></li> {/* Enlace a la nueva página */}
               {/* Puedes agregar más enlaces aquí según sea necesario */}
             </ul>
           </nav>

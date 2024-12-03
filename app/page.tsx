@@ -337,47 +337,76 @@ const [alertMessage, setAlertMessage] = useState('');
       </div>
 
       <main className="flex-1 pt-14">
-        <section className="w-full py-32 md:py-24 lg:py-32 xl:py-48">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center space-y-4 text-center">
-              <div className="space-y-2">
-              <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none bg-gradient-to-r from-[#38507E] via-[#51A09A] to-[#C2DB64] bg-clip-text text-transparent h-24 flex items-center justify-center">
-                  {typedText}
-                  <span className="animate-blink">|</span>
-                </h1>
-                <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                Optimiza tu flujo de trabajo con la herramienta que ya conoces. Crea tareas, registra y accede a información detallada, todo mediante mensajes de voz en WhatsApp.
-                </p>
-              </div>
-              <div className='w-full max-w-sm space-y-2 flex items-center justify-center'>
-                <Image
-                  src="./whatsapp.svg"
-                  alt="Company Logo"
-                  width={150}
-                  height={150}
-                />
-                <span className="sr-only">MIIDO</span>
-              </div>
-              <div className="w-full max-w-sm space-y-2">
-                <form onSubmit={handleSubmit} className="flex space-x-2">
-                  <Input
-                    className="max-w-lg flex-1"
-                    placeholder="Ingresa tu email"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                  <Button type="submit">Comienza ahora</Button>
-                </form>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
-                  Empieza tu prueba gratuita. No se requiere tarjeta de crédito.
-                </p>
-              </div>
-            </div>
-          </div>
-          <MultiWaveAudio />
-        </section>
+      <section className="w-full py-32 md:py-24 lg:py-32 xl:py-48">
+  <div className="container px-4 md:px-6">
+    <div className="flex flex-col items-center space-y-6 text-center">
+      {/* Title Section */}
+      <div className="space-y-2">
+        <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none bg-gradient-to-r from-[#38507E] via-[#51A09A] to-[#C2DB64] bg-clip-text text-transparent h-24 flex items-center justify-center">
+          {typedText}
+          <span className="animate-blink">|</span>
+        </h1>
+        <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
+          Optimiza tu flujo de trabajo con la herramienta que ya conoces. Crea tareas, registra y accede a información detallada, todo mediante mensajes de voz en WhatsApp.
+        </p>
+      </div>
+
+      {/* WhatsApp Icon */}
+      <div className="w-full max-w-sm space-y-2 flex items-center justify-center">
+        <Image
+          src="./whatsapp.svg"
+          alt="Company Logo"
+          width={150}
+          height={150}
+        />
+        <span className="sr-only">MIIDO</span>
+      </div>
+
+      {/* Call-to-Action Button */}
+      <div className="w-full max-w-sm space-y-2">
+        <div className="flex space-x-2">
+          <a
+            href="https://www.notion.so/miidocl/151f91071a0f80c19460e4c799042667?pvs=106"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="max-w-lg flex-1 inline-flex items-center justify-center px-4 py-2 text-white bg-[#1A202C] rounded-md hover:bg-[#2D3748] focus:outline-none"
+          >
+            Comienza ahora
+          </a>
+        </div>
+        <p className="text-xs text-gray-500 dark:text-gray-400">
+          Empieza tu prueba gratuita. No se requiere tarjeta de crédito.
+        </p>
+      </div>
+
+      {/* Embedded Video Section */}
+      <div className="w-full max-w-[700px] mt-8">
+        <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0 }}>
+          <iframe
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              border: 0,
+            }}
+            src="https://www.tella.tv/video/cm47fh5kh001603mo2gc10opu/embed?b=0&title=0&a=1&loop=0&autoPlay=true&t=0&muted=1&wt=0"
+            allowFullScreen
+            allowTransparency
+          ></iframe>
+        </div>
+        <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+          Descubre cómo MIIDO transforma tu flujo de trabajo.
+        </p>
+      </div>
+    </div>
+  </div>
+  <MultiWaveAudio />
+</section>
+
+
+
         <section className="w-full py-2 bg-gray-1 md:-mt-24 sm:-mt-32 overflow-x-auto"> 
           <div className="container px-4 md:px-6">
             <div className="flex flex-nowrap md:justify-center sm:justify-center  items-center gap-20">
