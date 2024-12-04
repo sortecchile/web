@@ -11,6 +11,13 @@ const NewsSection = () => {
   const newsItems = [
     {
       id: 9,
+      title: "Primer lugar Desafío Conectagro de la Sociedad Nacional de Agricultura",
+      description: "Obtuvimos el primer lugar en este desafío organizado por la SNA y SQM, lo cual valida una vez el propósito de MIIDO en terminos de digitalización en la agro-industria.. ",
+      image: "./Conectagro.png",
+      link: "https://www.instagram.com/reel/DCuDrfcRVy9/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+    },
+    {
+      id: 9,
       title: "MIIDO dentro de las 15 startups seleccionadas por IICA",
       description: "Seleccionados para participar de la Semana de la Agricultura digital en IICA Costa Rica, una instancia única donde pudimos conectar con actores relevantes del ecosistema Agrotech. ",
       image: "./IICA.png",
