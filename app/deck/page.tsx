@@ -30,17 +30,16 @@ const DeckPage = () => {
             padding: 0,
             margin: 0,
           }}
-          src="https://www.canva.com/design/DAGT3pyXuEI/QtFVGirDCSOXOt1LDrjRsA/view?embed"
+          src="https://www.canva.com/design/DAGbb78Qcl4/Oy4zgyupRAv5_PnZiMk5Fw/view?embed"
           allowFullScreen
           allow="fullscreen"
         ></iframe>
       </div>
       <a
-        href="https://www.canva.com/design/DAGT3pyXuEI/QtFVGirDCSOXOt1LDrjRsA/view?utm_content=DAGT3pyXuEI&utm_campaign=designshare&utm_medium=embeds&utm_source=link"
+        href="https://www.canva.com/design/DAGbb78Qcl4/Oy4zgyupRAv5_PnZiMk5Fw/view?utm_content=DAGbb78Qcl4&utm_campaign=designshare&utm_medium=embeds&utm_source=link"
         target="_blank"
         rel="noopener noreferrer"
       >
-        
       </a>
     </div>
   );
