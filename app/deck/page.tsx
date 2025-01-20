@@ -22,7 +22,13 @@ const MailPopup: React.FC = () => {
             body: JSON.stringify({ email }),
           }
         );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         const result = await response.json();
+        console.log("Respuesta de la API:", result);
 
         if (result.success) {
           console.log("Email enviado correctamente:", email);
@@ -31,9 +37,9 @@ const MailPopup: React.FC = () => {
           console.error("Error al enviar el email:", result.error);
           alert("Error al enviar el email: " + result.error);
         }
-      } catch (error) {
-        console.error("Error al enviar el email:", error);
-        alert("Hubo un error al enviar el email.");
+      }catch (error: any) {
+        console.error("Error al enviar el email:", error?.message || error);
+        alert("Hubo un error al enviar el email. Verifica la consola para más detalles.");
       }
     } else {
       alert("Por favor, ingresa un email válido.");
