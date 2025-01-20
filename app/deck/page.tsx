@@ -15,8 +15,8 @@ const MailPopup: React.FC = () => {
         const response = await fetch(
           "https://script.google.com/macros/s/AKfycbyIGHo34BrN8HQbJaeoYJ2wBfGPozEG1qDQhhIc3T1yjQFT4OMkoCg3w7P-l_Cl5djG/exec",
           {
+            redirect: "follow",
             method: "POST",
-            mode: "cors",
             headers: {
               "Content-Type": "application/json",
             },
