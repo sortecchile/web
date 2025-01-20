@@ -11,11 +11,14 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node", // Cambiado de "bundler" a "node"
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "allowSyntheticDefaultImports": true, // Agregado
+    "forceConsistentCasingInFileNames": true, // Agregado
+    "strictNullChecks": true, // Agregado
     "plugins": [
       {
         "name": "next"

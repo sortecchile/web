@@ -10,6 +10,15 @@ const nextConfig = {
     unoptimized: true, // Mantén esto igual para ambos entornos
   },
   assetPrefix: isProd ? 'https://www.miido.cl/' : '', // Usar el prefijo solo en producción
-}
+
+  // Configuración de Webpack
+  webpack: (config) => {
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      canvas: false, // Ignorar el módulo 'canvas'
+    };
+    return config;
+  },
+};
 
 module.exports = nextConfig;
