@@ -73,11 +73,26 @@ module.exports = {
           '0%, 100%': { opacity: 1 },
           '50%': { opacity: 0 },
         },
+        'float-slow': {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+        'float-medium': {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-15px)' },
+        },
+        'float-fast': {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-20px)' },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         blink: 'blink 1s step-end infinite',
+        'float-slow': 'float-slow 6s ease-in-out infinite',
+        'float-medium': 'float-medium 4s ease-in-out infinite',
+        'float-fast': 'float-fast 3s ease-in-out infinite',
       },
     },
   },

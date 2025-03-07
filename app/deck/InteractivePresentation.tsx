@@ -17,8 +17,10 @@ const slides = [
 const InteractivePresentation: React.FC<{ email: string }> = ({ email }) => {
   const [swiperRef, setSwiperRef] = useState<any>(null);
   const [zoom, setZoom] = useState(1); // Nivel de zoom
-  const timestamps = useRef<Record<string, number>>({}); // Tiempos por slide con claves dinámicas
+  const timestamps = useRef<Record<string, number>>({}); // Tiempos por slide
   const [currentSlide, setCurrentSlide] = useState<number>(0); // Slide actual
+  const [isSaving, setIsSaving] = useState(false); // Indicador de guardado
+  const [saveStatus, setSaveStatus] = useState<string | null>(null); // Estado del guardado
 
   // Controla el zoom
   const handleZoomIn = () => setZoom((prev) => Math.min(prev + 0.2, 2));
@@ -32,45 +34,62 @@ const InteractivePresentation: React.FC<{ email: string }> = ({ email }) => {
     // Calcula el tiempo pasado en la lámina anterior
     const currentTime = Date.now();
     if (currentSlide !== null) {
-      if (!timestamps.current[currentSlide.toString()]) {
-        timestamps.current[currentSlide.toString()] = 0;
+      const slideKey = currentSlide.toString();
+      if (!timestamps.current[slideKey]) {
+        timestamps.current[slideKey] = 0;
       }
-      timestamps.current[currentSlide.toString()] += currentTime - (timestamps.current[currentSlide.toString() + "_start"] || currentTime);
+      timestamps.current[slideKey] += currentTime - (timestamps.current[`${slideKey}_start`] || currentTime);
     }
 
     // Actualiza el tiempo de inicio para la nueva lámina
-    timestamps.current[newIndex.toString() + "_start"] = Date.now();
+    timestamps.current[`${newIndex}_start`] = Date.now();
     setCurrentSlide(newIndex);
   };
 
-  // Envía los tiempos acumulados a Google Sheets
-  const saveTimesToGoogleSheets = async () => {
-    console.log("Datos que se envían:", {
-      email,
-      times: timestamps.current,
+  // Calcula los tiempos acumulados para enviar
+  const calculateAndValidateTimes = () => {
+    const data = { ...timestamps.current };
+    Object.keys(data).forEach((key) => {
+      if (key.includes("_start")) {
+        delete data[key]; // Elimina las claves de tiempo de inicio
+      }
     });
+    return data;
+  };
+
+  // Envía los tiempos acumulados al backend usando el proxy
+  const saveTimesToGoogleSheets = async () => {
+    setIsSaving(true);
+    const times = calculateAndValidateTimes(); // Calcula los tiempos
+    console.log("Datos enviados al backend:", { email, times }); // Agrega este log
   
     try {
-      const response = await fetch("https://script.google.com/macros/s/AKfycbyIGHo34BrN8HQbJaeoYJ2wBfGPozEG1qDQhhIc3T1yjQFT4OMkoCg3w7P-l_Cl5djG/exec", {
+      const response = await fetch("/api/proxy", {
         method: "POST",
-        redirect: "follow",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email,
-          times: timestamps.current,
+          times,
         }),
       });
   
-      const text = await response.text();
-      console.log("Respuesta del servidor (bruta):", text);
+      if (!response.ok) throw new Error("Error al guardar datos");
+      const result = await response.json();
+  
+      if (result.success) {
+        setSaveStatus("Datos guardados exitosamente");
+      } else {
+        throw new Error(result.error || "Error desconocido");
+      }
     } catch (error) {
       console.error("Error al enviar los datos:", error);
+      setSaveStatus("Error al guardar los datos");
+    } finally {
+      setIsSaving(false);
     }
   };
-  
-  
   
 
   return (
@@ -98,12 +117,19 @@ const InteractivePresentation: React.FC<{ email: string }> = ({ email }) => {
         ))}
       </Swiper>
 
+      {/* Botón para Guardar Datos */}
       <button
         onClick={saveTimesToGoogleSheets}
         style={{ marginTop: "20px", padding: "10px 20px", backgroundColor: "#007bff", color: "#fff", border: "none", borderRadius: "4px" }}
       >
         Guardar Datos
       </button>
+
+      {/* Feedback de Estado */}
+      <div style={{ marginTop: "10px", textAlign: "center" }}>
+        {isSaving && <p>Guardando datos...</p>}
+        {saveStatus && <p>{saveStatus}</p>}
+      </div>
     </div>
   );
 };

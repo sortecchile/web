@@ -1,36 +1,32 @@
 "use client";
 
 import React, { useState } from "react";
-import InteractivePresentation from "./InteractivePresentation"; // Importa el componente del visor interactivo
+import InteractivePresentation from "./InteractivePresentation"; // Asegúrate de tener este componente correctamente configurado
 
 const MailPopup: React.FC = () => {
   const [email, setEmail] = useState(""); // Almacena el email ingresado
-  const [isEmailCaptured, setIsEmailCaptured] = useState(false); // Controla si se capturó el email
+  const [isEmailCaptured, setIsEmailCaptured] = useState(false); // Controla si el email fue enviado con éxito
 
+  // Maneja el envío del email
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+  
     if (email) {
       try {
-        const response = await fetch(
-          "https://script.google.com/macros/s/AKfycbyIGHo34BrN8HQbJaeoYJ2wBfGPozEG1qDQhhIc3T1yjQFT4OMkoCg3w7P-l_Cl5djG/exec",
-          {
-            method: "POST",
-            redirect: "follow",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email }),
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
+        const response = await fetch("/api/proxy", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            times: {}, // Envía un objeto vacío si no hay datos aún
+          }),
+        });
+  
         const result = await response.json();
-        console.log("Respuesta del servidor:", result);
-
+        console.log("Respuesta del proxy:", result);
+  
         if (result.success) {
           console.log("Email enviado correctamente:", email);
           setIsEmailCaptured(true);
@@ -46,9 +42,11 @@ const MailPopup: React.FC = () => {
       alert("Por favor, ingresa un email válido.");
     }
   };
+  
 
   return (
     <div>
+      {/* Si el email no ha sido capturado, mostrar el popup */}
       {!isEmailCaptured ? (
         <div
           style={{
@@ -80,7 +78,7 @@ const MailPopup: React.FC = () => {
               <input
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)} // Actualiza el email ingresado
                 placeholder="Ingresa tu email"
                 style={{
                   width: "100%",
@@ -108,7 +106,8 @@ const MailPopup: React.FC = () => {
           </div>
         </div>
       ) : (
-        <InteractivePresentation email={email} /> // Aquí se muestra el deck después de capturar el email
+        // Si el email fue capturado, mostrar el componente interactivo
+        <InteractivePresentation email={email} />
       )}
     </div>
   );

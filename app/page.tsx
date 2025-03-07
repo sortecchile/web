@@ -63,6 +63,7 @@ export default function Component() {
   const [playingVideo, setPlayingVideo] = useState<string | null>(null)
   const [showAlert, setShowAlert] = useState(false);
 const [alertMessage, setAlertMessage] = useState('');
+const [scrollY, setScrollY] = useState(0);
 
   const handlePlayVideo = (videoId: string) => {
     setPlayingVideo(videoId)
@@ -165,7 +166,7 @@ const [alertMessage, setAlertMessage] = useState('');
 // Texto principal 
 
   const [typedText, setTypedText] = useState('')
-  const fullText = "Controla tus procesos con la voz"
+  const fullText = "Empower Your Agriculture with AI Vertical Agents"
 
   useEffect(() => {
     let index = 0
@@ -281,8 +282,17 @@ const [alertMessage, setAlertMessage] = useState('');
     setEditingTitle(null)
   }
 
+  // Add parallax effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <div className="flex flex-col min-h-screen bg-background text-foreground">
+    <div className="flex flex-col min-h-screen bg-background text-foreground overflow-x-hidden">
       {showAlert && (
   <div className="fixed top-0 left-0 right-0 z-[9999] p-4 bg-green-500 text-white text-center transition-all duration-300 ease-in-out transform translate-y-0">
     <p>{alertMessage}</p>
@@ -337,80 +347,85 @@ const [alertMessage, setAlertMessage] = useState('');
       </div>
 
       <main className="flex-1 pt-14">
-      <section className="w-full py-32 md:py-24 lg:py-32 xl:py-48">
-  <div className="container px-4 md:px-6">
-    <div className="flex flex-col items-center space-y-6 text-center">
-      {/* Title Section */}
-      <div className="space-y-2">
-        <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none bg-gradient-to-r from-[#38507E] via-[#51A09A] to-[#C2DB64] bg-clip-text text-transparent h-24 flex items-center justify-center">
-          {typedText}
-          <span className="animate-blink">|</span>
-        </h1>
-        <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-          Optimiza tu flujo de trabajo con la herramienta que ya conoces. Crea tareas, registra y accede a información detallada, todo mediante mensajes de voz en WhatsApp.
-        </p>
-      </div>
-
-      {/* WhatsApp Icon */}
-      <div className="w-full max-w-sm space-y-2 flex items-center justify-center">
-        <Image
-          src="./whatsapp.svg"
-          alt="Company Logo"
-          width={150}
-          height={150}
-        />
-        <span className="sr-only">MIIDO</span>
-      </div>
-
-      {/* Call-to-Action Button */}
-      <div className="w-full max-w-sm space-y-2">
-        <div className="flex space-x-2">
-          <a
-            href="https://www.notion.so/miidocl/151f91071a0f80c19460e4c799042667?pvs=106"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="max-w-lg flex-1 inline-flex items-center justify-center px-4 py-2 text-white bg-[#1A202C] rounded-md hover:bg-[#2D3748] focus:outline-none"
-          >
-            Comienza ahora
-          </a>
+      <section className="w-full py-32 md:py-24 lg:py-32 xl:py-48 relative overflow-hidden">
+        {/* Enhanced Parallax background image */}
+        <div 
+          className="absolute inset-0 -z-10"
+          style={{
+            transform: `translateY(${scrollY * 0.3}px)`,
+            transition: 'transform 0.3s ease-out'
+          }}
+        >
+          <Image
+            src="/trees-aerial.png"
+            alt="Trees"
+            fill
+            className="object-cover opacity-10"
+          />
         </div>
-        <p className="text-xs text-gray-500 dark:text-gray-400">
-          Empieza tu prueba gratuita. No se requiere tarjeta de crédito.
-        </p>
-      </div>
 
-      {/* Embedded Video Section */}
-      <div className="w-full max-w-[700px] mt-8">
-        <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0 }}>
-          <iframe
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              border: 0,
-            }}
-            src="https://www.tella.tv/video/cm47fh5kh001603mo2gc10opu/embed?b=0&title=0&a=1&loop=0&autoPlay=true&t=0&muted=1&wt=0"
-            allowFullScreen
-            allowTransparency
-          ></iframe>
+        <div className="container px-4 md:px-6">
+          <div className="flex flex-col items-center space-y-6 text-center">
+            {/* Title Section */}
+            <div className="space-y-2">
+              <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none bg-gradient-to-r from-[#38507E] via-[#51A09A] to-[#C2DB64] bg-clip-text text-transparent h-24 flex items-center justify-center">
+                Vertical AI agents en agricultura
+                <span className="animate-blink">|</span>
+              </h1>
+              <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
+                Tu copiloto de IA en el campo: automatiza, predice y toma mejores decisiones agrícolas, <strong>sin complicaciones y desde WhatsApp</strong>.
+              </p>
+            </div>
+
+            {/* Updated CTA button with hover animation */}
+            <div className="w-full max-w-sm space-y-2">
+              <div className="flex space-x-2">
+                <a
+                  href="https://www.notion.so/miidocl/151f91071a0f80c19460e4c799042667?pvs=106"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="max-w-lg flex-1 inline-flex items-center justify-center px-4 py-2 text-white bg-[#1A202C] rounded-md hover:bg-[#2D3748] focus:outline-none transform transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                >
+                  Empieza gratis!
+                </a>
+              </div>
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                No se necesita tarjeta de crédito.
+              </p>
+            </div>
+
+            {/* Embedded Video Section without parallax */}
+            <div className="w-full max-w-[700px] mt-8">
+              <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0 }}>
+                <iframe
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    border: 0,
+                  }}
+                  src="https://www.tella.tv/video/cm47fh5kh001603mo2gc10opu/embed?b=0&title=0&a=1&loop=0&autoPlay=true&t=0&muted=1&wt=0"
+                  allowFullScreen
+                  allowTransparency
+                ></iframe>
+              </div>
+              <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+                Descubre cómo MIIDO transforma tu flujo de trabajo.
+              </p>
+            </div>
+          </div>
         </div>
-        <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
-          Descubre cómo MIIDO transforma tu flujo de trabajo.
-        </p>
-      </div>
-    </div>
-  </div>
-  <MultiWaveAudio />
-</section>
+        <MultiWaveAudio />
+      </section>
 
 
 
         <section className="w-full py-2 bg-gray-1 md:-mt-24 sm:-mt-32 overflow-x-auto"> 
           <div className="container px-4 md:px-6">
             <div className="flex flex-nowrap md:justify-center sm:justify-center  items-center gap-20">
-              <Image src="./errazuriz-logo.png" alt="Figma" width={120} height={40} />
+              <Image src="./errazuriz-logo.png" alt="Viña Errazuriz" width={120} height={40} />
               <Image src="./LCP.png" alt="La ciudad posible" width={140} height={40} />
               <Image src="./cyt.png" alt="Concha y Toro" width={140} height={40} />
               <Image src="./taglespa.svg" alt="Fundo Santa Eugenia" width={100} height={40} />
@@ -423,28 +438,39 @@ const [alertMessage, setAlertMessage] = useState('');
         <section ref={howtRef} className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
           <div className="container px-4 md:px-6">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12" style={{ color: '#2F3D44' }}>¿Cómo funciona?</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="flex flex-col items-center text-center">
-                <div className="mb-4">
-                  <Mic className="h-12 w-12 text-primary" style={ { color: '#38507E'}} />
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+              {[1, 2, 3, 4].map((step) => (
+                <div key={step} className="flex flex-col items-center text-center bg-white rounded-2xl p-4 relative min-h-[320px] w-[240px] mx-auto" style={{ 
+                  boxShadow: '-8px 8px 0px 0px #76a586',
+                  border: '1px solid #e5e7eb'
+                }}>
+                  <div className="bg-[#c2db64] rounded-full w-10 h-10 flex items-center justify-center mb-4 absolute -top-5">
+                    <span className="text-lg font-bold text-white">{step}</span>
+                  </div>
+                  <h3 className="text-lg font-bold mb-3 mt-4" style={{ color: '#2F3D44' }}>Paso {step}</h3>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                    {step === 1 && 'Subir la planificación del campo o nos conectampos a tu ERP.'}
+                    {step === 2 && 'Recoger datos de los trabajadores vía WhatsApp.'}
+                    {step === 3 && 'Correlacionar con el clima, inventario, planificación en el ERP.'}
+                    {step === 4 && 'Recibir información procesable.'}
+                  </p>
+                  <div className="my-4">
+                    <Image 
+                      src={`/how_works/step${step}.png`} 
+                      alt={`Step ${step}`} 
+                      width={step === 1 ? 170 : step === 2 ? 150 : step === 3 ? 110 : 80} 
+                      height={step === 1 ? 80 : step === 2 ? 100 : step === 3 ? 90 : 140} 
+                      className="mx-auto object-contain" 
+                    />
+                  </div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    {step === 1 && 'Software totalmente personalizado.'}
+                    {step === 2 && "Ej: 'Apliqué 20 kg de nitrógeno en el trimestre 3'."}
+                    {step === 3 && 'Integración con diferentes fuentes de información.'}
+                    {step === 4 && 'Todo directamente en una herramienta familiar.'}
+                  </p>
                 </div>
-                <h3 className="text-xl font-bold mb-2" style={{ color: '#2F3D44' }}>Envia un audio en Whatsapp</h3>
-                <p className="text-gray-500 dark:text-gray-400">Usa WhatsApp para enviar mensajes de voz para tareas, información o consultas.</p>
-              </div>
-              <div className="flex flex-col items-center text-center">
-                <div className="mb-4">
-                  <CheckCircle className="h-12 w-12 text-primary" style={ { color :  '#51A09A' }} />
-                </div>
-                <h3 className="text-xl font-bold mb-2" style={{ color: '#2F3D44' }}>Procesamiento automatizado</h3>
-                <p className="text-gray-500 dark:text-gray-400">Nuestro sistema procesa los mensajes de voz y organiza la información.</p>
-              </div>
-              <div className="flex flex-col items-center text-center">
-                <div className="mb-4">
-                  <BarChart2 className="h-12 w-12 text-primary" style={ { color: '#C2DB64'}} />
-                </div>
-                <h3 className="text-xl font-bold mb-2" style={{ color: '#2F3D44' }}>Obtén información detallada</h3>
-                <p className="text-gray-500 dark:text-gray-400">Accede a datos organizados y obtén información detallada a través de nuestro intuitivo dashboard.</p>
-              </div>
+              ))}
             </div>
           </div>
         </section>
@@ -966,6 +992,54 @@ const [alertMessage, setAlertMessage] = useState('');
       >
         <MessageCircle size={24} />
       </a>
+
+      {/* Update responsive styling to hide the image on smaller screens */}
+      <style jsx>{`
+        .trees-image {
+          width: 600px;
+          height: 600px;
+        }
+
+        @media (max-width: 1024px) {
+          .trees-image {
+            display: none !important;
+          }
+        }
+      `}</style>
+
+      {/* Update image container styles */}
+      <div className="absolute -top-[30%] -right-[20%] hidden md:block overflow-hidden pointer-events-none">
+        <Image
+          src="/trees-aerial.png"
+          alt="Trees"
+          width={600}
+          height={600}
+          className="object-cover"
+        />
+      </div>
     </div>
   )
 }
+
+// Add these styles at the end of the file, before the last closing brace
+const styles = {
+  '@keyframes float-slow': {
+    '0%, 100%': { transform: 'translateY(0)' },
+    '50%': { transform: 'translateY(-10px)' },
+  },
+  '@keyframes float-medium': {
+    '0%, 100%': { transform: 'translateY(0)' },
+    '50%': { transform: 'translateY(-15px)' },
+  },
+  '@keyframes float-fast': {
+    '0%, 100%': { transform: 'translateY(0)' },
+    '50%': { transform: 'translateY(-20px)' },
+  },
+};
+
+// Add these classes to your Tailwind CSS configuration
+const customClasses = {
+  'animate-float-slow': 'animation: float-slow 6s ease-in-out infinite',
+  'animate-float-medium': 'animation: float-medium 4s ease-in-out infinite',
+  'animate-float-fast': 'animation: float-fast 3s ease-in-out infinite',
+};

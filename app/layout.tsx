@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "MIIDO / Digitalización simple",
-  description: "Control de procesos a través de la voz",
+  description: "El copilot agrícola para tu empresa",
 };
 
 export default function RootLayout({
