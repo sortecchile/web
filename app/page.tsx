@@ -361,8 +361,28 @@ const [scrollY, setScrollY] = useState(0);
       </div>
 
       <main className="flex-1 pt-14">
+         {/* Main section */}
       <section className="w-full py-32 md:py-24 lg:py-32 xl:py-48 relative overflow-hidden">
         {/* Enhanced Parallax background image */}
+        {/* Grid Overlay */}
+        <div className="absolute inset-0 -z-1 pointer-events-none">
+          <div
+            className="w-full h-full"
+            style={{
+              position: 'absolute',
+              inset: 0,
+              backgroundImage: `
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px)
+              `,
+              backgroundSize: '40px 40px',
+              maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
+              opacity: isDark ? 0.3 : 0.07,
+              zIndex: 1
+            }}
+          />
+        </div>
         <div 
           className="absolute inset-0 -z-10"
           style={{
