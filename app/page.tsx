@@ -3,12 +3,13 @@
 import { useState, useEffect, useRef } from 'react'
 import { Button } from "@/src/components/ui/button"
 import { Input } from "@/src/components/ui/input"
-import { CheckCircle, BarChart2, Users, ArrowUp, Send, ChevronLeft, ChevronRight, MoreHorizontal, Edit2, Mic, MessageCircle, Menu, X, Plus, Minus, PlayCircle } from 'lucide-react'
+import { CheckCircle, BarChart2, Users, ArrowUp, Send, ChevronLeft, ChevronRight, MoreHorizontal, Edit2, Mic, MessageCircle, Menu, X, Plus, Minus, PlayCircle, Sun, Moon } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import NewsSection from './NewsSection'
 
 import dynamic from 'next/dynamic'
+import { useDarkMode } from './hooks/useDarkMode'
 
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
 
@@ -29,7 +30,9 @@ const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
       return `M0,50 ${points.join(' ')} 100,50`
     }
     return (
-      <div className="w-full bg-white overflow-hidden" style={{ height: '100px' }}>
+      <div className="w-full bg-background dark:bg-gray-900 overflow-hidden" style={{ height: '100px' }}>
+
+
         <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
           {[...Array(waveCount)].map((_, index) => (
             <path
@@ -49,6 +52,7 @@ const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
 
 
 export default function Component() {
+  useDarkMode();
   const [email, setEmail] = useState('')
   const [scrollProgress, setScrollProgress] = useState(0)
   const [scrollProgressNewSection, setScrollProgressNewSection] = useState(0) 
@@ -292,31 +296,41 @@ const [scrollY, setScrollY] = useState(0);
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen bg-background text-foreground overflow-x-hidden">
+    <div className="flex flex-col min-h-screen bg-background text-foreground overflow-x-hidden dark:bg-gray-900">
       {showAlert && (
-  <div className="fixed top-0 left-0 right-0 z-[9999] p-4 bg-green-500 text-white text-center transition-all duration-300 ease-in-out transform translate-y-0">
+  <div className="fixed top-0 left-0 right-0 z-[9999] p-4 bg-green-500 dark:bg-green-600 text-white text-center transition-all duration-300 ease-in-out transform translate-y-0">
     <p>{alertMessage}</p>
   </div>
 )}
-      <header className="fixed top-0 left-0 right-0 z-50 px-4 lg:px-6 h-14 flex items-center justify-between border-b bg-white">
+      <header className="fixed top-0 left-0 right-0 z-50 px-4 lg:px-6 h-14 flex items-center justify-between border-b bg-white dark:bg-gray-800 dark:border-gray-700">
         <div className="flex items-center justify-between w-full">
           <Link className="flex items-center justify-center" href="#">
-            <Image
-              src="./miido-logo.png"
-              alt="Company Logo"
-              width={150}
-              height={150}
-            />
+            <div className="dark:hidden">
+              <Image
+                src="./miido-logo.png"
+                alt="Company Logo"
+                width={150}
+                height={150}
+              />
+            </div>
+            <div className="hidden dark:block">
+              <Image
+                src="./logo_blanco.png"
+                alt="Company Logo"
+                width={150}
+                height={150}
+              />
+            </div>
             <span className="sr-only">MIIDO</span>
           </Link>
           <nav className="hidden md:flex gap-4 sm:gap-6">
-            <button className="text-sm font-medium hover:underline underline-offset-4 text-black" onClick={() => handleNavClick(howtRef)}>
+            <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => handleNavClick(howtRef)}>
               Cómo funciona?
             </button>
-            <button className="text-sm font-medium hover:underline underline-offset-4 text-black" onClick={() => handleNavClick(aboutRef)}>
+            <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => handleNavClick(aboutRef)}>
               Últimas publicaciones
             </button>
-            <button className="text-sm font-medium hover:underline underline-offset-4 text-black" onClick={() => handleNavClick(contactRef)}>
+            <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => handleNavClick(contactRef)}>
               Contáctanos
             </button>
           </nav>
@@ -332,13 +346,13 @@ const [scrollY, setScrollY] = useState(0);
       <div className={`fixed inset-0 z-40 transform ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out md:hidden`}>
         <div className="bg-white h-full w-64 shadow-lg pt-20 px-4">
           <nav className="flex flex-col gap-4">
-            <button className="text-sm font-medium hover:underline underline-offset-4 text-black" onClick={() => { handleHowClick(); closeMobileMenu(); }}>
+            <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => { handleHowClick(); closeMobileMenu(); }}>
               Cómo funciona?
             </button>
-            <button className="text-sm font-medium hover:underline underline-offset-4 text-black" onClick={() => { handleaboutClick(); closeMobileMenu(); }}>
+            <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => { handleaboutClick(); closeMobileMenu(); }}>
               Últimas publicaciones
             </button>
-            <button className="text-sm font-medium hover:underline underline-offset-4 text-black" onClick={() => { handleContactClick(); closeMobileMenu(); }}>
+            <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => { handleContactClick(); closeMobileMenu(); }}>
               Contáctanos
             </button>
           </nav>
@@ -425,30 +439,92 @@ const [scrollY, setScrollY] = useState(0);
         <section className="w-full py-2 bg-gray-1 md:-mt-24 sm:-mt-32 overflow-x-auto"> 
           <div className="container px-4 md:px-6">
             <div className="flex flex-nowrap md:justify-center sm:justify-center  items-center gap-20">
-              <Image src="./errazuriz-logo.png" alt="Viña Errazuriz" width={120} height={40} />
-              <Image src="./LCP.png" alt="La ciudad posible" width={140} height={40} />
-              <Image src="./cyt.png" alt="Concha y Toro" width={140} height={40} />
-              <Image src="./taglespa.svg" alt="Fundo Santa Eugenia" width={100} height={40} />
-              <Image src="./TMV.png" alt="TMV Agroexportació" width={140} height={40} />
-              <Image src="./startup-chile.png" alt="Startup Chile" width={120} height={40} />
-              <Image src="./start-fellowship.png" alt="Start Fellowship" width={120} height={40} />
+              {/* Viña Errazuriz */}
+      <>
+        <div className="dark:hidden">
+          <Image src="./errazuriz-logo.png" alt="Viña Errazuriz" width={120} height={40} />
+        </div>
+        <div className="hidden dark:block">
+          <Image src="./errazuriz-logo-white.png" alt="Viña Errazuriz white" width={120} height={40} />
+        </div>
+      </>
+
+      {/* La Ciudad Posible */}
+      <>
+        <div className="dark:hidden">
+          <Image src="./LCP.png" alt="La ciudad posible" width={140} height={40} />
+        </div>
+        <div className="hidden dark:block">
+          <Image src="./LCP-white.png" alt="La ciudad posible white" width={140} height={40} />
+        </div>
+      </>
+
+      {/* Concha y Toro */}
+      <>
+        <div className="dark:hidden">
+          <Image src="./cyt.png" alt="Concha y Toro" width={140} height={40} />
+        </div>
+        <div className="hidden dark:block">
+          <Image src="./cyt-white.png" alt="Concha y Toro white" width={140} height={40} />
+        </div>
+      </>
+
+      {/* Fundo Santa Eugenia */}
+      <>
+        <div className="dark:hidden">
+          <Image src="./driscolls.png" alt="Fundo Santa Eugenia" width={120} height={40} />
+        </div>
+        <div className="hidden dark:block">
+          <Image src="./driscolls-white.png" alt="Fundo Santa Eugenia white" width={120} height={40} />
+        </div>
+      </>
+
+      {/* TMV Agroexportación */}
+      <>
+        <div className="dark:hidden">
+          <Image src="./westfalia.png" alt="TMV Agroexportació" width={110} height={40} />
+        </div>
+        <div className="hidden dark:block">
+          <Image src="./westfalia-white.png" alt="TMV Agroexportació white" width={110} height={40} />
+        </div>
+      </>
+
+      {/* Startup Chile */}
+      <>
+        <div className="dark:hidden">
+          <Image src="./TMV.png" alt="Startup Chile" width={140} height={40} />
+        </div>
+        <div className="hidden dark:block">
+          <Image src="./TMV-white.png" alt="Startup Chile white" width={140} height={40} />
+        </div>
+      </>
+
+      {/* Start Fellowship */}
+      <>
+        <div className="dark:hidden">
+          <Image src="./start-fellowship.png" alt="Start Fellowship" width={120} height={40} />
+        </div>
+        <div className="hidden dark:block">
+          <Image src="./start-fellowship-white.png" alt="Start Fellowship white" width={120} height={40} />
+        </div>
+      </>
             </div>
           </div>
         </section>
         <section ref={howtRef} className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
           <div className="container px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12" style={{ color: '#2F3D44' }}>¿Cómo funciona?</h2>
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12 text-gray-900 dark:text-white">¿Cómo funciona?</h2>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               {[1, 2, 3, 4].map((step) => (
-                <div key={step} className="flex flex-col items-center text-center bg-white rounded-2xl p-4 relative min-h-[320px] w-[240px] mx-auto" style={{ 
+                <div key={step} className="flex flex-col items-center text-center bg-white dark:bg-gray-800 rounded-2xl p-4 relative min-h-[320px] w-[240px] mx-auto dark:border-gray-700" style={{ 
                   boxShadow: '-8px 8px 0px 0px #76a586',
                   border: '1px solid #e5e7eb'
                 }}>
                   <div className="bg-[#c2db64] rounded-full w-10 h-10 flex items-center justify-center mb-4 absolute -top-5">
                     <span className="text-lg font-bold text-white">{step}</span>
                   </div>
-                  <h3 className="text-lg font-bold mb-3 mt-4" style={{ color: '#2F3D44' }}>Paso {step}</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                  <h3 className="text-lg font-semibold mb-3 mt-4 text-gray-800 dark:text-white dark:drop-shadow-sm">Paso {step}</h3>
+                  <p className="text-sm text-gray-100 dark:text-gray-300 mb-4">
                     {step === 1 && 'Subir la planificación del campo o nos conectampos a tu ERP.'}
                     {step === 2 && 'Recoger datos de los trabajadores vía WhatsApp.'}
                     {step === 3 && 'Correlacionar con el clima, inventario, planificación en el ERP.'}
@@ -475,71 +551,80 @@ const [scrollY, setScrollY] = useState(0);
           </div>
         </section>
         <section className="w-full py-12 md:py-24 lg:py-32 overflow-hidden" ref={demoRef}>
-          <div className="container px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-6" style={{ color: '#2F3D44' }}>Véalo en acción</h2>
-            <p className="mb-6 text-gray-500 dark:text-gray-400 text-center">Todos los audios que se envíen en el día a día de la operación, lo ordenamos y mostramos automáticamente en el Dashboard.</p>
-            <div className="flex flex-col lg:flex-row items-start justify-center gap-8">
-              <div className="w-full max-w-sm">
-                <div className="border-2 border-gray-200 rounded-[3rem] p-2 bg-white shadow-xl">
-                  <div className="bg-gray-100 rounded-[2.5rem] p-2">
-                    <div className="bg-white rounded-[2rem] h-[500px] overflow-y-auto flex flex-col">
-                      <div className="bg-gray-100 p-4 flex items-center gap-2">
-                        <div className="w-10 h-10 rounded-full overflow-hidden">
-                          <Image
-                            src="./logo2.png"
-                            alt="Company Logo"
-                            width={5}
-                            height={10}
-                            className="w-full h-full"
-                            
-                          />
-                        </div>
-                        <div className="flex items-center">
-                          <p className="font-semibold">MIIDO</p>
-                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-blue-500 ml-1">
-                            <path fillRule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clipRule="evenodd" />
-                          </svg>
-                        </div>
-                        <div><p className="text-xs text-gray-500 ml-auto">Online</p></div>
-                      </div>
-                      <div className="flex-1 p-4 space-y-4">
-                        {["Registro: cosechamos 500 kg en el cuartel 6 de cerezas",
-                          "Tareas: Terminada la tarea de poda",
-                          "Pregunta: Cuándo empezamos la cosecha la temporada anterior?",
-                          "Recordatorio: Hacer cambio de aceite Tractor",
-                          "Completado: Cosecha terminada"].map((message, index) => (
-                          <div
-                            key={index}
-                            className="flex items-center gap-2"
-                            style={{
-                              opacity: scrollProgress > index / 5 ? 1 : 0,
-                              transform: `translateY(${scrollProgress > index / 5 ? 0 : 20}px)`,
-                              transition: 'opacity 0.3s ease-out, transform 0.3s ease-out'
-                            }}
-                          >
-                            <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-                              <Mic className="h-4 w-4 text-primary " />
-                            </div>
-                            <div className="bg-green-100 rounded-lg p-2 max-w-[80%]">
-                              <p className="text-sm">{message}</p>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                      <div className="bg-gray-100 p-4 flex items-center gap-2">
-                        <Input className="flex-1" placeholder="Type a message" />
-                        <Button size="icon">
-                          <Send className="h-4 w-4" />
-                          <span className="sr-only">Enviar mensaje</span>
-                        </Button>
-                      </div>
+  <div className="container px-4 md:px-6">
+    <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-6 text-gray-900 dark:text-white">
+      Véalo en acción
+    </h2>
+    <p className="mb-6 text-gray-600 dark:text-gray-400 text-center">
+      Todos los audios que se envíen en el día a día de la operación, lo ordenamos y mostramos automáticamente en el Dashboard.
+    </p>
+    <div className="flex flex-col lg:flex-row items-start justify-center gap-8">
+      {/* Simulación WhatsApp */}
+      <div className="w-full max-w-sm">
+        <div className="border-2 border-gray-200 dark:border-gray-700 rounded-[3rem] p-2 bg-white dark:bg-gray-900 shadow-xl">
+          <div className="bg-gray-100 dark:bg-gray-800 rounded-[2.5rem] p-2">
+            <div className="bg-white dark:bg-gray-900 rounded-[2rem] h-[500px] overflow-y-auto flex flex-col">
+              {/* Header */}
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 flex items-center gap-2">
+                <div className="w-10 h-10 rounded-full overflow-hidden">
+                  <Image
+                    src="./logo2.png"
+                    alt="Company Logo"
+                    width={5}
+                    height={10}
+                    className="w-full h-full"
+                  />
+                </div>
+                <div className="flex items-center">
+                  <p className="font-semibold text-gray-900 dark:text-white">MIIDO</p>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="w-5 h-5 text-blue-500 ml-1">
+                    <path fillRule="evenodd" d="M8.6 3.8A4.5 4.5 0 0112 2.3a4.5 4.5 0 013.4 1.5 4.5 4.5 0 013.5 1.3 4.5 4.5 0 011.3 3.5A4.5 4.5 0 0121.8 12a4.5 4.5 0 01-1.5 3.4 4.5 4.5 0 01-1.3 3.5 4.5 4.5 0 01-3.5 1.3A4.5 4.5 0 0112 21.8a4.5 4.5 0 01-3.4-1.5 4.5 4.5 0 01-3.5-1.3 4.5 4.5 0 01-1.3-3.5A4.5 4.5 0 012.3 12c0-1.4.6-2.6 1.5-3.4a4.5 4.5 0 011.3-3.5 4.5 4.5 0 013.5-1.3zM15.6 10.2a.75.75 0 10-1.2-.9l-3.2 4.5-1.6-1.6a.75.75 0 10-1.1 1.1l2.3 2.3a.75.75 0 001.1-.1l3.8-5.3z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <p className="text-xs text-gray-500 ml-auto">Online</p>
+              </div>
+              {/* Mensajes */}
+              <div className="flex-1 p-4 space-y-4">
+                {["Registro: cosechamos 500 kg en el cuartel 6 de cerezas",
+                  "Tareas: Terminada la tarea de poda",
+                  "Pregunta: Cuándo empezamos la cosecha la temporada anterior?",
+                  "Recordatorio: Hacer cambio de aceite Tractor",
+                  "Completado: Cosecha terminada"].map((message, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center gap-2"
+                    style={{
+                      opacity: scrollProgress > index / 5 ? 1 : 0,
+                      transform: `translateY(${scrollProgress > index / 5 ? 0 : 20}px)`,
+                      transition: 'opacity 0.3s ease-out, transform 0.3s ease-out'
+                    }}
+                  >
+                    <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                      <Mic className="h-4 w-4 text-white" />
+                    </div>
+                    <div className="bg-green-100 dark:bg-green-900 rounded-lg p-2 max-w-[80%] text-sm text-gray-900 dark:text-white">
+                      {message}
                     </div>
                   </div>
-                </div>
+                ))}
               </div>
+              {/* Input */}
+              <div className="bg-gray-100 dark:bg-gray-800 p-4 flex items-center gap-2">
+                <Input className="flex-1 dark:bg-gray-700 dark:text-white" placeholder="Escribe un mensaje" />
+                <Button size="icon">
+                  <Send className="h-4 w-4" />
+                  <span className="sr-only">Enviar mensaje</span>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+              {/* Dashboards / Indicadores */}
               <div className="w-full max-w-3xl space-y-8">
+                 {/* Diagrama */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="bg-white p-3 rounded-lg shadow-lg h-[180px]">
+                  <div className="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg h-[180px]">
                     <div className="flex justify-between items-center mb-2">
                       {editingTitle === 'diagram' ? (
                         <input
@@ -551,7 +636,7 @@ const [scrollY, setScrollY] = useState(0);
                           autoFocus
                         />
                       ) : (
-                        <h3 className="text-base font-semibold flex items-center gap-2" onClick={() => handleTitleClick('diagram')} style={{ color: '#2F3D44' }}>
+                        <h3 className="text-base font-semibold flex items-center gap-2 dark:text-white" onClick={() => handleTitleClick('diagram')} >
                           {titles.diagram}
                           <Edit2 className="w-4 h-4 text-gray-400" />
                         </h3>
@@ -572,7 +657,7 @@ const [scrollY, setScrollY] = useState(0);
                       ))}
                     </svg>
                   </div>
-                  <div className="bg-white p-3 rounded-lg shadow-lg h-[180px] flex flex-col justify-between">
+                  <div className=" bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg h-[180px]">
                     <div className="flex justify-between items-center">
                       {editingTitle === 'totalCost' ? (
                         <input
@@ -584,7 +669,7 @@ const [scrollY, setScrollY] = useState(0);
                           autoFocus
                         />
                       ) : (
-                        <h3 className="text-base font-semibold flex items-center gap-2" onClick={() => handleTitleClick('totalCost')} style={{ color: '#2F3D44' }}>
+                        <h3 className="text-base font-semibold flex items-center gap-2 dark:text-white" onClick={() => handleTitleClick('totalCost')} >
                           {titles.totalCost}
                           <Edit2 className="w-4 h-4 text-gray-400" />
                         </h3>
@@ -592,10 +677,10 @@ const [scrollY, setScrollY] = useState(0);
                       <MoreHorizontal className="text-gray-400 h-4 w-4" />
                     </div>
                     <div className="flex items-center justify-center flex-1">
-                      <span className="text-4xl font-bold" style={{ color: '#2F3D44' }}>${Math.round(scrollProgress * 2100)}</span>
+                      <span className="text-4xl font-bold text-gray-900 dark:text-white justify-center">${Math.round(scrollProgress * 2100)}</span>
                     </div>
                   </div>
-                  <div className="bg-white p-4 rounded-lg shadow-lg md:col-span-2">
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg md:col-span-2">
                     <div className="flex justify-between items-center mb-4">
                       {editingTitle === 'harvest' ? (
                         <input
@@ -607,7 +692,7 @@ const [scrollY, setScrollY] = useState(0);
                           autoFocus
                         />
                       ) : (
-                        <h3 className="text-lg font-semibold flex items-center gap-2" onClick={() => handleTitleClick('harvest')} style={{ color: '#2F3D44' }}>
+                        <h3 className="text-lg font-semibold flex items-center gap-2 dar:text-white" onClick={() => handleTitleClick('harvest')}>
                           {titles.harvest}
                           <Edit2 className="w-4 h-4 text-gray-400" />
                         </h3>
@@ -629,10 +714,10 @@ const [scrollY, setScrollY] = useState(0);
                       <span className="flex items-center"><span className="w-3 h-3 bg-red-500 rounded-full mr-1"></span> Detenido</span>
                       <span className="flex items-center"><span className="w-3 h-3 bg-gray-500 rounded-full mr-1"></span> No iniciado</span>
                     </div>
-                    <div className="mt-2 text-right text-lg font-semibold" style={{ color: '#2F3D44' }}>{(42.9 * scrollProgress).toFixed(1)}% Listo</div>
+                    <div className="mt-2 text-right text-lg font-semibold dark:text-white">{(42.9 * scrollProgress).toFixed(1)}% Listo</div>
                   </div>
-                  <div className="bg-white p-4 rounded-lg shadow-lg md:col-span-2">
-                    <div className="flex justify-between items-center mb-4">
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg md:col-span-2 overflow-x-auto">
+                    <div className="flex justify-between items-center mb-4 min-w-[600px]">
                       {editingTitle === 'gantt' ? (
                         <input
                           type="text"
@@ -643,7 +728,7 @@ const [scrollY, setScrollY] = useState(0);
                           autoFocus
                         />
                       ) : (
-                        <h3 className="text-lg font-semibold flex items-center gap-2" onClick={() => handleTitleClick('gantt')} style={{ color: '#2F3D44' }}>
+                        <h3 className="text-lg font-semibold flex items-center gap-2 dark:text-white" onClick={() => handleTitleClick('gantt')} >
                           {titles.gantt}
                           <Edit2 className="w-4 h-4 text-gray-400" />
                         </h3>
@@ -701,33 +786,33 @@ const [scrollY, setScrollY] = useState(0);
         <section className="w-full py-12 md:py-24 lg:py-32"> 
     
           <div className="container px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12" style={{ color: '#2F3D44' }}>Principales beneficios</h2>
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-6 text-gray-900 dark:text-white">Principales beneficios</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="flex items-start space-x-4">
                 <Users className="h-6 w-6 text-primary mt-1" style={{color: '#38507E'}} />
                 <div>
-                  <h3 className="text-xl font-bold mb-2" style={{ color: '#2F3D44' }}>Amigable con el usuario</h3>
+                  <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white" >Amigable con el usuario</h3>
                   <p className="text-gray-500 dark:text-gray-400">Aprovecha la familiaridad de WhatsApp para una adopción fácil en todo tu equipo.</p>
                 </div>
               </div>
               <div className="flex items-start space-x-4">
                 <BarChart2 className="h-6 w-6 text-primary mt-1" style={{ color: '#51A09A'}} />
                 <div>
-                  <h3 className="text-xl font-bold mb-2" style={{ color: '#2F3D44' }}>Información accionable</h3>
+                  <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white" >Información accionable</h3>
                   <p className="text-gray-500 dark:text-gray-400">Convierte los mensajes de voz en datos estructurados para una mejor toma de decisiones.</p>
                 </div>
               </div>
               <div className="flex items-start space-x-4">
                 <Mic className="h-6 w-6 text-primary mt-1" style={{ color:'#51A09A'}}/>
                 <div>
-                  <h3 className="text-xl font-bold mb-2" style={{ color: '#2F3D44' }}>Enfoque centrado en la voz</h3>
+                  <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white" >Enfoque centrado en la voz</h3>
                   <p className="text-gray-500 dark:text-gray-400">Ideal para industrias donde escribir no siempre es conveniente o posible.</p>
                 </div>
               </div>
               <div className="flex items-start space-x-4">
                 <CheckCircle className="h-6 w-6 text-primary mt-1" style={{ color: '#C2DB64'}}/>
                 <div>
-                  <h3 className="text-xl font-bold mb-2" style={{ color: '#2F3D44' }}>Flujos de trabajo optimizados</h3>
+                  <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">Flujos de trabajo optimizados</h3>
                   <p className="text-gray-500 dark:text-gray-400">Simplifica la creación de tareas, el seguimiento y la recopilación de información en un solo lugar.</p>
                 </div>
               </div>
@@ -740,16 +825,16 @@ const [scrollY, setScrollY] = useState(0);
 
 <section ref={newSectionRef} className="w-full py-12 md:py-24 lg:py-32 overflow-hidden">
   <div className="container px-4 md:px-6">
-    <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-6" style={{ color: '#2F3D44' }}>
+  <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-6 text-gray-900 dark:text-white">
       Haz preguntas sobre la data levantada
     </h2>
     <p className="mb-6 text-gray-500 dark:text-gray-400 text-center">Puedes hacer preguntas en el mismo chat, sobre toda la información que las personas están levantando. ¡Mira este ejemplo!</p>
-    <div className="flex flex-col lg:flex-row items-start justify-center gap-8">
-      <div className="w-full max-w-sm">
-        <div className="border-2 border-gray-200 rounded-[3rem] p-2 bg-white shadow-xl">
-          <div className="bg-gray-100 rounded-[2.5rem] p-2">
-            <div className="bg-white rounded-[2rem] h-[500px] overflow-y-auto flex flex-col">
-              <div className="bg-gray-100 p-4 flex items-center gap-2">
+    <div className="flex flex-col lg:flex-row items-start justify-center gap-8 ">
+      <div className="w-full max-w-sm ">
+        <div className="border-2 border-gray-200 rounded-[3rem] p-2 bg-white shadow-xl dark:bg-gray-800">
+          <div className="bg-gray-100 rounded-[2.5rem] p-2 dark:bg-gray-800">
+            <div className="bg-white dark:bg-gray-900 rounded-[2rem] h-[500px] overflow-y-auto flex flex-col">
+              <div className="bg-gray-100 p-4 flex items-center gap-2 dark:bg-gray-800 ">
                 <div className="w-10 h-10 rounded-full overflow-hidden">
                   <Image
                     src="./logo2.svg"
@@ -760,14 +845,14 @@ const [scrollY, setScrollY] = useState(0);
                   />
                 </div>
                 <div className="flex items-center">
-                  <p className="font-semibold">MIIDO</p>
+                  <p className="font-semibold dark:text-white">MIIDO</p>
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-blue-500 ml-1">
                     <path fillRule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clipRule="evenodd" />
                   </svg>
                 </div>
-                <div><p className="text-xs text-gray-500 ml-auto">Online</p></div>
+                <div><p className="text-xs text-gray-500 ml-auto dark:text-gray-400">Online</p></div>
               </div>
-              <div className="flex-1 p-4 space-y-4">
+              <div className="flex-1 p-4 space-y-4 ">
                 {["Pregunta: ¿Cuándo empezamos la cosecha la temporada anterior?",
                   "Respuesta: La cosecha empezó el 15 de diciembre del año pasado.",
                   "Pregunta: ¿Cómo va avanzando la cosecha?",
@@ -782,16 +867,16 @@ const [scrollY, setScrollY] = useState(0);
                       transition: 'opacity 0.3s ease-out, transform 0.3s ease-out'
                     }}
                   >
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${index % 2 === 0 ? 'bg-blue-500' : 'bg-green-500'}`}>
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${index % 2 === 0 ? 'bg-blue-500 ' : 'bg-green-500 ' }`}>
                       <Mic className="h-4 w-4 text-primary " />
                     </div>
-                    <div className={`rounded-lg p-2 max-w-[80%] ${index % 2 === 0 ? 'bg-blue-100' : 'bg-green-100'}`}>
+                    <div className={`rounded-lg p-2 max-w-[80%] ${index % 2 === 0 ? 'bg-blue-100 dark:bg-blue-800' : 'bg-green-100 dark:bg-green-800'}`}>
                       <p className="text-sm">{message}</p>
                     </div>
                   </div>
                 ))}
               </div>
-              <div className="bg-gray-100 p-4 flex items-center gap-2">
+              <div className="bg-gray-100 p-4 flex items-center gap-2 dark:bg-gray-800">
                 <Input className="flex-1" placeholder="Type a message" />
                 <Button size="icon">
                   <Send className="h-4 w-4" />
@@ -1008,15 +1093,28 @@ const [scrollY, setScrollY] = useState(0);
       `}</style>
 
       {/* Update image container styles */}
-      <div className="absolute -top-[30%] -right-[20%] hidden md:block overflow-hidden pointer-events-none">
+      <div className="absolute -top-[30%] -right-[0%] hidden md:block overflow-hidden pointer-events-none">
         <Image
           src="/trees-aerial.png"
           alt="Trees"
-          width={600}
-          height={600}
+          width={300}
+          height={300}
           className="object-cover"
         />
       </div>
+
+      {/* Add a toggle button for dark mode */}
+      <button
+        className="fixed bottom-20 right-4 bg-gray-200 dark:bg-gray-700 p-3 rounded-full shadow-lg transition-all duration-300 ease-in-out z-50"
+        onClick={() => document.documentElement.classList.toggle('dark')}
+        aria-label="Toggle dark mode"
+      >
+        {document.documentElement.classList.contains('dark') ? (
+          <Sun className="h-6 w-6 text-yellow-500" />
+        ) : (
+          <Moon className="h-6 w-6 text-gray-700" />
+        )}
+      </button>
     </div>
   )
 }
