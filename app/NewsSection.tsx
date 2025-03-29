@@ -129,7 +129,11 @@ const NewsSection = () => {
                   <div className="p-6">
                     <h3 className="text-xl font-bold mb-2">{item.title}</h3>
                     <p className="text-gray-600 dark:text-gray-400 mb-4">{item.description}</p>
-                    <Link href={item.link} className="inline-block bg-primary text-white py-2 px-4 rounded hover:bg-primary-dark">
+                    <Link
+  href={item.link}
+  className="inline-block bg-primary dark:bg-[#323f46] text-white dark:text-white py-2 px-4 rounded hover:bg-[#1e40af] transition-colors"
+>
+
                        Leer más
                       </Link>
                   </div>

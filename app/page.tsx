@@ -896,13 +896,15 @@ const [scrollY, setScrollY] = useState(0);
 
 {/* Nuestros clientes nos aman  **/}
         {/* Nuestros clientes nos aman */}
-<section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50">
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50 dark:bg-gray-900">
   <div className="container px-4 md:px-6">
-    <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12" style={{ color: '#2F3D44' }}>
+    <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12 text-gray-900 dark:text-white">
       Nuestros clientes nos aman
     </h2>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-      <div className="bg-white shadow-md rounded-lg overflow-hidden">
+      
+      {/* Guillermo */}
+      <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden">
         <div className="relative aspect-[2/4]">
           {playingVideo === 'ted-wright' ? (
             <ReactPlayer
@@ -931,16 +933,17 @@ const [scrollY, setScrollY] = useState(0);
           )}
         </div>
         <div className="p-4">
-          <h3 className="font-semibold text-base">Guillermo Baeza</h3>
-          <p className="text-sm text-gray-600">Jefe de campo en Agrícola Manantiales (Curicó) 🇨🇱</p>
+          <h3 className="font-semibold text-base text-gray-900 dark:text-white">Guillermo Baeza</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-300">Jefe de campo en Agrícola Manantiales (Curicó) 🇨🇱</p>
         </div>
       </div>
 
-      <div className="shadow-md rounded-lg overflow-hidden">
+      {/* Felipe */}
+      <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden">
         <div className="p-6">
-        <blockquote className="text-sm italic mb-4 mt-40">
-  &quot;MIIDO se ha convertido en nuestra herramienta más valiosa para dar inteligencia a los datos que se levantan en el día a día de la operación.&quot;
-</blockquote>
+          <blockquote className="text-sm italic mb-4 mt-40 text-gray-800 dark:text-gray-200">
+            &quot;MIIDO se ha convertido en nuestra herramienta más valiosa para dar inteligencia a los datos que se levantan en el día a día de la operación.&quot;
+          </blockquote>
           <div className="flex items-center">
             <Image
               src="/taglespa.svg"
@@ -950,14 +953,15 @@ const [scrollY, setScrollY] = useState(0);
               className="rounded-full mr-3"
             />
             <div>
-              <h3 className="font-semibold text-sm">Felipe Sanchez</h3>
-              <p className="text-xs text-gray-600">Gerente General - Fundo Santa Eugenia (Paine) 🇨🇱</p>
+              <h3 className="font-semibold text-sm text-gray-900 dark:text-white">Felipe Sanchez</h3>
+              <p className="text-xs text-gray-600 dark:text-gray-300">Gerente General - Fundo Santa Eugenia (Paine) 🇨🇱</p>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="bg-white shadow-md rounded-lg overflow-hidden">
+      {/* Tatiana */}
+      <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden">
         <div className="relative aspect-[2/4]">
           {playingVideo === 'Tatiana Morera' ? (
             <ReactPlayer
@@ -985,49 +989,58 @@ const [scrollY, setScrollY] = useState(0);
           )}
         </div>
         <div className="p-4">
-          <h3 className="font-semibold text-sm">Tatiana Morera</h3>
-          <p className="text-xs text-gray-600">Fundadora de TMV Agroexportación (Costa Rica) 🇨🇷🍍</p>
+          <h3 className="font-semibold text-sm text-gray-900 dark:text-white">Tatiana Morera</h3>
+          <p className="text-xs text-gray-600 dark:text-gray-300">Fundadora de TMV Agroexportación (Costa Rica) 🇨🇷🍍</p>
         </div>
       </div>
+      
     </div>
   </div>
 </section>
+
         
 
         <section ref={aboutRef}>
           <NewsSection />
         </section>
 
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50">
-          <div className="container px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12" style={{ color: '#2F3D44' }}>Preguntas Frecuentes</h2>
-            <div className="max-w-3xl mx-auto space-y-4">
-              {qaPairs.map((pair, index) => (
-                <div key={index} className="border border-gray-200 rounded-lg overflow-hidden">
-                  <button
-                    className="flex justify-between items-center w-full p-4 text-left bg-white hover:bg-gray-50 transition-colors"
-                    onClick={() => toggleQuestion(index)}
-                  >
-                    <span className="font-medium" style={{ color: '#2F3D44' }}>{pair.question}</span>
-                    {openQuestion === index ? <Minus className="h-5 w-5 text-gray-500" /> : <Plus className="h-5 w-5 text-gray-500" />}
-                  </button>
-                  {openQuestion === index && (
-                    <div className="p-4 bg-white">
-                      <p className="text-gray-600">{pair.answer}</p>
-                    </div>
-                  )}
-                </div>
-              ))}
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50 dark:bg-gray-900">
+  <div className="container px-4 md:px-6">
+    <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12 text-gray-800 dark:text-white">
+      Preguntas Frecuentes
+    </h2>
+    <div className="max-w-3xl mx-auto space-y-4">
+      {qaPairs.map((pair, index) => (
+        <div key={index} className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+          <button
+            className="flex justify-between items-center w-full p-4 text-left bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            onClick={() => toggleQuestion(index)}
+          >
+            <span className="font-medium text-gray-800 dark:text-white">{pair.question}</span>
+            {openQuestion === index ? (
+              <Minus className="h-5 w-5 text-gray-500 dark:text-gray-300" />
+            ) : (
+              <Plus className="h-5 w-5 text-gray-500 dark:text-gray-300" />
+            )}
+          </button>
+          {openQuestion === index && (
+            <div className="p-4 bg-white dark:bg-gray-800">
+              <p className="text-gray-600 dark:text-gray-300">{pair.answer}</p>
             </div>
-          </div>
-        </section>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
 
        
 
-        <section ref={contactRef} className="w-full py-12 md:py-24 bg-gray-1 dark:bg-gray-800">
+        <section ref={contactRef} className="w-full py-12 md:py-24 bg-gray-1 dark:bg-gray-900">
         <MultiWaveAudio />
         
-          <div className="container px-2 md:px-6">
+          <div className="container px-2 md:px-6 ">
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
                 <h2 className=" pb-4 text-3xl font-bold tracking-tighter mb:px-60 sm:text-4xl md:text-5xl lg:text-6xl leading-[1.2] bg-gradient-to-r from-[#38507E] via-[#51A09A] to-[#C2DB64] bg-clip-text text-transparent ">Sube a tu gente al tren de la tecnología.</h2>
@@ -1069,14 +1082,16 @@ const [scrollY, setScrollY] = useState(0);
       
       {/* WhatsApp floating button */}
       <a
-        href="https://wa.me/56966163647" // Replace with your actual WhatsApp number
-        target="_blank"
-        rel="noopener noreferrer"
-        className="fixed bottom-4 right-4 bg-green-500 hover:bg-green-600 text-white rounded-full p-3 shadow-lg transition-all duration-300 ease-in-out z-50"
-        aria-label="Chat on WhatsApp"
-      >
-        <MessageCircle size={24} />
-      </a>
+  href="https://wa.me/56966163647"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="fixed bottom-4 right-4 flex items-center bg-green-500 hover:bg-green-600 text-white rounded-full px-4 py-2 shadow-lg transition-all duration-300 ease-in-out z-50"
+  aria-label="Chat on WhatsApp"
+>
+  <MessageCircle size={20} className="mr-2" />
+  <span className="text-sm font-medium">¡Habla con nosotros!</span>
+</a>
+
 
       {/* Update responsive styling to hide the image on smaller screens */}
       <style jsx>{`
