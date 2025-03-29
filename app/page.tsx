@@ -52,7 +52,7 @@ const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
 
 
 export default function Component() {
-  useDarkMode();
+  const { isDark, toggleDarkMode } = useDarkMode()
   const [email, setEmail] = useState('')
   const [scrollProgress, setScrollProgress] = useState(0)
   const [scrollProgressNewSection, setScrollProgressNewSection] = useState(0) 
@@ -1105,16 +1105,16 @@ const [scrollY, setScrollY] = useState(0);
 
       {/* Add a toggle button for dark mode */}
       <button
-        className="fixed bottom-20 right-4 bg-gray-200 dark:bg-gray-700 p-3 rounded-full shadow-lg transition-all duration-300 ease-in-out z-50"
-        onClick={() => document.documentElement.classList.toggle('dark')}
-        aria-label="Toggle dark mode"
-      >
-        {document.documentElement.classList.contains('dark') ? (
-          <Sun className="h-6 w-6 text-yellow-500" />
-        ) : (
-          <Moon className="h-6 w-6 text-gray-700" />
-        )}
-      </button>
+  className="fixed bottom-20 right-4 bg-gray-200 dark:bg-gray-700 p-3 rounded-full shadow-lg transition-all duration-300 ease-in-out z-50"
+  onClick={toggleDarkMode}
+  aria-label="Toggle dark mode"
+>
+  {isDark ? (
+    <Sun className="h-6 w-6 text-yellow-500" />
+  ) : (
+    <Moon className="h-6 w-6 text-gray-700" />
+  )}
+</button>
     </div>
   )
 }
