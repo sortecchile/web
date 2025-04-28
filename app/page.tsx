@@ -361,98 +361,114 @@ const [scrollY, setScrollY] = useState(0);
       </div>
 
       <main className="flex-1 pt-14">
-         {/* Main section */}
-      <section className="w-full py-32 md:py-24 lg:py-32 xl:py-48 relative overflow-hidden">
-        {/* Enhanced Parallax background image */}
-        {/* Grid Overlay */}
-        <div className="absolute inset-0 -z-1 pointer-events-none">
-          <div
-            className="w-full h-full"
+        
+
+        {/* Main section */}
+        <section className="w-full py-24 md:py-24 lg:py-32 xl:py-48 relative overflow-hidden">
+          {/* Enhanced Parallax background image */}
+          {/* Grid Overlay */}
+          <div className="absolute inset-0 -z-1 pointer-events-none">
+            <div
+              className="w-full h-full"
+              style={{
+                position: 'absolute',
+                inset: 0,
+                backgroundImage: `
+                  linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                  linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px)
+                `,
+                backgroundSize: '40px 40px',
+                maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
+                opacity: isDark ? 0.3 : 0.07,
+                zIndex: 1
+              }}
+            />
+          </div>
+          <div 
+            className="absolute inset-0 -z-10"
             style={{
-              position: 'absolute',
-              inset: 0,
-              backgroundImage: `
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-                linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px)
-              `,
-              backgroundSize: '40px 40px',
-              maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
-              WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
-              opacity: isDark ? 0.3 : 0.07,
-              zIndex: 1
+              transform: `translateY(${scrollY * 0.3}px)`,
+              transition: 'transform 0.3s ease-out'
             }}
-          />
-        </div>
-        <div 
-          className="absolute inset-0 -z-10"
-          style={{
-            transform: `translateY(${scrollY * 0.3}px)`,
-            transition: 'transform 0.3s ease-out'
-          }}
-        >
-          <Image
-            src="/trees-aerial.png"
-            alt="Trees"
-            fill
-            className="object-cover opacity-10"
-          />
-        </div>
+          >
+            <Image
+              src="/trees-aerial.png"
+              alt="Trees"
+              fill
+              className="object-cover opacity-10"
+            />
+          </div>
 
-        <div className="container px-4 md:px-6">
-          <div className="flex flex-col items-center space-y-6 text-center">
-            {/* Title Section */}
-            <div className="space-y-2">
-              <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none bg-gradient-to-r from-[#38507E] via-[#51A09A] to-[#C2DB64] bg-clip-text text-transparent h-24 flex items-center justify-center">
-                Vertical AI agents en agricultura
-                <span className="animate-blink">|</span>
-              </h1>
-              <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                Tu copiloto de IA en el campo: automatiza, predice y toma mejores decisiones agrícolas, <strong>sin complicaciones y desde WhatsApp</strong>.
-              </p>
+          <div className="container px-4 md:px-6">
+            {/* Backed by - Ahora como div dentro de la sección principal */}
+            <div className="flex items-center justify-center gap-6 bg-gray-900 dark:bg-gray-800 border border-[#C2DB64] rounded-full px-6 py-2 max-w-sm mx-auto -mt-12 mb-12 ">
+              <span className="text-sm text-gray-300">Apoyados por</span>
+              <div className="flex items-center gap-4">
+                <Image
+                  src="./platanus-logo.png"
+                  alt="Platanus Logo"
+                  width={150}
+                  height={30}
+                  className="object-contain opacity-90 hover:opacity-100 transition-opacity"
+                />
+              </div>
             </div>
 
-            {/* Updated CTA button with hover animation */}
-            <div className="w-full max-w-sm space-y-2">
-              <div className="flex space-x-2">
-                <a
-                  href="https://www.notion.so/miidocl/151f91071a0f80c19460e4c799042667?pvs=106"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="max-w-lg flex-1 inline-flex items-center justify-center px-4 py-2 text-white bg-[#1A202C] rounded-md hover:bg-[#2D3748] focus:outline-none transform transition-all duration-300 hover:scale-105 hover:shadow-lg"
-                >
-                  Empieza gratis!
-                </a>
+            <div className="flex flex-col items-center space-y-6 text-center">
+              {/* Title Section */}
+              <div className="space-y-2">
+                <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none bg-gradient-to-r from-[#38507E] via-[#51A09A] to-[#C2DB64] bg-clip-text text-transparent h-24 flex items-center justify-center">
+                  Vertical AI agents en agricultura
+                  <span className="animate-blink">|</span>
+                </h1>
+                <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
+                  Tu copiloto de IA en el campo: automatiza, predice y toma mejores decisiones agrícolas, <strong>sin complicaciones y desde WhatsApp</strong>.
+                </p>
               </div>
-              <p className="text-xs text-gray-500 dark:text-gray-400">
-                No se necesita tarjeta de crédito.
-              </p>
-            </div>
 
-            {/* Embedded Video Section without parallax */}
-            <div className="w-full max-w-[700px] mt-8">
-              <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0 }}>
-                <iframe
-                  style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    border: 0,
-                  }}
-                  src="https://www.tella.tv/video/cm47fh5kh001603mo2gc10opu/embed?b=0&title=0&a=1&loop=0&autoPlay=true&t=0&muted=1&wt=0"
-                  allowFullScreen
-                  allowTransparency
-                ></iframe>
+              {/* Updated CTA button with hover animation */}
+              <div className="w-full max-w-sm space-y-2">
+                <div className="flex space-x-2">
+                  <a
+                    href="https://www.notion.so/miidocl/151f91071a0f80c19460e4c799042667?pvs=106"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="max-w-lg flex-1 inline-flex items-center justify-center px-4 py-2 text-white bg-[#1A202C] rounded-md hover:bg-[#2D3748] focus:outline-none transform transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                  >
+                    Empieza gratis!
+                  </a>
+                </div>
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  No se necesita tarjeta de crédito.
+                </p>
               </div>
-              <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
-                Descubre cómo MIIDO transforma tu flujo de trabajo.
-              </p>
+
+              {/* Embedded Video Section without parallax */}
+              <div className="w-full max-w-[700px] mt-8">
+                <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0 }}>
+                  <iframe
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      border: 0,
+                    }}
+                    src="https://www.tella.tv/video/cm47fh5kh001603mo2gc10opu/embed?b=0&title=0&a=1&loop=0&autoPlay=true&t=0&muted=1&wt=0"
+                    allowFullScreen
+                    allowTransparency
+                  ></iframe>
+                </div>
+                <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+                  Descubre cómo MIIDO transforma tu flujo de trabajo.
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-        <MultiWaveAudio />
-      </section>
+          <MultiWaveAudio />
+        </section>
 
 
 
@@ -1018,6 +1034,7 @@ const [scrollY, setScrollY] = useState(0);
   </div>
 </section>
 
+        {/* Backed by Section */}
         
 
         <section ref={aboutRef}>
