@@ -402,21 +402,21 @@ const [scrollY, setScrollY] = useState(0);
 
           <div className="container px-4 md:px-6">
             {/* Backed by - Ahora como div dentro de la sección principal */}
-            <div className="flex items-center justify-center gap-6 bg-white dark:bg-[#111827] border border-[#38507E] dark:border-[#1e293b] rounded-full px-6 py-3 max-w-sm mx-auto -mt-12 mb-12 shadow-md dark:shadow-[0_0_15px_rgba(0,0,0,0.3)]">
-              <span className="text-sm font-medium text-gray-800 dark:text-gray-300">Apoyados por</span>
+            <div className="flex items-center justify-center gap-6 bg-white dark:bg-[#111827] border border-[#38507E] dark:border-[#1e293b] rounded-full px-6 py-1.5 max-w-sm mx-auto -mt-12 mb-12 shadow-md dark:shadow-[0_0_15px_rgba(0,0,0,0.3)]">
+              <span className="text-xs font-medium text-gray-800 dark:text-gray-300">Apoyados por</span>
               <div className="flex items-center gap-6">
                 <Image
                   src="./platanus-logo.png"
                   alt="Platanus Logo"
-                  width={80}
-                  height={10}
+                  width={70}
+                  height={8}
                   className="object-contain opacity-90 hover:opacity-100 transition-opacity"
                 />
                 <Image
                   src="./IICA-logo.png"
                   alt="IICA Logo"
-                  width={70}
-                  height={10}
+                  width={60}
+                  height={8}
                   className="object-contain opacity-90 hover:opacity-100 transition-opacity"
                 />
               </div>
@@ -465,7 +465,7 @@ const [scrollY, setScrollY] = useState(0);
                     }}
                     src="https://www.tella.tv/video/cm47fh5kh001603mo2gc10opu/embed?b=0&title=0&a=1&loop=0&autoPlay=true&t=0&muted=1&wt=0"
                     allowFullScreen
-                    allowtransparency="true"
+                    allowTransparency={true}
                   ></iframe>
                 </div>
                 <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
