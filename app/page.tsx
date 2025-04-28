@@ -55,7 +55,7 @@ export default function Component() {
   const { isDark, toggleDarkMode } = useDarkMode()
   const [email, setEmail] = useState('')
   const [scrollProgress, setScrollProgress] = useState(0)
-  const [scrollProgressNewSection, setScrollProgressNewSection] = useState(0) 
+  const [scrollProgressNewSection, setScrollProgressNewSection] = useState(0)
   const [weekOffset, setWeekOffset] = useState(0)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [openQuestion, setOpenQuestion] = useState<number | null>(null)
@@ -103,14 +103,14 @@ const [scrollY, setScrollY] = useState(0);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+
     if (!email) {
       setAlertMessage('Por favor, ingresa tu correo electrónico');
       setShowAlert(true);
       setTimeout(() => setShowAlert(false), 3000);
       return;
     }
-  
+
     try {
       await fetch('https://script.google.com/macros/s/AKfycbyZubcnX9yAltdVrXwN7htNZwC75a4aysJxkVmKxlP0KQoL31Vv-iNGNXcOUJffE6ww/exec', {
         method: 'POST',
@@ -120,7 +120,7 @@ const [scrollY, setScrollY] = useState(0);
         },
         body: JSON.stringify({ email }),
       });
-  
+
       setAlertMessage('¡Gracias por registrarte en MIIDO! Te contactaremos en breve');
       setShowAlert(true);
       setTimeout(() => setShowAlert(false), 3000);
@@ -130,7 +130,7 @@ const [scrollY, setScrollY] = useState(0);
       setShowAlert(true);
       setTimeout(() => setShowAlert(false), 3000);
     }
-  
+
     setEmail('');
   };
 
@@ -167,7 +167,7 @@ const [scrollY, setScrollY] = useState(0);
     }
   ]
 
-// Texto principal 
+// Texto principal
 
   const [typedText, setTypedText] = useState('')
   const fullText = "Empower Your Agriculture with AI Vertical Agents"
@@ -201,7 +201,7 @@ const [scrollY, setScrollY] = useState(0);
 
 
 
-  
+
   useEffect(() => {
     const handleScroll = () => {
       if (demoRef.current) {
@@ -334,7 +334,7 @@ const [scrollY, setScrollY] = useState(0);
               Contáctanos
             </button>
           </nav>
-          <button 
+          <button
             className="md:hidden"
             onClick={toggleMobileMenu}
             aria-label={mobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
@@ -361,7 +361,7 @@ const [scrollY, setScrollY] = useState(0);
       </div>
 
       <main className="flex-1 pt-14">
-        
+
 
         {/* Main section */}
         <section className="w-full py-24 md:py-24 lg:py-32 xl:py-48 relative overflow-hidden">
@@ -385,7 +385,7 @@ const [scrollY, setScrollY] = useState(0);
               }}
             />
           </div>
-          <div 
+          <div
             className="absolute inset-0 -z-10"
             style={{
               transform: `translateY(${scrollY * 0.3}px)`,
@@ -402,14 +402,21 @@ const [scrollY, setScrollY] = useState(0);
 
           <div className="container px-4 md:px-6">
             {/* Backed by - Ahora como div dentro de la sección principal */}
-            <div className="flex items-center justify-center gap-6 bg-gray-900 dark:bg-gray-800 border border-[#C2DB64] rounded-full px-6 py-2 max-w-sm mx-auto -mt-12 mb-12 ">
-              <span className="text-sm text-gray-300">Apoyados por</span>
-              <div className="flex items-center gap-4">
+            <div className="flex items-center justify-center gap-6 bg-white dark:bg-[#111827] border border-[#38507E] dark:border-[#1e293b] rounded-full px-6 py-3 max-w-sm mx-auto -mt-12 mb-12 shadow-md dark:shadow-[0_0_15px_rgba(0,0,0,0.3)]">
+              <span className="text-sm font-medium text-gray-800 dark:text-gray-300">Apoyados por</span>
+              <div className="flex items-center gap-6">
                 <Image
                   src="./platanus-logo.png"
                   alt="Platanus Logo"
-                  width={150}
-                  height={30}
+                  width={80}
+                  height={10}
+                  className="object-contain opacity-90 hover:opacity-100 transition-opacity"
+                />
+                <Image
+                  src="./IICA-logo.png"
+                  alt="IICA Logo"
+                  width={70}
+                  height={10}
                   className="object-contain opacity-90 hover:opacity-100 transition-opacity"
                 />
               </div>
@@ -458,7 +465,7 @@ const [scrollY, setScrollY] = useState(0);
                     }}
                     src="https://www.tella.tv/video/cm47fh5kh001603mo2gc10opu/embed?b=0&title=0&a=1&loop=0&autoPlay=true&t=0&muted=1&wt=0"
                     allowFullScreen
-                    allowTransparency
+                    allowtransparency="true"
                   ></iframe>
                 </div>
                 <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
@@ -472,7 +479,7 @@ const [scrollY, setScrollY] = useState(0);
 
 
 
-        <section className="w-full py-2 bg-gray-1 md:-mt-24 sm:-mt-32 overflow-x-auto"> 
+        <section className="w-full py-2 bg-gray-1 md:-mt-24 sm:-mt-32 overflow-x-auto">
           <div className="container px-4 md:px-6">
             <div className="flex flex-nowrap md:justify-center sm:justify-center  items-center gap-20">
               {/* Viña Errazuriz */}
@@ -552,7 +559,7 @@ const [scrollY, setScrollY] = useState(0);
             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12 text-gray-900 dark:text-white">¿Cómo funciona?</h2>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               {[1, 2, 3, 4].map((step) => (
-                <div key={step} className="flex flex-col items-center text-center bg-white dark:bg-gray-800 rounded-2xl p-4 relative min-h-[320px] w-[240px] mx-auto dark:border-gray-700" style={{ 
+                <div key={step} className="flex flex-col items-center text-center bg-white dark:bg-gray-800 rounded-2xl p-4 relative min-h-[320px] w-[240px] mx-auto dark:border-gray-700" style={{
                   boxShadow: '-8px 8px 0px 0px #76a586',
                   border: '1px solid #e5e7eb'
                 }}>
@@ -567,12 +574,12 @@ const [scrollY, setScrollY] = useState(0);
                     {step === 4 && 'Recibir información procesable.'}
                   </p>
                   <div className="my-4">
-                    <Image 
-                      src={`/how_works/step${step}.png`} 
-                      alt={`Step ${step}`} 
-                      width={step === 1 ? 170 : step === 2 ? 150 : step === 3 ? 110 : 80} 
-                      height={step === 1 ? 80 : step === 2 ? 100 : step === 3 ? 90 : 140} 
-                      className="mx-auto object-contain" 
+                    <Image
+                      src={`/how_works/step${step}.png`}
+                      alt={`Step ${step}`}
+                      width={step === 1 ? 170 : step === 2 ? 150 : step === 3 ? 110 : 80}
+                      height={step === 1 ? 80 : step === 2 ? 100 : step === 3 ? 90 : 140}
+                      className="mx-auto object-contain"
                     />
                   </div>
                   <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -815,12 +822,12 @@ const [scrollY, setScrollY] = useState(0);
               </div>
             </div>
           </div>
-          
+
         </section>
         <MultiWaveAudio />
-        
-        <section className="w-full py-12 md:py-24 lg:py-32"> 
-    
+
+        <section className="w-full py-12 md:py-24 lg:py-32">
+
           <div className="container px-4 md:px-6">
           <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-6 text-gray-900 dark:text-white">Principales beneficios</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -938,7 +945,7 @@ const [scrollY, setScrollY] = useState(0);
       Nuestros clientes nos aman
     </h2>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-      
+
       {/* Guillermo */}
       <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden">
         <div className="relative aspect-[2/4]">
@@ -959,7 +966,7 @@ const [scrollY, setScrollY] = useState(0);
                 fill
                 style={{ objectFit: 'cover' }}
               />
-              <div 
+              <div
                 className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 cursor-pointer"
                 onClick={() => handlePlayVideo('ted-wright')}
               >
@@ -1015,7 +1022,7 @@ const [scrollY, setScrollY] = useState(0);
                 fill
                 style={{ objectFit: 'cover' }}
               />
-              <div 
+              <div
                 className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 cursor-pointer"
                 onClick={() => handlePlayVideo('Tatiana Morera')}
               >
@@ -1029,13 +1036,13 @@ const [scrollY, setScrollY] = useState(0);
           <p className="text-xs text-gray-600 dark:text-gray-300">Fundadora de TMV Agroexportación (Costa Rica) 🇨🇷🍍</p>
         </div>
       </div>
-      
+
     </div>
   </div>
 </section>
 
         {/* Backed by Section */}
-        
+
 
         <section ref={aboutRef}>
           <NewsSection />
@@ -1072,11 +1079,11 @@ const [scrollY, setScrollY] = useState(0);
 </section>
 
 
-       
+
 
         <section ref={contactRef} className="w-full py-12 md:py-24 bg-gray-1 dark:bg-gray-900">
         <MultiWaveAudio />
-        
+
           <div className="container px-2 md:px-6 ">
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
@@ -1116,7 +1123,7 @@ const [scrollY, setScrollY] = useState(0);
           </Link>
         </nav>
       </footer>
-      
+
       {/* WhatsApp floating button */}
       <a
   href="https://wa.me/56966163647"
