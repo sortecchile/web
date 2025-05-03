@@ -7,6 +7,7 @@ import { CheckCircle, BarChart2, Users, ArrowUp, Send, ChevronLeft, ChevronRight
 import Link from 'next/link'
 import Image from 'next/image'
 import NewsSection from './NewsSection'
+import UseCasesSection from './components/UseCasesSection'
 
 import dynamic from 'next/dynamic'
 import { useDarkMode } from './hooks/useDarkMode'
@@ -862,6 +863,11 @@ const [scrollY, setScrollY] = useState(0);
             </div>
           </div>
         </section>
+
+        <MultiWaveAudio />
+
+        {/* Casos de Uso Section */}
+        <UseCasesSection />
 
         <MultiWaveAudio />
 {/* Haz preguntas sobre la data Seccion  */}

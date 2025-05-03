@@ -1,0 +1,33 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="#f0f4f8"/>
+  <rect x="50" y="50" width="700" height="500" rx="10" fill="#ffffff" stroke="#38507E" stroke-width="2"/>
+  <text x="400" y="50" font-family="Arial" font-size="24" text-anchor="middle" fill="#38507E">Gestión de Cosecha</text>
+  
+  <!-- Gráfico de barras de cosecha -->
+  <rect x="100" y="100" width="600" height="200" rx="5" fill="#e6f7ff"/>
+  <rect x="150" y="150" width="50" height="100" fill="#51A09A"/>
+  <rect x="250" y="120" width="50" height="130" fill="#C2DB64"/>
+  <rect x="350" y="180" width="50" height="70" fill="#38507E"/>
+  <rect x="450" y="130" width="50" height="120" fill="#51A09A"/>
+  <rect x="550" y="100" width="50" height="150" fill="#C2DB64"/>
+  
+  <!-- Tabla de datos -->
+  <rect x="100" y="320" width="600" height="180" rx="5" fill="#e6f7ff"/>
+  <line x1="100" y1="350" x2="700" y2="350" stroke="#38507E" stroke-width="1"/>
+  <line x1="100" y1="380" x2="700" y2="380" stroke="#38507E" stroke-width="1"/>
+  <line x1="100" y1="410" x2="700" y2="410" stroke="#38507E" stroke-width="1"/>
+  <line x1="100" y1="440" x2="700" y2="440" stroke="#38507E" stroke-width="1"/>
+  <line x1="100" y1="470" x2="700" y2="470" stroke="#38507E" stroke-width="1"/>
+  
+  <line x1="250" y1="320" x2="250" y2="500" stroke="#38507E" stroke-width="1"/>
+  <line x1="400" y1="320" x2="400" y2="500" stroke="#38507E" stroke-width="1"/>
+  <line x1="550" y1="320" x2="550" y2="500" stroke="#38507E" stroke-width="1"/>
+  
+  <!-- Íconos de frutas/cultivos -->
+  <circle cx="125" cy="335" r="10" fill="#C2DB64"/>
+  <circle cx="125" cy="365" r="10" fill="#51A09A"/>
+  <circle cx="125" cy="395" r="10" fill="#38507E"/>
+  <circle cx="125" cy="425" r="10" fill="#C2DB64"/>
+  <circle cx="125" cy="455" r="10" fill="#51A09A"/>
+  <circle cx="125" cy="485" r="10" fill="#38507E"/>
+</svg>

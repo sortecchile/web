@@ -1,0 +1,3 @@
+Este es un marcador de posición para la imagen de "Riego".
+Por favor, reemplaza este archivo con una imagen real en formato PNG.
+La imagen debería mostrar un sistema de riego o un dashboard de control de riego.

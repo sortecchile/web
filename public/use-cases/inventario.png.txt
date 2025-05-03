@@ -1,0 +1,3 @@
+Este es un marcador de posición para la imagen de "Inventario".
+Por favor, reemplaza este archivo con una imagen real en formato PNG.
+La imagen debería mostrar un inventario de insumos agrícolas o un dashboard de gestión de inventario.

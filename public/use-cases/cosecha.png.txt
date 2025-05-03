@@ -1,0 +1,3 @@
+Este es un marcador de posición para la imagen de "Cosecha".
+Por favor, reemplaza este archivo con una imagen real en formato PNG.
+La imagen debería mostrar actividades de cosecha o un dashboard de gestión de cosecha.

@@ -1,0 +1,41 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="#f0f4f8"/>
+  <rect x="50" y="50" width="700" height="500" rx="10" fill="#ffffff" stroke="#38507E" stroke-width="2"/>
+  <text x="400" y="50" font-family="Arial" font-size="24" text-anchor="middle" fill="#38507E">Control de Mantenciones</text>
+  
+  <!-- Calendario de mantenciones -->
+  <rect x="100" y="100" width="600" height="250" rx="5" fill="#e6f7ff"/>
+  
+  <!-- Días de la semana -->
+  <rect x="130" y="120" width="80" height="30" rx="5" fill="#51A09A"/>
+  <rect x="220" y="120" width="80" height="30" rx="5" fill="#51A09A"/>
+  <rect x="310" y="120" width="80" height="30" rx="5" fill="#51A09A"/>
+  <rect x="400" y="120" width="80" height="30" rx="5" fill="#51A09A"/>
+  <rect x="490" y="120" width="80" height="30" rx="5" fill="#51A09A"/>
+  <rect x="580" y="120" width="80" height="30" rx="5" fill="#51A09A"/>
+  
+  <!-- Eventos de mantención -->
+  <rect x="130" y="170" width="80" height="40" rx="5" fill="#C2DB64"/>
+  <rect x="310" y="170" width="80" height="40" rx="5" fill="#38507E"/>
+  <rect x="490" y="170" width="80" height="40" rx="5" fill="#C2DB64"/>
+  
+  <rect x="220" y="230" width="80" height="40" rx="5" fill="#38507E"/>
+  <rect x="400" y="230" width="80" height="40" rx="5" fill="#C2DB64"/>
+  <rect x="580" y="230" width="80" height="40" rx="5" fill="#38507E"/>
+  
+  <rect x="130" y="290" width="80" height="40" rx="5" fill="#C2DB64"/>
+  <rect x="400" y="290" width="80" height="40" rx="5" fill="#38507E"/>
+  
+  <!-- Lista de equipos -->
+  <rect x="100" y="370" width="600" height="150" rx="5" fill="#e6f7ff"/>
+  
+  <!-- Equipos -->
+  <rect x="120" y="390" width="560" height="30" rx="5" fill="#ffffff" stroke="#51A09A" stroke-width="1"/>
+  <rect x="120" y="430" width="560" height="30" rx="5" fill="#ffffff" stroke="#51A09A" stroke-width="1"/>
+  <rect x="120" y="470" width="560" height="30" rx="5" fill="#ffffff" stroke="#51A09A" stroke-width="1"/>
+  
+  <!-- Íconos de estado -->
+  <circle cx="650" cy="405" r="10" fill="#C2DB64"/>
+  <circle cx="650" cy="445" r="10" fill="#38507E"/>
+  <circle cx="650" cy="485" r="10" fill="#C2DB64"/>
+</svg>

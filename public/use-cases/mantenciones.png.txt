@@ -1,0 +1,3 @@
+Este es un marcador de posición para la imagen de "Mantenciones".
+Por favor, reemplaza este archivo con una imagen real en formato PNG.
+La imagen debería mostrar mantenimiento de equipos agrícolas o un dashboard de control de mantenciones.

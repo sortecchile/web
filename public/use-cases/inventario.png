@@ -1,0 +1,46 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="#f0f4f8"/>
+  <rect x="50" y="50" width="700" height="500" rx="10" fill="#ffffff" stroke="#38507E" stroke-width="2"/>
+  <text x="400" y="50" font-family="Arial" font-size="24" text-anchor="middle" fill="#38507E">Gestión de Inventario</text>
+  
+  <!-- Tabla de inventario -->
+  <rect x="100" y="100" width="600" height="300" rx="5" fill="#e6f7ff"/>
+  
+  <!-- Encabezados de tabla -->
+  <rect x="100" y="100" width="600" height="40" rx="0" fill="#51A09A"/>
+  
+  <!-- Filas de la tabla -->
+  <rect x="100" y="140" width="600" height="40" rx="0" fill="#ffffff" stroke="#e6e6e6" stroke-width="1"/>
+  <rect x="100" y="180" width="600" height="40" rx="0" fill="#f9f9f9" stroke="#e6e6e6" stroke-width="1"/>
+  <rect x="100" y="220" width="600" height="40" rx="0" fill="#ffffff" stroke="#e6e6e6" stroke-width="1"/>
+  <rect x="100" y="260" width="600" height="40" rx="0" fill="#f9f9f9" stroke="#e6e6e6" stroke-width="1"/>
+  <rect x="100" y="300" width="600" height="40" rx="0" fill="#ffffff" stroke="#e6e6e6" stroke-width="1"/>
+  <rect x="100" y="340" width="600" height="40" rx="0" fill="#f9f9f9" stroke="#e6e6e6" stroke-width="1"/>
+  
+  <!-- Columnas de la tabla -->
+  <line x1="200" y1="100" x2="200" y2="380" stroke="#e6e6e6" stroke-width="1"/>
+  <line x1="350" y1="100" x2="350" y2="380" stroke="#e6e6e6" stroke-width="1"/>
+  <line x1="500" y1="100" x2="500" y2="380" stroke="#e6e6e6" stroke-width="1"/>
+  <line x1="600" y1="100" x2="600" y2="380" stroke="#e6e6e6" stroke-width="1"/>
+  
+  <!-- Indicadores de nivel de inventario -->
+  <rect x="520" y="150" width="60" height="20" rx="3" fill="#C2DB64"/>
+  <rect x="520" y="190" width="40" height="20" rx="3" fill="#C2DB64"/>
+  <rect x="520" y="230" width="20" height="20" rx="3" fill="#38507E"/>
+  <rect x="520" y="270" width="50" height="20" rx="3" fill="#C2DB64"/>
+  <rect x="520" y="310" width="10" height="20" rx="3" fill="#38507E"/>
+  <rect x="520" y="350" width="30" height="20" rx="3" fill="#C2DB64"/>
+  
+  <!-- Gráfico circular de resumen -->
+  <circle cx="400" cy="470" r="60" fill="none" stroke="#e6e6e6" stroke-width="1"/>
+  <path d="M400,470 L400,410 A60,60 0 0,1 452,500 Z" fill="#51A09A"/>
+  <path d="M400,470 L452,500 A60,60 0 0,1 400,530 Z" fill="#C2DB64"/>
+  <path d="M400,470 L400,530 A60,60 0 0,1 348,440 Z" fill="#38507E"/>
+  <path d="M400,470 L348,440 A60,60 0 0,1 400,410 Z" fill="#e6f7ff"/>
+  
+  <!-- Leyenda -->
+  <rect x="500" y="430" width="20" height="20" rx="3" fill="#51A09A"/>
+  <rect x="500" y="460" width="20" height="20" rx="3" fill="#C2DB64"/>
+  <rect x="500" y="490" width="20" height="20" rx="3" fill="#38507E"/>
+  <rect x="500" y="520" width="20" height="20" rx="3" fill="#e6f7ff"/>
+</svg>

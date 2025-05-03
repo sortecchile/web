@@ -1,0 +1,15 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="#f0f4f8"/>
+  <rect x="50" y="50" width="700" height="500" rx="10" fill="#ffffff" stroke="#38507E" stroke-width="2"/>
+  <rect x="100" y="100" width="600" height="150" rx="5" fill="#e6f7ff"/>
+  <rect x="100" y="280" width="290" height="220" rx="5" fill="#e6f7ff"/>
+  <rect x="410" y="280" width="290" height="220" rx="5" fill="#e6f7ff"/>
+  <text x="400" y="50" font-family="Arial" font-size="24" text-anchor="middle" fill="#38507E">Dashboard Campo Completo</text>
+  <circle cx="150" cy="350" r="50" fill="#51A09A"/>
+  <circle cx="250" cy="400" r="30" fill="#C2DB64"/>
+  <circle cx="350" cy="380" r="40" fill="#38507E"/>
+  <rect x="450" y="330" width="200" height="20" rx="5" fill="#51A09A"/>
+  <rect x="450" y="360" width="150" height="20" rx="5" fill="#C2DB64"/>
+  <rect x="450" y="390" width="180" height="20" rx="5" fill="#38507E"/>
+  <rect x="450" y="420" width="120" height="20" rx="5" fill="#51A09A"/>
+</svg>
