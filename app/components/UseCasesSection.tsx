@@ -21,65 +21,65 @@ const useCases: UseCase[] = [
     id: 'campo-completo',
     name: 'Campo completo',
     videoUrl: 'https://www.tella.tv/video/cm47fh5kh001603mo2gc10opu/embed?b=0&title=0&a=1&loop=1&autoPlay=true&t=0&muted=1&wt=0',
-    title: 'Gestión integral del campo',
-    description: 'Administra todas las operaciones de tu campo desde un solo lugar, con información en tiempo real.',
+    title: 'Gestión integral del campo desde WhatsApp',
+    description: 'Desde fertilización hasta mantenciones: todo se registra con mensajes simples. MIIDO centraliza los datos, genera reportes y mejora la toma de decisiones en tiempo real.',
     bullets: [
-      'Coordina todas las actividades agrícolas',
-      'Monitorea el progreso de tareas en tiempo real',
-      'Centraliza la comunicación entre equipos',
-      'Obtén reportes completos de operaciones'
+      'Todas las operaciones en un solo sistema',
+      'Información centralizada y en tiempo real',
+      'Reportes automáticos por área y actividad',
+      'obten información de la operación con un simple mensaje en Whatsapp'
     ]
   },
   {
-    id: 'riego',
-    name: 'Riego',
-    videoUrl: 'https://www.tella.tv/video/cm47fh5kh001603mo2gc10opu/embed?b=0&title=0&a=1&loop=1&autoPlay=true&t=0&muted=1&wt=0',
-    title: 'Optimización de riego',
-    description: 'Controla y optimiza tus sistemas de riego con datos precisos y alertas oportunas.',
+    id: 'maquinarias',
+    name: 'Maquinaria',
+    videoUrl: 'https://www.tella.tv/video/cmahdig8g00020bjy1e9g75tv/embed?b=1&title=1&a=1&loop=0&t=0&muted=0&wt=1',
+    title: 'Control de maquinarias en tiempo real',
+    description: 'Con MIIDO, basta un mensaje por WhatsApp para registrar la detención de una máquina. Sin apps ni procesos complejos. Un ingenio azucarero en Costa Rica ya gestiona más de 200 equipos así.',
     bullets: [
-      'Programa ciclos de riego basados en datos',
+      'Registro instantáneo desde el campo',
       'Recibe alertas sobre problemas en el sistema',
-      'Analiza el consumo de agua por sector',
-      'Integra datos climáticos para decisiones más precisas'
+      'Carga Gantt automática',
+      'Analítica de uso y tiempo de paro'
     ]
   },
   {
-    id: 'cosecha',
-    name: 'Cosecha',
+    id: 'Labores',
+    name: 'Labores',
     videoUrl: 'https://www.tella.tv/video/cm47fh5kh001603mo2gc10opu/embed?b=0&title=0&a=1&loop=1&autoPlay=true&t=0&muted=1&wt=0',
-    title: 'Gestión de cosecha eficiente',
-    description: 'Maximiza la eficiencia de tu cosecha con seguimiento detallado y coordinación en tiempo real.',
+    title: 'Registro y costos de labores en un solo mensaje',
+    description: 'Los encargados del campo mandan por WhatsApp zona, actividad y cuántas personas trabajaron. MIIDO calcula todo automáticamente: costos, eficiencia y reportes listos para decidir.',
     bullets: [
-      'Registra volúmenes de cosecha por sector',
-      'Asigna y supervisa cuadrillas de trabajo',
-      'Monitorea la calidad del producto cosechado',
-      'Optimiza la logística de transporte'
+      'Costo total y por acre en automático',
+      'Ranking de jefes cuadrilla más eficientes',
+      'Análisis por tipo de labor agrícola',
+      'Estadística con lenguaje natural'
     ]
   },
   {
-    id: 'mantenciones',
-    name: 'Mantenciones',
+    id: 'Fertilización',
+    name: 'Fertilzación',
     videoUrl: 'https://www.tella.tv/video/cm47fh5kh001603mo2gc10opu/embed?b=0&title=0&a=1&loop=1&autoPlay=true&t=0&muted=1&wt=0',
-    title: 'Control de mantenciones',
-    description: 'Mantén tu maquinaria y equipos en óptimas condiciones con un sistema de mantención preventiva.',
+    title: 'Fertilización con control total desde WhatsApp',
+    description: 'Los encargados mandan la dosis por sector y MIIDO calcula el costo total, por litro y por aplicación.También pueden consultar stock y precios de cada producto al instante desde el mismo chat.',
     bullets: [
-      'Programa mantenciones preventivas',
-      'Registra historial de reparaciones',
-      'Recibe recordatorios automáticos',
-      'Gestiona inventario de repuestos'
+      'Costo por aplicación y por litro automático',
+      'Control de stock y precios de fertilizantes',
+      'Registro y análisis por sector de riego',
+      'Consultas en el mismo chat'
     ]
   },
   {
-    id: 'inventario',
-    name: 'Inventario',
+    id: 'Combustible',
+    name: 'Combustible',
     videoUrl: 'https://www.tella.tv/video/cm47fh5kh001603mo2gc10opu/embed?b=0&title=0&a=1&loop=1&autoPlay=true&t=0&muted=1&wt=0',
-    title: 'Gestión de inventario',
-    description: 'Controla tu inventario de insumos y productos con precisión y evita quiebres de stock.',
+    title: 'Control de combustible sin cuadernos',
+    description: 'Los operadores registran cada carga por WhatsApp. MIIDO calcula el uso por máquina, frecuencia de carga y rendimiento por hora o kilómetro.',
     bullets: [
-      'Monitorea niveles de stock en tiempo real',
-      'Recibe alertas de niveles bajos',
-      'Registra entradas y salidas fácilmente',
-      'Analiza el consumo de insumos por temporada'
+      'Registro digital de cada carga',
+      'Análisis por máquina, operador y fecha',
+      'Rendimiento por hora y por kilómetro',
+      'Analítica de uso de maquinas.'
     ]
   }
 ]

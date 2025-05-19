@@ -65,10 +65,13 @@ export default function Component() {
   const contactRef = useRef<HTMLDivElement>(null)
   const aboutRef = useRef<HTMLDivElement>(null)
   const howtRef = useRef<HTMLDivElement>(null)
+  const casesRef = useRef<HTMLElement>(null)
   const [playingVideo, setPlayingVideo] = useState<string | null>(null)
   const [showAlert, setShowAlert] = useState(false);
-const [alertMessage, setAlertMessage] = useState('');
-const [scrollY, setScrollY] = useState(0);
+  const [alertMessage, setAlertMessage] = useState('');
+  const [scrollY, setScrollY] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [animationsReady, setAnimationsReady] = useState(false);
 
   const handlePlayVideo = (videoId: string) => {
     setPlayingVideo(videoId)
@@ -99,6 +102,12 @@ const [scrollY, setScrollY] = useState(0);
   const handleHowClick = () => {
     if (howtRef.current) {
       howtRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  const handleCasesClick = () => {
+    if (casesRef.current) {
+      casesRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }
 
@@ -296,13 +305,227 @@ const [scrollY, setScrollY] = useState(0);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Efecto para controlar el estado de carga
+  useEffect(() => {
+    // Simular tiempo de carga
+    const loadingTimer = setTimeout(() => {
+      setLoading(false);
+
+      // Activar las animaciones después de que la pantalla de carga desaparezca
+      const animationsTimer = setTimeout(() => {
+        setAnimationsReady(true);
+      }, 100); // Pequeño retraso para asegurar una transición suave
+
+      return () => clearTimeout(animationsTimer);
+    }, 2500); // 2.5 segundos de carga
+
+    return () => clearTimeout(loadingTimer);
+  }, []);
+
+  // Estilos globales para animaciones
+  useEffect(() => {
+    const globalStyles = `
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes pulse {
+        0%, 100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+
+      @keyframes float {
+        0%, 100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes dash {
+        0% {
+          stroke-dasharray: 1, 150;
+          stroke-dashoffset: 0;
+        }
+        50% {
+          stroke-dasharray: 90, 150;
+          stroke-dashoffset: -35;
+        }
+        100% {
+          stroke-dasharray: 90, 150;
+          stroke-dashoffset: -124;
+        }
+      }
+
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+
+      @keyframes borderPulse {
+        0% {
+          border-color: #38507E;
+        }
+        50% {
+          border-color: #C2DB64;
+        }
+        100% {
+          border-color: #38507E;
+        }
+      }
+    `;
+
+    // Crear elemento de estilo
+    const styleElement = document.createElement('style');
+    styleElement.innerHTML = globalStyles;
+    document.head.appendChild(styleElement);
+
+    // Limpiar al desmontar
+    return () => {
+      if (styleElement && document.head.contains(styleElement)) {
+        document.head.removeChild(styleElement);
+      }
+    };
+  }, []);
+
+  // No necesitamos la función createWavePath para el cargador de barras
+
+  // Si está cargando, solo mostrar la pantalla de carga
+  if (loading) {
+    return (
+      <div
+        className="fixed inset-0 flex items-center justify-center bg-white dark:bg-gray-900 z-[9999]"
+      >
+        <div className="absolute inset-0 backdrop-blur-[2px]">
+          {/* Grid Overlay para modo claro */}
+          <div
+            className="absolute inset-0 pointer-events-none dark:hidden"
+            style={{
+              backgroundImage: `
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+                linear-gradient(to right, rgba(0, 0, 0, 0.1) 1px, transparent 1px)
+              `,
+              backgroundSize: '40px 40px',
+              maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
+              opacity: 0.3
+            }}
+          />
+
+          {/* Grid Overlay para modo oscuro */}
+          <div
+            className="absolute inset-0 pointer-events-none hidden dark:block"
+            style={{
+              backgroundImage: `
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px)
+              `,
+              backgroundSize: '40px 40px',
+              maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
+              WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
+              opacity: 0.3
+            }}
+          />
+        </div>
+
+        <div
+          className="w-full h-24 relative z-10 flex items-center justify-center"
+        >
+          <div className="flex items-end h-12 space-x-2">
+            {[0, 1, 2, 3, 4].map((index) => (
+              <div
+                key={index}
+                className={`bar-${index} w-3 bg-white dark:bg-[#111827] border border-[#38507E] dark:border-white rounded-t-md`}
+                style={{ height: '20%' }}
+              ></div>
+            ))}
+          </div>
+        </div>
+
+        <style jsx>{`
+          .bar-0 {
+            animation: barAnim 1.2s ease-in-out infinite;
+          }
+
+          .bar-1 {
+            animation: barAnim 1.2s ease-in-out 0.2s infinite;
+          }
+
+          .bar-2 {
+            animation: barAnim 1.2s ease-in-out 0.4s infinite;
+          }
+
+          .bar-3 {
+            animation: barAnim 1.2s ease-in-out 0.6s infinite;
+          }
+
+          .bar-4 {
+            animation: barAnim 1.2s ease-in-out 0.8s infinite;
+          }
+
+          @keyframes barAnim {
+            0%, 100% {
+              height: 20%;
+              opacity: 0.9;
+              border-color: #38507E;
+            }
+            50% {
+              height: 80%;
+              opacity: 1;
+              border-color: #C2DB64;
+            }
+          }
+        `}</style>
+      </div>
+    );
+  }
+
+  // Si no está cargando, mostrar el contenido principal
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground overflow-x-hidden dark:bg-gray-900">
+
       {showAlert && (
-  <div className="fixed top-0 left-0 right-0 z-[9999] p-4 bg-green-500 dark:bg-green-600 text-white text-center transition-all duration-300 ease-in-out transform translate-y-0">
-    <p>{alertMessage}</p>
-  </div>
-)}
+        <div className="fixed top-0 left-0 right-0 z-[9999] p-4 bg-green-500 dark:bg-green-600 text-white text-center transition-all duration-300 ease-in-out transform translate-y-0">
+          <p>{alertMessage}</p>
+        </div>
+      )}
       <header className="fixed top-0 left-0 right-0 z-50 px-4 lg:px-6 h-14 flex items-center justify-between border-b bg-white dark:bg-gray-800 dark:border-gray-700">
         <div className="flex items-center justify-between w-full">
           <Link className="flex items-center justify-center" href="#">
@@ -328,6 +551,10 @@ const [scrollY, setScrollY] = useState(0);
             <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => handleNavClick(howtRef)}>
               Cómo funciona?
             </button>
+            {/* Temporalmente oculto hasta tener todos los videos */}
+            {/* <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => handleNavClick(casesRef)}>
+              Casos de uso
+            </button> */}
             <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => handleNavClick(aboutRef)}>
               Últimas publicaciones
             </button>
@@ -335,13 +562,30 @@ const [scrollY, setScrollY] = useState(0);
               Contáctanos
             </button>
           </nav>
-          <button
-            className="md:hidden"
-            onClick={toggleMobileMenu}
-            aria-label={mobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="flex items-center gap-4">
+            {/* Botón Ingresar */}
+            <a
+              href="https://dashboard.miido.cl/login"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative group hidden md:block"
+            >
+              <Button
+                className="bg-white hover:bg-white dark:bg-[#111827] dark:hover:bg-[#111827] border border-[#38507E] hover:border-[#C2DB64] text-gray-800 dark:text-white rounded-full shadow-md hover:shadow-lg px-6 py-2 text-sm transition-all duration-300"
+              >
+                Ingresar
+              </Button>
+            </a>
+
+            {/* Botón de menú móvil */}
+            <button
+              className="md:hidden"
+              onClick={toggleMobileMenu}
+              aria-label={mobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
+            >
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </header>
       <div className={`fixed inset-0 z-40 transform ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out md:hidden`}>
@@ -350,12 +594,30 @@ const [scrollY, setScrollY] = useState(0);
             <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => { handleHowClick(); closeMobileMenu(); }}>
               Cómo funciona?
             </button>
+            {/* Temporalmente oculto hasta tener todos los videos */}
+            {/* <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => { handleCasesClick(); closeMobileMenu(); }}>
+              Casos de uso
+            </button> */}
             <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => { handleaboutClick(); closeMobileMenu(); }}>
               Últimas publicaciones
             </button>
             <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => { handleContactClick(); closeMobileMenu(); }}>
               Contáctanos
             </button>
+
+            {/* Botón Ingresar para móvil */}
+            <a
+              href="https://www.dashboard.miido.cl"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4"
+            >
+              <Button
+                className="w-full bg-white hover:bg-white dark:bg-[#111827] dark:hover:bg-[#111827] border border-[#38507E] hover:border-[#C2DB64] text-gray-800 dark:text-white rounded-full shadow-md hover:shadow-lg px-6 py-2 text-sm transition-all duration-300"
+              >
+                Ingresar
+              </Button>
+            </a>
           </nav>
         </div>
         <div className="bg-black bg-opacity-50 h-full w-full" onClick={closeMobileMenu}></div>
@@ -367,8 +629,28 @@ const [scrollY, setScrollY] = useState(0);
         {/* Main section */}
         <section className="w-full py-24 md:py-24 lg:py-32 xl:py-48 relative overflow-hidden">
           {/* Enhanced Parallax background image */}
-          {/* Grid Overlay */}
-          <div className="absolute inset-0 -z-1 pointer-events-none">
+          {/* Grid Overlay para modo claro */}
+          <div className="absolute inset-0 -z-1 pointer-events-none dark:hidden">
+            <div
+              className="w-full h-full"
+              style={{
+                position: 'absolute',
+                inset: 0,
+                backgroundImage: `
+                  linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+                  linear-gradient(to right, rgba(0, 0, 0, 0.1) 1px, transparent 1px)
+                `,
+                backgroundSize: '40px 40px',
+                maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
+                opacity: 0.3,
+                zIndex: 1
+              }}
+            />
+          </div>
+
+          {/* Grid Overlay para modo oscuro */}
+          <div className="absolute inset-0 -z-1 pointer-events-none hidden dark:block">
             <div
               className="w-full h-full"
               style={{
@@ -381,7 +663,7 @@ const [scrollY, setScrollY] = useState(0);
                 backgroundSize: '40px 40px',
                 maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
                 WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
-                opacity: isDark ? 0.3 : 0.07,
+                opacity: 0.3,
                 zIndex: 1
               }}
             />
@@ -403,7 +685,14 @@ const [scrollY, setScrollY] = useState(0);
 
           <div className="container px-4 md:px-6">
             {/* Backed by - Ahora como div dentro de la sección principal */}
-            <div className="flex items-center justify-center gap-6 bg-white dark:bg-[#111827] border border-[#38507E] dark:border-[#1e293b] rounded-full px-6 py-1.5 max-w-sm mx-auto -mt-12 mb-12 shadow-md dark:shadow-[0_0_15px_rgba(0,0,0,0.3)]">
+            <div
+              className="flex items-center justify-center gap-6 bg-white dark:bg-[#111827] border border-[#38507E] dark:border-[#1e293b] rounded-full px-6 py-1.5 max-w-sm mx-auto -mt-12 mb-12 shadow-md dark:shadow-[0_0_15px_rgba(0,0,0,0.3)] hover:border-[#C2DB64] transition-all duration-300"
+              style={{
+                animation: animationsReady ? 'fadeInDown 0.8s ease-out forwards' : 'none',
+                opacity: animationsReady ? 0 : 1,
+                transform: animationsReady ? 'translateY(-20px)' : 'none'
+              }}
+            >
               <span className="text-xs font-medium text-gray-800 dark:text-gray-300">Apoyados por</span>
               <div className="flex items-center gap-6">
                 <Image
@@ -411,14 +700,14 @@ const [scrollY, setScrollY] = useState(0);
                   alt="Platanus Logo"
                   width={70}
                   height={8}
-                  className="object-contain opacity-90 hover:opacity-100 transition-opacity"
+                  className="object-contain opacity-90 hover:opacity-100 transition-opacity hover:scale-110 transform transition-transform duration-300"
                 />
                 <Image
                   src="./IICA-logo.png"
                   alt="IICA Logo"
                   width={60}
                   height={8}
-                  className="object-contain opacity-90 hover:opacity-100 transition-opacity"
+                  className="object-contain opacity-90 hover:opacity-100 transition-opacity hover:scale-110 transform transition-transform duration-300"
                 />
               </div>
             </div>
@@ -426,25 +715,47 @@ const [scrollY, setScrollY] = useState(0);
             <div className="flex flex-col items-center space-y-6 text-center">
               {/* Title Section */}
               <div className="space-y-2">
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none bg-gradient-to-r from-[#38507E] via-[#51A09A] to-[#C2DB64] bg-clip-text text-transparent h-24 flex items-center justify-center">
+                <h1
+                  className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none bg-gradient-to-r from-[#38507E] via-[#51A09A] to-[#C2DB64] bg-clip-text text-transparent h-24 flex items-center justify-center"
+                  style={{
+                    animation: animationsReady ? 'fadeInUp 0.8s ease-out forwards' : 'none',
+                    opacity: animationsReady ? 0 : 1,
+                    transform: animationsReady ? 'translateY(20px)' : 'none'
+                  }}
+                >
                   Vertical AI agents en agricultura
                   <span className="animate-blink">|</span>
                 </h1>
-                <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
+                <p
+                  className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400"
+                  style={{
+                    animation: animationsReady ? 'fadeInUp 0.8s ease-out 0.2s forwards' : 'none',
+                    opacity: animationsReady ? 0 : 1,
+                    transform: animationsReady ? 'translateY(20px)' : 'none'
+                  }}
+                >
                   Tu copiloto de IA en el campo: automatiza, predice y toma mejores decisiones agrícolas, <strong>sin complicaciones y desde WhatsApp</strong>.
                 </p>
               </div>
 
               {/* Updated CTA button with hover animation */}
               <div className="w-full max-w-sm space-y-2">
-                <div className="flex space-x-2">
+                <div
+                  className="flex space-x-2"
+                  style={{
+                    animation: animationsReady ? 'fadeInUp 0.8s ease-out 0.4s forwards' : 'none',
+                    opacity: animationsReady ? 0 : 1,
+                    transform: animationsReady ? 'translateY(20px)' : 'none'
+                  }}
+                >
                   <a
                     href="https://www.notion.so/miidocl/151f91071a0f80c19460e4c799042667?pvs=106"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="max-w-lg flex-1 inline-flex items-center justify-center px-4 py-2 text-white bg-[#1A202C] rounded-md hover:bg-[#2D3748] focus:outline-none transform transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                    className="max-w-lg flex-1 inline-flex items-center justify-center px-4 py-2 text-white bg-[#1A202C] rounded-md hover:bg-[#2D3748] focus:outline-none transform transition-all duration-300 hover:scale-105 hover:shadow-lg relative overflow-hidden group"
                   >
-                    Empieza gratis!
+                    <span className="relative z-10">Empieza gratis!</span>
+                    <span className="absolute inset-0 bg-[#2D3748] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
                   </a>
                 </div>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
@@ -453,8 +764,26 @@ const [scrollY, setScrollY] = useState(0);
               </div>
 
               {/* Embedded Video Section without parallax */}
-              <div className="w-full max-w-[700px] mt-8">
-                <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0 }}>
+              <div
+                className="w-full max-w-[700px] mt-8"
+                style={{
+                  animation: animationsReady ? 'fadeInUp 0.8s ease-out 0.6s forwards' : 'none',
+                  opacity: animationsReady ? 0 : 1,
+                  transform: animationsReady ? 'translateY(20px)' : 'none'
+                }}
+              >
+                <div
+                  style={{
+                    position: 'relative',
+                    paddingBottom: '56.25%',
+                    height: 0,
+                    borderRadius: '12px',
+                    overflow: 'hidden',
+                    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)',
+                    transition: 'transform 0.3s ease-out, box-shadow 0.3s ease-out',
+                  }}
+                  className="hover:shadow-2xl hover:scale-[1.02] transform transition-all duration-300"
+                >
                   <iframe
                     style={{
                       position: 'absolute',
@@ -464,14 +793,31 @@ const [scrollY, setScrollY] = useState(0);
                       height: '100%',
                       border: 0,
                     }}
-                    src="https://www.tella.tv/video/cm47fh5kh001603mo2gc10opu/embed?b=0&title=0&a=1&loop=0&autoPlay=true&t=0&muted=1&wt=0"
+                    src="https://www.tella.tv/video/cmafppfb0000u0dl2hlbv44t2/embed?b=1&title=1&a=1&loop=0&t=0&muted=0&wt=1"
                     allowFullScreen
                     allowTransparency={true}
                   ></iframe>
                 </div>
-                <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+                <p
+                  className="mt-4 text-sm text-gray-500 dark:text-gray-400"
+                  style={{
+                    animation: animationsReady ? 'fadeInUp 0.8s ease-out 0.8s forwards' : 'none',
+                    opacity: animationsReady ? 0 : 1,
+                    transform: animationsReady ? 'translateY(20px)' : 'none'
+                  }}
+                >
                   Descubre cómo MIIDO transforma tu flujo de trabajo.
                 </p>
+
+                {/* Botón para ver casos de éxito - Temporalmente comentado */}
+                {/* <div className="mt-6 flex justify-center">
+                  <Button
+                    onClick={handleCasesClick}
+                    className="bg-white dark:bg-[#111827] border border-[#38507E] hover:border-[#51A09A] text-gray-800 dark:text-white rounded-full shadow-md hover:shadow-lg px-6 py-2 text-sm"
+                  >
+                    Ver casos de éxito
+                  </Button>
+                </div> */}
               </div>
             </div>
           </div>
@@ -485,20 +831,32 @@ const [scrollY, setScrollY] = useState(0);
             <div className="flex flex-nowrap md:justify-center sm:justify-center  items-center gap-20">
               {/* Viña Errazuriz */}
       <>
-        <div className="dark:hidden">
+        <div
+          className="dark:hidden transform transition-transform duration-300 hover:scale-110"
+          style={{ animation: 'fadeInUp 0.8s ease-out 0.1s forwards', opacity: 0 }}
+        >
           <Image src="./errazuriz-logo.png" alt="Viña Errazuriz" width={120} height={40} />
         </div>
-        <div className="hidden dark:block">
+        <div
+          className="hidden dark:block transform transition-transform duration-300 hover:scale-110"
+          style={{ animation: 'fadeInUp 0.8s ease-out 0.1s forwards', opacity: 0 }}
+        >
           <Image src="./errazuriz-logo-white.png" alt="Viña Errazuriz white" width={120} height={40} />
         </div>
       </>
 
       {/* La Ciudad Posible */}
       <>
-        <div className="dark:hidden">
+        <div
+          className="dark:hidden transform transition-transform duration-300 hover:scale-110"
+          style={{ animation: 'fadeInUp 0.8s ease-out 0.2s forwards', opacity: 0 }}
+        >
           <Image src="./LCP.png" alt="La ciudad posible" width={140} height={40} />
         </div>
-        <div className="hidden dark:block">
+        <div
+          className="hidden dark:block transform transition-transform duration-300 hover:scale-110"
+          style={{ animation: 'fadeInUp 0.8s ease-out 0.2s forwards', opacity: 0 }}
+        >
           <Image src="./LCP-white.png" alt="La ciudad posible white" width={140} height={40} />
         </div>
       </>
@@ -557,24 +915,48 @@ const [scrollY, setScrollY] = useState(0);
         </section>
         <section ref={howtRef} className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
           <div className="container px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12 text-gray-900 dark:text-white">¿Cómo funciona?</h2>
+            <h2
+              className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12 text-gray-900 dark:text-white"
+              style={{
+                animation: 'fadeInUp 0.8s ease-out forwards',
+                opacity: 0,
+                transform: 'translateY(20px)'
+              }}
+            >¿Cómo funciona?</h2>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
               {[1, 2, 3, 4].map((step) => (
-                <div key={step} className="flex flex-col items-center text-center bg-white dark:bg-gray-800 rounded-2xl p-4 relative min-h-[320px] w-[240px] mx-auto dark:border-gray-700" style={{
-                  boxShadow: '-8px 8px 0px 0px #76a586',
-                  border: '1px solid #e5e7eb'
-                }}>
-                  <div className="bg-[#c2db64] rounded-full w-10 h-10 flex items-center justify-center mb-4 absolute -top-5">
+                <div
+                  key={step}
+                  className="flex flex-col items-center text-center bg-white dark:bg-gray-800 rounded-2xl p-4 relative min-h-[320px] w-[240px] mx-auto dark:border-gray-700 hover:transform hover:scale-105 transition-all duration-300"
+                  style={{
+                    boxShadow: '-8px 8px 0px 0px #76a586',
+                    border: '1px solid #e5e7eb',
+                    animation: `fadeInUp 0.8s ease-out ${0.2 + step * 0.1}s forwards`,
+                    opacity: 0,
+                    transform: 'translateY(20px)'
+                  }}
+                >
+                  <div
+                    className="bg-[#c2db64] rounded-full w-10 h-10 flex items-center justify-center mb-4 absolute -top-5"
+                    style={{
+                      animation: `pulse 2s infinite ${step * 0.5}s`
+                    }}
+                  >
                     <span className="text-lg font-bold text-white">{step}</span>
                   </div>
                   <h3 className="text-lg font-semibold mb-3 mt-4 text-gray-800 dark:text-white dark:drop-shadow-sm">Paso {step}</h3>
-                  <p className="text-sm text-gray-100 dark:text-gray-300 mb-4">
+                  <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
                     {step === 1 && 'Subir la planificación del campo o nos conectampos a tu ERP.'}
                     {step === 2 && 'Recoger datos de los trabajadores vía WhatsApp.'}
                     {step === 3 && 'Correlacionar con el clima, inventario, planificación en el ERP.'}
                     {step === 4 && 'Recibir información procesable.'}
                   </p>
-                  <div className="my-4">
+                  <div
+                    className="my-4"
+                    style={{
+                      animation: `float 3s ease-in-out infinite ${step * 0.3}s`
+                    }}
+                  >
                     <Image
                       src={`/how_works/step${step}.png`}
                       alt={`Step ${step}`}
@@ -866,8 +1248,10 @@ const [scrollY, setScrollY] = useState(0);
 
         <MultiWaveAudio />
 
-        {/* Casos de Uso Section */}
-        <UseCasesSection />
+        {/* Casos de Uso Section - Temporalmente comentado hasta tener todos los videos */}
+        {/* <section ref={casesRef}>
+          <UseCasesSection />
+        </section> */}
 
         <MultiWaveAudio />
 {/* Haz preguntas sobre la data Seccion  */}
@@ -947,13 +1331,27 @@ const [scrollY, setScrollY] = useState(0);
         {/* Nuestros clientes nos aman */}
         <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50 dark:bg-gray-900">
   <div className="container px-4 md:px-6">
-    <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12 text-gray-900 dark:text-white">
+    <h2
+      className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12 text-gray-900 dark:text-white"
+      style={{
+        animation: 'fadeInUp 0.8s ease-out forwards',
+        opacity: 0,
+        transform: 'translateY(20px)'
+      }}
+    >
       Nuestros clientes nos aman
     </h2>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
 
       {/* Guillermo */}
-      <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden">
+      <div
+        className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+        style={{
+          animation: 'fadeInUp 0.8s ease-out 0.2s forwards',
+          opacity: 0,
+          transform: 'translateY(20px)'
+        }}
+      >
         <div className="relative aspect-[2/4]">
           {playingVideo === 'ted-wright' ? (
             <ReactPlayer
@@ -973,7 +1371,7 @@ const [scrollY, setScrollY] = useState(0);
                 style={{ objectFit: 'cover' }}
               />
               <div
-                className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 cursor-pointer"
+                className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 cursor-pointer transform transition-transform duration-300 hover:scale-110"
                 onClick={() => handlePlayVideo('ted-wright')}
               >
                 <PlayCircle className="w-12 h-12 text-white opacity-80" />
@@ -988,18 +1386,37 @@ const [scrollY, setScrollY] = useState(0);
       </div>
 
       {/* Felipe */}
-      <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden">
+      <div
+        className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+        style={{
+          animation: 'fadeInUp 0.8s ease-out 0.4s forwards',
+          opacity: 0,
+          transform: 'translateY(20px)'
+        }}
+      >
         <div className="p-6">
-          <blockquote className="text-sm italic mb-4 mt-40 text-gray-800 dark:text-gray-200">
+          <blockquote
+            className="text-sm italic mb-4 mt-40 text-gray-800 dark:text-gray-200"
+            style={{
+              animation: 'fadeInUp 0.8s ease-out 0.6s forwards',
+              opacity: 0
+            }}
+          >
             &quot;MIIDO se ha convertido en nuestra herramienta más valiosa para dar inteligencia a los datos que se levantan en el día a día de la operación.&quot;
           </blockquote>
-          <div className="flex items-center">
+          <div
+            className="flex items-center"
+            style={{
+              animation: 'fadeInUp 0.8s ease-out 0.7s forwards',
+              opacity: 0
+            }}
+          >
             <Image
               src="/taglespa.svg"
               alt="Felipe Sanchez"
               width={40}
               height={40}
-              className="rounded-full mr-3"
+              className="rounded-full mr-3 hover:scale-110 transition-transform duration-300"
             />
             <div>
               <h3 className="font-semibold text-sm text-gray-900 dark:text-white">Felipe Sanchez</h3>
@@ -1010,7 +1427,14 @@ const [scrollY, setScrollY] = useState(0);
       </div>
 
       {/* Tatiana */}
-      <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden">
+      <div
+        className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+        style={{
+          animation: 'fadeInUp 0.8s ease-out 0.6s forwards',
+          opacity: 0,
+          transform: 'translateY(20px)'
+        }}
+      >
         <div className="relative aspect-[2/4]">
           {playingVideo === 'Tatiana Morera' ? (
             <ReactPlayer
@@ -1029,7 +1453,7 @@ const [scrollY, setScrollY] = useState(0);
                 style={{ objectFit: 'cover' }}
               />
               <div
-                className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 cursor-pointer"
+                className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 cursor-pointer transform transition-transform duration-300 hover:scale-110"
                 onClick={() => handlePlayVideo('Tatiana Morera')}
               >
                 <PlayCircle className="w-12 h-12 text-white opacity-80" />
@@ -1056,25 +1480,46 @@ const [scrollY, setScrollY] = useState(0);
 
         <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50 dark:bg-gray-900">
   <div className="container px-4 md:px-6">
-    <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12 text-gray-800 dark:text-white">
+    <h2
+      className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12 text-gray-800 dark:text-white"
+      style={{
+        animation: 'fadeInUp 0.8s ease-out forwards',
+        opacity: 0,
+        transform: 'translateY(20px)'
+      }}
+    >
       Preguntas Frecuentes
     </h2>
     <div className="max-w-3xl mx-auto space-y-4">
       {qaPairs.map((pair, index) => (
-        <div key={index} className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+        <div
+          key={index}
+          className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
+          style={{
+            animation: `fadeInUp 0.8s ease-out ${0.2 + index * 0.1}s forwards`,
+            opacity: 0,
+            transform: 'translateY(20px)'
+          }}
+        >
           <button
             className="flex justify-between items-center w-full p-4 text-left bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             onClick={() => toggleQuestion(index)}
           >
             <span className="font-medium text-gray-800 dark:text-white">{pair.question}</span>
             {openQuestion === index ? (
-              <Minus className="h-5 w-5 text-gray-500 dark:text-gray-300" />
+              <Minus className="h-5 w-5 text-gray-500 dark:text-gray-300 transform transition-transform duration-300" />
             ) : (
-              <Plus className="h-5 w-5 text-gray-500 dark:text-gray-300" />
+              <Plus className="h-5 w-5 text-gray-500 dark:text-gray-300 transform transition-transform duration-300 hover:rotate-90" />
             )}
           </button>
           {openQuestion === index && (
-            <div className="p-4 bg-white dark:bg-gray-800">
+            <div
+              className="p-4 bg-white dark:bg-gray-800"
+              style={{
+                animation: 'fadeInDown 0.3s ease-out forwards',
+                opacity: 0
+              }}
+            >
               <p className="text-gray-600 dark:text-gray-300">{pair.answer}</p>
             </div>
           )}
@@ -1093,24 +1538,58 @@ const [scrollY, setScrollY] = useState(0);
           <div className="container px-2 md:px-6 ">
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
-                <h2 className=" pb-4 text-3xl font-bold tracking-tighter mb:px-60 sm:text-4xl md:text-5xl lg:text-6xl leading-[1.2] bg-gradient-to-r from-[#38507E] via-[#51A09A] to-[#C2DB64] bg-clip-text text-transparent ">Sube a tu gente al tren de la tecnología.</h2>
-                <p className="mx-auto max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400">
+                <h2
+                  className="pb-4 text-3xl font-bold tracking-tighter mb:px-60 sm:text-4xl md:text-5xl lg:text-6xl leading-[1.2] bg-gradient-to-r from-[#38507E] via-[#51A09A] to-[#C2DB64] bg-clip-text text-transparent"
+                  style={{
+                    animation: 'fadeInUp 0.8s ease-out forwards',
+                    opacity: 0,
+                    transform: 'translateY(20px)'
+                  }}
+                >
+                  Sube a tu gente al tren de la tecnología.
+                </h2>
+                <p
+                  className="mx-auto max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400"
+                  style={{
+                    animation: 'fadeInUp 0.8s ease-out 0.2s forwards',
+                    opacity: 0,
+                    transform: 'translateY(20px)'
+                  }}
+                >
                   Únete a una digitalización inclusiva y optimiza los procesos de tu compañía hoy mismo.
                 </p>
               </div>
-              <div className="w-full max-w-sm space-y-2">
+              <div
+                className="w-full max-w-sm space-y-2"
+                style={{
+                  animation: 'fadeInUp 0.8s ease-out 0.4s forwards',
+                  opacity: 0,
+                  transform: 'translateY(20px)'
+                }}
+              >
                 <form onSubmit={handleSubmit} className="flex space-x-2">
                   <Input
-                    className="max-w-lg flex-1"
+                    className="max-w-lg flex-1 focus:ring-2 focus:ring-[#51A09A] transition-all duration-300"
                     placeholder="Ingresa tu mail"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
                   />
-                  <Button type="submit">Comienza ahora</Button>
+                  <Button
+                    type="submit"
+                    className="bg-[#38507E] hover:bg-[#51A09A] transition-colors duration-300 transform hover:scale-105"
+                  >
+                    Comienza ahora
+                  </Button>
                 </form>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
+                <p
+                  className="text-xs text-gray-500 dark:text-gray-400"
+                  style={{
+                    animation: 'fadeInUp 0.8s ease-out 0.6s forwards',
+                    opacity: 0
+                  }}
+                >
                   1 mes gratis, sin tarjeta de crédito.
                 </p>
               </div>
@@ -1135,10 +1614,15 @@ const [scrollY, setScrollY] = useState(0);
   href="https://wa.me/56966163647"
   target="_blank"
   rel="noopener noreferrer"
-  className="fixed bottom-4 right-4 flex items-center bg-green-500 hover:bg-green-600 text-white rounded-full px-4 py-2 shadow-lg transition-all duration-300 ease-in-out z-50"
+  className="fixed bottom-4 right-4 flex items-center bg-green-500 hover:bg-green-600 text-white rounded-full px-4 py-2 shadow-lg transition-all duration-300 ease-in-out z-50 hover:scale-105 transform"
   aria-label="Chat on WhatsApp"
+  style={{
+    animation: 'fadeInUp 0.5s ease-out 1s forwards',
+    opacity: 0,
+    transform: 'translateY(20px)'
+  }}
 >
-  <MessageCircle size={20} className="mr-2" />
+  <MessageCircle size={20} className="mr-2 animate-pulse" />
   <span className="text-sm font-medium">¡Habla con nosotros!</span>
 </a>
 
@@ -1155,10 +1639,33 @@ const [scrollY, setScrollY] = useState(0);
             display: none !important;
           }
         }
+
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+        }
+
+        @keyframes pulse {
+          0%, 100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.05);
+          }
+        }
       `}</style>
 
       {/* Update image container styles */}
-      <div className="absolute -top-[30%] -right-[0%] hidden md:block overflow-hidden pointer-events-none">
+      <div
+        className="absolute -top-[30%] -right-[0%] hidden md:block overflow-hidden pointer-events-none"
+        style={{
+          animation: 'float 6s ease-in-out infinite'
+        }}
+      >
         <Image
           src="/trees-aerial.png"
           alt="Trees"
@@ -1170,9 +1677,14 @@ const [scrollY, setScrollY] = useState(0);
 
       {/* Add a toggle button for dark mode */}
       <button
-  className="fixed bottom-20 right-4 bg-gray-200 dark:bg-gray-700 p-3 rounded-full shadow-lg transition-all duration-300 ease-in-out z-50"
+  className="fixed bottom-20 right-4 bg-gray-200 dark:bg-gray-700 p-3 rounded-full shadow-lg transition-all duration-300 ease-in-out z-50 hover:scale-110 transform"
   onClick={toggleDarkMode}
   aria-label="Toggle dark mode"
+  style={{
+    animation: 'fadeInUp 0.5s ease-out 1.2s forwards',
+    opacity: 0,
+    transform: 'translateY(20px)'
+  }}
 >
   {isDark ? (
     <Sun className="h-6 w-6 text-yellow-500" />
@@ -1184,25 +1696,4 @@ const [scrollY, setScrollY] = useState(0);
   )
 }
 
-// Add these styles at the end of the file, before the last closing brace
-const styles = {
-  '@keyframes float-slow': {
-    '0%, 100%': { transform: 'translateY(0)' },
-    '50%': { transform: 'translateY(-10px)' },
-  },
-  '@keyframes float-medium': {
-    '0%, 100%': { transform: 'translateY(0)' },
-    '50%': { transform: 'translateY(-15px)' },
-  },
-  '@keyframes float-fast': {
-    '0%, 100%': { transform: 'translateY(0)' },
-    '50%': { transform: 'translateY(-20px)' },
-  },
-};
 
-// Add these classes to your Tailwind CSS configuration
-const customClasses = {
-  'animate-float-slow': 'animation: float-slow 6s ease-in-out infinite',
-  'animate-float-medium': 'animation: float-medium 4s ease-in-out infinite',
-  'animate-float-fast': 'animation: float-fast 3s ease-in-out infinite',
-};
