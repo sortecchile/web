@@ -64,8 +64,9 @@ export default function Component() {
   const newSectionRef = useRef<HTMLElement>(null)
   const contactRef = useRef<HTMLDivElement>(null)
   const aboutRef = useRef<HTMLDivElement>(null)
-  const howtRef = useRef<HTMLDivElement>(null)
+  // const howtRef = useRef<HTMLDivElement>(null) // Temporalmente comentado
   const casesRef = useRef<HTMLElement>(null)
+  const testimonialsRef = useRef<HTMLElement>(null)
   const [playingVideo, setPlayingVideo] = useState<string | null>(null)
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
@@ -99,15 +100,22 @@ export default function Component() {
     }
   }
 
-  const handleHowClick = () => {
-    if (howtRef.current) {
-      howtRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  }
+  // Temporalmente comentado
+  // const handleHowClick = () => {
+  //   if (howtRef.current) {
+  //     howtRef.current.scrollIntoView({ behavior: 'smooth' });
+  //   }
+  // }
 
   const handleCasesClick = () => {
     if (casesRef.current) {
       casesRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  const handleTestimonialsClick = () => {
+    if (testimonialsRef.current) {
+      testimonialsRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }
 
@@ -520,6 +528,28 @@ export default function Component() {
   // Si no está cargando, mostrar el contenido principal
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground overflow-x-hidden dark:bg-gray-900">
+      {/* Estilos CSS para el scrollbar personalizado de WhatsApp */}
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          .whatsapp-scroll::-webkit-scrollbar {
+            width: 4px;
+          }
+          .whatsapp-scroll::-webkit-scrollbar-track {
+            background: transparent;
+          }
+          .whatsapp-scroll::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+          }
+          .whatsapp-scroll::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+          }
+          .whatsapp-scroll {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+          }
+        `
+      }} />
 
       {showAlert && (
         <div className="fixed top-0 left-0 right-0 z-[9999] p-4 bg-green-500 dark:bg-green-600 text-white text-center transition-all duration-300 ease-in-out transform translate-y-0">
@@ -548,13 +578,16 @@ export default function Component() {
             <span className="sr-only">MIIDO</span>
           </Link>
           <nav className="hidden md:flex gap-4 sm:gap-6">
-            <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => handleNavClick(howtRef)}>
-              Cómo funciona?
+            <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => handleNavClick(demoRef)}>
+              ¿Cómo funciona?
             </button>
             {/* Temporalmente oculto hasta tener todos los videos */}
             {/* <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => handleNavClick(casesRef)}>
               Casos de uso
             </button> */}
+            <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => handleNavClick(testimonialsRef)}>
+              Testimonios
+            </button>
             <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => handleNavClick(aboutRef)}>
               Últimas publicaciones
             </button>
@@ -591,13 +624,16 @@ export default function Component() {
       <div className={`fixed inset-0 z-40 transform ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out md:hidden`}>
         <div className="bg-white h-full w-64 shadow-lg pt-20 px-4">
           <nav className="flex flex-col gap-4">
-            <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => { handleHowClick(); closeMobileMenu(); }}>
-              Cómo funciona?
+            <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => { handleNavClick(demoRef); closeMobileMenu(); }}>
+              ¿Cómo funciona?
             </button>
             {/* Temporalmente oculto hasta tener todos los videos */}
             {/* <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => { handleCasesClick(); closeMobileMenu(); }}>
               Casos de uso
             </button> */}
+            <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => { handleTestimonialsClick(); closeMobileMenu(); }}>
+              Testimonios
+            </button>
             <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => { handleaboutClick(); closeMobileMenu(); }}>
               Últimas publicaciones
             </button>
@@ -723,7 +759,7 @@ export default function Component() {
                     transform: animationsReady ? 'translateY(20px)' : 'none'
                   }}
                 >
-                  Vertical AI agents en agricultura
+                   AI agents en agricultura - MIIDO
                   <span className="animate-blink">|</span>
                 </h1>
                 <p
@@ -913,7 +949,8 @@ export default function Component() {
             </div>
           </div>
         </section>
-        <section ref={howtRef} className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
+        {/* SECCIÓN "CÓMO FUNCIONA" COMENTADA TEMPORALMENTE */}
+        {/* <section ref={howtRef} className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
           <div className="container px-4 md:px-6">
             <h2
               className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12 text-gray-900 dark:text-white"
@@ -975,7 +1012,7 @@ export default function Component() {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
         <section className="w-full py-12 md:py-24 lg:py-32 overflow-hidden" ref={demoRef}>
   <div className="container px-4 md:px-6">
     <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-6 text-gray-900 dark:text-white">
@@ -985,221 +1022,776 @@ export default function Component() {
       Todos los audios que se envíen en el día a día de la operación, lo ordenamos y mostramos automáticamente en el Dashboard.
     </p>
     <div className="flex flex-col lg:flex-row items-start justify-center gap-8">
-      {/* Simulación WhatsApp */}
-      <div className="w-full max-w-sm">
-        <div className="border-2 border-gray-200 dark:border-gray-700 rounded-[3rem] p-2 bg-white dark:bg-gray-900 shadow-xl">
-          <div className="bg-gray-100 dark:bg-gray-800 rounded-[2.5rem] p-2">
-            <div className="bg-white dark:bg-gray-900 rounded-[2rem] h-[500px] overflow-y-auto flex flex-col">
-              {/* Header */}
-              <div className="bg-gray-100 dark:bg-gray-800 p-4 flex items-center gap-2">
-                <div className="w-10 h-10 rounded-full overflow-hidden">
-                  <Image
-                    src="./logo2.png"
-                    alt="Company Logo"
-                    width={5}
-                    height={10}
-                    className="w-full h-full"
-                  />
+      {/* iPhone Real Auténtico - SE MANTIENE VISIBLE AL HACER SCROLL */}
+      <div className="w-full max-w-[300px] mx-auto lg:sticky lg:top-4 lg:self-start">
+        {/* Marco del iPhone - Negro mate como iPhone Pro */}
+        <div className="relative bg-black rounded-[3rem] p-2 shadow-2xl" style={{
+          background: 'linear-gradient(145deg, #1a1a1a 0%, #000000 50%, #1a1a1a 100%)',
+          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+          width: '300px',
+          height: '615px', // 300px * 2.05 = 615px (proporción real iPhone)
+          aspectRatio: '71.5/146.7' // Proporción exacta del iPhone real
+        }}>
+
+          {/* Pantalla del iPhone - Proporciones reales */}
+          <div className="relative bg-[#0b141a] rounded-[2.5rem] overflow-hidden w-full h-full">
+
+            {/* Barra de estado del iPhone - Proporcional */}
+            <div className="absolute top-0 left-0 right-0 h-10 flex justify-between items-center px-5 pt-1.5 z-30">
+              <div className="flex items-center gap-1">
+                <span className="text-white text-sm font-semibold">17:52</span>
+              </div>
+              <div className="flex items-center gap-1">
+                {/* Señal celular */}
+                <div className="flex gap-0.5">
+                  <div className="w-1 h-2 bg-white rounded-full"></div>
+                  <div className="w-1 h-2.5 bg-white rounded-full"></div>
+                  <div className="w-1 h-3 bg-white rounded-full"></div>
+                  <div className="w-1 h-3.5 bg-white rounded-full"></div>
                 </div>
-                <div className="flex items-center">
-                  <p className="font-semibold text-gray-900 dark:text-white">MIIDO</p>
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="w-5 h-5 text-blue-500 ml-1">
-                    <path fillRule="evenodd" d="M8.6 3.8A4.5 4.5 0 0112 2.3a4.5 4.5 0 013.4 1.5 4.5 4.5 0 013.5 1.3 4.5 4.5 0 011.3 3.5A4.5 4.5 0 0121.8 12a4.5 4.5 0 01-1.5 3.4 4.5 4.5 0 01-1.3 3.5 4.5 4.5 0 01-3.5 1.3A4.5 4.5 0 0112 21.8a4.5 4.5 0 01-3.4-1.5 4.5 4.5 0 01-3.5-1.3 4.5 4.5 0 01-1.3-3.5A4.5 4.5 0 012.3 12c0-1.4.6-2.6 1.5-3.4a4.5 4.5 0 011.3-3.5 4.5 4.5 0 013.5-1.3zM15.6 10.2a.75.75 0 10-1.2-.9l-3.2 4.5-1.6-1.6a.75.75 0 10-1.1 1.1l2.3 2.3a.75.75 0 001.1-.1l3.8-5.3z" clipRule="evenodd" />
+                {/* WiFi */}
+                <svg className="w-4 h-4 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.07 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/>
+                </svg>
+                {/* Batería */}
+                <div className="flex items-center ml-1">
+                  <div className="w-6 h-3 border border-white rounded-sm relative">
+                    <div className="w-4 h-1.5 bg-green-400 rounded-sm absolute top-0.5 left-0.5"></div>
+                  </div>
+                  <div className="w-0.5 h-1.5 bg-white rounded-r ml-0.5"></div>
+                </div>
+              </div>
+            </div>
+
+            {/* Isla dinámica - Proporcional */}
+            <div className="absolute top-1.5 left-1/2 transform -translate-x-1/2 w-24 h-6 bg-black rounded-full z-20 border border-gray-800"></div>
+
+            {/* Contenido de WhatsApp con fondo oscuro - ESTRUCTURA FIJA PARA BARRA SIEMPRE VISIBLE */}
+            <div className="bg-[#0b141a] flex-1 flex flex-col relative pt-10 h-full">
+              {/* WhatsApp Header - Exacto como la imagen */}
+             <div className="bg-[#202c33] px-3 py-2.5 flex items-center gap-3 h-14 z-20">
+                {/* Flecha de regreso */}
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+
+              
+
+                {/* Avatar con logo MIIDO más pequeño */}
+                <div className="w-7 h-7 rounded-full bg-white flex items-center justify-center">
+                  <svg className="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                   </svg>
                 </div>
-                <p className="text-xs text-gray-500 ml-auto">Online</p>
+
+                {/* Info del contacto - TODO EN UNA LÍNEA */}
+                <div className="flex-1 flex items-center gap-2 flex-nowrap whitespace-nowrap overflow-hidden">
+                  <span className="text-white text-base font-medium truncate">Bot MIIDO</span>
+                
+                </div>
               </div>
-              {/* Mensajes */}
-              <div className="flex-1 p-4 space-y-4">
-                {["Registro: cosechamos 500 kg en el cuartel 6 de cerezas",
-                  "Tareas: Terminada la tarea de poda",
-                  "Pregunta: Cuándo empezamos la cosecha la temporada anterior?",
-                  "Recordatorio: Hacer cambio de aceite Tractor",
-                  "Completado: Cosecha terminada"].map((message, index) => (
+              {/* Mensajes con fondo oscuro de WhatsApp - ALTURA FIJA PARA QUE LA BARRA SIEMPRE SE VEA */}
+              <div
+                className="flex-1 p-2.5 space-y-2.5 relative overflow-y-auto whatsapp-scroll"
+                style={{
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+                  backgroundColor: '#0b141a',
+                  height: 'calc(100% - 60px)' // Altura fija menos el espacio para la barra de escribir
+                }}
+              >
+                {/* Mensaje de texto del bot - Proporcional */}
+                <div className="flex justify-start mb-2.5">
+                  <div className="bg-[#202c33] rounded-lg p-2.5 max-w-[85%] relative">
+                    <div className="absolute left-[-6px] top-2.5 w-0 h-0 border-t-[6px] border-t-transparent border-r-[6px] border-r-[#202c33] border-b-[6px] border-b-transparent"></div>
+                    <div className="text-xs text-gray-300 mb-1">
+                      Puedes hacer preguntas sobre toda la data de tu empresa o registrar información de lo que necesites!
+                    </div>
+                    <div className="text-xs text-gray-300 mb-1.5">
+                      ¡Gracias por colaborar 🚜!
+                    </div>
+                    <div className="text-[10px] text-gray-500 mb-1.5">Powered by Miido</div>
+                    <div className="flex justify-end">
+                      <span className="text-[10px] text-gray-500">15:30</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Mensajes de audio verdes */}
+                {[
+                  { duration: "0:11", time: "15:31" },
+                  { duration: "0:11", time: "15:32" }
+                ].map((audio, index) => (
                   <div
                     key={index}
-                    className="flex items-center gap-2"
+                    className="flex justify-start mb-2.5"
                     style={{
-                      opacity: scrollProgress > index / 5 ? 1 : 0,
-                      transform: `translateY(${scrollProgress > index / 5 ? 0 : 20}px)`,
+                      opacity: scrollProgress > (index + 1) / 8 ? 1 : 0,
+                      transform: `translateY(${scrollProgress > (index + 1) / 8 ? 0 : 20}px)`,
                       transition: 'opacity 0.3s ease-out, transform 0.3s ease-out'
                     }}
                   >
-                    <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-                      <Mic className="h-4 w-4 text-white" />
-                    </div>
-                    <div className="bg-green-100 dark:bg-green-900 rounded-lg p-2 max-w-[80%] text-sm text-gray-900 dark:text-white">
-                      {message}
+                    <div className="bg-[#005c4b] rounded-lg p-2.5 max-w-[85%] relative">
+                      <div className="absolute left-[-6px] top-2.5 w-0 h-0 border-t-[6px] border-t-transparent border-r-[6px] border-r-[#005c4b] border-b-[6px] border-b-transparent"></div>
+
+                      <div className="flex items-center gap-2.5">
+                        {/* Avatar del usuario - Proporcional */}
+                        <div className="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center flex-shrink-0">
+                          <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                          </svg>
+                        </div>
+
+                        {/* Botón de play - Proporcional */}
+                        <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center flex-shrink-0">
+                          <svg className="w-3 h-3 text-[#005c4b] ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z"/>
+                          </svg>
+                        </div>
+
+                        {/* Barra de audio - Proporcional */}
+                        <div className="flex-1 flex items-center gap-1.5">
+                          <div className="flex items-center gap-0.5 flex-1">
+                            {[...Array(20)].map((_, i) => (
+                              <div
+                                key={i}
+                                className="w-0.5 bg-white/30 rounded-full"
+                                style={{
+                                  height: `${Math.random() * 8 + 2}px`,
+                                  backgroundColor: i < (scrollProgress * 20) ? 'white' : 'rgba(255,255,255,0.3)'
+                                }}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex justify-between items-center mt-1.5">
+                        <span className="text-[10px] text-white/70 font-mono">{audio.duration}</span>
+                        <div className="flex items-center gap-0.5">
+                          <span className="text-[10px] text-white/70">{audio.time}</span>
+                          <svg className="w-2.5 h-2.5 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                          </svg>
+                          <svg className="w-2.5 h-2.5 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                          </svg>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 ))}
+
+                {/* Mensaje de texto largo - Proporcional */}
+                <div
+                  className="flex justify-start mb-2.5"
+                  style={{
+                    opacity: scrollProgress > 3 / 8 ? 1 : 0,
+                    transform: `translateY(${scrollProgress > 3 / 8 ? 0 : 20}px)`,
+                    transition: 'opacity 0.3s ease-out, transform 0.3s ease-out'
+                  }}
+                >
+                  <div className="bg-[#202c33] rounded-lg p-2.5 max-w-[85%] relative">
+                    <div className="absolute left-[-6px] top-2.5 w-0 h-0 border-t-[6px] border-t-transparent border-r-[6px] border-r-[#202c33] border-b-[6px] border-b-transparent"></div>
+                    <div className="text-xs text-gray-300 mb-1.5">
+                      En 2023 cosechaste 12,450 kilos de cerezas y en 2024 has cosechado 15,280 kilos hasta ahora. ¡Un aumento del 23%! La temporada alta fue en diciembre con 3,200 kilos. ¿Quieres ver más detalles?
+                    </div>
+                    <div className="flex justify-end">
+                      <span className="text-[10px] text-gray-500">15:32</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Audio del usuario sobre poda */}
+                <div
+                  className="flex justify-start mb-2.5"
+                  style={{
+                    opacity: scrollProgress > 4 / 8 ? 1 : 0,
+                    transform: `translateY(${scrollProgress > 4 / 8 ? 0 : 20}px)`,
+                    transition: 'opacity 0.3s ease-out, transform 0.3s ease-out'
+                  }}
+                >
+                  <div className="bg-[#005c4b] rounded-lg p-2.5 max-w-[85%] relative">
+                    <div className="absolute left-[-6px] top-2.5 w-0 h-0 border-t-[6px] border-t-transparent border-r-[6px] border-r-[#005c4b] border-b-[6px] border-b-transparent"></div>
+
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                      </div>
+
+                      <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg className="w-3 h-3 text-[#005c4b] ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M8 5v14l11-7z"/>
+                        </svg>
+                      </div>
+
+                      <div className="flex-1 flex items-center gap-1.5">
+                        <div className="flex items-center gap-0.5 flex-1">
+                          {[...Array(20)].map((_, i) => (
+                            <div
+                              key={i}
+                              className="w-0.5 bg-white/30 rounded-full"
+                              style={{
+                                height: `${Math.random() * 8 + 2}px`,
+                                backgroundColor: i < (scrollProgress * 20) ? 'white' : 'rgba(255,255,255,0.3)'
+                              }}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex justify-between items-center mt-1.5">
+                      <span className="text-[10px] text-white/70 font-mono">0:08</span>
+                      <div className="flex items-center gap-0.5">
+                        <span className="text-[10px] text-white/70">15:33</span>
+                        <svg className="w-2.5 h-2.5 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                        </svg>
+                        <svg className="w-2.5 h-2.5 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Respuesta del bot sobre poda */}
+                <div
+                  className="flex justify-start mb-2.5"
+                  style={{
+                    opacity: scrollProgress > 5 / 8 ? 1 : 0,
+                    transform: `translateY(${scrollProgress > 5 / 8 ? 0 : 20}px)`,
+                    transition: 'opacity 0.3s ease-out, transform 0.3s ease-out'
+                  }}
+                >
+                  <div className="bg-[#202c33] rounded-lg p-2.5 max-w-[85%] relative">
+                    <div className="absolute left-[-6px] top-2.5 w-0 h-0 border-t-[6px] border-t-transparent border-r-[6px] border-r-[#202c33] border-b-[6px] border-b-transparent"></div>
+                    <div className="text-xs text-gray-300 mb-1.5">
+                      La poda en 40 hectáreas con 15 personas ha sido registrada con éxito, ¿deseas que te ayude con algo más?
+                    </div>
+                    <div className="flex justify-end">
+                      <span className="text-[10px] text-gray-500">15:34</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Audio del usuario sobre maquinaria */}
+                <div
+                  className="flex justify-start mb-2.5"
+                  style={{
+                    opacity: scrollProgress > 6 / 8 ? 1 : 0,
+                    transform: `translateY(${scrollProgress > 6 / 8 ? 0 : 20}px)`,
+                    transition: 'opacity 0.3s ease-out, transform 0.3s ease-out'
+                  }}
+                >
+                  <div className="bg-[#005c4b] rounded-lg p-2.5 max-w-[85%] relative">
+                    <div className="absolute left-[-6px] top-2.5 w-0 h-0 border-t-[6px] border-t-transparent border-r-[6px] border-r-[#005c4b] border-b-[6px] border-b-transparent"></div>
+
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-6 h-6 bg-gray-600 rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                      </div>
+
+                      <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg className="w-3 h-3 text-[#005c4b] ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M8 5v14l11-7z"/>
+                        </svg>
+                      </div>
+
+                      <div className="flex-1 flex items-center gap-1.5">
+                        <div className="flex items-center gap-0.5 flex-1">
+                          {[...Array(20)].map((_, i) => (
+                            <div
+                              key={i}
+                              className="w-0.5 bg-white/30 rounded-full"
+                              style={{
+                                height: `${Math.random() * 8 + 2}px`,
+                                backgroundColor: i < (scrollProgress * 20) ? 'white' : 'rgba(255,255,255,0.3)'
+                              }}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex justify-between items-center mt-1.5">
+                      <span className="text-[10px] text-white/70 font-mono">0:12</span>
+                      <div className="flex items-center gap-0.5">
+                        <span className="text-[10px] text-white/70">15:35</span>
+                        <svg className="w-2.5 h-2.5 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                        </svg>
+                        <svg className="w-2.5 h-2.5 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Respuesta del bot sobre maquinaria */}
+                <div
+                  className="flex justify-start mb-2.5"
+                  style={{
+                    opacity: scrollProgress > 7 / 8 ? 1 : 0,
+                    transform: `translateY(${scrollProgress > 7 / 8 ? 0 : 20}px)`,
+                    transition: 'opacity 0.3s ease-out, transform 0.3s ease-out'
+                  }}
+                >
+                  <div className="bg-[#202c33] rounded-lg p-2.5 max-w-[85%] relative">
+                    <div className="absolute left-[-6px] top-2.5 w-0 h-0 border-t-[6px] border-t-transparent border-r-[6px] border-r-[#202c33] border-b-[6px] border-b-transparent"></div>
+                    <div className="text-xs text-gray-300 mb-1.5">
+                      Se ha registrado con éxito la falla de la maquinaria 125, en el cuartel 3 por rueda pinchada. ¿Quieres ver qué máquinas tienes con fallas y cuáles están reparadas?
+                    </div>
+                    <div className="flex justify-end">
+                      <span className="text-[10px] text-gray-500">15:36</span>
+                    </div>
+                  </div>
+                </div>
               </div>
-              {/* Input */}
-              <div className="bg-gray-100 dark:bg-gray-800 p-4 flex items-center gap-2">
-                <Input className="flex-1 dark:bg-gray-700 dark:text-white" placeholder="Escribe un mensaje" />
-                <Button size="icon">
-                  <Send className="h-4 w-4" />
-                  <span className="sr-only">Enviar mensaje</span>
-                </Button>
+              {/* Input estilo WhatsApp modo oscuro - POSICIÓN ABSOLUTA SIEMPRE EN EL FONDO */}
+              <div className="bg-[#202c33] p-2.5 flex items-center gap-2.5 absolute bottom-0 left-0 right-0 z-20">
+                {/* Botón de más - Proporcional */}
+                <button className="text-gray-400 hover:text-gray-300">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                  </svg>
+                </button>
+
+                {/* Input de mensaje - Proporcional */}
+                <div className="flex-1 bg-[#2a3942] rounded-full px-3 py-1.5 flex items-center gap-1.5">
+                  <input
+                    type="text"
+                    placeholder="Escribe un mensaje"
+                    className="flex-1 outline-none text-xs bg-transparent text-white placeholder-gray-400"
+                  />
+                </div>
+
+                {/* Botón de cámara - Proporcional */}
+                <button className="text-gray-400 hover:text-gray-300">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 15c1.66 0 2.99-1.34 2.99-3L15 6c0-1.66-1.34-3-3-3S9 4.34 9 6v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 15 6.7 12H5c0 3.41 2.72 6.23 6 6.72V21h2v-2.28c3.28-.49 6-3.31 6-6.72h-1.7z"/>
+                  </svg>
+                </button>
+
+                {/* Botón de micrófono - Proporcional */}
+                <button className="w-10 h-10 bg-[#00a884] rounded-full flex items-center justify-center text-white hover:bg-[#008f72] transition-colors">
+                  <Mic className="h-4 w-4" />
+                </button>
               </div>
             </div>
+
+            {/* Indicador de inicio del iPhone */}
+            <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-white rounded-full opacity-60"></div>
           </div>
         </div>
       </div>
-              {/* Dashboards / Indicadores */}
+              {/* Dashboards / Indicadores - INSIGHTS OPERACIONALES */}
               <div className="w-full max-w-3xl space-y-8">
-                 {/* Diagrama */}
+                 {/* Insights en Tiempo Real */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg h-[180px]">
-                    <div className="flex justify-between items-center mb-2">
-                      {editingTitle === 'diagram' ? (
-                        <input
-                          type="text"
-                          value={titles.diagram}
-                          onChange={handleTitleChange}
-                          onBlur={handleTitleBlur}
-                          className="text-base font-semibold bg-transparent border-b border-gray-300 focus:outline-none focus:border-blue-500"
-                          autoFocus
-                        />
-                      ) : (
-                        <h3 className="text-base font-semibold flex items-center gap-2 dark:text-white" onClick={() => handleTitleClick('diagram')} >
-                          {titles.diagram}
-                          <Edit2 className="w-4 h-4 text-gray-400" />
-                        </h3>
-                      )}
-                      <MoreHorizontal className="text-gray-400 h-4 w-4" />
-                    </div>
-                    <svg width="100%" height="130" viewBox="0 0 200 130">
-                      <rect x="30" y={130 - 40 * scrollProgress} width="40" height={40 * scrollProgress} fill="#ff4d4f" />
-                      <rect x="100" y={130 - 80 * scrollProgress} width="40" height={80 * scrollProgress} fill="#52c41a" />
-                      <text x="50" y="125" textAnchor="middle" fill="black" fontSize="12">{Math.round(scrollProgress * 1)}</text>
-                      <text x="120" y="125" textAnchor="middle" fill="black" fontSize="12">{Math.round(scrollProgress * 3)}</text>
-                      <text x="50" y="140" textAnchor="middle" fill="black" fontSize="10">Detenido</text>
-                      <text x="120" y="140" textAnchor="middle" fill="black" fontSize="10">Listo</text>
-                      <line x1="0" y1="130" x2="200" y2="130" stroke="#e5e7eb" strokeWidth="1" />
-                      <line x1="0" y1="0" x2="0" y2="130" stroke="#e5e7eb" strokeWidth="1" />
-                      {[0, 2, 4].map((value, index) => (
-                        <text key={index} x="-5" y={130 - value * 32.5} textAnchor="end" fill="black" fontSize="10">{value}</text>
-                      ))}
-                    </svg>
-                  </div>
-                  <div className=" bg-white dark:bg-gray-800 p-3 rounded-lg shadow-lg h-[180px]">
-                    <div className="flex justify-between items-center">
-                      {editingTitle === 'totalCost' ? (
-                        <input
-                          type="text"
-                          value={titles.totalCost}
-                          onChange={handleTitleChange}
-                          onBlur={handleTitleBlur}
-                          className="text-base font-semibold bg-transparent border-b border-gray-300 focus:outline-none focus:border-blue-500"
-                          autoFocus
-                        />
-                      ) : (
-                        <h3 className="text-base font-semibold flex items-center gap-2 dark:text-white" onClick={() => handleTitleClick('totalCost')} >
-                          {titles.totalCost}
-                          <Edit2 className="w-4 h-4 text-gray-400" />
-                        </h3>
-                      )}
-                      <MoreHorizontal className="text-gray-400 h-4 w-4" />
-                    </div>
-                    <div className="flex items-center justify-center flex-1">
-                      <span className="text-4xl font-bold text-gray-900 dark:text-white justify-center">${Math.round(scrollProgress * 2100)}</span>
-                    </div>
-                  </div>
-                  <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg md:col-span-2">
-                    <div className="flex justify-between items-center mb-4">
-                      {editingTitle === 'harvest' ? (
-                        <input
-                          type="text"
-                          value={titles.harvest}
-                          onChange={handleTitleChange}
-                          onBlur={handleTitleBlur}
-                          className="text-lg font-semibold bg-transparent border-b border-gray-300 focus:outline-none focus:border-blue-500"
-                          autoFocus
-                        />
-                      ) : (
-                        <h3 className="text-lg font-semibold flex items-center gap-2 dar:text-white" onClick={() => handleTitleClick('harvest')}>
-                          {titles.harvest}
-                          <Edit2 className="w-4 h-4 text-gray-400" />
-                        </h3>
-                      )}
-                      <MoreHorizontal className="text-gray-400" />
-                    </div>
-                    <div className="relative h-8 bg-gray-200 rounded-full overflow-hidden mb-2">
-                      <div
-                        className="absolute top-0 left-0 h-full bg-green-500"
-                        style={{ width: `${42.9 * scrollProgress}%` }}
-                      ></div>
-                      <div
-                        className="absolute top-0 left-0 h-full bg-red-500"
-                        style={{ width: `${5 * scrollProgress}%`, left: `${42.9 * scrollProgress}%` }}
-                      ></div>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="flex items-center"><span className="w-3 h-3 bg-green-500 rounded-full mr-1"></span> Listo</span>
-                      <span className="flex items-center"><span className="w-3 h-3 bg-red-500 rounded-full mr-1"></span> Detenido</span>
-                      <span className="flex items-center"><span className="w-3 h-3 bg-gray-500 rounded-full mr-1"></span> No iniciado</span>
-                    </div>
-                    <div className="mt-2 text-right text-lg font-semibold dark:text-white">{(42.9 * scrollProgress).toFixed(1)}% Listo</div>
-                  </div>
-                  <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg md:col-span-2 overflow-x-auto">
-                    <div className="flex justify-between items-center mb-4 min-w-[600px]">
-                      {editingTitle === 'gantt' ? (
-                        <input
-                          type="text"
-                          value={titles.gantt}
-                          onChange={handleTitleChange}
-                          onBlur={handleTitleBlur}
-                          className="text-lg font-semibold bg-transparent border-b border-gray-300 focus:outline-none focus:border-blue-500"
-                          autoFocus
-                        />
-                      ) : (
-                        <h3 className="text-lg font-semibold flex items-center gap-2 dark:text-white" onClick={() => handleTitleClick('gantt')} >
-                          {titles.gantt}
-                          <Edit2 className="w-4 h-4 text-gray-400" />
-                        </h3>
-                      )}
-                      <div className="flex items-center space-x-2">
-                        <Button variant="outline" size="sm">Referencia</Button>
-                        <Button variant="outline" size="sm">Ajuste automático</Button>
-                        <select className="bg-white text-black rounded px-2 py-1 text-sm border border-gray-300">
-                          <option>Semanas</option>
-                        </select>
-                        <Button variant="outline" size="icon" className="w-8 h-8 p-0">
-                          <ChevronLeft className="h-4 w-4" />
-                        </Button>
-                        <Button variant="outline" size="icon" className="w-8 h-8 p-0">
-                          <ChevronRight className="h-4 w-4" />
-                        </Button>
-                        <MoreHorizontal className="text-gray-400" />
+                  {/* Widget: Gráfico de Barras - Estado de Maquinaria */}
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 h-[220px]">
+                    <div className="flex justify-between items-center mb-3">
+                      <h3 className="text-sm font-semibold dark:text-white text-gray-700">Estado de Maquinaria</h3>
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                        <span className="text-xs text-gray-500">En vivo</span>
                       </div>
                     </div>
-                    <svg width={ganttChartWidth} height={ganttChartHeight} viewBox={`0 0 ${ganttChartWidth} ${ganttChartHeight}`}>
-                      {weeks.map((week, index) => (
-                        <g key={week.name} transform={`translate(${index * weekWidth}, 0)`}>
-                          <rect x="0" y="0" width={weekWidth} height="30" fill="#f3f4f6" />
-                          <text x={weekWidth / 2} y="20" textAnchor="middle" fill="black" fontSize="12">
-                            {week.name}
-                          </text>
-                        </g>
-                      ))}
-                      {ganttData.map((task, index) => (
-                        <g key={task.task} transform={`translate(0, ${40 + index * taskHeight})`}>
-                          <text x="-5" y={taskHeight / 2} textAnchor="end" fill="black" fontSize="12" dominantBaseline="middle">
-                            {task.task}
-                          </text>
-                          <rect
-                            x={getTaskPosition(task.start)}
-                            y="0"
-                            width={getTaskWidth(task.start, task.end) * scrollProgress}
-                            height={taskHeight - 10}
-                            fill="#3b82f6"
-                            rx="5"
-                            ry="5"
+
+                    {/* Gráfico de Barras */}
+                    <div className="h-32 flex items-end justify-center gap-6 mb-3 px-4">
+                      {/* Barra Operativas */}
+                      <div className="flex flex-col items-center">
+                        <div className="relative h-24 w-8 bg-gray-200 rounded-t">
+                          <div
+                            className="absolute bottom-0 w-full bg-green-500 rounded-t transition-all duration-1000 ease-out"
+                            style={{ height: `${Math.max(scrollProgress * 80, 8)}%` }}
+                          ></div>
+                        </div>
+                        <span className="text-xs text-gray-600 dark:text-gray-400 mt-1">Operativas</span>
+                        <span className="text-sm font-bold text-green-600">{Math.round(scrollProgress * 12)}</span>
+                      </div>
+
+                      {/* Barra Con Fallas */}
+                      <div className="flex flex-col items-center">
+                        <div className="relative h-24 w-8 bg-gray-200 rounded-t">
+                          <div
+                            className="absolute bottom-0 w-full bg-red-500 rounded-t transition-all duration-1000 ease-out delay-300"
+                            style={{ height: `${Math.max(scrollProgress * 25, 8)}%` }}
+                          ></div>
+                        </div>
+                        <span className="text-xs text-gray-600 dark:text-gray-400 mt-1">Con Fallas</span>
+                        <span className="text-sm font-bold text-red-600">{Math.round(scrollProgress * 3)}</span>
+                      </div>
+
+                      {/* Barra Mantenimiento */}
+                      <div className="flex flex-col items-center">
+                        <div className="relative h-24 w-8 bg-gray-200 rounded-t">
+                          <div
+                            className="absolute bottom-0 w-full bg-yellow-500 rounded-t transition-all duration-1000 ease-out delay-500"
+                            style={{ height: `${Math.max(scrollProgress * 40, 8)}%` }}
+                          ></div>
+                        </div>
+                        <span className="text-xs text-gray-600 dark:text-gray-400 mt-1">Mantenim.</span>
+                        <span className="text-sm font-bold text-yellow-600">{Math.round(scrollProgress * 2)}</span>
+                      </div>
+                    </div>
+
+                    {/* Indicador de última actualización */}
+                    <div className="text-xs text-gray-500 text-center">
+                      Actualizado hace {Math.round(scrollProgress * 2)} min
+                    </div>
+                  </div>
+                  {/* Widget: Gráfico de Dona - Distribución de Cultivos */}
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 h-[220px]">
+                    <div className="flex justify-between items-center mb-3">
+                      <h3 className="text-sm font-semibold dark:text-white text-gray-700">Distribución de Cultivos</h3>
+                      <div className="flex items-center gap-1">
+                        <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                        <span className="text-xs text-green-600">{Math.round(scrollProgress * 450)} hectáreas</span>
+                      </div>
+                    </div>
+
+                    {/* Gráfico de Dona */}
+                    <div className="flex items-center justify-center mb-3">
+                      <div className="relative w-24 h-24">
+                        <svg className="w-24 h-24 transform -rotate-90" viewBox="0 0 100 100">
+                          {/* Círculo de fondo */}
+                          <circle cx="50" cy="50" r="40" fill="none" stroke="#e5e7eb" strokeWidth="8"/>
+
+                          {/* Paltas - Verde */}
+                          <circle
+                            cx="50" cy="50" r="40" fill="none"
+                            stroke="#22c55e" strokeWidth="8"
+                            strokeDasharray={`${Math.round(scrollProgress * 180 / 450 * 251)} 251`}
+                            strokeDashoffset="0"
+                            className="transition-all duration-1000 ease-out"
                           />
-                        </g>
-                      ))}
-                    </svg>
+
+                          {/* Arándanos - Azul */}
+                          <circle
+                            cx="50" cy="50" r="40" fill="none"
+                            stroke="#3b82f6" strokeWidth="8"
+                            strokeDasharray={`${Math.round(scrollProgress * 150 / 450 * 251)} 251`}
+                            strokeDashoffset={`-${Math.round(scrollProgress * 180 / 450 * 251)}`}
+                            className="transition-all duration-1000 ease-out delay-300"
+                          />
+
+                          {/* Cerezas - Rojo */}
+                          <circle
+                            cx="50" cy="50" r="40" fill="none"
+                            stroke="#ef4444" strokeWidth="8"
+                            strokeDasharray={`${Math.round(scrollProgress * 120 / 450 * 251)} 251`}
+                            strokeDashoffset={`-${Math.round(scrollProgress * 330 / 450 * 251)}`}
+                            className="transition-all duration-1000 ease-out delay-500"
+                          />
+                        </svg>
+
+                        {/* Número central */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="text-center">
+                            <div className="text-lg font-bold text-gray-900 dark:text-white">{Math.round(scrollProgress * 450)}</div>
+                            <div className="text-xs text-gray-500">hectáreas</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Leyenda */}
+                    <div className="space-y-1 text-xs">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                          <span className="text-gray-600 dark:text-gray-400">Paltas</span>
+                        </div>
+                        <span className="font-medium">{Math.round(scrollProgress * 180)} ha</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                          <span className="text-gray-600 dark:text-gray-400">Arándanos</span>
+                        </div>
+                        <span className="font-medium">{Math.round(scrollProgress * 150)} ha</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                          <span className="text-gray-600 dark:text-gray-400">Cerezas</span>
+                        </div>
+                        <span className="font-medium">{Math.round(scrollProgress * 120)} ha</span>
+                      </div>
+                    </div>
+                  </div>
+                  {/* Widget: Gráfico de Líneas - Total Kilos Exportados por Semana */}
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 md:col-span-2">
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-sm font-semibold dark:text-white text-gray-700">Total kilos exportados por semana</h3>
+                      <div className="flex items-center gap-4 text-xs">
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 bg-cyan-500 rounded-full"></div>
+                          <span className="text-gray-500">Total Kg Exp</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                          <span className="text-gray-500">Promedio Total US</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                          <span className="text-gray-500">Mínimo Total US</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                          <span className="text-gray-500">Máximo Total US</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Gráfico de Líneas Múltiples */}
+                    <div className="h-40 mb-4">
+                      <svg width="100%" height="100%" viewBox="0 0 500 160" className="overflow-visible">
+                        {/* Grid lines */}
+                        <defs>
+                          <pattern id="exportGrid" width="50" height="32" patternUnits="userSpaceOnUse">
+                            <path d="M 50 0 L 0 0 0 32" fill="none" stroke="#e5e7eb" strokeWidth="0.5"/>
+                          </pattern>
+                        </defs>
+                        <rect width="100%" height="100%" fill="url(#exportGrid)" />
+
+                        {/* Eje Y - Labels */}
+                        <text x="15" y="20" fill="#6b7280" fontSize="10">350,000</text>
+                        <text x="15" y="50" fill="#6b7280" fontSize="10">250,000</text>
+                        <text x="15" y="80" fill="#6b7280" fontSize="10">150,000</text>
+                        <text x="15" y="110" fill="#6b7280" fontSize="10">50,000</text>
+                        <text x="15" y="140" fill="#6b7280" fontSize="10">0</text>
+
+                        {/* Eje X - Semanas */}
+                        <text x="50" y="155" fill="#6b7280" fontSize="10">46</text>
+                        <text x="150" y="155" fill="#6b7280" fontSize="10">47</text>
+                        <text x="250" y="155" fill="#6b7280" fontSize="10">48</text>
+                        <text x="350" y="155" fill="#6b7280" fontSize="10">49</text>
+                        <text x="450" y="155" fill="#6b7280" fontSize="10">52</text>
+
+                        {/* Línea Total Kg Exp (Cyan) - Línea principal que sube dramáticamente */}
+                        <polyline
+                          fill="none"
+                          stroke="#06b6d4"
+                          strokeWidth="3"
+                          strokeDasharray="800"
+                          strokeDashoffset={800 - (scrollProgress * 800)}
+                          points="50,120 100,110 150,100 200,80 250,60 300,50 350,45 400,25 450,15"
+                          className="transition-all duration-1500 ease-out"
+                        />
+
+                        {/* Línea Máximo Total US (Amarillo) */}
+                        <polyline
+                          fill="none"
+                          stroke="#eab308"
+                          strokeWidth="2"
+                          strokeDasharray="700"
+                          strokeDashoffset={700 - (scrollProgress * 700)}
+                          points="50,130 100,125 150,120 200,115 250,110 300,105 350,100 400,95 450,90"
+                          className="transition-all duration-1500 ease-out"
+                          style={{ transitionDelay: `${300}ms` }}
+                        />
+
+                        {/* Línea Promedio Total US (Rojo) */}
+                        <polyline
+                          fill="none"
+                          stroke="#ef4444"
+                          strokeWidth="2"
+                          strokeDasharray="650"
+                          strokeDashoffset={650 - (scrollProgress * 650)}
+                          points="50,135 100,133 150,130 200,128 250,125 300,123 350,120 400,118 450,115"
+                          className="transition-all duration-1500 ease-out"
+                          style={{ transitionDelay: `${500}ms` }}
+                        />
+
+                        {/* Línea Mínimo Total US (Azul) */}
+                        <polyline
+                          fill="none"
+                          stroke="#3b82f6"
+                          strokeWidth="2"
+                          strokeDasharray="600"
+                          strokeDashoffset={600 - (scrollProgress * 600)}
+                          points="50,140 100,138 150,135 200,133 250,130 300,128 350,125 400,123 450,120"
+                          className="transition-all duration-1500 ease-out"
+                          style={{ transitionDelay: `${700}ms` }}
+                        />
+
+                        {/* Puntos de datos finales */}
+                        {scrollProgress > 0.8 && (
+                          <>
+                            <circle cx="450" cy="15" r="4" fill="#06b6d4" className="animate-pulse"/>
+                            <circle cx="450" cy="90" r="3" fill="#eab308"/>
+                            <circle cx="450" cy="115" r="3" fill="#ef4444"/>
+                            <circle cx="450" cy="120" r="3" fill="#3b82f6"/>
+                          </>
+                        )}
+                      </svg>
+                    </div>
+
+                    {/* Métricas clave */}
+                    <div className="grid grid-cols-3 gap-4 text-center">
+                      <div className="p-2 bg-cyan-50 dark:bg-cyan-900/20 rounded">
+                        <div className="text-lg font-bold text-cyan-600">{Math.round(scrollProgress * 320000).toLocaleString()}</div>
+                        <div className="text-xs text-gray-600 dark:text-gray-400">Kg exportados esta semana</div>
+                      </div>
+                      <div className="p-2 bg-green-50 dark:bg-green-900/20 rounded">
+                        <div className="text-lg font-bold text-green-600">+{Math.round(scrollProgress * 180)}%</div>
+                        <div className="text-xs text-gray-600 dark:text-gray-400">Crecimiento vs sem. anterior</div>
+                      </div>
+                      <div className="p-2 bg-blue-50 dark:bg-blue-900/20 rounded">
+                        <div className="text-lg font-bold text-blue-600">${Math.round(scrollProgress * 2.8 * 100)/100}</div>
+                        <div className="text-xs text-gray-600 dark:text-gray-400">Precio promedio por kg</div>
+                      </div>
+                    </div>
+                  </div>
+                  {/* Widget: Stress de Plantas por Huerto */}
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700">
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-sm font-semibold dark:text-white text-gray-700">Stress de Plantas por Huerto</h3>
+                      <div className="flex items-center gap-1">
+                        <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                        <span className="text-xs text-red-600">Alerta activa</span>
+                      </div>
+                    </div>
+
+                    {/* Gráfico de Barras Horizontales */}
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs text-gray-600 dark:text-gray-400 w-16">Huerto A</span>
+                        <div className="flex-1 bg-gray-200 rounded-full h-3">
+                          <div
+                            className="bg-red-500 h-3 rounded-full transition-all duration-1000 ease-out"
+                            style={{ width: `${scrollProgress * 85}%` }}
+                          ></div>
+                        </div>
+                        <span className="text-xs font-medium text-red-600">{Math.round(scrollProgress * 85)}%</span>
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs text-gray-600 dark:text-gray-400 w-16">Huerto B</span>
+                        <div className="flex-1 bg-gray-200 rounded-full h-3">
+                          <div
+                            className="bg-yellow-500 h-3 rounded-full transition-all duration-1000 ease-out delay-200"
+                            style={{ width: `${scrollProgress * 65}%` }}
+                          ></div>
+                        </div>
+                        <span className="text-xs font-medium text-yellow-600">{Math.round(scrollProgress * 65)}%</span>
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs text-gray-600 dark:text-gray-400 w-16">Huerto C</span>
+                        <div className="flex-1 bg-gray-200 rounded-full h-3">
+                          <div
+                            className="bg-green-500 h-3 rounded-full transition-all duration-1000 ease-out delay-400"
+                            style={{ width: `${scrollProgress * 35}%` }}
+                          ></div>
+                        </div>
+                        <span className="text-xs font-medium text-green-600">{Math.round(scrollProgress * 35)}%</span>
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs text-gray-600 dark:text-gray-400 w-16">Huerto D</span>
+                        <div className="flex-1 bg-gray-200 rounded-full h-3">
+                          <div
+                            className="bg-green-500 h-3 rounded-full transition-all duration-1000 ease-out delay-600"
+                            style={{ width: `${scrollProgress * 28}%` }}
+                          ></div>
+                        </div>
+                        <span className="text-xs font-medium text-green-600">{Math.round(scrollProgress * 28)}%</span>
+                      </div>
+                    </div>
+
+                    {/* Leyenda de niveles de stress */}
+                    <div className="mt-4 flex justify-between text-xs">
+                      <div className="flex items-center gap-1">
+                        <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                        <span className="text-gray-600 dark:text-gray-400">Bajo (&lt;40%)</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                        <span className="text-gray-600 dark:text-gray-400">Medio (40-70%)</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                        <span className="text-gray-600 dark:text-gray-400">Alto (&gt;70%)</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Widget: Eficiencia de Labores por Persona */}
+                  <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700">
+                    <div className="flex justify-between items-center mb-4">
+                      <h3 className="text-sm font-semibold dark:text-white text-gray-700">Eficiencia de Labores por Persona</h3>
+                      <span className="text-xs text-gray-500">Última semana</span>
+                    </div>
+
+                    {/* Lista de trabajadores con eficiencia */}
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                          <span className="text-xs font-medium text-green-700">JP</span>
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex justify-between items-center mb-1">
+                            <span className="text-xs font-medium text-gray-700 dark:text-gray-300">Juan Pérez</span>
+                            <span className="text-xs font-bold text-green-600">{Math.round(scrollProgress * 94)}%</span>
+                          </div>
+                          <div className="w-full bg-gray-200 rounded-full h-2">
+                            <div
+                              className="bg-green-500 h-2 rounded-full transition-all duration-1000 ease-out"
+                              style={{ width: `${scrollProgress * 94}%` }}
+                            ></div>
+                          </div>
+                          <span className="text-xs text-gray-500">Cosecha - {Math.round(scrollProgress * 850)} kg/día</span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-3">
+                        <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center">
+                          <span className="text-xs font-medium text-blue-700">MG</span>
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex justify-between items-center mb-1">
+                            <span className="text-xs font-medium text-gray-700 dark:text-gray-300">María González</span>
+                            <span className="text-xs font-bold text-blue-600">{Math.round(scrollProgress * 87)}%</span>
+                          </div>
+                          <div className="w-full bg-gray-200 rounded-full h-2">
+                            <div
+                              className="bg-blue-500 h-2 rounded-full transition-all duration-1000 ease-out delay-200"
+                              style={{ width: `${scrollProgress * 87}%` }}
+                            ></div>
+                          </div>
+                          <span className="text-xs text-gray-500">Poda - {Math.round(scrollProgress * 45)} árboles/día</span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-3">
+                        <div className="w-6 h-6 bg-yellow-100 rounded-full flex items-center justify-center">
+                          <span className="text-xs font-medium text-yellow-700">CR</span>
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex justify-between items-center mb-1">
+                            <span className="text-xs font-medium text-gray-700 dark:text-gray-300">Carlos Ruiz</span>
+                            <span className="text-xs font-bold text-yellow-600">{Math.round(scrollProgress * 72)}%</span>
+                          </div>
+                          <div className="w-full bg-gray-200 rounded-full h-2">
+                            <div
+                              className="bg-yellow-500 h-2 rounded-full transition-all duration-1000 ease-out delay-400"
+                              style={{ width: `${scrollProgress * 72}%` }}
+                            ></div>
+                          </div>
+                          <span className="text-xs text-gray-500">Riego - {Math.round(scrollProgress * 12)} ha/día</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1262,61 +1854,228 @@ export default function Component() {
       Haz preguntas sobre la data levantada
     </h2>
     <p className="mb-6 text-gray-500 dark:text-gray-400 text-center">Puedes hacer preguntas en el mismo chat, sobre toda la información que las personas están levantando. ¡Mira este ejemplo!</p>
-    <div className="flex flex-col lg:flex-row items-start justify-center gap-8 ">
-      <div className="w-full max-w-sm ">
-        <div className="border-2 border-gray-200 rounded-[3rem] p-2 bg-white shadow-xl dark:bg-gray-800">
-          <div className="bg-gray-100 rounded-[2.5rem] p-2 dark:bg-gray-800">
-            <div className="bg-white dark:bg-gray-900 rounded-[2rem] h-[500px] overflow-y-auto flex flex-col">
-              <div className="bg-gray-100 p-4 flex items-center gap-2 dark:bg-gray-800 ">
-                <div className="w-10 h-10 rounded-full overflow-hidden">
-                  <Image
-                    src="./logo2.svg"
-                    alt="Company Logo"
-                    width={5}
-                    height={10}
-                    className="w-full h-full"
-                  />
+    <div className="flex flex-col lg:flex-row items-start justify-center gap-8">
+      {/* iPhone Real Auténtico - Proporciones exactas 146.7mm x 71.5mm */}
+      <div className="w-full max-w-[300px] mx-auto">
+        {/* Marco del iPhone - Negro mate como iPhone Pro */}
+        <div className="relative bg-black rounded-[3rem] p-2 shadow-2xl" style={{
+          background: 'linear-gradient(145deg, #1a1a1a 0%, #000000 50%, #1a1a1a 100%)',
+          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+          width: '300px',
+          height: '615px', // 300px * 2.05 = 615px (proporción real iPhone)
+          aspectRatio: '71.5/146.7' // Proporción exacta del iPhone real
+        }}>
+
+          {/* Pantalla del iPhone - Proporciones reales */}
+          <div className="relative bg-[#0b141a] rounded-[2.5rem] overflow-hidden w-full h-full">
+
+            {/* Barra de estado del iPhone - Proporcional */}
+            <div className="absolute top-0 left-0 right-0 h-10 flex justify-between items-center px-5 pt-1.5 z-30">
+              <div className="flex items-center gap-1">
+                <span className="text-white text-sm font-semibold">17:52</span>
+              </div>
+              <div className="flex items-center gap-1">
+                {/* Señal celular */}
+                <div className="flex gap-0.5">
+                  <div className="w-1 h-2 bg-white rounded-full"></div>
+                  <div className="w-1 h-2.5 bg-white rounded-full"></div>
+                  <div className="w-1 h-3 bg-white rounded-full"></div>
+                  <div className="w-1 h-3.5 bg-white rounded-full"></div>
                 </div>
-                <div className="flex items-center">
-                  <p className="font-semibold dark:text-white">MIIDO</p>
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-blue-500 ml-1">
-                    <path fillRule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clipRule="evenodd" />
+                {/* WiFi */}
+                <svg className="w-4 h-4 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.07 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/>
+                </svg>
+                {/* Batería */}
+                <div className="flex items-center ml-1">
+                  <div className="w-6 h-3 border border-white rounded-sm relative">
+                    <div className="w-4 h-1.5 bg-green-400 rounded-sm absolute top-0.5 left-0.5"></div>
+                  </div>
+                  <div className="w-0.5 h-1.5 bg-white rounded-r ml-0.5"></div>
+                </div>
+              </div>
+            </div>
+
+            {/* Isla dinámica - Proporcional */}
+            <div className="absolute top-1.5 left-1/2 transform -translate-x-1/2 w-24 h-6 bg-black rounded-full z-20 border border-gray-800"></div>
+
+            {/* Contenido de WhatsApp con fondo oscuro - ESTRUCTURA FIJA PARA BARRA SIEMPRE VISIBLE */}
+            <div className="bg-[#0b141a] flex-1 flex flex-col relative pt-10 h-full">
+              {/* WhatsApp Header - Exacto como la imagen */}
+             <div className="bg-[#202c33] px-3 py-2.5 flex items-center gap-3 h-14 z-20">
+                {/* Flecha de regreso */}
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+
+                {/* Número 357 */}
+                <span className="text-white text-base font-normal">357</span>
+
+                {/* Avatar con logo MIIDO más pequeño */}
+                <div className="w-7 h-7 rounded-full bg-white flex items-center justify-center">
+                  <svg className="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                   </svg>
                 </div>
-                <div><p className="text-xs text-gray-500 ml-auto dark:text-gray-400">Online</p></div>
+
+                {/* Info del contacto - TODO EN UNA LÍNEA */}
+                <div className="flex-1 flex items-center gap-2 flex-nowrap whitespace-nowrap overflow-hidden">
+                  <span className="text-white text-base font-medium truncate">Bot MIIDO</span>
+                  <span className="text-[#8696a0] text-sm">Miido Tareas</span>
+                  <svg className="w-3 h-3 text-[#53bdeb]" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                  <span className="text-[#8696a0] text-sm">• Business account</span>
+                </div>
               </div>
-              <div className="flex-1 p-4 space-y-4 ">
-                {["Pregunta: ¿Cuándo empezamos la cosecha la temporada anterior?",
-                  "Respuesta: La cosecha empezó el 15 de diciembre del año pasado.",
-                  "Pregunta: ¿Cómo va avanzando la cosecha?",
-                  "Respuesta: La cosecha va en un 30% del total.",
-                  "Pregunta: ¿Cuál fue el rendimiento del último trimestre?"].map((message, index) => (
+
+              {/* Mensajes con fondo oscuro de WhatsApp - SCROLLEABLE */}
+              <div
+                className="flex-1 p-2.5 space-y-2.5 relative overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent"
+                style={{
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+                  backgroundColor: '#0b141a',
+                  maxHeight: 'calc(100% - 116px)', // Espacio para header (56px) + input (60px)
+                  minHeight: '400px',
+                  scrollbarWidth: 'thin',
+                  scrollbarColor: '#4a5568 transparent'
+                }}
+              >
+                {/* Mensajes con animación de scroll */}
+                {[
+                  { text: "¿Cuándo empezamos la cosecha la temporada anterior?", type: "question" },
+                  { text: "La cosecha empezó el 15 de diciembre del año pasado.", type: "answer" },
+                  { text: "¿Cómo va la cosecha?", type: "question" },
+                  { text: "chart", type: "chart" }, // Mensaje especial para el gráfico
+                  { text: "¿Cuál fue el rendimiento del último trimestre?", type: "question" },
+                  { text: "El rendimiento del último trimestre fue de 2,850 kg por hectárea, un 15% superior al trimestre anterior.", type: "answer" },
+                  { text: "¿Qué huertos tienen mejor productividad?", type: "question" },
+                  { text: "Los huertos C y D tienen la mejor productividad con 3,200 kg/ha y 3,100 kg/ha respectivamente.", type: "answer" }
+                ].map((message, index) => (
                   <div
                     key={index}
-                    className={`flex items-center gap-2 ${index % 2 === 0 ? 'justify-end' : 'justify-start'}`}
+                    className={`flex ${message.type === 'question' ? 'justify-end' : 'justify-start'} mb-2.5`}
                     style={{
-                      opacity: scrollProgressNewSection > index / 5 ? 1 : 0,
-                      transform: `translateY(${scrollProgressNewSection > index / 5 ? 0 : 20}px)`,
-                      transition: 'opacity 0.3s ease-out, transform 0.3s ease-out'
+                      opacity: scrollProgressNewSection > index / 8 ? 1 : 0,
+                      transform: `translateY(${scrollProgressNewSection > index / 8 ? 0 : 20}px)`,
+                      transition: 'opacity 0.5s ease-out, transform 0.5s ease-out'
                     }}
                   >
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${index % 2 === 0 ? 'bg-blue-500 ' : 'bg-green-500 ' }`}>
-                      <Mic className="h-4 w-4 text-primary " />
-                    </div>
-                    <div className={`rounded-lg p-2 max-w-[80%] ${index % 2 === 0 ? 'bg-blue-100 dark:bg-blue-800' : 'bg-green-100 dark:bg-green-800'}`}>
-                      <p className="text-sm">{message}</p>
-                    </div>
+                    {message.type === 'chart' ? (
+                      // Gráfico de evolución de cosecha
+                      <div className="bg-[#202c33] rounded-lg p-3 max-w-[90%] relative">
+                        <div className="absolute left-[-6px] top-2.5 w-0 h-0 border-t-[6px] border-t-transparent border-r-[6px] border-r-[#202c33] border-b-[6px] border-b-transparent"></div>
+
+                        <div className="text-xs text-gray-300 mb-2">
+                          📊 Evolución de la cosecha - Últimos 7 días
+                        </div>
+
+                        {/* Mini gráfico de líneas */}
+                        <div className="bg-[#0b141a] rounded p-2 mb-2">
+                          <svg width="200" height="80" viewBox="0 0 200 80" className="w-full">
+                            {/* Grid lines */}
+                            <defs>
+                              <pattern id="miniGrid" width="25" height="16" patternUnits="userSpaceOnUse">
+                                <path d="M 25 0 L 0 0 0 16" fill="none" stroke="#374151" strokeWidth="0.5"/>
+                              </pattern>
+                            </defs>
+                            <rect width="100%" height="100%" fill="url(#miniGrid)" />
+
+                            {/* Línea de progreso de cosecha - ESTÁTICA */}
+                            <polyline
+                              fill="none"
+                              stroke="#22c55e"
+                              strokeWidth="2"
+                              points="20,60 45,55 70,45 95,40 120,30 145,25 170,15"
+                            />
+
+                            {/* Puntos de datos estáticos */}
+                            <circle cx="20" cy="60" r="2" fill="#22c55e"/>
+                            <circle cx="45" cy="55" r="2" fill="#22c55e"/>
+                            <circle cx="70" cy="45" r="2" fill="#22c55e"/>
+                            <circle cx="95" cy="40" r="2" fill="#22c55e"/>
+                            <circle cx="120" cy="30" r="2" fill="#22c55e"/>
+                            <circle cx="145" cy="25" r="2" fill="#22c55e"/>
+                            <circle cx="170" cy="15" r="2" fill="#22c55e"/>
+
+                            {/* Labels de días */}
+                            <text x="20" y="75" fill="#9ca3af" fontSize="8" textAnchor="middle">L</text>
+                            <text x="45" y="75" fill="#9ca3af" fontSize="8" textAnchor="middle">M</text>
+                            <text x="70" y="75" fill="#9ca3af" fontSize="8" textAnchor="middle">M</text>
+                            <text x="95" y="75" fill="#9ca3af" fontSize="8" textAnchor="middle">J</text>
+                            <text x="120" y="75" fill="#9ca3af" fontSize="8" textAnchor="middle">V</text>
+                            <text x="145" y="75" fill="#9ca3af" fontSize="8" textAnchor="middle">S</text>
+                            <text x="170" y="75" fill="#9ca3af" fontSize="8" textAnchor="middle">D</text>
+                          </svg>
+                        </div>
+
+                        {/* Métricas */}
+                        <div className="grid grid-cols-2 gap-2 text-xs">
+                          <div className="bg-[#0b141a] rounded p-1.5 text-center">
+                            <div className="text-green-400 font-bold">72%</div>
+                            <div className="text-gray-400">Completado</div>
+                          </div>
+                          <div className="bg-[#0b141a] rounded p-1.5 text-center">
+                            <div className="text-blue-400 font-bold">1,250 kg</div>
+                            <div className="text-gray-400">Hoy</div>
+                          </div>
+                        </div>
+
+                        <div className="flex justify-end mt-2">
+                          <span className="text-[10px] text-gray-500">15:38</span>
+                        </div>
+                      </div>
+                    ) : (
+                      // Mensajes normales
+                      <div className={`${message.type === 'question' ? 'bg-[#005c4b]' : 'bg-[#202c33]'} rounded-lg p-2.5 max-w-[85%] relative`}>
+                        {/* Triángulo de mensaje */}
+                        <div className={`absolute ${message.type === 'question' ? 'right-[-6px]' : 'left-[-6px]'} top-2.5 w-0 h-0 ${message.type === 'question' ? 'border-t-[6px] border-t-transparent border-l-[6px] border-l-[#005c4b] border-b-[6px] border-b-transparent' : 'border-t-[6px] border-t-transparent border-r-[6px] border-r-[#202c33] border-b-[6px] border-b-transparent'}`}></div>
+                        <div className="text-xs text-gray-300 mb-1">
+                          {message.text}
+                        </div>
+                        <div className="flex justify-end">
+                          <span className="text-[10px] text-gray-500">15:3{6 + index}</span>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
-              <div className="bg-gray-100 p-4 flex items-center gap-2 dark:bg-gray-800">
-                <Input className="flex-1" placeholder="Type a message" />
-                <Button size="icon">
-                  <Send className="h-4 w-4" />
-                  <span className="sr-only">Enviar mensaje</span>
-                </Button>
+
+              {/* Input estilo WhatsApp modo oscuro - POSICIÓN ABSOLUTA SIEMPRE EN EL FONDO */}
+              <div className="bg-[#202c33] p-2.5 flex items-center gap-2.5 absolute bottom-0 left-0 right-0 z-20">
+                {/* Botón de más - Proporcional */}
+                <button className="text-gray-400 hover:text-gray-300">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                  </svg>
+                </button>
+
+                {/* Input de mensaje - Proporcional */}
+                <div className="flex-1 bg-[#2a3942] rounded-full px-3 py-1.5 flex items-center gap-1.5">
+                  <input
+                    type="text"
+                    placeholder="Escribe un mensaje"
+                    className="flex-1 outline-none text-xs bg-transparent text-white placeholder-gray-400"
+                  />
+                </div>
+
+                {/* Botón de cámara - Proporcional */}
+                <button className="text-gray-400 hover:text-gray-300">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 15c1.66 0 2.99-1.34 2.99-3L15 6c0-1.66-1.34-3-3-3S9 4.34 9 6v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 15 6.7 12H5c0 3.41 2.72 6.23 6 6.72V21h2v-2.28c3.28-.49 6-3.31 6-6.72h-1.7z"/>
+                  </svg>
+                </button>
+
+                {/* Botón de micrófono - Proporcional */}
+                <button className="w-10 h-10 bg-[#00a884] rounded-full flex items-center justify-center text-white hover:bg-[#008f72] transition-colors">
+                  <Mic className="h-4 w-4" />
+                </button>
               </div>
             </div>
+
+            {/* Indicador de inicio del iPhone */}
+            <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-white rounded-full opacity-60"></div>
           </div>
         </div>
       </div>
@@ -1329,7 +2088,7 @@ export default function Component() {
 
 {/* Nuestros clientes nos aman  **/}
         {/* Nuestros clientes nos aman */}
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50 dark:bg-gray-900">
+        <section ref={testimonialsRef} className="w-full py-12 md:py-24 lg:py-32 bg-gray-50 dark:bg-gray-900">
   <div className="container px-4 md:px-6">
     <h2
       className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12 text-gray-900 dark:text-white"
