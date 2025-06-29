@@ -1210,10 +1210,10 @@ export default function Component() {
                     key={index}
                     className="flex justify-start mb-2.5"
                     style={{
-                      opacity: scrollProgress > (index + 1) / 6 ? 1 : 0,
-                      transform: `translateY(${scrollProgress > (index + 1) / 6 ? 0 : 30}px)`,
-                      transition: 'opacity 0.8s ease-out, transform 0.8s ease-out',
-                      transitionDelay: `${index * 0.3}s`
+                      opacity: scrollProgress > 0.05 + (index * 0.05) ? 1 : 0,
+                      transform: `translateY(${scrollProgress > 0.05 + (index * 0.05) ? 0 : 30}px)`,
+                      transition: 'opacity 0.6s ease-out, transform 0.6s ease-out',
+                      transitionDelay: `${index * 0.15}s`
                     }}
                   >
                     <div className="bg-[#005c4b] rounded-lg p-2.5 max-w-[85%] relative">
@@ -1277,10 +1277,10 @@ export default function Component() {
                 <div
                   className="flex justify-start mb-2.5"
                   style={{
-                    opacity: scrollProgress > 0.4 ? 1 : 0,
-                    transform: `translateY(${scrollProgress > 0.4 ? 0 : 30}px)`,
-                    transition: 'opacity 1s ease-out, transform 1s ease-out',
-                    transitionDelay: '0.6s'
+                    opacity: scrollProgress > 0.15 ? 1 : 0,
+                    transform: `translateY(${scrollProgress > 0.15 ? 0 : 30}px)`,
+                    transition: 'opacity 0.6s ease-out, transform 0.6s ease-out',
+                    transitionDelay: '0.2s'
                   }}
                 >
                   <div className="bg-[#202c33] rounded-lg p-2.5 max-w-[85%] relative">
@@ -1298,10 +1298,10 @@ export default function Component() {
                 <div
                   className="flex justify-start mb-2.5"
                   style={{
-                    opacity: scrollProgress > 0.6 ? 1 : 0,
-                    transform: `translateY(${scrollProgress > 0.6 ? 0 : 30}px)`,
-                    transition: 'opacity 1s ease-out, transform 1s ease-out',
-                    transitionDelay: '1s'
+                    opacity: scrollProgress > 0.2 ? 1 : 0,
+                    transform: `translateY(${scrollProgress > 0.2 ? 0 : 30}px)`,
+                    transition: 'opacity 0.6s ease-out, transform 0.6s ease-out',
+                    transitionDelay: '0.25s'
                   }}
                 >
                   <div className="bg-[#005c4b] rounded-lg p-2.5 max-w-[85%] relative">
@@ -1355,9 +1355,10 @@ export default function Component() {
                 <div
                   className="flex justify-start mb-2.5"
                   style={{
-                    opacity: scrollProgress > 5 / 8 ? 1 : 0,
-                    transform: `translateY(${scrollProgress > 5 / 8 ? 0 : 20}px)`,
-                    transition: 'opacity 0.3s ease-out, transform 0.3s ease-out'
+                    opacity: scrollProgress > 0.25 ? 1 : 0,
+                    transform: `translateY(${scrollProgress > 0.25 ? 0 : 30}px)`,
+                    transition: 'opacity 0.6s ease-out, transform 0.6s ease-out',
+                    transitionDelay: '0.3s'
                   }}
                 >
                   <div className="bg-[#202c33] rounded-lg p-2.5 max-w-[85%] relative">
@@ -1375,9 +1376,10 @@ export default function Component() {
                 <div
                   className="flex justify-start mb-2.5"
                   style={{
-                    opacity: scrollProgress > 6 / 8 ? 1 : 0,
-                    transform: `translateY(${scrollProgress > 6 / 8 ? 0 : 20}px)`,
-                    transition: 'opacity 0.3s ease-out, transform 0.3s ease-out'
+                    opacity: scrollProgress > 0.3 ? 1 : 0,
+                    transform: `translateY(${scrollProgress > 0.3 ? 0 : 30}px)`,
+                    transition: 'opacity 0.6s ease-out, transform 0.6s ease-out',
+                    transitionDelay: '0.35s'
                   }}
                 >
                   <div className="bg-[#005c4b] rounded-lg p-2.5 max-w-[85%] relative">
@@ -1398,16 +1400,22 @@ export default function Component() {
 
                       <div className="flex-1 flex items-center gap-1.5">
                         <div className="flex items-center gap-0.5 flex-1">
-                          {[...Array(20)].map((_, i) => (
-                            <div
-                              key={i}
-                              className="w-0.5 bg-white/30 rounded-full"
-                              style={{
-                                height: `${Math.random() * 8 + 2}px`,
-                                backgroundColor: i < (scrollProgress * 20) ? 'white' : 'rgba(255,255,255,0.3)'
-                              }}
-                            />
-                          ))}
+                          {[...Array(15)].map((_, i) => {
+                            const heights = [6, 9, 5, 11, 7, 10, 4, 8, 6, 12, 5, 9, 7, 10, 6]; // Alturas fijas
+                            const isActive = i < (scrollProgress * 15);
+                            return (
+                              <div
+                                key={i}
+                                className="w-1 rounded-full transition-all duration-300 ease-out"
+                                style={{
+                                  height: `${heights[i]}px`,
+                                  backgroundColor: isActive ? '#ffffff' : 'rgba(255,255,255,0.3)',
+                                  transform: isActive ? 'scaleY(1.2)' : 'scaleY(1)',
+                                  transitionDelay: `${i * 50}ms`
+                                }}
+                              />
+                            );
+                          })}
                         </div>
                       </div>
                     </div>
@@ -1431,9 +1439,10 @@ export default function Component() {
                 <div
                   className="flex justify-start mb-2.5"
                   style={{
-                    opacity: scrollProgress > 7 / 8 ? 1 : 0,
-                    transform: `translateY(${scrollProgress > 7 / 8 ? 0 : 20}px)`,
-                    transition: 'opacity 0.3s ease-out, transform 0.3s ease-out'
+                    opacity: scrollProgress > 0.35 ? 1 : 0,
+                    transform: `translateY(${scrollProgress > 0.35 ? 0 : 30}px)`,
+                    transition: 'opacity 0.6s ease-out, transform 0.6s ease-out',
+                    transitionDelay: '0.4s'
                   }}
                 >
                   <div className="bg-[#202c33] rounded-lg p-2.5 max-w-[85%] relative">
