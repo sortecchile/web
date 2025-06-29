@@ -730,20 +730,20 @@ export default function Component() {
               }}
             >
               <span className="text-xs font-medium text-gray-800 dark:text-gray-300">Apoyados por</span>
-              <div className="flex items-center gap-6">
+              <div className="flex items-center gap-3 sm:gap-4 md:gap-6">
                 <Image
                   src="./platanus-logo.png"
                   alt="Platanus Logo"
-                  width={70}
+                  width={50}
                   height={8}
-                  className="object-contain opacity-90 hover:opacity-100 transition-opacity hover:scale-110 transform transition-transform duration-300"
+                  className="w-10 sm:w-12 md:w-16 lg:w-18 h-auto object-contain opacity-90 hover:opacity-100 transition-opacity hover:scale-110 transform transition-transform duration-300"
                 />
                 <Image
                   src="./IICA-logo.png"
                   alt="IICA Logo"
-                  width={60}
+                  width={45}
                   height={8}
-                  className="object-contain opacity-90 hover:opacity-100 transition-opacity hover:scale-110 transform transition-transform duration-300"
+                  className="w-9 sm:w-11 md:w-14 lg:w-16 h-auto object-contain opacity-90 hover:opacity-100 transition-opacity hover:scale-110 transform transition-transform duration-300"
                 />
               </div>
             </div>
@@ -862,90 +862,174 @@ export default function Component() {
 
 
 
-        <section className="w-full py-2 bg-gray-1 md:-mt-24 sm:-mt-32 overflow-x-auto">
+        <section className="w-full py-4 bg-gray-1 md:-mt-24 sm:-mt-32 overflow-x-auto">
           <div className="container px-4 md:px-6">
-            <div className="flex flex-nowrap md:justify-center sm:justify-center  items-center gap-20">
+            <div className="flex flex-nowrap md:justify-center sm:justify-center items-center gap-4 sm:gap-8 md:gap-12 lg:gap-20 pb-2">
               {/* Viña Errazuriz */}
-      <>
+      <div className="flex-shrink-0">
         <div
           className="dark:hidden transform transition-transform duration-300 hover:scale-110"
           style={{ animation: 'fadeInUp 0.8s ease-out 0.1s forwards', opacity: 0 }}
         >
-          <Image src="./errazuriz-logo.png" alt="Viña Errazuriz" width={120} height={40} />
+          <Image
+            src="./errazuriz-logo.png"
+            alt="Viña Errazuriz"
+            width={80}
+            height={30}
+            className="w-16 sm:w-20 md:w-24 lg:w-28 h-auto object-contain"
+          />
         </div>
         <div
           className="hidden dark:block transform transition-transform duration-300 hover:scale-110"
           style={{ animation: 'fadeInUp 0.8s ease-out 0.1s forwards', opacity: 0 }}
         >
-          <Image src="./errazuriz-logo-white.png" alt="Viña Errazuriz white" width={120} height={40} />
+          <Image
+            src="./errazuriz-logo-white.png"
+            alt="Viña Errazuriz white"
+            width={80}
+            height={30}
+            className="w-16 sm:w-20 md:w-24 lg:w-28 h-auto object-contain"
+          />
         </div>
-      </>
+      </div>
 
       {/* La Ciudad Posible */}
-      <>
+      <div className="flex-shrink-0">
         <div
           className="dark:hidden transform transition-transform duration-300 hover:scale-110"
           style={{ animation: 'fadeInUp 0.8s ease-out 0.2s forwards', opacity: 0 }}
         >
-          <Image src="./LCP.png" alt="La ciudad posible" width={140} height={40} />
+          <Image
+            src="./LCP.png"
+            alt="La ciudad posible"
+            width={90}
+            height={30}
+            className="w-18 sm:w-22 md:w-26 lg:w-32 h-auto object-contain"
+          />
         </div>
         <div
           className="hidden dark:block transform transition-transform duration-300 hover:scale-110"
           style={{ animation: 'fadeInUp 0.8s ease-out 0.2s forwards', opacity: 0 }}
         >
-          <Image src="./LCP-white.png" alt="La ciudad posible white" width={140} height={40} />
+          <Image
+            src="./LCP-white.png"
+            alt="La ciudad posible white"
+            width={90}
+            height={30}
+            className="w-18 sm:w-22 md:w-26 lg:w-32 h-auto object-contain"
+          />
         </div>
-      </>
+      </div>
 
       {/* Concha y Toro */}
-      <>
-        <div className="dark:hidden">
-          <Image src="./cyt.png" alt="Concha y Toro" width={140} height={40} />
+      <div className="flex-shrink-0">
+        <div className="dark:hidden transform transition-transform duration-300 hover:scale-110">
+          <Image
+            src="./cyt.png"
+            alt="Concha y Toro"
+            width={90}
+            height={30}
+            className="w-18 sm:w-22 md:w-26 lg:w-32 h-auto object-contain"
+          />
         </div>
-        <div className="hidden dark:block">
-          <Image src="./cyt-white.png" alt="Concha y Toro white" width={140} height={40} />
+        <div className="hidden dark:block transform transition-transform duration-300 hover:scale-110">
+          <Image
+            src="./cyt-white.png"
+            alt="Concha y Toro white"
+            width={90}
+            height={30}
+            className="w-18 sm:w-22 md:w-26 lg:w-32 h-auto object-contain"
+          />
         </div>
-      </>
+      </div>
 
       {/* Fundo Santa Eugenia */}
-      <>
-        <div className="dark:hidden">
-          <Image src="./driscolls.png" alt="Fundo Santa Eugenia" width={120} height={40} />
+      <div className="flex-shrink-0">
+        <div className="dark:hidden transform transition-transform duration-300 hover:scale-110">
+          <Image
+            src="./driscolls.png"
+            alt="Fundo Santa Eugenia"
+            width={80}
+            height={30}
+            className="w-16 sm:w-20 md:w-24 lg:w-28 h-auto object-contain"
+          />
         </div>
-        <div className="hidden dark:block">
-          <Image src="./driscolls-white.png" alt="Fundo Santa Eugenia white" width={120} height={40} />
+        <div className="hidden dark:block transform transition-transform duration-300 hover:scale-110">
+          <Image
+            src="./driscolls-white.png"
+            alt="Fundo Santa Eugenia white"
+            width={80}
+            height={30}
+            className="w-16 sm:w-20 md:w-24 lg:w-28 h-auto object-contain"
+          />
         </div>
-      </>
+      </div>
 
       {/* TMV Agroexportación */}
-      <>
-        <div className="dark:hidden">
-          <Image src="./westfalia.png" alt="TMV Agroexportació" width={110} height={40} />
+      <div className="flex-shrink-0">
+        <div className="dark:hidden transform transition-transform duration-300 hover:scale-110">
+          <Image
+            src="./westfalia.png"
+            alt="TMV Agroexportació"
+            width={75}
+            height={30}
+            className="w-14 sm:w-18 md:w-22 lg:w-26 h-auto object-contain"
+          />
         </div>
-        <div className="hidden dark:block">
-          <Image src="./westfalia-white.png" alt="TMV Agroexportació white" width={110} height={40} />
+        <div className="hidden dark:block transform transition-transform duration-300 hover:scale-110">
+          <Image
+            src="./westfalia-white.png"
+            alt="TMV Agroexportació white"
+            width={75}
+            height={30}
+            className="w-14 sm:w-18 md:w-22 lg:w-26 h-auto object-contain"
+          />
         </div>
-      </>
+      </div>
 
       {/* Startup Chile */}
-      <>
-        <div className="dark:hidden">
-          <Image src="./TMV.png" alt="Startup Chile" width={140} height={40} />
+      <div className="flex-shrink-0">
+        <div className="dark:hidden transform transition-transform duration-300 hover:scale-110">
+          <Image
+            src="./TMV.png"
+            alt="Startup Chile"
+            width={90}
+            height={30}
+            className="w-18 sm:w-22 md:w-26 lg:w-32 h-auto object-contain"
+          />
         </div>
-        <div className="hidden dark:block">
-          <Image src="./TMV-white.png" alt="Startup Chile white" width={140} height={40} />
+        <div className="hidden dark:block transform transition-transform duration-300 hover:scale-110">
+          <Image
+            src="./TMV-white.png"
+            alt="Startup Chile white"
+            width={90}
+            height={30}
+            className="w-18 sm:w-22 md:w-26 lg:w-32 h-auto object-contain"
+          />
         </div>
-      </>
+      </div>
 
       {/* Start Fellowship */}
-      <>
-        <div className="dark:hidden">
-          <Image src="./start-fellowship.png" alt="Start Fellowship" width={120} height={40} />
+      <div className="flex-shrink-0">
+        <div className="dark:hidden transform transition-transform duration-300 hover:scale-110">
+          <Image
+            src="./start-fellowship.png"
+            alt="Start Fellowship"
+            width={80}
+            height={30}
+            className="w-16 sm:w-20 md:w-24 lg:w-28 h-auto object-contain"
+          />
         </div>
-        <div className="hidden dark:block">
-          <Image src="./start-fellowship-white.png" alt="Start Fellowship white" width={120} height={40} />
+        <div className="hidden dark:block transform transition-transform duration-300 hover:scale-110">
+          <Image
+            src="./start-fellowship-white.png"
+            alt="Start Fellowship white"
+            width={80}
+            height={30}
+            className="w-16 sm:w-20 md:w-24 lg:w-28 h-auto object-contain"
+          />
         </div>
-      </>
+      </div>
             </div>
           </div>
         </section>
@@ -1022,24 +1106,25 @@ export default function Component() {
       Todos los audios que se envíen en el día a día de la operación, lo ordenamos y mostramos automáticamente en el Dashboard.
     </p>
     <div className="flex flex-col lg:flex-row items-start justify-center gap-8">
-      {/* iPhone Real Auténtico - SE MANTIENE VISIBLE AL HACER SCROLL */}
-      <div className="w-full max-w-[300px] mx-auto lg:sticky lg:top-4 lg:self-start">
+      {/* iPhone Real Auténtico - RESPONSIVO */}
+      <div className="w-full max-w-[280px] sm:max-w-[300px] mx-auto lg:sticky lg:top-4 lg:self-start">
         {/* Marco del iPhone - Negro mate como iPhone Pro */}
-        <div className="relative bg-black rounded-[3rem] p-2 shadow-2xl" style={{
+        <div className="relative bg-black rounded-[2.5rem] sm:rounded-[3rem] p-1.5 sm:p-2 shadow-2xl" style={{
           background: 'linear-gradient(145deg, #1a1a1a 0%, #000000 50%, #1a1a1a 100%)',
           boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
-          width: '300px',
-          height: '615px', // 300px * 2.05 = 615px (proporción real iPhone)
+          width: '100%',
+          maxWidth: '300px',
+          height: 'auto',
           aspectRatio: '71.5/146.7' // Proporción exacta del iPhone real
         }}>
 
           {/* Pantalla del iPhone - Proporciones reales */}
-          <div className="relative bg-[#0b141a] rounded-[2.5rem] overflow-hidden w-full h-full">
+          <div className="relative bg-[#0b141a] rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden w-full" style={{ height: '580px' }}>
 
             {/* Barra de estado del iPhone - Proporcional */}
-            <div className="absolute top-0 left-0 right-0 h-10 flex justify-between items-center px-5 pt-1.5 z-30">
+            <div className="absolute top-0 left-0 right-0 h-8 sm:h-10 flex justify-between items-center px-3 sm:px-5 pt-1 sm:pt-1.5 z-30">
               <div className="flex items-center gap-1">
-                <span className="text-white text-sm font-semibold">17:52</span>
+                <span className="text-white text-xs sm:text-sm font-semibold">17:52</span>
               </div>
               <div className="flex items-center gap-1">
                 {/* Señal celular */}
@@ -1064,12 +1149,12 @@ export default function Component() {
             </div>
 
             {/* Isla dinámica - Proporcional */}
-            <div className="absolute top-1.5 left-1/2 transform -translate-x-1/2 w-24 h-6 bg-black rounded-full z-20 border border-gray-800"></div>
+            <div className="absolute top-1 sm:top-1.5 left-1/2 transform -translate-x-1/2 w-20 sm:w-24 h-5 sm:h-6 bg-black rounded-full z-20 border border-gray-800"></div>
 
             {/* Contenido de WhatsApp con fondo oscuro - ESTRUCTURA FIJA PARA BARRA SIEMPRE VISIBLE */}
-            <div className="bg-[#0b141a] flex-1 flex flex-col relative pt-10 h-full">
+            <div className="bg-[#0b141a] flex-1 flex flex-col relative pt-8 sm:pt-10 h-full">
               {/* WhatsApp Header - Exacto como la imagen */}
-             <div className="bg-[#202c33] px-3 py-2.5 flex items-center gap-3 h-14 z-20">
+             <div className="bg-[#202c33] px-2 sm:px-3 py-2 sm:py-2.5 flex items-center gap-2 sm:gap-3 h-12 sm:h-14 z-20">
                 {/* Flecha de regreso */}
                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -1119,15 +1204,16 @@ export default function Component() {
                 {/* Mensajes de audio verdes */}
                 {[
                   { duration: "0:11", time: "15:31" },
-                  { duration: "0:11", time: "15:32" }
+                  { duration: "0:15", time: "15:32" }
                 ].map((audio, index) => (
                   <div
                     key={index}
                     className="flex justify-start mb-2.5"
                     style={{
-                      opacity: scrollProgress > (index + 1) / 8 ? 1 : 0,
-                      transform: `translateY(${scrollProgress > (index + 1) / 8 ? 0 : 20}px)`,
-                      transition: 'opacity 0.3s ease-out, transform 0.3s ease-out'
+                      opacity: scrollProgress > (index + 1) / 6 ? 1 : 0,
+                      transform: `translateY(${scrollProgress > (index + 1) / 6 ? 0 : 30}px)`,
+                      transition: 'opacity 0.8s ease-out, transform 0.8s ease-out',
+                      transitionDelay: `${index * 0.3}s`
                     }}
                   >
                     <div className="bg-[#005c4b] rounded-lg p-2.5 max-w-[85%] relative">
@@ -1151,16 +1237,22 @@ export default function Component() {
                         {/* Barra de audio - Proporcional */}
                         <div className="flex-1 flex items-center gap-1.5">
                           <div className="flex items-center gap-0.5 flex-1">
-                            {[...Array(20)].map((_, i) => (
-                              <div
-                                key={i}
-                                className="w-0.5 bg-white/30 rounded-full"
-                                style={{
-                                  height: `${Math.random() * 8 + 2}px`,
-                                  backgroundColor: i < (scrollProgress * 20) ? 'white' : 'rgba(255,255,255,0.3)'
-                                }}
-                              />
-                            ))}
+                            {[...Array(15)].map((_, i) => {
+                              const heights = [4, 8, 6, 10, 5, 12, 7, 9, 4, 11, 6, 8, 5, 9, 7]; // Alturas fijas para consistencia
+                              const isActive = i < (scrollProgress * 15);
+                              return (
+                                <div
+                                  key={i}
+                                  className="w-1 rounded-full transition-all duration-300 ease-out"
+                                  style={{
+                                    height: `${heights[i]}px`,
+                                    backgroundColor: isActive ? '#ffffff' : 'rgba(255,255,255,0.3)',
+                                    transform: isActive ? 'scaleY(1.2)' : 'scaleY(1)',
+                                    transitionDelay: `${i * 50}ms`
+                                  }}
+                                />
+                              );
+                            })}
                           </div>
                         </div>
                       </div>
@@ -1185,9 +1277,10 @@ export default function Component() {
                 <div
                   className="flex justify-start mb-2.5"
                   style={{
-                    opacity: scrollProgress > 3 / 8 ? 1 : 0,
-                    transform: `translateY(${scrollProgress > 3 / 8 ? 0 : 20}px)`,
-                    transition: 'opacity 0.3s ease-out, transform 0.3s ease-out'
+                    opacity: scrollProgress > 0.4 ? 1 : 0,
+                    transform: `translateY(${scrollProgress > 0.4 ? 0 : 30}px)`,
+                    transition: 'opacity 1s ease-out, transform 1s ease-out',
+                    transitionDelay: '0.6s'
                   }}
                 >
                   <div className="bg-[#202c33] rounded-lg p-2.5 max-w-[85%] relative">
@@ -1205,9 +1298,10 @@ export default function Component() {
                 <div
                   className="flex justify-start mb-2.5"
                   style={{
-                    opacity: scrollProgress > 4 / 8 ? 1 : 0,
-                    transform: `translateY(${scrollProgress > 4 / 8 ? 0 : 20}px)`,
-                    transition: 'opacity 0.3s ease-out, transform 0.3s ease-out'
+                    opacity: scrollProgress > 0.6 ? 1 : 0,
+                    transform: `translateY(${scrollProgress > 0.6 ? 0 : 30}px)`,
+                    transition: 'opacity 1s ease-out, transform 1s ease-out',
+                    transitionDelay: '1s'
                   }}
                 >
                   <div className="bg-[#005c4b] rounded-lg p-2.5 max-w-[85%] relative">
@@ -1845,7 +1939,6 @@ export default function Component() {
           <UseCasesSection />
         </section> */}
 
-        <MultiWaveAudio />
 {/* Haz preguntas sobre la data Seccion  */}
 
 <section ref={newSectionRef} className="w-full py-12 md:py-24 lg:py-32 overflow-hidden">
