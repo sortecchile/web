@@ -74,6 +74,46 @@ export default function Component() {
   const [loading, setLoading] = useState(true);
   const [animationsReady, setAnimationsReady] = useState(false);
 
+  // Función helper para calcular thresholds de animación responsivos
+  const getAnimationThreshold = (baseThreshold: number) => {
+    if (typeof window === 'undefined') return baseThreshold;
+    const isMobile = window.innerWidth < 768;
+    const isTablet = window.innerWidth < 1024;
+    const isShortScreen = window.innerHeight < 700; // Pantallas cortas como iPhone SE
+
+    // En móviles, reducir los thresholds significativamente para que aparezcan más temprano
+    // En pantallas cortas, reducir aún más
+    // En tablets, reducir un 25%
+    if (isMobile) {
+      if (isShortScreen) {
+        return baseThreshold * 0.2; // Muy temprano para pantallas pequeñas
+      }
+      return baseThreshold * 0.3; // Temprano para móviles normales
+    } else if (isTablet) {
+      return baseThreshold * 0.6;
+    }
+    return baseThreshold;
+  };
+
+  // Función helper para obtener duración de transición responsiva
+  const getTransitionDuration = () => {
+    if (typeof window === 'undefined') return '0.6s';
+    const isMobile = window.innerWidth < 768;
+    return isMobile ? '0.4s' : '0.6s'; // Transiciones más rápidas en móviles
+  };
+
+  // Función helper para obtener delay de transición responsivo
+  const getTransitionDelay = (baseDelay: string) => {
+    if (typeof window === 'undefined') return baseDelay;
+    const isMobile = window.innerWidth < 768;
+    if (isMobile) {
+      // Reducir delays en móviles para que las animaciones sean más rápidas
+      const delayValue = parseFloat(baseDelay.replace('s', ''));
+      return `${delayValue * 0.5}s`;
+    }
+    return baseDelay;
+  };
+
   const handlePlayVideo = (videoId: string) => {
     setPlayingVideo(videoId)
   }
@@ -227,7 +267,20 @@ export default function Component() {
         const sectionHeight = rect.height
         const viewportHeight = window.innerHeight
 
-        const startOffset = sectionHeight * 0.4
+        // Ajustar el offset de inicio basado en el tamaño de pantalla
+        // En móviles usar offsets más pequeños para que las animaciones empiecen antes
+        const isMobile = window.innerWidth < 768
+        const isTablet = window.innerWidth < 1024
+        const isShortScreen = window.innerHeight < 700
+
+        let startOffsetRatio = 0.4; // Default para desktop
+        if (isMobile) {
+          startOffsetRatio = isShortScreen ? 0.1 : 0.15; // Muy temprano para pantallas pequeñas
+        } else if (isTablet) {
+          startOffsetRatio = 0.25;
+        }
+
+        const startOffset = sectionHeight * startOffsetRatio
         const scrolled = viewportHeight - rect.top - startOffset
         const totalScrollDistance = sectionHeight - startOffset
 
@@ -241,7 +294,19 @@ export default function Component() {
         const sectionHeight = rect.height
         const viewportHeight = window.innerHeight
 
-        const startOffset = sectionHeight * 0.4
+        // Aplicar el mismo ajuste responsivo para la nueva sección
+        const isMobile = window.innerWidth < 768
+        const isTablet = window.innerWidth < 1024
+        const isShortScreen = window.innerHeight < 700
+
+        let startOffsetRatio = 0.4; // Default para desktop
+        if (isMobile) {
+          startOffsetRatio = isShortScreen ? 0.1 : 0.15; // Muy temprano para pantallas pequeñas
+        } else if (isTablet) {
+          startOffsetRatio = 0.25;
+        }
+
+        const startOffset = sectionHeight * startOffsetRatio
         const scrolled = viewportHeight - rect.top - startOffset
         const totalScrollDistance = sectionHeight - startOffset
 
@@ -1205,15 +1270,17 @@ export default function Component() {
                 {[
                   { duration: "0:11", time: "15:31" },
                   { duration: "0:15", time: "15:32" }
-                ].map((audio, index) => (
+                ].map((audio, index) => {
+                  const threshold = getAnimationThreshold(0.05 + (index * 0.05));
+                  return (
                   <div
                     key={index}
                     className="flex justify-start mb-2.5"
                     style={{
-                      opacity: scrollProgress > 0.05 + (index * 0.05) ? 1 : 0,
-                      transform: `translateY(${scrollProgress > 0.05 + (index * 0.05) ? 0 : 30}px)`,
-                      transition: 'opacity 0.6s ease-out, transform 0.6s ease-out',
-                      transitionDelay: `${index * 0.15}s`
+                      opacity: scrollProgress > threshold ? 1 : 0,
+                      transform: `translateY(${scrollProgress > threshold ? 0 : 30}px)`,
+                      transition: `opacity ${getTransitionDuration()} ease-out, transform ${getTransitionDuration()} ease-out`,
+                      transitionDelay: getTransitionDelay(`${index * 0.15}s`)
                     }}
                   >
                     <div className="bg-[#005c4b] rounded-lg p-2.5 max-w-[85%] relative">
@@ -1271,16 +1338,17 @@ export default function Component() {
                       </div>
                     </div>
                   </div>
-                ))}
+                  );
+                })}
 
                 {/* Mensaje de texto largo - Proporcional */}
                 <div
                   className="flex justify-start mb-2.5"
                   style={{
-                    opacity: scrollProgress > 0.15 ? 1 : 0,
-                    transform: `translateY(${scrollProgress > 0.15 ? 0 : 30}px)`,
-                    transition: 'opacity 0.6s ease-out, transform 0.6s ease-out',
-                    transitionDelay: '0.2s'
+                    opacity: scrollProgress > getAnimationThreshold(0.15) ? 1 : 0,
+                    transform: `translateY(${scrollProgress > getAnimationThreshold(0.15) ? 0 : 30}px)`,
+                    transition: `opacity ${getTransitionDuration()} ease-out, transform ${getTransitionDuration()} ease-out`,
+                    transitionDelay: getTransitionDelay('0.2s')
                   }}
                 >
                   <div className="bg-[#202c33] rounded-lg p-2.5 max-w-[85%] relative">
@@ -1298,10 +1366,10 @@ export default function Component() {
                 <div
                   className="flex justify-start mb-2.5"
                   style={{
-                    opacity: scrollProgress > 0.2 ? 1 : 0,
-                    transform: `translateY(${scrollProgress > 0.2 ? 0 : 30}px)`,
-                    transition: 'opacity 0.6s ease-out, transform 0.6s ease-out',
-                    transitionDelay: '0.25s'
+                    opacity: scrollProgress > getAnimationThreshold(0.2) ? 1 : 0,
+                    transform: `translateY(${scrollProgress > getAnimationThreshold(0.2) ? 0 : 30}px)`,
+                    transition: `opacity ${getTransitionDuration()} ease-out, transform ${getTransitionDuration()} ease-out`,
+                    transitionDelay: getTransitionDelay('0.25s')
                   }}
                 >
                   <div className="bg-[#005c4b] rounded-lg p-2.5 max-w-[85%] relative">
@@ -1355,10 +1423,10 @@ export default function Component() {
                 <div
                   className="flex justify-start mb-2.5"
                   style={{
-                    opacity: scrollProgress > 0.25 ? 1 : 0,
-                    transform: `translateY(${scrollProgress > 0.25 ? 0 : 30}px)`,
-                    transition: 'opacity 0.6s ease-out, transform 0.6s ease-out',
-                    transitionDelay: '0.3s'
+                    opacity: scrollProgress > getAnimationThreshold(0.25) ? 1 : 0,
+                    transform: `translateY(${scrollProgress > getAnimationThreshold(0.25) ? 0 : 30}px)`,
+                    transition: `opacity ${getTransitionDuration()} ease-out, transform ${getTransitionDuration()} ease-out`,
+                    transitionDelay: getTransitionDelay('0.3s')
                   }}
                 >
                   <div className="bg-[#202c33] rounded-lg p-2.5 max-w-[85%] relative">
@@ -1376,10 +1444,10 @@ export default function Component() {
                 <div
                   className="flex justify-start mb-2.5"
                   style={{
-                    opacity: scrollProgress > 0.3 ? 1 : 0,
-                    transform: `translateY(${scrollProgress > 0.3 ? 0 : 30}px)`,
-                    transition: 'opacity 0.6s ease-out, transform 0.6s ease-out',
-                    transitionDelay: '0.35s'
+                    opacity: scrollProgress > getAnimationThreshold(0.3) ? 1 : 0,
+                    transform: `translateY(${scrollProgress > getAnimationThreshold(0.3) ? 0 : 30}px)`,
+                    transition: `opacity ${getTransitionDuration()} ease-out, transform ${getTransitionDuration()} ease-out`,
+                    transitionDelay: getTransitionDelay('0.35s')
                   }}
                 >
                   <div className="bg-[#005c4b] rounded-lg p-2.5 max-w-[85%] relative">
@@ -1439,10 +1507,10 @@ export default function Component() {
                 <div
                   className="flex justify-start mb-2.5"
                   style={{
-                    opacity: scrollProgress > 0.35 ? 1 : 0,
-                    transform: `translateY(${scrollProgress > 0.35 ? 0 : 30}px)`,
-                    transition: 'opacity 0.6s ease-out, transform 0.6s ease-out',
-                    transitionDelay: '0.4s'
+                    opacity: scrollProgress > getAnimationThreshold(0.35) ? 1 : 0,
+                    transform: `translateY(${scrollProgress > getAnimationThreshold(0.35) ? 0 : 30}px)`,
+                    transition: `opacity ${getTransitionDuration()} ease-out, transform ${getTransitionDuration()} ease-out`,
+                    transitionDelay: getTransitionDelay('0.4s')
                   }}
                 >
                   <div className="bg-[#202c33] rounded-lg p-2.5 max-w-[85%] relative">
