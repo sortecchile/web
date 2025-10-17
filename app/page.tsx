@@ -11,6 +11,8 @@ import UseCasesSection from './components/UseCasesSection'
 
 import dynamic from 'next/dynamic'
 import { useDarkMode } from './hooks/useDarkMode'
+import { useLanguageContext } from './i18n/LanguageProvider'
+import { LanguageSwitcher } from './components/LanguageSwitcher'
 
 const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
 
@@ -54,6 +56,7 @@ const ReactPlayer = dynamic(() => import('react-player/lazy'), { ssr: false })
 
 export default function Component() {
   const { isDark, toggleDarkMode } = useDarkMode()
+  const { t, language, isClient } = useLanguageContext()
   const [email, setEmail] = useState('')
   const [scrollProgress, setScrollProgress] = useState(0)
   const [scrollProgressNewSection, setScrollProgressNewSection] = useState(0)
@@ -200,28 +203,28 @@ export default function Component() {
 
   const qaPairs = [
     {
-      question: "¿Cómo funciona el sistema de voz de MIIDO?",
-      answer: "MIIDO utiliza tecnología avanzada de reconocimiento de voz para convertir los mensajes de audio de WhatsApp en texto. Luego, nuestro sistema procesa este texto para extraer información relevante y organizarla en tareas, registros y consultas."
+      question: language === 'es' ? "¿Cómo funciona el sistema de voz de MIIDO?" : "How does MIIDO's voice system work?",
+      answer: language === 'es' ? "MIIDO utiliza tecnología avanzada de reconocimiento de voz para convertir los mensajes de audio de WhatsApp en texto. Luego, nuestro sistema procesa este texto para extraer información relevante y organizarla en tareas, registros y consultas." : "MIIDO uses advanced voice recognition technology to convert WhatsApp audio messages into text. Our system then processes this text to extract relevant information and organize it into tasks, records, and queries."
     },
     {
-      question: "¿Es segura la información que envío a través de WhatsApp?",
-      answer: "Sí, la seguridad es nuestra prioridad. Utilizamos encriptación de extremo a extremo y cumplimos con las normativas de protección de datos más estrictas para garantizar que tu información esté siempre protegida."
+      question: language === 'es' ? "¿Es segura la información que envío a través de WhatsApp?" : "Is the information I send through WhatsApp secure?",
+      answer: language === 'es' ? "Sí, la seguridad es nuestra prioridad. Utilizamos encriptación de extremo a extremo y cumplimos con las normativas de protección de datos más estrictas para garantizar que tu información esté siempre protegida." : "Yes, security is our priority. We use end-to-end encryption and comply with the strictest data protection regulations to ensure your information is always protected."
     },
     {
-      question: "¿Puedo integrar MIIDO con otros sistemas que ya uso?",
-      answer: "Absolutamente. MIIDO está diseñado para ser flexible y se puede integrar con una variedad de sistemas de gestión empresarial, CRMs y otras herramientas de productividad. Contáctanos para discutir tus necesidades específicas de integración."
+      question: language === 'es' ? "¿Puedo integrar MIIDO con otros sistemas que ya uso?" : "Can I integrate MIIDO with other systems I already use?",
+      answer: language === 'es' ? "Absolutamente. MIIDO está diseñado para ser flexible y se puede integrar con una variedad de sistemas de gestión empresarial, CRMs y otras herramientas de productividad. Contáctanos para discutir tus necesidades específicas de integración." : "Absolutely. MIIDO is designed to be flexible and can integrate with a variety of enterprise management systems, CRMs, and other productivity tools. Contact us to discuss your specific integration needs."
     },
     {
-      question: "¿Qué tipo de soporte ofrecen?",
-      answer: "Ofrecemos soporte completo, incluyendo configuración inicial, capacitación para tu equipo y asistencia técnica continua. Nuestro equipo de soporte está disponible por chat, correo electrónico y llamadas telefónicas para asegurar que obtengas el máximo beneficio de MIIDO."
+      question: language === 'es' ? "¿Qué tipo de soporte ofrecen?" : "What kind of support do you offer?",
+      answer: language === 'es' ? "Ofrecemos soporte completo, incluyendo configuración inicial, capacitación para tu equipo y asistencia técnica continua. Nuestro equipo de soporte está disponible por chat, correo electrónico y llamadas telefónicas para asegurar que obtengas el máximo beneficio de MIIDO." : "We offer complete support, including initial setup, team training, and ongoing technical assistance. Our support team is available via chat, email, and phone calls to ensure you get the maximum benefit from MIIDO."
     },
     {
-      question: "¿Es MIIDO una empresa verificada por Meta?",
-      answer: "Si, MIIDO pasó por todo el proceso de verificación de Meta."
+      question: language === 'es' ? "¿Es MIIDO una empresa verificada por Meta?" : "Is MIIDO a Meta-verified company?",
+      answer: language === 'es' ? "Si, MIIDO pasó por todo el proceso de verificación de Meta." : "Yes, MIIDO has completed Meta's entire verification process."
     },
     {
-      question: "¿En qué industrias puedo usar MIIDO?",
-      answer: "Estamos enfocados en la industria Agro, pero nuestra tecnología puede ser usada en otras industrias como Logística, construcción, minería, etc."
+      question: language === 'es' ? "¿En qué industrias puedo usar MIIDO?" : "What industries can I use MIIDO in?",
+      answer: language === 'es' ? "Estamos enfocados en la industria Agro, pero nuestra tecnología puede ser usada en otras industrias como Logística, construcción, minería, etc." : "We are focused on the Agriculture industry, but our technology can be used in other industries such as Logistics, construction, mining, etc."
     }
   ]
 
@@ -323,10 +326,10 @@ export default function Component() {
   }, [])
 
   const ganttData = [
-    { task: "Poda", start: "12 ago.", end: "15 ago." },
-    { task: "Cosecha", start: "14 ago.", end: "17 ago." },
-    { task: "Aplicacion de fertilizante (cop...", start: "18 ago.", end: "21 ago." },
-    { task: "Aplicacion de fertilizante", start: "22 ago.", end: "28 ago." },
+    { task: language === 'es' ? "Poda" : "Pruning", start: "12 ago.", end: "15 ago." },
+    { task: language === 'es' ? "Cosecha" : "Harvest", start: "14 ago.", end: "17 ago." },
+    { task: language === 'es' ? "Aplicacion de fertilizante (cop..." : "Fertilizer application (cop...", start: "18 ago.", end: "21 ago." },
+    { task: language === 'es' ? "Aplicacion de fertilizante" : "Fertilizer application", start: "22 ago.", end: "28 ago." },
   ]
 
   const weeks = [
@@ -644,23 +647,26 @@ export default function Component() {
           </Link>
           <nav className="hidden md:flex gap-4 sm:gap-6">
             <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => handleNavClick(demoRef)}>
-              ¿Cómo funciona?
+              {language === 'es' ? '¿Cómo funciona?' : 'How it works?'}
             </button>
             {/* Temporalmente oculto hasta tener todos los videos */}
             {/* <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => handleNavClick(casesRef)}>
-              Casos de uso
+              {language === 'es' ? 'Casos de uso' : 'Use Cases'}
             </button> */}
             <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => handleNavClick(testimonialsRef)}>
-              Testimonios
+              {language === 'es' ? 'Testimonios' : 'Testimonials'}
             </button>
             <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => handleNavClick(aboutRef)}>
-              Últimas publicaciones
+              {language === 'es' ? 'Últimas publicaciones' : 'Latest publications'}
             </button>
             <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => handleNavClick(contactRef)}>
-              Contáctanos
+              {language === 'es' ? 'Contáctanos' : 'Contact us'}
             </button>
           </nav>
           <div className="flex items-center gap-4">
+            {/* Selector de idioma */}
+            {isClient && <LanguageSwitcher />}
+
             {/* Botón Ingresar */}
             <a
               href="https://dashboard.miido.cl/login"
@@ -671,7 +677,7 @@ export default function Component() {
               <Button
                 className="bg-white hover:bg-white dark:bg-[#111827] dark:hover:bg-[#111827] border border-[#38507E] hover:border-[#C2DB64] text-gray-800 dark:text-white rounded-full shadow-md hover:shadow-lg px-6 py-2 text-sm transition-all duration-300"
               >
-                Ingresar
+                {language === 'es' ? 'Ingresar' : 'Login'}
               </Button>
             </a>
 
@@ -690,20 +696,20 @@ export default function Component() {
         <div className="bg-white h-full w-64 shadow-lg pt-20 px-4">
           <nav className="flex flex-col gap-4">
             <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => { handleNavClick(demoRef); closeMobileMenu(); }}>
-              ¿Cómo funciona?
+              {language === 'es' ? '¿Cómo funciona?' : 'How it works?'}
             </button>
             {/* Temporalmente oculto hasta tener todos los videos */}
             {/* <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => { handleCasesClick(); closeMobileMenu(); }}>
               Casos de uso
             </button> */}
             <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => { handleTestimonialsClick(); closeMobileMenu(); }}>
-              Testimonios
+              {language === 'es' ? 'Testimonios' : 'Testimonials'}
             </button>
             <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => { handleaboutClick(); closeMobileMenu(); }}>
-              Últimas publicaciones
+              {language === 'es' ? 'Últimas publicaciones' : 'Latest publications'}
             </button>
             <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => { handleContactClick(); closeMobileMenu(); }}>
-              Contáctanos
+              {language === 'es' ? 'Contáctanos' : 'Contact us'}
             </button>
 
             {/* Botón Ingresar para móvil */}
@@ -716,7 +722,7 @@ export default function Component() {
               <Button
                 className="w-full bg-white hover:bg-white dark:bg-[#111827] dark:hover:bg-[#111827] border border-[#38507E] hover:border-[#C2DB64] text-gray-800 dark:text-white rounded-full shadow-md hover:shadow-lg px-6 py-2 text-sm transition-all duration-300"
               >
-                Ingresar
+                {language === 'es' ? 'Ingresar' : 'Login'}
               </Button>
             </a>
           </nav>
@@ -794,7 +800,7 @@ export default function Component() {
                 transform: animationsReady ? 'translateY(-20px)' : 'none'
               }}
             >
-              <span className="text-xs font-medium text-gray-800 dark:text-gray-300">Apoyados por</span>
+              <span className="text-xs font-medium text-gray-800 dark:text-gray-300">{language === 'es' ? 'Apoyados por' : 'Backed by'}</span>
               <div className="flex items-center gap-3 sm:gap-4 md:gap-6">
                 <Image
                   src="./platanus-logo.png"
@@ -824,7 +830,7 @@ export default function Component() {
                     transform: animationsReady ? 'translateY(20px)' : 'none'
                   }}
                 >
-                   AI agents en agricultura - MIIDO
+                   {language === 'es' ? 'AI agents en agricultura - MIIDO' : 'AI agents in agriculture - MIIDO'}
                   <span className="animate-blink">|</span>
                 </h1>
                 <p
@@ -835,7 +841,11 @@ export default function Component() {
                     transform: animationsReady ? 'translateY(20px)' : 'none'
                   }}
                 >
-                  Tu copiloto de IA en el campo: automatiza, predice y toma mejores decisiones agrícolas, <strong>sin complicaciones y desde WhatsApp</strong>.
+                  {language === 'es'
+                    ? 'Tu copiloto de IA en el campo: automatiza, predice y toma mejores decisiones agrícolas, '
+                    : 'Your AI copilot in the field: automate, predict and make better agricultural decisions, '
+                  }
+                  <strong>{language === 'es' ? 'sin complicaciones y desde WhatsApp' : 'without complications and from WhatsApp'}</strong>.
                 </p>
               </div>
 
@@ -855,12 +865,12 @@ export default function Component() {
                     rel="noopener noreferrer"
                     className="max-w-lg flex-1 inline-flex items-center justify-center px-4 py-2 text-white bg-[#1A202C] rounded-md hover:bg-[#2D3748] focus:outline-none transform transition-all duration-300 hover:scale-105 hover:shadow-lg relative overflow-hidden group"
                   >
-                    <span className="relative z-10">Empieza gratis!</span>
+                    <span className="relative z-10">{language === 'es' ? 'Empieza gratis!' : 'Start free!'}</span>
                     <span className="absolute inset-0 bg-[#2D3748] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
                   </a>
                 </div>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                  No se necesita tarjeta de crédito.
+                  {language === 'es' ? 'No se necesita tarjeta de crédito.' : 'No credit card required.'}
                 </p>
               </div>
 
@@ -907,7 +917,7 @@ export default function Component() {
                     transform: animationsReady ? 'translateY(20px)' : 'none'
                   }}
                 >
-                  Descubre cómo MIIDO transforma tu flujo de trabajo.
+                  {language === 'es' ? 'Descubre cómo MIIDO transforma tu flujo de trabajo.' : 'Discover how MIIDO transforms your workflow.'}
                 </p>
 
                 {/* Botón para ver casos de éxito - Temporalmente comentado */}
@@ -1165,10 +1175,13 @@ export default function Component() {
         <section className="w-full py-12 md:py-24 lg:py-32 overflow-hidden" ref={demoRef}>
   <div className="container px-4 md:px-6">
     <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-6 text-gray-900 dark:text-white">
-      Véalo en acción
+      {language === 'es' ? 'Véalo en acción' : 'See it in action'}
     </h2>
     <p className="mb-6 text-gray-600 dark:text-gray-400 text-center">
-      Todos los audios que se envíen en el día a día de la operación, lo ordenamos y mostramos automáticamente en el Dashboard.
+      {language === 'es'
+        ? 'Todos los audios que se envíen en el día a día de la operación, lo ordenamos y mostramos automáticamente en el Dashboard.'
+        : 'All the audios sent during daily operations are automatically organized and displayed in the Dashboard.'
+      }
     </p>
     <div className="flex flex-col lg:flex-row items-start justify-center gap-8">
       {/* iPhone Real Auténtico - RESPONSIVO */}
@@ -1254,10 +1267,13 @@ export default function Component() {
                   <div className="bg-[#202c33] rounded-lg p-2.5 max-w-[85%] relative">
                     <div className="absolute left-[-6px] top-2.5 w-0 h-0 border-t-[6px] border-t-transparent border-r-[6px] border-r-[#202c33] border-b-[6px] border-b-transparent"></div>
                     <div className="text-xs text-gray-300 mb-1">
-                      Puedes hacer preguntas sobre toda la data de tu empresa o registrar información de lo que necesites!
+                      {language === 'es'
+                        ? 'Puedes hacer preguntas sobre toda la data de tu empresa o registrar información de lo que necesites!'
+                        : 'You can ask questions about all your company data or register information about what you need!'
+                      }
                     </div>
                     <div className="text-xs text-gray-300 mb-1.5">
-                      ¡Gracias por colaborar 🚜!
+                      {language === 'es' ? '¡Gracias por colaborar 🚜!' : 'Thank you for collaborating 🚜!'}
                     </div>
                     <div className="text-[10px] text-gray-500 mb-1.5">Powered by Miido</div>
                     <div className="flex justify-end">
@@ -1354,7 +1370,10 @@ export default function Component() {
                   <div className="bg-[#202c33] rounded-lg p-2.5 max-w-[85%] relative">
                     <div className="absolute left-[-6px] top-2.5 w-0 h-0 border-t-[6px] border-t-transparent border-r-[6px] border-r-[#202c33] border-b-[6px] border-b-transparent"></div>
                     <div className="text-xs text-gray-300 mb-1.5">
-                      En 2023 cosechaste 12,450 kilos de cerezas y en 2024 has cosechado 15,280 kilos hasta ahora. ¡Un aumento del 23%! La temporada alta fue en diciembre con 3,200 kilos. ¿Quieres ver más detalles?
+                      {language === 'es'
+                        ? 'En 2023 cosechaste 12,450 kilos de cerezas y en 2024 has cosechado 15,280 kilos hasta ahora. ¡Un aumento del 23%! La temporada alta fue en diciembre con 3,200 kilos. ¿Quieres ver más detalles?'
+                        : 'In 2023 you harvested 12,450 kilos of cherries and in 2024 you have harvested 15,280 kilos so far. A 23% increase! Peak season was in December with 3,200 kilos. Would you like to see more details?'
+                      }
                     </div>
                     <div className="flex justify-end">
                       <span className="text-[10px] text-gray-500">15:32</span>
@@ -1432,7 +1451,10 @@ export default function Component() {
                   <div className="bg-[#202c33] rounded-lg p-2.5 max-w-[85%] relative">
                     <div className="absolute left-[-6px] top-2.5 w-0 h-0 border-t-[6px] border-t-transparent border-r-[6px] border-r-[#202c33] border-b-[6px] border-b-transparent"></div>
                     <div className="text-xs text-gray-300 mb-1.5">
-                      La poda en 40 hectáreas con 15 personas ha sido registrada con éxito, ¿deseas que te ayude con algo más?
+                      {language === 'es'
+                        ? 'La poda en 40 hectáreas con 15 personas ha sido registrada con éxito, ¿deseas que te ayude con algo más?'
+                        : 'Pruning on 40 hectares with 15 people has been successfully registered. Would you like me to help you with anything else?'
+                      }
                     </div>
                     <div className="flex justify-end">
                       <span className="text-[10px] text-gray-500">15:34</span>
@@ -1516,7 +1538,10 @@ export default function Component() {
                   <div className="bg-[#202c33] rounded-lg p-2.5 max-w-[85%] relative">
                     <div className="absolute left-[-6px] top-2.5 w-0 h-0 border-t-[6px] border-t-transparent border-r-[6px] border-r-[#202c33] border-b-[6px] border-b-transparent"></div>
                     <div className="text-xs text-gray-300 mb-1.5">
-                      Se ha registrado con éxito la falla de la maquinaria 125, en el cuartel 3 por rueda pinchada. ¿Quieres ver qué máquinas tienes con fallas y cuáles están reparadas?
+                      {language === 'es'
+                        ? 'Se ha registrado con éxito la falla de la maquinaria 125, en el cuartel 3 por rueda pinchada. ¿Quieres ver qué máquinas tienes con fallas y cuáles están reparadas?'
+                        : 'Machinery 125 failure has been successfully registered in field 3 due to a flat tire. Would you like to see which machines have failures and which are repaired?'
+                      }
                     </div>
                     <div className="flex justify-end">
                       <span className="text-[10px] text-gray-500">15:36</span>
@@ -1537,7 +1562,7 @@ export default function Component() {
                 <div className="flex-1 bg-[#2a3942] rounded-full px-3 py-1.5 flex items-center gap-1.5">
                   <input
                     type="text"
-                    placeholder="Escribe un mensaje"
+                    placeholder={language === 'es' ? 'Escribe un mensaje' : 'Type a message'}
                     className="flex-1 outline-none text-xs bg-transparent text-white placeholder-gray-400"
                   />
                 </div>
@@ -1568,10 +1593,10 @@ export default function Component() {
                   {/* Widget: Gráfico de Barras - Estado de Maquinaria */}
                   <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 h-[220px]">
                     <div className="flex justify-between items-center mb-3">
-                      <h3 className="text-sm font-semibold dark:text-white text-gray-700">Estado de Maquinaria</h3>
+                      <h3 className="text-sm font-semibold dark:text-white text-gray-700">{language === 'es' ? 'Estado de Maquinaria' : 'Machinery Status'}</h3>
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                        <span className="text-xs text-gray-500">En vivo</span>
+                        <span className="text-xs text-gray-500">{language === 'es' ? 'En vivo' : 'Live'}</span>
                       </div>
                     </div>
 
@@ -1585,7 +1610,7 @@ export default function Component() {
                             style={{ height: `${Math.max(scrollProgress * 80, 8)}%` }}
                           ></div>
                         </div>
-                        <span className="text-xs text-gray-600 dark:text-gray-400 mt-1">Operativas</span>
+                        <span className="text-xs text-gray-600 dark:text-gray-400 mt-1">{language === 'es' ? 'Operativas' : 'Operational'}</span>
                         <span className="text-sm font-bold text-green-600">{Math.round(scrollProgress * 12)}</span>
                       </div>
 
@@ -1597,7 +1622,7 @@ export default function Component() {
                             style={{ height: `${Math.max(scrollProgress * 25, 8)}%` }}
                           ></div>
                         </div>
-                        <span className="text-xs text-gray-600 dark:text-gray-400 mt-1">Con Fallas</span>
+                        <span className="text-xs text-gray-600 dark:text-gray-400 mt-1">{language === 'es' ? 'Con Fallas' : 'With Failures'}</span>
                         <span className="text-sm font-bold text-red-600">{Math.round(scrollProgress * 3)}</span>
                       </div>
 
@@ -1609,23 +1634,23 @@ export default function Component() {
                             style={{ height: `${Math.max(scrollProgress * 40, 8)}%` }}
                           ></div>
                         </div>
-                        <span className="text-xs text-gray-600 dark:text-gray-400 mt-1">Mantenim.</span>
+                        <span className="text-xs text-gray-600 dark:text-gray-400 mt-1">{language === 'es' ? 'Mantenim.' : 'Maintenance'}</span>
                         <span className="text-sm font-bold text-yellow-600">{Math.round(scrollProgress * 2)}</span>
                       </div>
                     </div>
 
                     {/* Indicador de última actualización */}
                     <div className="text-xs text-gray-500 text-center">
-                      Actualizado hace {Math.round(scrollProgress * 2)} min
+                      {language === 'es' ? 'Actualizado hace' : 'Updated'} {Math.round(scrollProgress * 2)} {language === 'es' ? 'min' : 'min ago'}
                     </div>
                   </div>
                   {/* Widget: Gráfico de Dona - Distribución de Cultivos */}
                   <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 h-[220px]">
                     <div className="flex justify-between items-center mb-3">
-                      <h3 className="text-sm font-semibold dark:text-white text-gray-700">Distribución de Cultivos</h3>
+                      <h3 className="text-sm font-semibold dark:text-white text-gray-700">{language === 'es' ? 'Distribución de Cultivos' : 'Crop Distribution'}</h3>
                       <div className="flex items-center gap-1">
                         <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                        <span className="text-xs text-green-600">{Math.round(scrollProgress * 450)} hectáreas</span>
+                        <span className="text-xs text-green-600">{Math.round(scrollProgress * 450)} {language === 'es' ? 'hectáreas' : 'hectares'}</span>
                       </div>
                     </div>
 
@@ -1668,7 +1693,7 @@ export default function Component() {
                         <div className="absolute inset-0 flex items-center justify-center">
                           <div className="text-center">
                             <div className="text-lg font-bold text-gray-900 dark:text-white">{Math.round(scrollProgress * 450)}</div>
-                            <div className="text-xs text-gray-500">hectáreas</div>
+                            <div className="text-xs text-gray-500">{language === 'es' ? 'hectáreas' : 'hectares'}</div>
                           </div>
                         </div>
                       </div>
@@ -1679,21 +1704,21 @@ export default function Component() {
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
                           <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                          <span className="text-gray-600 dark:text-gray-400">Paltas</span>
+                          <span className="text-gray-600 dark:text-gray-400">{language === 'es' ? 'Paltas' : 'Avocados'}</span>
                         </div>
                         <span className="font-medium">{Math.round(scrollProgress * 180)} ha</span>
                       </div>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
                           <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                          <span className="text-gray-600 dark:text-gray-400">Arándanos</span>
+                          <span className="text-gray-600 dark:text-gray-400">{language === 'es' ? 'Arándanos' : 'Blueberries'}</span>
                         </div>
                         <span className="font-medium">{Math.round(scrollProgress * 150)} ha</span>
                       </div>
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
                           <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                          <span className="text-gray-600 dark:text-gray-400">Cerezas</span>
+                          <span className="text-gray-600 dark:text-gray-400">{language === 'es' ? 'Cerezas' : 'Cherries'}</span>
                         </div>
                         <span className="font-medium">{Math.round(scrollProgress * 120)} ha</span>
                       </div>
@@ -1702,23 +1727,23 @@ export default function Component() {
                   {/* Widget: Gráfico de Líneas - Total Kilos Exportados por Semana */}
                   <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 md:col-span-2">
                     <div className="flex justify-between items-center mb-4">
-                      <h3 className="text-sm font-semibold dark:text-white text-gray-700">Total kilos exportados por semana</h3>
+                      <h3 className="text-sm font-semibold dark:text-white text-gray-700">{language === 'es' ? 'Total kilos exportados por semana' : 'Total kilos exported per week'}</h3>
                       <div className="flex items-center gap-4 text-xs">
                         <div className="flex items-center gap-2">
                           <div className="w-2 h-2 bg-cyan-500 rounded-full"></div>
-                          <span className="text-gray-500">Total Kg Exp</span>
+                          <span className="text-gray-500">{language === 'es' ? 'Total Kg Exp' : 'Total Kg Exp'}</span>
                         </div>
                         <div className="flex items-center gap-2">
                           <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                          <span className="text-gray-500">Promedio Total US</span>
+                          <span className="text-gray-500">{language === 'es' ? 'Promedio Total US' : 'Average Total US'}</span>
                         </div>
                         <div className="flex items-center gap-2">
                           <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                          <span className="text-gray-500">Mínimo Total US</span>
+                          <span className="text-gray-500">{language === 'es' ? 'Mínimo Total US' : 'Minimum Total US'}</span>
                         </div>
                         <div className="flex items-center gap-2">
                           <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                          <span className="text-gray-500">Máximo Total US</span>
+                          <span className="text-gray-500">{language === 'es' ? 'Máximo Total US' : 'Maximum Total US'}</span>
                         </div>
                       </div>
                     </div>
@@ -1826,17 +1851,17 @@ export default function Component() {
                   {/* Widget: Stress de Plantas por Huerto */}
                   <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700">
                     <div className="flex justify-between items-center mb-4">
-                      <h3 className="text-sm font-semibold dark:text-white text-gray-700">Stress de Plantas por Huerto</h3>
+                      <h3 className="text-sm font-semibold dark:text-white text-gray-700">{language === 'es' ? 'Stress de Plantas por Huerto' : 'Plant Stress by Orchard'}</h3>
                       <div className="flex items-center gap-1">
                         <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                        <span className="text-xs text-red-600">Alerta activa</span>
+                        <span className="text-xs text-red-600">{language === 'es' ? 'Alerta activa' : 'Active alert'}</span>
                       </div>
                     </div>
 
                     {/* Gráfico de Barras Horizontales */}
                     <div className="space-y-3">
                       <div className="flex items-center gap-2">
-                        <span className="text-xs text-gray-600 dark:text-gray-400 w-16">Huerto A</span>
+                        <span className="text-xs text-gray-600 dark:text-gray-400 w-16">{language === 'es' ? 'Huerto A' : 'Orchard A'}</span>
                         <div className="flex-1 bg-gray-200 rounded-full h-3">
                           <div
                             className="bg-red-500 h-3 rounded-full transition-all duration-1000 ease-out"
@@ -1847,7 +1872,7 @@ export default function Component() {
                       </div>
 
                       <div className="flex items-center gap-2">
-                        <span className="text-xs text-gray-600 dark:text-gray-400 w-16">Huerto B</span>
+                        <span className="text-xs text-gray-600 dark:text-gray-400 w-16">{language === 'es' ? 'Huerto B' : 'Orchard B'}</span>
                         <div className="flex-1 bg-gray-200 rounded-full h-3">
                           <div
                             className="bg-yellow-500 h-3 rounded-full transition-all duration-1000 ease-out delay-200"
@@ -1858,7 +1883,7 @@ export default function Component() {
                       </div>
 
                       <div className="flex items-center gap-2">
-                        <span className="text-xs text-gray-600 dark:text-gray-400 w-16">Huerto C</span>
+                        <span className="text-xs text-gray-600 dark:text-gray-400 w-16">{language === 'es' ? 'Huerto C' : 'Orchard C'}</span>
                         <div className="flex-1 bg-gray-200 rounded-full h-3">
                           <div
                             className="bg-green-500 h-3 rounded-full transition-all duration-1000 ease-out delay-400"
@@ -1869,7 +1894,7 @@ export default function Component() {
                       </div>
 
                       <div className="flex items-center gap-2">
-                        <span className="text-xs text-gray-600 dark:text-gray-400 w-16">Huerto D</span>
+                        <span className="text-xs text-gray-600 dark:text-gray-400 w-16">{language === 'es' ? 'Huerto D' : 'Orchard D'}</span>
                         <div className="flex-1 bg-gray-200 rounded-full h-3">
                           <div
                             className="bg-green-500 h-3 rounded-full transition-all duration-1000 ease-out delay-600"
@@ -1884,15 +1909,15 @@ export default function Component() {
                     <div className="mt-4 flex justify-between text-xs">
                       <div className="flex items-center gap-1">
                         <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                        <span className="text-gray-600 dark:text-gray-400">Bajo (&lt;40%)</span>
+                        <span className="text-gray-600 dark:text-gray-400">{language === 'es' ? 'Bajo' : 'Low'} (&lt;40%)</span>
                       </div>
                       <div className="flex items-center gap-1">
                         <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                        <span className="text-gray-600 dark:text-gray-400">Medio (40-70%)</span>
+                        <span className="text-gray-600 dark:text-gray-400">{language === 'es' ? 'Medio' : 'Medium'} (40-70%)</span>
                       </div>
                       <div className="flex items-center gap-1">
                         <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                        <span className="text-gray-600 dark:text-gray-400">Alto (&gt;70%)</span>
+                        <span className="text-gray-600 dark:text-gray-400">{language === 'es' ? 'Alto' : 'High'} (&gt;70%)</span>
                       </div>
                     </div>
                   </div>
@@ -1900,8 +1925,8 @@ export default function Component() {
                   {/* Widget: Eficiencia de Labores por Persona */}
                   <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700">
                     <div className="flex justify-between items-center mb-4">
-                      <h3 className="text-sm font-semibold dark:text-white text-gray-700">Eficiencia de Labores por Persona</h3>
-                      <span className="text-xs text-gray-500">Última semana</span>
+                      <h3 className="text-sm font-semibold dark:text-white text-gray-700">{language === 'es' ? 'Eficiencia de Labores por Persona' : 'Labor Efficiency by Person'}</h3>
+                      <span className="text-xs text-gray-500">{language === 'es' ? 'Última semana' : 'Last week'}</span>
                     </div>
 
                     {/* Lista de trabajadores con eficiencia */}
@@ -1921,7 +1946,7 @@ export default function Component() {
                               style={{ width: `${scrollProgress * 94}%` }}
                             ></div>
                           </div>
-                          <span className="text-xs text-gray-500">Cosecha - {Math.round(scrollProgress * 850)} kg/día</span>
+                          <span className="text-xs text-gray-500">{language === 'es' ? 'Cosecha' : 'Harvest'} - {Math.round(scrollProgress * 850)} kg/día</span>
                         </div>
                       </div>
 
@@ -1940,7 +1965,7 @@ export default function Component() {
                               style={{ width: `${scrollProgress * 87}%` }}
                             ></div>
                           </div>
-                          <span className="text-xs text-gray-500">Poda - {Math.round(scrollProgress * 45)} árboles/día</span>
+                          <span className="text-xs text-gray-500">{language === 'es' ? 'Poda' : 'Pruning'} - {Math.round(scrollProgress * 45)} {language === 'es' ? 'árboles/día' : 'trees/day'}</span>
                         </div>
                       </div>
 
@@ -1959,7 +1984,7 @@ export default function Component() {
                               style={{ width: `${scrollProgress * 72}%` }}
                             ></div>
                           </div>
-                          <span className="text-xs text-gray-500">Riego - {Math.round(scrollProgress * 12)} ha/día</span>
+                          <span className="text-xs text-gray-500">{language === 'es' ? 'Riego' : 'Irrigation'} - {Math.round(scrollProgress * 12)} ha/día</span>
                         </div>
                       </div>
                     </div>
@@ -1975,34 +2000,34 @@ export default function Component() {
         <section className="w-full py-12 md:py-24 lg:py-32">
 
           <div className="container px-4 md:px-6">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-6 text-gray-900 dark:text-white">Principales beneficios</h2>
+          <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-6 text-gray-900 dark:text-white">{language === 'es' ? 'Principales beneficios' : 'Main Benefits'}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="flex items-start space-x-4">
                 <Users className="h-6 w-6 text-primary mt-1" style={{color: '#38507E'}} />
                 <div>
-                  <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white" >Amigable con el usuario</h3>
-                  <p className="text-gray-500 dark:text-gray-400">Aprovecha la familiaridad de WhatsApp para una adopción fácil en todo tu equipo.</p>
+                  <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white" >{language === 'es' ? 'Amigable con el usuario' : 'User-Friendly'}</h3>
+                  <p className="text-gray-500 dark:text-gray-400">{language === 'es' ? 'Aprovecha la familiaridad de WhatsApp para una adopción fácil en todo tu equipo.' : 'Leverage WhatsApp familiarity for easy adoption across your team.'}</p>
                 </div>
               </div>
               <div className="flex items-start space-x-4">
                 <BarChart2 className="h-6 w-6 text-primary mt-1" style={{ color: '#51A09A'}} />
                 <div>
-                  <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white" >Información accionable</h3>
-                  <p className="text-gray-500 dark:text-gray-400">Convierte los mensajes de voz en datos estructurados para una mejor toma de decisiones.</p>
+                  <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white" >{language === 'es' ? 'Información accionable' : 'Actionable Information'}</h3>
+                  <p className="text-gray-500 dark:text-gray-400">{language === 'es' ? 'Convierte los mensajes de voz en datos estructurados para una mejor toma de decisiones.' : 'Convert voice messages into structured data for better decision-making.'}</p>
                 </div>
               </div>
               <div className="flex items-start space-x-4">
                 <Mic className="h-6 w-6 text-primary mt-1" style={{ color:'#51A09A'}}/>
                 <div>
-                  <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white" >Enfoque centrado en la voz</h3>
-                  <p className="text-gray-500 dark:text-gray-400">Ideal para industrias donde escribir no siempre es conveniente o posible.</p>
+                  <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white" >{language === 'es' ? 'Enfoque centrado en la voz' : 'Voice-First Approach'}</h3>
+                  <p className="text-gray-500 dark:text-gray-400">{language === 'es' ? 'Ideal para industrias donde escribir no siempre es conveniente o posible.' : 'Ideal for industries where typing is not always convenient or possible.'}</p>
                 </div>
               </div>
               <div className="flex items-start space-x-4">
                 <CheckCircle className="h-6 w-6 text-primary mt-1" style={{ color: '#C2DB64'}}/>
                 <div>
-                  <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">Flujos de trabajo optimizados</h3>
-                  <p className="text-gray-500 dark:text-gray-400">Simplifica la creación de tareas, el seguimiento y la recopilación de información en un solo lugar.</p>
+                  <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">{language === 'es' ? 'Flujos de trabajo optimizados' : 'Optimized Workflows'}</h3>
+                  <p className="text-gray-500 dark:text-gray-400">{language === 'es' ? 'Simplifica la creación de tareas, el seguimiento y la recopilación de información en un solo lugar.' : 'Simplify task creation, tracking, and information collection in one place.'}</p>
                 </div>
               </div>
             </div>
@@ -2021,9 +2046,9 @@ export default function Component() {
 <section ref={newSectionRef} className="w-full py-12 md:py-24 lg:py-32 overflow-hidden">
   <div className="container px-4 md:px-6">
   <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-6 text-gray-900 dark:text-white">
-      Haz preguntas sobre la data levantada
+      {language === 'es' ? 'Haz preguntas sobre la data levantada' : 'Ask Questions About Collected Data'}
     </h2>
-    <p className="mb-6 text-gray-500 dark:text-gray-400 text-center">Puedes hacer preguntas en el mismo chat, sobre toda la información que las personas están levantando. ¡Mira este ejemplo!</p>
+    <p className="mb-6 text-gray-500 dark:text-gray-400 text-center">{language === 'es' ? 'Puedes hacer preguntas en el mismo chat, sobre toda la información que las personas están levantando. ¡Mira este ejemplo!' : 'You can ask questions in the same chat about all the information people are collecting. Check out this example!'}</p>
     <div className="flex flex-col lg:flex-row items-start justify-center gap-8">
       {/* iPhone Real Auténtico - Proporciones exactas 146.7mm x 71.5mm */}
       <div className="w-full max-w-[300px] mx-auto">
@@ -2268,7 +2293,7 @@ export default function Component() {
         transform: 'translateY(20px)'
       }}
     >
-      Nuestros clientes nos aman
+      {language === 'es' ? 'Nuestros clientes nos aman' : 'Our clients love us'}
     </h2>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
 
@@ -2310,7 +2335,7 @@ export default function Component() {
         </div>
         <div className="p-4">
           <h3 className="font-semibold text-base text-gray-900 dark:text-white">Guillermo Baeza</h3>
-          <p className="text-sm text-gray-600 dark:text-gray-300">Jefe de campo en Agrícola Manantiales (Curicó) 🇨🇱</p>
+          <p className="text-sm text-gray-600 dark:text-gray-300">{language === 'es' ? 'Jefe de campo en Agrícola Manantiales (Curicó) 🇨🇱' : 'Field Manager at Agrícola Manantiales (Curicó) 🇨🇱'}</p>
         </div>
       </div>
 
@@ -2331,7 +2356,7 @@ export default function Component() {
               opacity: 0
             }}
           >
-            &quot;MIIDO se ha convertido en nuestra herramienta más valiosa para dar inteligencia a los datos que se levantan en el día a día de la operación.&quot;
+            {language === 'es' ? '&quot;MIIDO se ha convertido en nuestra herramienta más valiosa para dar inteligencia a los datos que se levantan en el día a día de la operación.&quot;' : '&quot;MIIDO has become our most valuable tool for adding intelligence to the data we collect in our daily operations.&quot;'}
           </blockquote>
           <div
             className="flex items-center"
@@ -2349,7 +2374,7 @@ export default function Component() {
             />
             <div>
               <h3 className="font-semibold text-sm text-gray-900 dark:text-white">Felipe Sanchez</h3>
-              <p className="text-xs text-gray-600 dark:text-gray-300">Gerente General - Fundo Santa Eugenia (Paine) 🇨🇱</p>
+              <p className="text-xs text-gray-600 dark:text-gray-300">{language === 'es' ? 'Gerente General - Fundo Santa Eugenia (Paine) 🇨🇱' : 'General Manager - Fundo Santa Eugenia (Paine) 🇨🇱'}</p>
             </div>
           </div>
         </div>
@@ -2392,7 +2417,7 @@ export default function Component() {
         </div>
         <div className="p-4">
           <h3 className="font-semibold text-sm text-gray-900 dark:text-white">Tatiana Morera</h3>
-          <p className="text-xs text-gray-600 dark:text-gray-300">Fundadora de TMV Agroexportación (Costa Rica) 🇨🇷🍍</p>
+          <p className="text-xs text-gray-600 dark:text-gray-300">{language === 'es' ? 'Fundadora de TMV Agroexportación (Costa Rica) 🇨🇷🍍' : 'Founder of TMV Agroexportación (Costa Rica) 🇨🇷🍍'}</p>
         </div>
       </div>
 
@@ -2417,7 +2442,7 @@ export default function Component() {
         transform: 'translateY(20px)'
       }}
     >
-      Preguntas Frecuentes
+      {language === 'es' ? 'Preguntas Frecuentes' : 'Frequently Asked Questions'}
     </h2>
     <div className="max-w-3xl mx-auto space-y-4">
       {qaPairs.map((pair, index) => (
@@ -2475,7 +2500,7 @@ export default function Component() {
                     transform: 'translateY(20px)'
                   }}
                 >
-                  Sube a tu gente al tren de la tecnología.
+                  {language === 'es' ? 'Sube a tu gente al tren de la tecnología.' : 'Get Your Team on the Technology Train.'}
                 </h2>
                 <p
                   className="mx-auto max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400"
@@ -2485,7 +2510,7 @@ export default function Component() {
                     transform: 'translateY(20px)'
                   }}
                 >
-                  Únete a una digitalización inclusiva y optimiza los procesos de tu compañía hoy mismo.
+                  {language === 'es' ? 'Únete a una digitalización inclusiva y optimiza los procesos de tu compañía hoy mismo.' : 'Join an inclusive digitalization and optimize your company processes today.'}
                 </p>
               </div>
               <div
@@ -2499,7 +2524,7 @@ export default function Component() {
                 <form onSubmit={handleSubmit} className="flex space-x-2">
                   <Input
                     className="max-w-lg flex-1 focus:ring-2 focus:ring-[#51A09A] transition-all duration-300"
-                    placeholder="Ingresa tu mail"
+                    placeholder={language === 'es' ? 'Ingresa tu mail' : 'Enter your email'}
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -2509,7 +2534,7 @@ export default function Component() {
                     type="submit"
                     className="bg-[#38507E] hover:bg-[#51A09A] transition-colors duration-300 transform hover:scale-105"
                   >
-                    Comienza ahora
+                    {language === 'es' ? 'Comienza ahora' : 'Start Now'}
                   </Button>
                 </form>
                 <p
@@ -2519,7 +2544,7 @@ export default function Component() {
                     opacity: 0
                   }}
                 >
-                  1 mes gratis, sin tarjeta de crédito.
+                  {language === 'es' ? '1 mes gratis, sin tarjeta de crédito.' : '1 month free, no credit card required.'}
                 </p>
               </div>
             </div>
@@ -2527,13 +2552,13 @@ export default function Component() {
         </section>
       </main>
       <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
-        <p className="text-xs text-gray-500 dark:text-gray-400">© 2023 Citylink SpA. All rights reserved.</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400">© 2023 Citylink SpA. {language === 'es' ? 'Todos los derechos reservados.' : 'All rights reserved.'}</p>
         <nav className="sm:ml-auto flex gap-4 sm:gap-6">
           <Link className="text-xs hover:underline underline-offset-4" href="#">
-            Terms of Service
+            {language === 'es' ? 'Términos de Servicio' : 'Terms of Service'}
           </Link>
           <Link className="text-xs hover:underline underline-offset-4" href="#">
-            Privacy
+            {language === 'es' ? 'Privacidad' : 'Privacy'}
           </Link>
         </nav>
       </footer>
@@ -2552,7 +2577,7 @@ export default function Component() {
   }}
 >
   <MessageCircle size={20} className="mr-2 animate-pulse" />
-  <span className="text-sm font-medium">¡Habla con nosotros!</span>
+  <span className="text-sm font-medium">{language === 'es' ? '¡Habla con nosotros!' : 'Talk to us!'}</span>
 </a>
 
 

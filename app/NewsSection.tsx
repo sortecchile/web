@@ -1,14 +1,18 @@
+'use client';
+
 import { useRef, useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { useLanguageContext } from './i18n/LanguageProvider'
 
 const NewsSection = () => {
+  const { language } = useLanguageContext()
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const [showLeftArrow, setShowLeftArrow] = useState(false)
   const [showRightArrow, setShowRightArrow] = useState(true)
 
-  const newsItems = [
+  const newsItemsEs = [
     {
       id: 9,
       title: "Primer lugar Desafío Conectagro de la Sociedad Nacional de Agricultura",
@@ -65,8 +69,68 @@ const NewsSection = () => {
       image: "./START.svg",
       link: "https://www.startglobal.org/fellowship/fellows",
     },
-    // Add more news items as needed
   ]
+
+  const newsItemsEn = [
+    {
+      id: 9,
+      title: "First place in Conectagro Challenge by the National Agricultural Society",
+      description: "We won first place in this challenge organized by SNA and SQM, which validates MIIDO's purpose in terms of digitalization in the agro-industry.",
+      image: "./Conectagro.png",
+      link: "https://www.instagram.com/reel/DCuDrfcRVy9/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+    },
+    {
+      id: 9,
+      title: "MIIDO among 15 startups selected by IICA",
+      description: "Selected to participate in Digital Agriculture Week at IICA Costa Rica, a unique opportunity where we connected with relevant actors in the Agrotech ecosystem.",
+      image: "./IICA.png",
+      link: "https://www.linkedin.com/posts/miido_digitalizaciaejn-agtech-innovaciaejn-activity-7249010677158150144-_mdr?utm_source=share&utm_medium=member_desktop",
+    },
+    {
+      id: 8,
+      title: "1st LATAM forum for young people in agriculture",
+      description: "We participated in this incredible event where new technologies, industry trends, leadership and more were discussed at CEPAL, Chile.",
+      image: "./CEPAL.svg",
+      link: "https://iica.int/es/prensa/noticias/primer-foro-latam-de-jovenes-lideres-rurales-innovacion-y-sustentabilidad-en-el",
+    },
+    {
+        id: 7,
+        title: "Agriculture 4.0 for cherry trees",
+        description: "We participated in MIIDO at the Agriculture 4.0 Seminar for cherry trees, organized by Copeval.",
+        image: "./Cerezas.svg",
+        link: "https://corporativo.copeval.cl/agricultura-inteligente/agricultura-4-0-para-cerezos/",
+      },
+    {
+        id: 6,
+        title: "GTT Maule",
+        description: "Regional GTT meeting of Maule held at the San José de Duao Agricultural School. #agrotech.",
+        image: "./gtt.svg",
+        link: "https://www.snaeduca.cl/consejo-regional-gtt-region-del-maule-en-escuela-agricola-san-jose-de-duao/",
+      },
+    {
+      id: 1,
+      title: "Selected by Startup Chile",
+      description: "We were selected for the Build2 and Ignite 5 programs of Startup Chile, one of the best business accelerators in the world.",
+      image: "./StartupChile.svg",
+      link: "https://startupchile.org/en/blog/big-5-new-generation/",
+    },
+    {
+      id: 2,
+      title: "First place in Babson Collaborative Global Student Challenge",
+      description: "We competed with more than 2000 entrepreneurs from around the world and won first place, allowing us to study at the #1 entrepreneurship university in the world.",
+      image: "./babson.svg",
+      link: "https://entrepreneurship.babson.edu/global-student-challenge-2022/",
+    },
+    {
+      id: 3,
+      title: "Accelerated in Switzerland 🇨🇭 - START Fellowship",
+      description: "Accelerated in Switzerland with the opportunity to learn about the European ecosystem and the agro industry in the old continent.",
+      image: "./START.svg",
+      link: "https://www.startglobal.org/fellowship/fellows",
+    },
+  ]
+
+  const newsItems = language === 'es' ? newsItemsEs : newsItemsEn
 
   useEffect(() => {
     const container = scrollContainerRef.current
@@ -97,7 +161,7 @@ const NewsSection = () => {
   return (
     <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
       <div className="container px-4 md:px-6">
-        <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12 text-primary">Últimas publicaciones</h2>
+        <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12 text-primary">{language === 'es' ? 'Últimas publicaciones' : 'Latest publications'}</h2>
         <div className="relative">
           {showLeftArrow && (
             <button
@@ -133,8 +197,7 @@ const NewsSection = () => {
   href={item.link}
   className="inline-block bg-primary dark:bg-[#323f46] text-white dark:text-white py-2 px-4 rounded hover:bg-[#1e40af] transition-colors"
 >
-
-                       Leer más
+                       {language === 'es' ? 'Leer más' : 'Read more'}
                       </Link>
                   </div>
                 </div>

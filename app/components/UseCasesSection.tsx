@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { Button } from "@/src/components/ui/button"
 import { AnimatePresence, motion } from "framer-motion"
+import { useLanguageContext } from '@/app/i18n/LanguageProvider'
 
 // Definición de tipos para los casos de uso
 interface UseCase {
@@ -85,6 +86,7 @@ const useCases: UseCase[] = [
 ]
 
 export default function UseCasesSection() {
+  const { language } = useLanguageContext()
   const [activeTab, setActiveTab] = useState<string>(useCases[0].id)
   const [isMobile, setIsMobile] = useState<boolean>(false)
 
@@ -149,7 +151,7 @@ export default function UseCasesSection() {
 
       <div className="container px-4 md:px-6 relative z-10">
         <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12 text-gray-900 dark:text-white">
-          Casos de Uso
+          {language === 'es' ? 'Casos de Uso' : 'Use Cases'}
         </h2>
 
         {/* Tabs de navegación - estilo similar a "Apoyados por" */}
@@ -243,7 +245,7 @@ export default function UseCasesSection() {
                   className="flex justify-start"
                 >
                   <Button className="bg-white dark:bg-[#111827] border border-[#38507E] hover:border-[#51A09A] text-gray-800 dark:text-white rounded-full shadow-md hover:shadow-lg px-6 py-2 text-sm">
-                    Ver cómo funciona
+                    {language === 'es' ? 'Ver cómo funciona' : 'See how it works'}
                   </Button>
                 </motion.div>
               </motion.div>
