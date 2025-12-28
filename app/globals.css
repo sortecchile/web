@@ -74,5 +74,66 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-weight: 300; /* Peso delgado por defecto */
+  }
+
+  /* Títulos principales - Semi-bold */
+  h1 {
+    font-weight: 600;
+  }
+
+  /* Títulos secundarios - Medium */
+  h2 {
+    font-weight: 600;
+  }
+
+  /* Títulos terciarios - Medium */
+  h3 {
+    font-weight: 500;
+  }
+
+  /* Párrafos - Light */
+  p {
+    font-weight: 300;
+  }
+
+  /* Botones - Medium */
+  button {
+    font-weight: 500;
+  }
+
+  /* Links - Regular */
+  a {
+    font-weight: 400;
+  }
+
+  /* Texto fuerte - Medium */
+  strong, b {
+    font-weight: 500;
+  }
+
+  /* Texto muy delgado para información secundaria */
+  .text-ultra-light {
+    font-weight: 200;
+  }
+
+  /* Texto delgado para contenido regular */
+  .text-light {
+    font-weight: 300;
+  }
+
+  /* Texto regular para énfasis moderado */
+  .text-regular {
+    font-weight: 400;
+  }
+
+  /* Texto medium para énfasis importante */
+  .text-medium {
+    font-weight: 500;
+  }
+
+  /* Texto semi-bold para títulos */
+  .text-semibold {
+    font-weight: 600;
   }
 }

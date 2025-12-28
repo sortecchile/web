@@ -1,12 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Fraunces } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "./i18n/LanguageProvider";
 
 const inter = Inter({ subsets: ["latin"] });
+export const fraunces = Fraunces({
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700"],
+  variable: '--font-fraunces'
+});
 
 export const metadata: Metadata = {
-  title: "MIIDO / Digitalización simple",
+  title: "MIIDO / Agentic Farming",
   description: "El copilot agrícola para tu empresa",
 };
 
@@ -16,8 +21,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" className={fraunces.variable}>
+      <body className={fraunces.className}>
         <LanguageProvider>
           {/* Aquí agregamos el menú de navegación */}
           <header>

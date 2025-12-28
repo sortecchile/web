@@ -161,7 +161,7 @@ const NewsSection = () => {
   return (
     <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
       <div className="container px-4 md:px-6">
-        <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12 text-primary">{language === 'es' ? 'Últimas publicaciones' : 'Latest publications'}</h2>
+        <h2 className="text-3xl text-semibold tracking-tighter sm:text-5xl text-center mb-12 text-primary">{language === 'es' ? 'Últimas publicaciones' : 'Latest publications'}</h2>
         <div className="relative">
           {showLeftArrow && (
             <button
@@ -191,11 +191,11 @@ const NewsSection = () => {
                 <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg overflow-hidden">
                   <Image src={item.image} alt={item.title} width={400} height={400} className="w-full h-48 object-cover" />
                   <div className="p-6">
-                    <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                    <p className="text-gray-600 dark:text-gray-400 mb-4">{item.description}</p>
+                    <h3 className="text-xl text-medium mb-2">{item.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-400 mb-4 text-light">{item.description}</p>
                     <Link
   href={item.link}
-  className="inline-block bg-primary dark:bg-[#323f46] text-white dark:text-white py-2 px-4 rounded hover:bg-[#1e40af] transition-colors"
+  className="inline-block bg-primary dark:bg-[#323f46] text-white dark:text-white py-2 px-4 rounded hover:bg-[#1e40af] transition-colors text-medium"
 >
                        {language === 'es' ? 'Leer más' : 'Read more'}
                       </Link>

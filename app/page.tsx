@@ -646,20 +646,20 @@ export default function Component() {
             <span className="sr-only">MIIDO</span>
           </Link>
           <nav className="hidden md:flex gap-4 sm:gap-6">
-            <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => handleNavClick(demoRef)}>
+            <button className="text-sm text-regular hover:underline underline-offset-4 text-black dark:text-white" onClick={() => handleNavClick(demoRef)}>
               {language === 'es' ? '¿Cómo funciona?' : 'How it works?'}
             </button>
             {/* Temporalmente oculto hasta tener todos los videos */}
-            {/* <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => handleNavClick(casesRef)}>
+            {/* <button className="text-sm text-regular hover:underline underline-offset-4 text-black dark:text-white" onClick={() => handleNavClick(casesRef)}>
               {language === 'es' ? 'Casos de uso' : 'Use Cases'}
             </button> */}
-            <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => handleNavClick(testimonialsRef)}>
+            <button className="text-sm text-regular hover:underline underline-offset-4 text-black dark:text-white" onClick={() => handleNavClick(testimonialsRef)}>
               {language === 'es' ? 'Testimonios' : 'Testimonials'}
             </button>
-            <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => handleNavClick(aboutRef)}>
+            <button className="text-sm text-regular hover:underline underline-offset-4 text-black dark:text-white" onClick={() => handleNavClick(aboutRef)}>
               {language === 'es' ? 'Últimas publicaciones' : 'Latest publications'}
             </button>
-            <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => handleNavClick(contactRef)}>
+            <button className="text-sm text-regular hover:underline underline-offset-4 text-black dark:text-white" onClick={() => handleNavClick(contactRef)}>
               {language === 'es' ? 'Contáctanos' : 'Contact us'}
             </button>
           </nav>
@@ -695,20 +695,20 @@ export default function Component() {
       <div className={`fixed inset-0 z-40 transform ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out md:hidden`}>
         <div className="bg-white h-full w-64 shadow-lg pt-20 px-4">
           <nav className="flex flex-col gap-4">
-            <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => { handleNavClick(demoRef); closeMobileMenu(); }}>
+            <button className="text-sm text-regular hover:underline underline-offset-4 text-black dark:text-white" onClick={() => { handleNavClick(demoRef); closeMobileMenu(); }}>
               {language === 'es' ? '¿Cómo funciona?' : 'How it works?'}
             </button>
             {/* Temporalmente oculto hasta tener todos los videos */}
-            {/* <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => { handleCasesClick(); closeMobileMenu(); }}>
+            {/* <button className="text-sm text-regular hover:underline underline-offset-4 text-black dark:text-white" onClick={() => { handleCasesClick(); closeMobileMenu(); }}>
               Casos de uso
             </button> */}
-            <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => { handleTestimonialsClick(); closeMobileMenu(); }}>
+            <button className="text-sm text-regular hover:underline underline-offset-4 text-black dark:text-white" onClick={() => { handleTestimonialsClick(); closeMobileMenu(); }}>
               {language === 'es' ? 'Testimonios' : 'Testimonials'}
             </button>
-            <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => { handleaboutClick(); closeMobileMenu(); }}>
+            <button className="text-sm text-regular hover:underline underline-offset-4 text-black dark:text-white" onClick={() => { handleaboutClick(); closeMobileMenu(); }}>
               {language === 'es' ? 'Últimas publicaciones' : 'Latest publications'}
             </button>
-            <button className="text-sm font-medium hover:underline underline-offset-4 text-black dark:text-white" onClick={() => { handleContactClick(); closeMobileMenu(); }}>
+            <button className="text-sm text-regular hover:underline underline-offset-4 text-black dark:text-white" onClick={() => { handleContactClick(); closeMobileMenu(); }}>
               {language === 'es' ? 'Contáctanos' : 'Contact us'}
             </button>
 
@@ -800,22 +800,16 @@ export default function Component() {
                 transform: animationsReady ? 'translateY(-20px)' : 'none'
               }}
             >
-              <span className="text-xs font-medium text-gray-800 dark:text-gray-300">{language === 'es' ? 'Apoyados por' : 'Backed by'}</span>
-              <div className="flex items-center gap-3 sm:gap-4 md:gap-6">
+              <span className="text-xs text-ultra-light text-gray-800 dark:text-gray-300">{language === 'es' ? 'Apoyados por' : 'Backed by'}</span>
+              <div className="flex items-center justify-center gap-3 sm:gap-4 md:gap-6">
                 <Image
-                  src="./platanus-logo.png"
-                  alt="Platanus Logo"
-                  width={50}
-                  height={8}
-                  className="w-10 sm:w-12 md:w-16 lg:w-18 h-auto object-contain opacity-90 hover:opacity-100 transition-opacity hover:scale-110 transform transition-transform duration-300"
+                  src={isDark ? "./skydeck2.png" : "./skydeck.png"}
+                  alt="Skydeck Logo"
+                  width={150}
+                  height={150}
+                  className="w-16 sm:w-20 md:w-24 lg:w-28 h-auto object-contain opacity-90 hover:opacity-100 transition-opacity hover:scale-110 transform transition-transform duration-300"
                 />
-                <Image
-                  src="./IICA-logo.png"
-                  alt="IICA Logo"
-                  width={45}
-                  height={8}
-                  className="w-9 sm:w-11 md:w-14 lg:w-16 h-auto object-contain opacity-90 hover:opacity-100 transition-opacity hover:scale-110 transform transition-transform duration-300"
-                />
+
               </div>
             </div>
 
@@ -823,29 +817,31 @@ export default function Component() {
               {/* Title Section */}
               <div className="space-y-2">
                 <h1
-                  className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none bg-gradient-to-r from-[#38507E] via-[#51A09A] to-[#C2DB64] bg-clip-text text-transparent h-24 flex items-center justify-center"
+                  className="text-3xl text-semibold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none bg-gradient-to-r from-[#38507E] via-[#51A09A] to-[#C2DB64] bg-clip-text text-transparent h-24 flex items-center justify-center"
                   style={{
                     animation: animationsReady ? 'fadeInUp 0.8s ease-out forwards' : 'none',
                     opacity: animationsReady ? 0 : 1,
-                    transform: animationsReady ? 'translateY(20px)' : 'none'
+                    transform: animationsReady ? 'translateY(20px)' : 'none',
+                    fontWeight: 600
                   }}
                 >
                    {language === 'es' ? 'AI agents en agricultura - MIIDO' : 'AI agents in agriculture - MIIDO'}
                   <span className="animate-blink">|</span>
                 </h1>
                 <p
-                  className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400"
+                  className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400 text-light"
                   style={{
                     animation: animationsReady ? 'fadeInUp 0.8s ease-out 0.2s forwards' : 'none',
                     opacity: animationsReady ? 0 : 1,
-                    transform: animationsReady ? 'translateY(20px)' : 'none'
+                    transform: animationsReady ? 'translateY(20px)' : 'none',
+                    fontWeight: 300
                   }}
                 >
                   {language === 'es'
                     ? 'Tu copiloto de IA en el campo: automatiza, predice y toma mejores decisiones agrícolas, '
                     : 'Your AI copilot in the field: automate, predict and make better agricultural decisions, '
                   }
-                  <strong>{language === 'es' ? 'sin complicaciones y desde WhatsApp' : 'without complications and from WhatsApp'}</strong>.
+                  <strong style={{ fontWeight: 400 }}>{language === 'es' ? 'sin complicaciones y desde WhatsApp' : 'without complications and from WhatsApp'}</strong>.
                 </p>
               </div>
 
@@ -1174,10 +1170,10 @@ export default function Component() {
         </section> */}
         <section className="w-full py-12 md:py-24 lg:py-32 overflow-hidden" ref={demoRef}>
   <div className="container px-4 md:px-6">
-    <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-6 text-gray-900 dark:text-white">
+    <h2 className="text-3xl text-semibold tracking-tighter sm:text-5xl text-center mb-6 text-gray-900 dark:text-white">
       {language === 'es' ? 'Véalo en acción' : 'See it in action'}
     </h2>
-    <p className="mb-6 text-gray-600 dark:text-gray-400 text-center">
+    <p className="mb-6 text-gray-600 dark:text-gray-400 text-center text-light">
       {language === 'es'
         ? 'Todos los audios que se envíen en el día a día de la operación, lo ordenamos y mostramos automáticamente en el Dashboard.'
         : 'All the audios sent during daily operations are automatically organized and displayed in the Dashboard.'
@@ -2005,29 +2001,29 @@ export default function Component() {
               <div className="flex items-start space-x-4">
                 <Users className="h-6 w-6 text-primary mt-1" style={{color: '#38507E'}} />
                 <div>
-                  <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white" >{language === 'es' ? 'Amigable con el usuario' : 'User-Friendly'}</h3>
-                  <p className="text-gray-500 dark:text-gray-400">{language === 'es' ? 'Aprovecha la familiaridad de WhatsApp para una adopción fácil en todo tu equipo.' : 'Leverage WhatsApp familiarity for easy adoption across your team.'}</p>
+                  <h3 className="text-xl text-medium mb-2 text-gray-900 dark:text-white" >{language === 'es' ? 'Amigable con el usuario' : 'User-Friendly'}</h3>
+                  <p className="text-gray-500 dark:text-gray-400 text-light">{language === 'es' ? 'Aprovecha la familiaridad de WhatsApp para una adopción fácil en todo tu equipo.' : 'Leverage WhatsApp familiarity for easy adoption across your team.'}</p>
                 </div>
               </div>
               <div className="flex items-start space-x-4">
                 <BarChart2 className="h-6 w-6 text-primary mt-1" style={{ color: '#51A09A'}} />
                 <div>
-                  <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white" >{language === 'es' ? 'Información accionable' : 'Actionable Information'}</h3>
-                  <p className="text-gray-500 dark:text-gray-400">{language === 'es' ? 'Convierte los mensajes de voz en datos estructurados para una mejor toma de decisiones.' : 'Convert voice messages into structured data for better decision-making.'}</p>
+                  <h3 className="text-xl text-medium mb-2 text-gray-900 dark:text-white" >{language === 'es' ? 'Información accionable' : 'Actionable Information'}</h3>
+                  <p className="text-gray-500 dark:text-gray-400 text-light">{language === 'es' ? 'Convierte los mensajes de voz en datos estructurados para una mejor toma de decisiones.' : 'Convert voice messages into structured data for better decision-making.'}</p>
                 </div>
               </div>
               <div className="flex items-start space-x-4">
                 <Mic className="h-6 w-6 text-primary mt-1" style={{ color:'#51A09A'}}/>
                 <div>
-                  <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white" >{language === 'es' ? 'Enfoque centrado en la voz' : 'Voice-First Approach'}</h3>
-                  <p className="text-gray-500 dark:text-gray-400">{language === 'es' ? 'Ideal para industrias donde escribir no siempre es conveniente o posible.' : 'Ideal for industries where typing is not always convenient or possible.'}</p>
+                  <h3 className="text-xl text-medium mb-2 text-gray-900 dark:text-white" >{language === 'es' ? 'Enfoque centrado en la voz' : 'Voice-First Approach'}</h3>
+                  <p className="text-gray-500 dark:text-gray-400 text-light">{language === 'es' ? 'Ideal para industrias donde escribir no siempre es conveniente o posible.' : 'Ideal for industries where typing is not always convenient or possible.'}</p>
                 </div>
               </div>
               <div className="flex items-start space-x-4">
                 <CheckCircle className="h-6 w-6 text-primary mt-1" style={{ color: '#C2DB64'}}/>
                 <div>
-                  <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">{language === 'es' ? 'Flujos de trabajo optimizados' : 'Optimized Workflows'}</h3>
-                  <p className="text-gray-500 dark:text-gray-400">{language === 'es' ? 'Simplifica la creación de tareas, el seguimiento y la recopilación de información en un solo lugar.' : 'Simplify task creation, tracking, and information collection in one place.'}</p>
+                  <h3 className="text-xl text-medium mb-2 text-gray-900 dark:text-white">{language === 'es' ? 'Flujos de trabajo optimizados' : 'Optimized Workflows'}</h3>
+                  <p className="text-gray-500 dark:text-gray-400 text-light">{language === 'es' ? 'Simplifica la creación de tareas, el seguimiento y la recopilación de información en un solo lugar.' : 'Simplify task creation, tracking, and information collection in one place.'}</p>
                 </div>
               </div>
             </div>
@@ -2286,7 +2282,7 @@ export default function Component() {
         <section ref={testimonialsRef} className="w-full py-12 md:py-24 lg:py-32 bg-gray-50 dark:bg-gray-900">
   <div className="container px-4 md:px-6">
     <h2
-      className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12 text-gray-900 dark:text-white"
+      className="text-3xl text-semibold tracking-tighter sm:text-5xl text-center mb-12 text-gray-900 dark:text-white"
       style={{
         animation: 'fadeInUp 0.8s ease-out forwards',
         opacity: 0,
@@ -2334,8 +2330,8 @@ export default function Component() {
           )}
         </div>
         <div className="p-4">
-          <h3 className="font-semibold text-base text-gray-900 dark:text-white">Guillermo Baeza</h3>
-          <p className="text-sm text-gray-600 dark:text-gray-300">{language === 'es' ? 'Jefe de campo en Agrícola Manantiales (Curicó) 🇨🇱' : 'Field Manager at Agrícola Manantiales (Curicó) 🇨🇱'}</p>
+          <h3 className="text-medium text-base text-gray-900 dark:text-white">Guillermo Baeza</h3>
+          <p className="text-sm text-gray-600 dark:text-gray-300 text-ultra-light">{language === 'es' ? 'Jefe de campo en Agrícola Manantiales (Curicó) 🇨🇱' : 'Field Manager at Agrícola Manantiales (Curicó) 🇨🇱'}</p>
         </div>
       </div>
 
@@ -2350,7 +2346,7 @@ export default function Component() {
       >
         <div className="p-6">
           <blockquote
-            className="text-sm italic mb-4 mt-40 text-gray-800 dark:text-gray-200"
+            className="text-sm italic mb-4 mt-40 text-gray-800 dark:text-gray-200 text-light"
             style={{
               animation: 'fadeInUp 0.8s ease-out 0.6s forwards',
               opacity: 0
@@ -2373,8 +2369,8 @@ export default function Component() {
               className="rounded-full mr-3 hover:scale-110 transition-transform duration-300"
             />
             <div>
-              <h3 className="font-semibold text-sm text-gray-900 dark:text-white">Felipe Sanchez</h3>
-              <p className="text-xs text-gray-600 dark:text-gray-300">{language === 'es' ? 'Gerente General - Fundo Santa Eugenia (Paine) 🇨🇱' : 'General Manager - Fundo Santa Eugenia (Paine) 🇨🇱'}</p>
+              <h3 className="text-medium text-sm text-gray-900 dark:text-white">Felipe Sanchez</h3>
+              <p className="text-xs text-gray-600 dark:text-gray-300 text-ultra-light">{language === 'es' ? 'Gerente General - Fundo Santa Eugenia (Paine) 🇨🇱' : 'General Manager - Fundo Santa Eugenia (Paine) 🇨🇱'}</p>
             </div>
           </div>
         </div>
@@ -2416,8 +2412,8 @@ export default function Component() {
           )}
         </div>
         <div className="p-4">
-          <h3 className="font-semibold text-sm text-gray-900 dark:text-white">Tatiana Morera</h3>
-          <p className="text-xs text-gray-600 dark:text-gray-300">{language === 'es' ? 'Fundadora de TMV Agroexportación (Costa Rica) 🇨🇷🍍' : 'Founder of TMV Agroexportación (Costa Rica) 🇨🇷🍍'}</p>
+          <h3 className="text-medium text-sm text-gray-900 dark:text-white">Tatiana Morera</h3>
+          <p className="text-xs text-gray-600 dark:text-gray-300 text-ultra-light">{language === 'es' ? 'Fundadora de TMV Agroexportación (Costa Rica) 🇨🇷🍍' : 'Founder of TMV Agroexportación (Costa Rica) 🇨🇷🍍'}</p>
         </div>
       </div>
 
@@ -2435,7 +2431,7 @@ export default function Component() {
         <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50 dark:bg-gray-900">
   <div className="container px-4 md:px-6">
     <h2
-      className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12 text-gray-800 dark:text-white"
+      className="text-3xl text-semibold tracking-tighter sm:text-5xl text-center mb-12 text-gray-800 dark:text-white"
       style={{
         animation: 'fadeInUp 0.8s ease-out forwards',
         opacity: 0,
@@ -2459,7 +2455,7 @@ export default function Component() {
             className="flex justify-between items-center w-full p-4 text-left bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             onClick={() => toggleQuestion(index)}
           >
-            <span className="font-medium text-gray-800 dark:text-white">{pair.question}</span>
+            <span className="text-medium text-gray-800 dark:text-white">{pair.question}</span>
             {openQuestion === index ? (
               <Minus className="h-5 w-5 text-gray-500 dark:text-gray-300 transform transition-transform duration-300" />
             ) : (
@@ -2474,7 +2470,7 @@ export default function Component() {
                 opacity: 0
               }}
             >
-              <p className="text-gray-600 dark:text-gray-300">{pair.answer}</p>
+              <p className="text-gray-600 dark:text-gray-300 text-light">{pair.answer}</p>
             </div>
           )}
         </div>
@@ -2493,7 +2489,7 @@ export default function Component() {
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
                 <h2
-                  className="pb-4 text-3xl font-bold tracking-tighter mb:px-60 sm:text-4xl md:text-5xl lg:text-6xl leading-[1.2] bg-gradient-to-r from-[#38507E] via-[#51A09A] to-[#C2DB64] bg-clip-text text-transparent"
+                  className="pb-4 text-3xl text-semibold tracking-tighter mb:px-60 sm:text-4xl md:text-5xl lg:text-6xl leading-[1.2] bg-gradient-to-r from-[#38507E] via-[#51A09A] to-[#C2DB64] bg-clip-text text-transparent"
                   style={{
                     animation: 'fadeInUp 0.8s ease-out forwards',
                     opacity: 0,
@@ -2503,7 +2499,7 @@ export default function Component() {
                   {language === 'es' ? 'Sube a tu gente al tren de la tecnología.' : 'Get Your Team on the Technology Train.'}
                 </h2>
                 <p
-                  className="mx-auto max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400"
+                  className="mx-auto max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400 text-light"
                   style={{
                     animation: 'fadeInUp 0.8s ease-out 0.2s forwards',
                     opacity: 0,
@@ -2577,7 +2573,7 @@ export default function Component() {
   }}
 >
   <MessageCircle size={20} className="mr-2 animate-pulse" />
-  <span className="text-sm font-medium">{language === 'es' ? '¡Habla con nosotros!' : 'Talk to us!'}</span>
+  <span className="text-sm text-medium">{language === 'es' ? '¡Habla con nosotros!' : 'Talk to us!'}</span>
 </a>
 
 
