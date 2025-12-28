@@ -8,6 +8,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import NewsSection from './NewsSection'
 import UseCasesSection from './components/UseCasesSection'
+import WorkflowBuilder from './components/WorkflowBuilder'
 
 import dynamic from 'next/dynamic'
 import { useDarkMode } from './hooks/useDarkMode'
@@ -2029,6 +2030,11 @@ export default function Component() {
             </div>
           </div>
         </section>
+
+        <MultiWaveAudio />
+
+        {/* Workflow Builder Section */}
+        <WorkflowBuilder />
 
         <MultiWaveAudio />
 
