@@ -4,7 +4,7 @@ import "./globals.css";
 import { LanguageProvider } from "./i18n/LanguageProvider";
 
 const inter = Inter({ subsets: ["latin"] });
-export const fraunces = Fraunces({
+const fraunces = Fraunces({
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600", "700"],
   variable: '--font-fraunces'
