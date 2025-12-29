@@ -128,9 +128,10 @@ const pestPopups = {
 
 interface WorkflowBuilderProps {
   simpleMode?: boolean;
+  hideTitle?: boolean;
 }
 
-const WorkflowBuilder = ({ simpleMode = false }: WorkflowBuilderProps) => {
+const WorkflowBuilder = ({ simpleMode = false, hideTitle = false }: WorkflowBuilderProps) => {
   const { language } = useLanguageContext();
   const [currentStep, setCurrentStep] = useState(0);
   const [animationStep, setAnimationStep] = useState(0);
@@ -458,8 +459,8 @@ const WorkflowBuilder = ({ simpleMode = false }: WorkflowBuilderProps) => {
   return (
     <section ref={sectionRef} className={`w-full ${simpleMode ? 'py-0' : 'py-16 md:py-24'}`}>
       <div className={simpleMode ? 'px-0' : 'container px-4 md:px-6'}>
-        {/* Title - only show when not in simpleMode */}
-        {!simpleMode && (
+        {/* Title - only show when not in simpleMode and hideTitle is false */}
+        {!simpleMode && !hideTitle && (
           <div className="text-center mb-12">
             <h2 className="text-3xl text-semibold tracking-tighter sm:text-5xl mb-4 text-gray-900 dark:text-white">
               {language === 'es' ? 'Crea tus propios Workflows' : 'Create your own Workflows'}

@@ -9,6 +9,8 @@ import Image from 'next/image'
 import NewsSection from './NewsSection'
 import UseCasesSection from './components/UseCasesSection'
 import WorkflowBuilder from './components/WorkflowBuilder'
+import IntegrationDemo from './components/IntegrationDemo'
+import DashboardDemo from './components/DashboardDemo'
 
 import dynamic from 'next/dynamic'
 import { useDarkMode } from './hooks/useDarkMode'
@@ -1144,13 +1146,20 @@ export default function Component() {
         </section> */}
         <section className="w-full py-12 md:py-24 lg:py-32 overflow-hidden" ref={demoRef}>
   <div className="container px-4 md:px-6">
-    <h2 className="text-3xl text-semibold tracking-tighter sm:text-5xl text-center mb-6 text-gray-900 dark:text-white">
-      {language === 'es' ? 'Véalo en acción' : 'See it in action'}
+    {/* Paso 1 Badge */}
+    <div className="flex justify-center mb-4">
+      <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#38507E]/10 dark:bg-[#38507E]/20 text-[#38507E] dark:text-[#7B9ED9] rounded-full text-sm font-medium">
+        <span className="w-6 h-6 bg-[#38507E] text-white rounded-full flex items-center justify-center text-xs font-bold">1</span>
+        {language === 'es' ? 'Paso 1' : 'Step 1'}
+      </span>
+    </div>
+    <h2 className="text-3xl text-semibold tracking-tighter sm:text-5xl text-center mb-4 text-gray-900 dark:text-white">
+      {language === 'es' ? 'Digitaliza tu campo a través de WhatsApp' : 'Digitize your field through WhatsApp'}
     </h2>
-    <p className="mb-6 text-gray-600 dark:text-gray-400 text-center text-light">
+    <p className="mb-6 text-gray-600 dark:text-gray-400 text-center text-light max-w-2xl mx-auto">
       {language === 'es'
-        ? 'Todos los audios que se envíen en el día a día de la operación, lo ordenamos y mostramos automáticamente en el Dashboard.'
-        : 'All the audios sent during daily operations are automatically organized and displayed in the Dashboard.'
+        ? 'Tus trabajadores envían audios con información del campo. Nosotros lo ordenamos y mostramos automáticamente en el Dashboard.'
+        : 'Your workers send audios with field information. We organize it and display it automatically in the Dashboard.'
       }
     </p>
     <div className="flex flex-col lg:flex-row items-start justify-center gap-8">
@@ -1965,31 +1974,186 @@ export default function Component() {
           </div>
 
         </section>
-        <MultiWaveAudio />
 
-        <section className="w-full py-12 md:py-24 lg:py-32">
-
+        {/* Paso 2: Integra todas tus fuentes de datos */}
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50 dark:bg-gray-800/50 overflow-hidden">
           <div className="container px-4 md:px-6">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-6 text-gray-900 dark:text-white">{language === 'es' ? 'Principales beneficios' : 'Main Benefits'}</h2>
+            {/* Paso 2 Badge */}
+            <div className="flex justify-center mb-4">
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#F97316]/10 dark:bg-[#F97316]/20 text-[#F97316] rounded-full text-sm font-medium">
+                <span className="w-6 h-6 bg-[#F97316] text-white rounded-full flex items-center justify-center text-xs font-bold">2</span>
+                {language === 'es' ? 'Paso 2' : 'Step 2'}
+              </span>
+            </div>
+            <h2 className="text-3xl text-semibold tracking-tighter sm:text-5xl text-center mb-4 text-gray-900 dark:text-white">
+              {language === 'es' ? 'Integra todas tus fuentes de datos' : 'Integrate all your data sources'}
+            </h2>
+            <p className="mb-10 text-gray-600 dark:text-gray-400 text-center text-light max-w-2xl mx-auto">
+              {language === 'es'
+                ? 'Nos conectamos con múltiples plataformas, ERPs y sistemas agrícolas. Toda tu información en un solo lugar.'
+                : 'We connect with multiple platforms, ERPs and agricultural systems. All your information in one place.'
+              }
+            </p>
+
+            <div className="flex items-center justify-center">
+              {/* Lista de integraciones disponibles - Temporalmente comentado */}
+              {/* <div className="w-full max-w-xs space-y-4">
+                <h3 className="text-lg font-semibold text-gray-800 dark:text-white text-center lg:text-left mb-4">
+                  {language === 'es' ? 'Integraciones disponibles' : 'Available integrations'}
+                </h3>
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    { name: 'SAP', color: '#0FAAFF' },
+                    { name: 'Wiseconn', color: '#3B82F6' },
+                    { name: 'Odoo', color: '#714B67' },
+                    { name: 'Salesforce', color: '#00A1E0' },
+                    { name: 'Excel', color: '#217346' },
+                    { name: 'INIA', color: '#22C55E' },
+                  ].map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="flex items-center gap-2 px-3 py-2 bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 shadow-sm hover:shadow-md hover:border-[#F97316] transition-all cursor-pointer"
+                    >
+                      <div
+                        className="w-6 h-6 rounded flex items-center justify-center text-white text-xs font-bold"
+                        style={{ backgroundColor: item.color }}
+                      >
+                        {item.name.charAt(0)}
+                      </div>
+                      <span className="text-sm text-gray-700 dark:text-gray-200">{item.name}</span>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-xs text-gray-500 dark:text-gray-400 text-center lg:text-left mt-4">
+                  {language === 'es' ? '+ muchas más integraciones disponibles' : '+ many more integrations available'}
+                </p>
+              </div> */}
+
+              {/* Demo de integración - Centrado */}
+              <IntegrationDemo />
+            </div>
+          </div>
+        </section>
+
+        {/* Paso 3: Crea tus propios dashboards con IA */}
+        <section className="w-full py-12 md:py-24 lg:py-32 overflow-hidden">
+          <div className="container px-4 md:px-6">
+            {/* Paso 3 Badge */}
+            <div className="flex justify-center mb-4">
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#14B8A6]/10 dark:bg-[#14B8A6]/20 text-[#14B8A6] rounded-full text-sm font-medium">
+                <span className="w-6 h-6 bg-[#14B8A6] text-white rounded-full flex items-center justify-center text-xs font-bold">3</span>
+                {language === 'es' ? 'Paso 3' : 'Step 3'}
+              </span>
+            </div>
+            <h2 className="text-3xl text-semibold tracking-tighter sm:text-5xl text-center mb-4 text-gray-900 dark:text-white">
+              {language === 'es' ? 'Crea dashboards con un simple chat de IA' : 'Create dashboards with a simple AI chat'}
+            </h2>
+            <p className="mb-10 text-gray-600 dark:text-gray-400 text-center text-light max-w-2xl mx-auto">
+              {language === 'es'
+                ? 'Genera reportes, gráficos y análisis personalizados solo preguntando. Sin código, sin complicaciones.'
+                : 'Generate reports, charts and custom analytics just by asking. No code, no hassle.'
+              }
+            </p>
+
+            {/* Demo del Dashboard Builder */}
+            <DashboardDemo />
+
+            {/* Features adicionales */}
+            <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+              <div className="flex items-start gap-3 p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
+                <div className="w-10 h-10 rounded-lg bg-[#14B8A6]/10 flex items-center justify-center flex-shrink-0">
+                  <span className="text-lg">📊</span>
+                </div>
+                <div>
+                  <h4 className="font-medium text-gray-800 dark:text-white text-sm mb-1">
+                    {language === 'es' ? 'Gráficos automáticos' : 'Auto-generated charts'}
+                  </h4>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                    {language === 'es' ? 'La IA elige el mejor tipo de visualización para tus datos' : 'AI picks the best visualization type for your data'}
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3 p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
+                <div className="w-10 h-10 rounded-lg bg-[#14B8A6]/10 flex items-center justify-center flex-shrink-0">
+                  <span className="text-lg">🔄</span>
+                </div>
+                <div>
+                  <h4 className="font-medium text-gray-800 dark:text-white text-sm mb-1">
+                    {language === 'es' ? 'Datos en tiempo real' : 'Real-time data'}
+                  </h4>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                    {language === 'es' ? 'Conectado a todas tus fuentes de datos integradas' : 'Connected to all your integrated data sources'}
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3 p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
+                <div className="w-10 h-10 rounded-lg bg-[#14B8A6]/10 flex items-center justify-center flex-shrink-0">
+                  <span className="text-lg">💬</span>
+                </div>
+                <div>
+                  <h4 className="font-medium text-gray-800 dark:text-white text-sm mb-1">
+                    {language === 'es' ? 'Lenguaje natural' : 'Natural language'}
+                  </h4>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                    {language === 'es' ? 'Pregunta como le hablarías a un colega experto' : 'Ask as you would speak to an expert colleague'}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+       
+
+        {/* Paso 4: Crea tus propios AI Workflows */}
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-50 dark:bg-gray-800/50 overflow-hidden">
+          <div className="container px-4 md:px-6">
+            {/* Paso 4 Badge */}
+            <div className="flex justify-center mb-4">
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#8B5CF6]/10 dark:bg-[#8B5CF6]/20 text-[#8B5CF6] rounded-full text-sm font-medium">
+                <span className="w-6 h-6 bg-[#8B5CF6] text-white rounded-full flex items-center justify-center text-xs font-bold">4</span>
+                {language === 'es' ? 'Paso 4' : 'Step 4'}
+              </span>
+            </div>
+            <h2 className="text-3xl text-semibold tracking-tighter sm:text-5xl text-center mb-4 text-gray-900 dark:text-white">
+              {language === 'es' ? 'Crea tus propios AI Workflows' : 'Create your own AI Workflows'}
+            </h2>
+            <p className="mb-10 text-gray-600 dark:text-gray-400 text-center text-light max-w-2xl mx-auto">
+              {language === 'es'
+                ? 'Automatiza procesos complejos conectando bloques de IA, integraciones y acciones. Sin código, 100% visual.'
+                : 'Automate complex processes by connecting AI blocks, integrations and actions. No code, 100% visual.'
+              }
+            </p>
+          </div>
+
+          {/* WorkflowBuilder con casos de uso */}
+          <WorkflowBuilder hideTitle={true} />
+        </section>
+
+        {/* Principales beneficios */}
+        <section className="w-full py-12 md:py-24 lg:py-32">
+          <div className="container px-4 md:px-6">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-6 text-gray-900 dark:text-white">{language === 'es' ? 'Principales beneficios' : 'Main Benefits'}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="flex items-start space-x-4">
                 <Users className="h-6 w-6 text-primary mt-1" style={{color: '#38507E'}} />
                 <div>
-                  <h3 className="text-xl text-medium mb-2 text-gray-900 dark:text-white" >{language === 'es' ? 'Amigable con el usuario' : 'User-Friendly'}</h3>
+                  <h3 className="text-xl text-medium mb-2 text-gray-900 dark:text-white">{language === 'es' ? 'Amigable con el usuario' : 'User-Friendly'}</h3>
                   <p className="text-gray-500 dark:text-gray-400 text-light">{language === 'es' ? 'Aprovecha la familiaridad de WhatsApp para una adopción fácil en todo tu equipo.' : 'Leverage WhatsApp familiarity for easy adoption across your team.'}</p>
                 </div>
               </div>
               <div className="flex items-start space-x-4">
                 <BarChart2 className="h-6 w-6 text-primary mt-1" style={{ color: '#51A09A'}} />
                 <div>
-                  <h3 className="text-xl text-medium mb-2 text-gray-900 dark:text-white" >{language === 'es' ? 'Información accionable' : 'Actionable Information'}</h3>
+                  <h3 className="text-xl text-medium mb-2 text-gray-900 dark:text-white">{language === 'es' ? 'Información accionable' : 'Actionable Information'}</h3>
                   <p className="text-gray-500 dark:text-gray-400 text-light">{language === 'es' ? 'Convierte los mensajes de voz en datos estructurados para una mejor toma de decisiones.' : 'Convert voice messages into structured data for better decision-making.'}</p>
                 </div>
               </div>
               <div className="flex items-start space-x-4">
                 <Mic className="h-6 w-6 text-primary mt-1" style={{ color:'#51A09A'}}/>
                 <div>
-                  <h3 className="text-xl text-medium mb-2 text-gray-900 dark:text-white" >{language === 'es' ? 'Enfoque centrado en la voz' : 'Voice-First Approach'}</h3>
+                  <h3 className="text-xl text-medium mb-2 text-gray-900 dark:text-white">{language === 'es' ? 'Enfoque centrado en la voz' : 'Voice-First Approach'}</h3>
                   <p className="text-gray-500 dark:text-gray-400 text-light">{language === 'es' ? 'Ideal para industrias donde escribir no siempre es conveniente o posible.' : 'Ideal for industries where typing is not always convenient or possible.'}</p>
                 </div>
               </div>
@@ -2004,12 +2168,8 @@ export default function Component() {
           </div>
         </section>
 
+        
         <MultiWaveAudio />
-
-        {/* Workflow Builder Section - Versión completa con casos de uso */}
-        <WorkflowBuilder />
-
-        {/* <MultiWaveAudio /> */}
 
         {/* Casos de Uso Section - Temporalmente comentado hasta tener todos los videos */}
         {/* <section ref={casesRef}>
