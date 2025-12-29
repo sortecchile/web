@@ -9,7 +9,7 @@ const nextConfig = {
   images: {
     unoptimized: true, // Mantén esto igual para ambos entornos
   },
-  assetPrefix: isProd ? 'https://www.miido.ai/' : '', // Usar el prefijo solo en producción
+  assetPrefix: isProd ? 'https://miido.ai/' : '', // Usar el prefijo solo en producción (sin www)
 
   // Configuración de Webpack
   webpack: (config) => {
