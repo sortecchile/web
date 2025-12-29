@@ -1503,11 +1503,6 @@ const WorkflowBuilder = ({ simpleMode = false }: WorkflowBuilderProps) => {
                 </div>
               )}
 
-              {/* React Flow watermark like real */}
-              <div className="absolute bottom-2 right-4 text-[10px] text-gray-400 opacity-50">
-                React Flow
-              </div>
-
               {/* Mini map hint */}
               <div className="absolute bottom-3 right-20 flex gap-1">
                 <div className="w-4 h-4 bg-[#38507E] rounded opacity-60"></div>
