@@ -126,7 +126,11 @@ const pestPopups = {
   }
 };
 
-const WorkflowBuilder = () => {
+interface WorkflowBuilderProps {
+  simpleMode?: boolean;
+}
+
+const WorkflowBuilder = ({ simpleMode = false }: WorkflowBuilderProps) => {
   const { language } = useLanguageContext();
   const [currentStep, setCurrentStep] = useState(0);
   const [animationStep, setAnimationStep] = useState(0);
@@ -164,7 +168,10 @@ const WorkflowBuilder = () => {
     return () => observer.disconnect();
   }, [isVisible]);
 
-  // Animation sequence - only runs once when section becomes visible
+  // State to track animation cycle for looping
+  const [animationCycle, setAnimationCycle] = useState(0);
+
+  // Animation sequence - loops in simpleMode, runs once otherwise
   useEffect(() => {
     if (!isVisible || !isAnimating) return;
 
@@ -176,28 +183,37 @@ const WorkflowBuilder = () => {
       { delay: 4500, step: 5 },  // AI block appears
       { delay: 5500, step: 6 },  // Connection line 2 appears
       { delay: 6500, step: 7 },  // WhatsApp block appears
-      { delay: 7500, step: 8 },  // Complete - show interactive mode
+      { delay: 7500, step: 8 },  // Complete
     ];
 
     const timeouts: NodeJS.Timeout[] = [];
 
+    // Reset animation step at the start of each cycle
+    setAnimationStep(0);
+
     steps.forEach(({ delay, step }) => {
       const timeout = setTimeout(() => {
         setAnimationStep(step);
-        if (step === 8) {
-          // Animation complete - switch to interactive mode
-          setTimeout(() => {
-            setIsAnimating(false);
-            setCurrentStep(3); // Show all blocks active
-            setConnections(initialConnections); // Set initial connections
-          }, 1000);
-        }
       }, delay);
       timeouts.push(timeout);
     });
 
+    // Handle completion
+    const completionTimeout = setTimeout(() => {
+      if (simpleMode) {
+        // In simpleMode, trigger a new animation cycle after a brief pause
+        setAnimationCycle(prev => prev + 1);
+      } else {
+        // Animation complete - switch to interactive mode
+        setIsAnimating(false);
+        setCurrentStep(3); // Show all blocks active
+        setConnections(initialConnections); // Set initial connections
+      }
+    }, 9000);
+    timeouts.push(completionTimeout);
+
     return () => timeouts.forEach(t => clearTimeout(t));
-  }, [isVisible, isAnimating]);
+  }, [isVisible, isAnimating, simpleMode, animationCycle]);
 
   // Cursor positions for animation
   const getCursorPosition = () => {
@@ -440,32 +456,34 @@ const WorkflowBuilder = () => {
   };
 
   return (
-    <section ref={sectionRef} className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
-      <div className="container px-4 md:px-6">
-        {/* Title */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl text-semibold tracking-tighter sm:text-5xl mb-4 text-gray-900 dark:text-white">
-            {language === 'es' ? 'Crea tus propios Workflows' : 'Create your own Workflows'}
-          </h2>
-          <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400 text-light">
-            {language === 'es'
-              ? 'Automatiza procesos conectando integraciones, IA y WhatsApp en minutos. Sin código, sin complicaciones.'
-              : 'Automate processes by connecting integrations, AI and WhatsApp in minutes. No code, no hassle.'}
-          </p>
-        </div>
+    <section ref={sectionRef} className={`w-full ${simpleMode ? 'py-0' : 'py-16 md:py-24'}`}>
+      <div className={simpleMode ? 'px-0' : 'container px-4 md:px-6'}>
+        {/* Title - only show when not in simpleMode */}
+        {!simpleMode && (
+          <div className="text-center mb-12">
+            <h2 className="text-3xl text-semibold tracking-tighter sm:text-5xl mb-4 text-gray-900 dark:text-white">
+              {language === 'es' ? 'Crea tus propios Workflows' : 'Create your own Workflows'}
+            </h2>
+            <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400 text-light">
+              {language === 'es'
+                ? 'Automatiza procesos conectando integraciones, IA y WhatsApp en minutos. Sin código, sin complicaciones.'
+                : 'Automate processes by connecting integrations, AI and WhatsApp in minutes. No code, no hassle.'}
+            </p>
+          </div>
+        )}
 
-        {/* Animation status indicator */}
-        {isAnimating && (
+        {/* Animation status indicator - Comentado */}
+        {/* {isAnimating && (
           <div className="text-center mb-4">
             <span className="inline-flex items-center gap-2 px-4 py-2 bg-[#38507E]/10 text-[#38507E] rounded-full text-sm text-medium">
               <span className="w-2 h-2 bg-[#38507E] rounded-full animate-pulse"></span>
               {language === 'es' ? 'Creando workflow...' : 'Creating workflow...'}
             </span>
           </div>
-        )}
+        )} */}
 
-        {/* Use Case Buttons - appear after initial animation */}
-        {!isAnimating && (
+        {/* Use Case Buttons - appear after initial animation (hidden in simpleMode) */}
+        {!isAnimating && !simpleMode && (
           <div className="flex flex-wrap justify-center gap-3 mb-6">
             <button
               onClick={() => handleUseCaseSelect('default')}
@@ -506,13 +524,23 @@ const WorkflowBuilder = () => {
         )}
 
         {/* Workflow Canvas */}
-        <div className="relative max-w-5xl mx-auto overflow-x-auto">
+        <div
+          className={`relative ${simpleMode ? 'overflow-hidden' : 'overflow-x-auto max-w-5xl mx-auto'}`}
+          style={simpleMode ? {
+            width: `${950 * 0.8}px`,
+            height: `${340 * 0.8}px`
+          } : undefined}
+        >
           <div
             ref={canvasRef}
-            className={`relative rounded-2xl shadow-2xl overflow-hidden min-w-[950px] ${!isAnimating ? 'cursor-grab' : ''} ${draggingBlock ? 'cursor-grabbing' : ''}`}
+            className={`relative rounded-2xl shadow-2xl overflow-hidden ${simpleMode ? 'w-[950px] origin-top-left' : 'min-w-[950px]'} ${!isAnimating ? 'cursor-grab' : ''} ${draggingBlock ? 'cursor-grabbing' : ''}`}
             style={{
               minHeight: selectedUseCase === 'pests' ? '520px' : '340px',
-              background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)'
+              background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)',
+              ...(simpleMode && {
+                transform: 'scale(0.8)',
+                transformOrigin: 'top left',
+              })
             }}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
@@ -1490,8 +1518,8 @@ const WorkflowBuilder = () => {
             </div>
           </div>
 
-          {/* Interaction hints - only show after animation */}
-          {!isAnimating && (
+          {/* Interaction hints - only show after animation (hidden in simpleMode) */}
+          {!isAnimating && !simpleMode && (
             <div className="mt-4 text-center space-y-1">
               <span className="block text-sm text-gray-400 dark:text-gray-500 text-light">
                 {language === 'es' ? '👆 Arrastra los bloques para moverlos' : '👆 Drag blocks to move them'}
@@ -1502,42 +1530,44 @@ const WorkflowBuilder = () => {
             </div>
           )}
 
-          {/* Feature highlights below */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-            <div className="text-center p-4">
-              <div className="w-12 h-12 mx-auto mb-3 bg-[#38507E]/10 rounded-full flex items-center justify-center">
-                <Database className="w-6 h-6 text-[#38507E]" />
+          {/* Feature highlights below (hidden in simpleMode) */}
+          {!simpleMode && (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+              <div className="text-center p-4">
+                <div className="w-12 h-12 mx-auto mb-3 bg-[#38507E]/10 rounded-full flex items-center justify-center">
+                  <Database className="w-6 h-6 text-[#38507E]" />
+                </div>
+                <h3 className="text-medium text-gray-900 dark:text-white mb-1">
+                  {language === 'es' ? '+20 Integraciones' : '+20 Integrations'}
+                </h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400 text-ultra-light">
+                  {language === 'es' ? 'Dropcontrol, SAP, y más' : 'Dropcontrol, SAP, and more'}
+                </p>
               </div>
-              <h3 className="text-medium text-gray-900 dark:text-white mb-1">
-                {language === 'es' ? '+20 Integraciones' : '+20 Integrations'}
-              </h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400 text-ultra-light">
-                {language === 'es' ? 'Dropcontrol, SAP, y más' : 'Dropcontrol, SAP, and more'}
-              </p>
-            </div>
-            <div className="text-center p-4">
-              <div className="w-12 h-12 mx-auto mb-3 bg-[#51A09A]/10 rounded-full flex items-center justify-center">
-                <Brain className="w-6 h-6 text-[#51A09A]" />
+              <div className="text-center p-4">
+                <div className="w-12 h-12 mx-auto mb-3 bg-[#51A09A]/10 rounded-full flex items-center justify-center">
+                  <Brain className="w-6 h-6 text-[#51A09A]" />
+                </div>
+                <h3 className="text-medium text-gray-900 dark:text-white mb-1">
+                  {language === 'es' ? 'IA Personalizada' : 'Custom AI'}
+                </h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400 text-ultra-light">
+                  {language === 'es' ? 'Define lo que necesitas en lenguaje natural' : 'Define what you need in natural language'}
+                </p>
               </div>
-              <h3 className="text-medium text-gray-900 dark:text-white mb-1">
-                {language === 'es' ? 'IA Personalizada' : 'Custom AI'}
-              </h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400 text-ultra-light">
-                {language === 'es' ? 'Define lo que necesitas en lenguaje natural' : 'Define what you need in natural language'}
-              </p>
-            </div>
-            <div className="text-center p-4">
-              <div className="w-12 h-12 mx-auto mb-3 bg-[#25D366]/10 rounded-full flex items-center justify-center">
-                <MessageCircle className="w-6 h-6 text-[#25D366]" />
+              <div className="text-center p-4">
+                <div className="w-12 h-12 mx-auto mb-3 bg-[#25D366]/10 rounded-full flex items-center justify-center">
+                  <MessageCircle className="w-6 h-6 text-[#25D366]" />
+                </div>
+                <h3 className="text-medium text-gray-900 dark:text-white mb-1">
+                  {language === 'es' ? 'WhatsApp Nativo' : 'Native WhatsApp'}
+                </h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400 text-ultra-light">
+                  {language === 'es' ? 'Interactúa desde donde ya estás' : 'Interact from where you already are'}
+                </p>
               </div>
-              <h3 className="text-medium text-gray-900 dark:text-white mb-1">
-                {language === 'es' ? 'WhatsApp Nativo' : 'Native WhatsApp'}
-              </h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400 text-ultra-light">
-                {language === 'es' ? 'Interactúa desde donde ya estás' : 'Interact from where you already are'}
-              </p>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </section>

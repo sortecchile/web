@@ -735,7 +735,7 @@ export default function Component() {
 
 
         {/* Main section */}
-        <section className="w-full py-24 md:py-24 lg:py-32 xl:py-48 relative overflow-hidden">
+        <section className="w-full py-8 md:py-10 lg:py-12 xl:py-16 relative overflow-hidden">
           {/* Enhanced Parallax background image */}
           {/* Grid Overlay para modo claro */}
           <div className="absolute inset-0 -z-1 pointer-events-none dark:hidden">
@@ -792,64 +792,67 @@ export default function Component() {
           </div>
 
           <div className="container px-4 md:px-6">
-            {/* Backed by - Ahora como div dentro de la sección principal */}
-            <div
-              className="flex items-center justify-center gap-6 bg-white dark:bg-[#111827] border border-[#38507E] dark:border-[#1e293b] rounded-full px-6 py-1.5 max-w-sm mx-auto -mt-12 mb-12 shadow-md dark:shadow-[0_0_15px_rgba(0,0,0,0.3)] hover:border-[#C2DB64] transition-all duration-300"
-              style={{
-                animation: animationsReady ? 'fadeInDown 0.8s ease-out forwards' : 'none',
-                opacity: animationsReady ? 0 : 1,
-                transform: animationsReady ? 'translateY(-20px)' : 'none'
-              }}
-            >
-              <span className="text-xs text-ultra-light text-gray-800 dark:text-gray-300">{language === 'es' ? 'Apoyados por' : 'Backed by'}</span>
-              <div className="flex items-center justify-center gap-3 sm:gap-4 md:gap-6">
+            {/* Backed by badge - centrado arriba */}
+            <div className="flex justify-center mb-8">
+              <div
+                className="flex items-center gap-4 bg-white dark:bg-[#111827] border border-[#38507E] dark:border-[#1e293b] rounded-full px-4 py-1.5 shadow-md dark:shadow-[0_0_15px_rgba(0,0,0,0.3)] hover:border-[#C2DB64] transition-all duration-300"
+                style={{
+                  animation: animationsReady ? 'fadeInDown 0.8s ease-out forwards' : 'none',
+                  opacity: animationsReady ? 0 : 1,
+                  transform: animationsReady ? 'translateY(-20px)' : 'none'
+                }}
+              >
+                <span className="text-xs text-ultra-light text-gray-800 dark:text-gray-300">{language === 'es' ? 'Apoyados por' : 'Backed by'}</span>
                 <Image
                   src={isDark ? "./skydeck2.png" : "./skydeck.png"}
                   alt="Skydeck Logo"
-                  width={150}
-                  height={150}
-                  className="w-16 sm:w-20 md:w-24 lg:w-28 h-auto object-contain opacity-90 hover:opacity-100 transition-opacity hover:scale-110 transform transition-transform duration-300"
+                  width={100}
+                  height={100}
+                  className="w-16 sm:w-20 h-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
                 />
-
               </div>
             </div>
 
-            <div className="flex flex-col items-center space-y-6 text-center">
-              {/* Title Section */}
-              <div className="space-y-2">
-                <h1
-                  className="text-3xl text-semibold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none bg-gradient-to-r from-[#38507E] via-[#51A09A] to-[#C2DB64] bg-clip-text text-transparent h-24 flex items-center justify-center"
-                  style={{
-                    animation: animationsReady ? 'fadeInUp 0.8s ease-out forwards' : 'none',
-                    opacity: animationsReady ? 0 : 1,
-                    transform: animationsReady ? 'translateY(20px)' : 'none',
-                    fontWeight: 600
-                  }}
-                >
-                   {language === 'es' ? 'AI agents en agricultura - MIIDO' : 'AI agents in agriculture - MIIDO'}
-                  <span className="animate-blink">|</span>
-                </h1>
-                <p
-                  className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400 text-light"
-                  style={{
-                    animation: animationsReady ? 'fadeInUp 0.8s ease-out 0.2s forwards' : 'none',
-                    opacity: animationsReady ? 0 : 1,
-                    transform: animationsReady ? 'translateY(20px)' : 'none',
-                    fontWeight: 300
-                  }}
-                >
-                  {language === 'es'
-                    ? 'Tu copiloto de IA en el campo: automatiza, predice y toma mejores decisiones agrícolas, '
-                    : 'Your AI copilot in the field: automate, predict and make better agricultural decisions, '
-                  }
-                  <strong style={{ fontWeight: 400 }}>{language === 'es' ? 'sin complicaciones y desde WhatsApp' : 'without complications and from WhatsApp'}</strong>.
-                </p>
-              </div>
+            {/* Layout de dos columnas estilo Notion */}
+            <div className="flex flex-col lg:flex-row items-start gap-8 lg:gap-4">
 
-              {/* Updated CTA button with hover animation */}
-              <div className="w-full max-w-sm space-y-2">
+              {/* Columna izquierda - Texto */}
+              <div className="flex-1 flex flex-col items-center lg:items-start space-y-5 text-center lg:text-left max-w-xl">
+
+                {/* Title Section */}
+                <div className="space-y-6">
+                  <h1
+                    className="text-4xl sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl text-semibold tracking-tight bg-gradient-to-r from-[#38507E] via-[#51A09A] to-[#C2DB64] bg-clip-text text-transparent pb-1"
+                    style={{
+                      animation: animationsReady ? 'fadeInUp 0.8s ease-out forwards' : 'none',
+                      opacity: animationsReady ? 0 : 1,
+                      transform: animationsReady ? 'translateY(20px)' : 'none',
+                      fontWeight: 600,
+                      lineHeight: 1.2
+                    }}
+                  >
+                    {language === 'es' ? 'AI agents en agricultura' : 'AI agents in agriculture'}
+                  </h1>
+                  <p
+                    className="text-gray-500 text-lg md:text-xl dark:text-gray-400 text-light"
+                    style={{
+                      animation: animationsReady ? 'fadeInUp 0.8s ease-out 0.2s forwards' : 'none',
+                      opacity: animationsReady ? 0 : 1,
+                      transform: animationsReady ? 'translateY(20px)' : 'none',
+                      fontWeight: 300
+                    }}
+                  >
+                    {language === 'es'
+                      ? 'Tu copiloto de IA en el campo: automatiza, predice y toma mejores decisiones agrícolas, '
+                      : 'Your AI copilot in the field: automate, predict and make better agricultural decisions, '
+                    }
+                    <strong style={{ fontWeight: 400 }}>{language === 'es' ? 'sin complicaciones y desde WhatsApp' : 'without complications and from WhatsApp'}</strong>.
+                  </p>
+                </div>
+
+                {/* CTA Buttons - Estilo Notion */}
                 <div
-                  className="flex space-x-2"
+                  className="flex flex-col sm:flex-row gap-3"
                   style={{
                     animation: animationsReady ? 'fadeInUp 0.8s ease-out 0.4s forwards' : 'none',
                     opacity: animationsReady ? 0 : 1,
@@ -860,81 +863,51 @@ export default function Component() {
                     href="https://www.notion.so/miidocl/151f91071a0f80c19460e4c799042667?pvs=106"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="max-w-lg flex-1 inline-flex items-center justify-center px-4 py-2 text-white bg-[#1A202C] rounded-md hover:bg-[#2D3748] focus:outline-none transform transition-all duration-300 hover:scale-105 hover:shadow-lg relative overflow-hidden group"
+                    className="inline-flex items-center justify-center px-6 py-3 text-white bg-[#38507E] rounded-lg hover:bg-[#2d4066] focus:outline-none transform transition-all duration-300 hover:scale-105 hover:shadow-lg text-sm font-medium"
                   >
-                    <span className="relative z-10">{language === 'es' ? 'Empieza gratis!' : 'Start free!'}</span>
-                    <span className="absolute inset-0 bg-[#2D3748] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                    {language === 'es' ? 'Empieza gratis' : 'Start free'}
                   </a>
+                  <button
+                    onClick={() => handleNavClick(contactRef)}
+                    className="inline-flex items-center justify-center px-6 py-3 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none transform transition-all duration-300 hover:scale-105 text-sm font-medium"
+                  >
+                    {language === 'es' ? 'Solicitar demo' : 'Request a demo'}
+                  </button>
                 </div>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
-                  {language === 'es' ? 'No se necesita tarjeta de crédito.' : 'No credit card required.'}
-                </p>
-              </div>
 
-              {/* Embedded Video Section without parallax */}
-              <div
-                className="w-full max-w-[700px] mt-8"
-                style={{
-                  animation: animationsReady ? 'fadeInUp 0.8s ease-out 0.6s forwards' : 'none',
-                  opacity: animationsReady ? 0 : 1,
-                  transform: animationsReady ? 'translateY(20px)' : 'none'
-                }}
-              >
-                <div
-                  style={{
-                    position: 'relative',
-                    paddingBottom: '56.25%',
-                    height: 0,
-                    borderRadius: '12px',
-                    overflow: 'hidden',
-                    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1)',
-                    transition: 'transform 0.3s ease-out, box-shadow 0.3s ease-out',
-                  }}
-                  className="hover:shadow-2xl hover:scale-[1.02] transform transition-all duration-300"
-                >
-                  <iframe
-                    style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      width: '100%',
-                      height: '100%',
-                      border: 0,
-                    }}
-                    src="https://www.tella.tv/video/cmafppfb0000u0dl2hlbv44t2/embed?b=1&title=1&a=1&loop=0&t=0&muted=0&wt=1"
-                    allowFullScreen
-                    allowTransparency={true}
-                  ></iframe>
-                </div>
                 <p
-                  className="mt-4 text-sm text-gray-500 dark:text-gray-400"
+                  className="text-xs text-gray-500 dark:text-gray-400"
                   style={{
-                    animation: animationsReady ? 'fadeInUp 0.8s ease-out 0.8s forwards' : 'none',
+                    animation: animationsReady ? 'fadeInUp 0.8s ease-out 0.5s forwards' : 'none',
                     opacity: animationsReady ? 0 : 1,
                     transform: animationsReady ? 'translateY(20px)' : 'none'
                   }}
                 >
-                  {language === 'es' ? 'Descubre cómo MIIDO transforma tu flujo de trabajo.' : 'Discover how MIIDO transforms your workflow.'}
+                  {language === 'es' ? 'No se necesita tarjeta de crédito.' : 'No credit card required.'}
                 </p>
+              </div>
 
-                {/* Botón para ver casos de éxito - Temporalmente comentado */}
-                {/* <div className="mt-6 flex justify-center">
-                  <Button
-                    onClick={handleCasesClick}
-                    className="bg-white dark:bg-[#111827] border border-[#38507E] hover:border-[#51A09A] text-gray-800 dark:text-white rounded-full shadow-md hover:shadow-lg px-6 py-2 text-sm"
-                  >
-                    Ver casos de éxito
-                  </Button>
-                </div> */}
+              {/* Columna derecha - Animación WorkflowBuilder (simpleMode) */}
+              <div
+                className="flex-1 w-full lg:max-w-2xl"
+                style={{
+                  animation: animationsReady ? 'fadeInUp 0.8s ease-out 0.3s forwards' : 'none',
+                  opacity: animationsReady ? 0 : 1,
+                  transform: animationsReady ? 'translateY(20px)' : 'none'
+                }}
+              >
+                <WorkflowBuilder simpleMode={true} />
               </div>
             </div>
           </div>
-          <MultiWaveAudio />
+          <div className="mt-16">
+            <MultiWaveAudio />
+          </div>
         </section>
 
 
 
-        <section className="w-full py-4 bg-gray-1 md:-mt-24 sm:-mt-32 overflow-x-auto">
+        <section className="w-full py-4 bg-gray-1 md:-mt-16 sm:-mt-20 overflow-x-auto">
           <div className="container px-4 md:px-6">
             <div className="flex flex-nowrap md:justify-center sm:justify-center items-center gap-4 sm:gap-8 md:gap-12 lg:gap-20 pb-2">
               {/* Viña Errazuriz */}
@@ -2033,10 +2006,10 @@ export default function Component() {
 
         <MultiWaveAudio />
 
-        {/* Workflow Builder Section */}
+        {/* Workflow Builder Section - Versión completa con casos de uso */}
         <WorkflowBuilder />
 
-        <MultiWaveAudio />
+        {/* <MultiWaveAudio /> */}
 
         {/* Casos de Uso Section - Temporalmente comentado hasta tener todos los videos */}
         {/* <section ref={casesRef}>
@@ -2614,22 +2587,6 @@ export default function Component() {
           }
         }
       `}</style>
-
-      {/* Update image container styles */}
-      <div
-        className="absolute -top-[30%] -right-[0%] hidden md:block overflow-hidden pointer-events-none"
-        style={{
-          animation: 'float 6s ease-in-out infinite'
-        }}
-      >
-        <Image
-          src="/trees-aerial.png"
-          alt="Trees"
-          width={300}
-          height={300}
-          className="object-cover"
-        />
-      </div>
 
       {/* Add a toggle button for dark mode */}
       <button
