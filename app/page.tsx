@@ -717,7 +717,7 @@ export default function Component() {
 
             {/* Botón Ingresar para móvil */}
             <a
-              href="https://www.dashboard.miido.cl"
+              href="https://dashboard.miido.cl/login"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-4"
