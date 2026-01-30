@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import Link from "next/link";
 import "./globals.css";
 import { LanguageProvider } from "./i18n/LanguageProvider";
 
@@ -23,15 +24,13 @@ export default function RootLayout({
     <html lang="en" className={fraunces.variable}>
       <body className={fraunces.className}>
         <LanguageProvider>
-          {/* Aquí agregamos el menú de navegación */}
-          <header>
+          {/* Hidden navigation for accessibility/SEO */}
+          <header className="sr-only">
             <nav>
               <ul>
-                <li><a href="/"></a></li>
-                <li><a href="/deck"></a></li> {/* Enlace a la nueva página */}
-                <li><a href="/demo"></a></li> {/* Enlace a la nueva página */}
-                <li><a href="/newsletter"></a></li> {/* Enlace a la nueva página */}
-                {/* Puedes agregar más enlaces aquí según sea necesario */}
+                <li><Link href="/">Home</Link></li>
+                <li><Link href="/deck">Deck</Link></li>
+                <li><Link href="/demo">Demo</Link></li>
               </ul>
             </nav>
           </header>

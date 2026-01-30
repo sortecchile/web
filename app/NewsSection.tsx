@@ -14,7 +14,7 @@ const NewsSection = () => {
 
   const newsItemsEs = [
     {
-      id: 9,
+      id: 10,
       title: "Primer lugar Desafío Conectagro de la Sociedad Nacional de Agricultura",
       description: "Obtuvimos el primer lugar en este desafío organizado por la SNA y SQM, lo cual valida una vez el propósito de MIIDO en terminos de digitalización en la agro-industria.. ",
       image: "./Conectagro.png",
@@ -73,7 +73,7 @@ const NewsSection = () => {
 
   const newsItemsEn = [
     {
-      id: 9,
+      id: 10,
       title: "First place in Conectagro Challenge by the National Agricultural Society",
       description: "We won first place in this challenge organized by SNA and SQM, which validates MIIDO's purpose in terms of digitalization in the agro-industry.",
       image: "./Conectagro.png",

@@ -2,20 +2,21 @@
  * @type {import('next').NextConfig}
  */
 const isProd = process.env.NODE_ENV === 'production';
+const isExport = process.env.EXPORT === 'true'; // Use EXPORT=true npm run build for static export
 
 const nextConfig = {
-  output: isProd ? 'export' : undefined, // Solo 'export' en producción
-  distDir: isProd ? 'dist' : '.next', // Usar 'dist' en producción y '.next' en desarrollo
+  output: isExport ? 'export' : undefined, // Static export only when EXPORT=true
+  distDir: isExport ? 'dist' : '.next',
   images: {
-    unoptimized: true, // Mantén esto igual para ambos entornos
+    unoptimized: true,
   },
-  assetPrefix: isProd ? 'https://miido.ai/' : '', // Usar el prefijo solo en producción (sin www)
+  assetPrefix: isExport ? 'https://miido.ai/' : '',
 
   // Configuración de Webpack
   webpack: (config) => {
     config.resolve.fallback = {
       ...config.resolve.fallback,
-      canvas: false, // Ignorar el módulo 'canvas'
+      canvas: false,
     };
     return config;
   },

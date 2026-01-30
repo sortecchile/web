@@ -634,16 +634,16 @@ export default function Component() {
               <Image
                 src="./miido-logo.png"
                 alt="Company Logo"
-                width={150}
-                height={150}
+                width={120}
+                height={40}
               />
             </div>
             <div className="hidden dark:block">
               <Image
                 src="./logo_blanco.png"
                 alt="Company Logo"
-                width={150}
-                height={150}
+                width={120}
+                height={40}
               />
             </div>
             <span className="sr-only">MIIDO</span>
@@ -789,6 +789,7 @@ export default function Component() {
               src="/trees-aerial.png"
               alt="Trees"
               fill
+              priority
               className="object-cover opacity-10"
             />
           </div>
@@ -921,9 +922,8 @@ export default function Component() {
           <Image
             src="./errazuriz-logo.png"
             alt="Viña Errazuriz"
-            width={80}
-            height={30}
-            className="w-16 sm:w-20 md:w-24 lg:w-28 h-auto object-contain"
+            width={112}
+            height={42}
           />
         </div>
         <div
@@ -933,9 +933,8 @@ export default function Component() {
           <Image
             src="./errazuriz-logo-white.png"
             alt="Viña Errazuriz white"
-            width={80}
-            height={30}
-            className="w-16 sm:w-20 md:w-24 lg:w-28 h-auto object-contain"
+            width={112}
+            height={42}
           />
         </div>
       </div>
@@ -949,9 +948,8 @@ export default function Component() {
           <Image
             src="./LCP.png"
             alt="La ciudad posible"
-            width={90}
-            height={30}
-            className="w-18 sm:w-22 md:w-26 lg:w-32 h-auto object-contain"
+            width={128}
+            height={42}
           />
         </div>
         <div
@@ -961,9 +959,8 @@ export default function Component() {
           <Image
             src="./LCP-white.png"
             alt="La ciudad posible white"
-            width={90}
-            height={30}
-            className="w-18 sm:w-22 md:w-26 lg:w-32 h-auto object-contain"
+            width={128}
+            height={42}
           />
         </div>
       </div>
@@ -974,18 +971,16 @@ export default function Component() {
           <Image
             src="./cyt.png"
             alt="Concha y Toro"
-            width={90}
-            height={30}
-            className="w-18 sm:w-22 md:w-26 lg:w-32 h-auto object-contain"
+            width={128}
+            height={42}
           />
         </div>
         <div className="hidden dark:block transform transition-transform duration-300 hover:scale-110">
           <Image
             src="./cyt-white.png"
             alt="Concha y Toro white"
-            width={90}
-            height={30}
-            className="w-18 sm:w-22 md:w-26 lg:w-32 h-auto object-contain"
+            width={128}
+            height={42}
           />
         </div>
       </div>
@@ -996,18 +991,16 @@ export default function Component() {
           <Image
             src="./driscolls.png"
             alt="Fundo Santa Eugenia"
-            width={80}
-            height={30}
-            className="w-16 sm:w-20 md:w-24 lg:w-28 h-auto object-contain"
+            width={112}
+            height={42}
           />
         </div>
         <div className="hidden dark:block transform transition-transform duration-300 hover:scale-110">
           <Image
             src="./driscolls-white.png"
             alt="Fundo Santa Eugenia white"
-            width={80}
-            height={30}
-            className="w-16 sm:w-20 md:w-24 lg:w-28 h-auto object-contain"
+            width={112}
+            height={42}
           />
         </div>
       </div>
@@ -1018,18 +1011,16 @@ export default function Component() {
           <Image
             src="./westfalia.png"
             alt="TMV Agroexportació"
-            width={75}
-            height={30}
-            className="w-14 sm:w-18 md:w-22 lg:w-26 h-auto object-contain"
+            width={104}
+            height={42}
           />
         </div>
         <div className="hidden dark:block transform transition-transform duration-300 hover:scale-110">
           <Image
             src="./westfalia-white.png"
             alt="TMV Agroexportació white"
-            width={75}
-            height={30}
-            className="w-14 sm:w-18 md:w-22 lg:w-26 h-auto object-contain"
+            width={104}
+            height={42}
           />
         </div>
       </div>
@@ -1040,18 +1031,16 @@ export default function Component() {
           <Image
             src="./TMV.png"
             alt="Startup Chile"
-            width={90}
-            height={30}
-            className="w-18 sm:w-22 md:w-26 lg:w-32 h-auto object-contain"
+            width={128}
+            height={42}
           />
         </div>
         <div className="hidden dark:block transform transition-transform duration-300 hover:scale-110">
           <Image
             src="./TMV-white.png"
             alt="Startup Chile white"
-            width={90}
-            height={30}
-            className="w-18 sm:w-22 md:w-26 lg:w-32 h-auto object-contain"
+            width={128}
+            height={42}
           />
         </div>
       </div>
@@ -1062,18 +1051,16 @@ export default function Component() {
           <Image
             src="./start-fellowship.png"
             alt="Start Fellowship"
-            width={80}
-            height={30}
-            className="w-16 sm:w-20 md:w-24 lg:w-28 h-auto object-contain"
+            width={112}
+            height={42}
           />
         </div>
         <div className="hidden dark:block transform transition-transform duration-300 hover:scale-110">
           <Image
             src="./start-fellowship-white.png"
             alt="Start Fellowship white"
-            width={80}
-            height={30}
-            className="w-16 sm:w-20 md:w-24 lg:w-28 h-auto object-contain"
+            width={112}
+            height={42}
           />
         </div>
       </div>
@@ -1304,7 +1291,7 @@ export default function Component() {
                               const isActive = i < (scrollProgress * 15);
                               return (
                                 <div
-                                  key={i}
+                                  key={`audio1-bar-${i}`}
                                   className="w-1 rounded-full transition-all duration-300 ease-out"
                                   style={{
                                     height: `${heights[i]}px`,
@@ -1390,7 +1377,7 @@ export default function Component() {
                         <div className="flex items-center gap-0.5 flex-1">
                           {[...Array(20)].map((_, i) => (
                             <div
-                              key={i}
+                              key={`audio2-bar-${i}`}
                               className="w-0.5 bg-white/30 rounded-full"
                               style={{
                                 height: `${Math.random() * 8 + 2}px`,
@@ -1474,7 +1461,7 @@ export default function Component() {
                             const isActive = i < (scrollProgress * 15);
                             return (
                               <div
-                                key={i}
+                                key={`audio3-bar-${i}`}
                                 className="w-1 rounded-full transition-all duration-300 ease-out"
                                 style={{
                                   height: `${heights[i]}px`,
