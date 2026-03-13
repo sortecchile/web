@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Link from "next/link";
+import Script from "next/script";
 import "./globals.css";
 import { LanguageProvider } from "./i18n/LanguageProvider";
 
@@ -23,6 +24,18 @@ export default function RootLayout({
   return (
     <html lang="en" className={fraunces.variable}>
       <body className={fraunces.className}>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-P4KX5LP8GN"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-P4KX5LP8GN');
+          `}
+        </Script>
         <LanguageProvider>
           {/* Hidden navigation for accessibility/SEO */}
           <header className="sr-only">
