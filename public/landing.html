@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIIDO Workers - Contratista Agrícola</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .miido-navy { color: #38507E; }
+        .bg-miido-navy { background-color: #38507E; }
+        .border-miido-navy { border-color: #38507E; }
+        .bg-miido-bg { background-color: #F8FAFC; }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- HEADER -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white border-b h-16">
+        <div class="max-w-7xl mx-auto px-4 h-full flex items-center justify-between">
+            <div class="font-bold text-xl text-miido-navy">MIIDO Workers</div>
+            <button onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})" 
+                    class="bg-miido-navy text-white px-5 py-2 rounded-lg text-sm font-semibold">
+                Inscríbete →
+            </button>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="pt-32 pb-20 px-4 bg-miido-bg">
+        <div class="max-w-7xl mx-auto">
+            <h1 class="text-4xl md:text-5xl font-semibold text-miido-navy mb-6">
+                Contratista agrícola para tu fundo todo el año
+            </h1>
+            <p class="text-xl text-gray-600 font-light mb-2">Formal. Medible. Sin sorpresas.</p>
+            <p class="text-lg text-gray-600 mb-10">
+                Cuadrillas para plantación, poda, raleo, amarra, deshoje, cosecha, packing y mantención.
+            </p>
+            <button onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})" 
+                    class="bg-[#C2DB64] text-miido-navy text-lg font-bold py-6 px-10 rounded-lg">
+                Inscríbete a la lista de espera →
+            </button>
+        </div>
+    </section>
+
+    <!-- QUÉ HACEMOS -->
+    <section class="py-20 px-4 bg-miido-bg">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-semibold text-miido-navy mb-4">Qué hacemos</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
+                <div class="bg-white p-8 rounded-xl border-l-4 border-miido-navy">
+                    <h3 class="text-xl font-semibold mb-3 text-miido-navy">Cubrimos toda la temporada</h3>
+                    <p class="text-gray-600 font-light">Desde poda hasta cosecha y packing.</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl border-l-4 border-[#51A09A]">
+                    <h3 class="text-xl font-semibold mb-3 text-miido-navy">Empleador formal</h3>
+                    <p class="text-gray-600 font-light">EST inscrita. F30-1 al día.</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl border-l-4 border-[#C2DB64]">
+                    <h3 class="text-xl font-semibold mb-3 text-miido-navy">Operación con data</h3>
+                    <p class="text-gray-600 font-light">Productividad real.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WAITLIST -->
+    <section id="waitlist" class="py-20 px-4 bg-miido-navy">
+        <div class="max-w-2xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-semibold text-white mb-4">Lista de espera</h2>
+            <form onsubmit="alert('Gracias por inscribirte'); return false;" class="bg-white p-8 rounded-2xl shadow-2xl mt-8 space-y-6">
+                <div>
+                    <label class="block text-sm font-medium mb-2">Nombre y apellido *</label>
+                    <input required class="w-full p-3 border border-gray-300 rounded-lg" placeholder="Tu nombre">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Email corporativo *</label>
+                    <input type="email" required class="w-full p-3 border border-gray-300 rounded-lg" placeholder="tu@email.com">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Empresa / fundo *</label>
+                    <input required class="w-full p-3 border border-gray-300 rounded-lg" placeholder="Nombre de la empresa">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">Cargo *</label>
+                    <input required class="w-full p-3 border border-gray-300 rounded-lg" placeholder="Tu cargo">
+                </div>
+                <button type="submit" class="w-full bg-[#C2DB64] text-miido-navy text-lg font-bold py-6 rounded-lg">
+                    Inscribirme a la lista de espera →
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-12 px-4 bg-gray-900 text-gray-400">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="text-white font-bold text-lg">MIIDO Workers</div>
+            <div class="text-center md:text-left">
+                <p>contacto@miido.cl</p>
+                <p class="text-sm">Av. Providencia 1234, Santiago, Chile</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
