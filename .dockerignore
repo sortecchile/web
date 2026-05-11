@@ -1,0 +1,17 @@
+node_modules
+.next
+dist
+.git
+.github
+*.md
+src
+app
+public
+package*.json
+tsconfig.json
+tailwind.config.ts
+postcss.config.mjs
+eslint.config.mjs
+next.config.js
+next-env.d.ts
+.DS_Store

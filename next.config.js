@@ -10,7 +10,6 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  assetPrefix: isExport ? 'https://miido.ai/' : '',
 
   // Configuración de Webpack
   webpack: (config) => {
