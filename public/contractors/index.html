@@ -1860,19 +1860,25 @@
       submitBtn.disabled = true;
       submitBtn.textContent = 'Enviando...';
 
-      fetch('https://formspree.io/f/xykovkrv', {
+      const payload = Object.fromEntries(new FormData(form).entries());
+
+      fetch('/api/waitlist', {
         method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
+        body: JSON.stringify(payload),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
       })
-      .then(res => {
+      .then(async res => {
         if (res.ok) {
           form.style.display = 'none';
           successMsg.style.display = 'block';
         } else {
+          const result = await res.json().catch(() => ({}));
           submitBtn.disabled = false;
           submitBtn.textContent = 'Inscribirme a la lista de espera';
-          alert('Hubo un error al enviar. Intenta de nuevo.');
+          alert(result.error || 'Hubo un error al enviar. Intenta de nuevo.');
         }
       })
       .catch(() => {

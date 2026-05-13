@@ -45,6 +45,7 @@ const REGION_MAP: Record<string, string> = {
   Valparaiso: 'Valparaíso',
   Valparaíso: 'Valparaíso',
   Metropolitana: 'Metropolitana',
+  'Metropolitana de Santiago': 'Metropolitana',
   OHiggins: "O'Higgins",
   "O'Higgins": "O'Higgins",
   Maule: 'Maule',
