@@ -5,39 +5,102 @@ const NOTION_VERSION = '2022-06-28';
 
 const HECTAREAS_MAP: Record<string, string> = {
   'menos-50': 'Menos de 50 ha',
+  '<50ha': 'Menos de 50 ha',
   '50-200': '50 – 200 ha',
+  '50-100ha': '50 – 200 ha',
+  '100-500ha': '200 – 500 ha',
   '200-500': '200 – 500 ha',
   'mas-500': 'Más de 500 ha',
+  '500+ha': 'Más de 500 ha',
+  'Menos de 50 ha': 'Menos de 50 ha',
+  '50 – 200 ha': '50 – 200 ha',
+  '200 – 500 ha': '200 – 500 ha',
+  'Más de 500 ha': 'Más de 500 ha',
 };
 
 const ESPECIE_MAP: Record<string, string> = {
   palto: 'Palto',
+  Palto: 'Palto',
   cereza: 'Cereza',
+  Cereza: 'Cereza',
   arandano: 'Arándano',
+  Arándano: 'Arándano',
   uva: 'Uva de mesa',
+  Uva: 'Uva de mesa',
+  'Uva de mesa': 'Uva de mesa',
   manzana: 'Manzana',
+  Manzana: 'Manzana',
   otro: 'Otra',
+  Otro: 'Otra',
+  Otra: 'Otra',
+};
+
+const REGION_MAP: Record<string, string> = {
+  'Arica y Parinacota': 'Arica y Parinacota',
+  Tarapaca: 'Tarapacá',
+  Tarapacá: 'Tarapacá',
+  Antofagasta: 'Antofagasta',
+  Atacama: 'Atacama',
+  Coquimbo: 'Coquimbo',
+  Valparaiso: 'Valparaíso',
+  Valparaíso: 'Valparaíso',
+  Metropolitana: 'Metropolitana',
+  OHiggins: "O'Higgins",
+  "O'Higgins": "O'Higgins",
+  Maule: 'Maule',
+  Nuble: 'Ñuble',
+  Ñuble: 'Ñuble',
+  Biobio: 'Biobío',
+  Biobío: 'Biobío',
+  'La Araucania': 'La Araucanía',
+  'La Araucanía': 'La Araucanía',
+  'Los Rios': 'Los Ríos',
+  'Los Ríos': 'Los Ríos',
+  'Los Lagos': 'Los Lagos',
+  Aysen: 'Aysén',
+  Aysén: 'Aysén',
+  Magallanes: 'Magallanes',
 };
 
 type WaitlistPayload = {
+  name?: string;
   nombre?: string;
   apellido?: string;
   email?: string;
+  company?: string;
   empresa?: string;
+  position?: string;
   cargo?: string;
+  hectares?: string;
   hectareas?: string;
+  species?: string;
   especie?: string;
   region?: string;
+  needDate?: string;
   temporada?: string;
 };
 
-function text(value?: string) {
+function text(value?: string): { rich_text: { text: { content: string } }[] } {
   return { rich_text: [{ text: { content: value ?? '' } }] };
 }
 
-function select(value?: string) {
+function select(value?: string): { select: { name: string } } | undefined {
   if (!value) return undefined;
   return { select: { name: value } };
+}
+
+function clean(value?: string): string {
+  return value?.toString().trim() ?? '';
+}
+
+function splitName(fullName: string): { nombre: string; apellido: string } {
+  const parts = fullName.split(/\s+/).filter(Boolean);
+  if (parts.length <= 1) return { nombre: fullName, apellido: '' };
+
+  return {
+    nombre: parts.slice(0, -1).join(' '),
+    apellido: parts.at(-1) ?? '',
+  };
 }
 
 export async function POST(request: Request) {
@@ -58,10 +121,28 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Invalid JSON body.' }, { status: 400 });
   }
 
-  const required: (keyof WaitlistPayload)[] = [
-    'nombre', 'apellido', 'email', 'empresa', 'cargo', 'hectareas', 'especie', 'region',
-  ];
-  const missing = required.filter((key) => !body[key]?.toString().trim());
+  const fullName = clean(body.name) || [clean(body.nombre), clean(body.apellido)].filter(Boolean).join(' ');
+  const splitFullName = splitName(fullName);
+  const nombre = clean(body.nombre) || splitFullName.nombre || fullName;
+  const apellido = clean(body.apellido) || splitFullName.apellido;
+  const email = clean(body.email);
+  const empresa = clean(body.empresa) || clean(body.company);
+  const cargo = clean(body.cargo) || clean(body.position);
+  const hectareas = HECTAREAS_MAP[clean(body.hectareas) || clean(body.hectares)];
+  const especie = ESPECIE_MAP[clean(body.especie) || clean(body.species)];
+  const region = REGION_MAP[clean(body.region)];
+  const temporada = clean(body.temporada) || clean(body.needDate);
+
+  const missing = [
+    !fullName && 'nombre',
+    !email && 'email',
+    !empresa && 'empresa',
+    !cargo && 'cargo',
+    !hectareas && 'hectareas',
+    !especie && 'especie',
+    !region && 'region',
+  ].filter(Boolean);
+
   if (missing.length) {
     return NextResponse.json(
       { error: `Faltan campos: ${missing.join(', ')}` },
@@ -70,22 +151,16 @@ export async function POST(request: Request) {
   }
 
   const properties: Record<string, unknown> = {
-    Nombre: { title: [{ text: { content: body.nombre! } }] },
-    Apellido: text(body.apellido),
-    Email: { email: body.email },
-    Empresa: text(body.empresa),
-    Cargo: text(body.cargo),
-    Temporada: text(body.temporada),
+    Nombre: { title: [{ text: { content: fullName || nombre } }] },
+    Apellido: text(apellido),
+    Email: { email },
+    Empresa: text(empresa),
+    Cargo: text(cargo),
+    Temporada: text(temporada),
+    'Hectáreas': select(hectareas),
+    'Especie principal': select(especie),
+    Región: select(region),
   };
-
-  const hectareas = select(HECTAREAS_MAP[body.hectareas!]);
-  if (hectareas) properties['Hectáreas'] = hectareas;
-
-  const especie = select(ESPECIE_MAP[body.especie!]);
-  if (especie) properties['Especie principal'] = especie;
-
-  const region = select(body.region);
-  if (region) properties['Región'] = region;
 
   const res = await fetch(NOTION_API, {
     method: 'POST',

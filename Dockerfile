@@ -5,7 +5,6 @@ RUN npm ci
 
 FROM node:20-alpine AS builder
 WORKDIR /app
-ENV DEPLOY_TARGET=contractors
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build
@@ -13,7 +12,6 @@ RUN npm run build
 FROM node:20-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
-ENV DEPLOY_TARGET=contractors
 ENV PORT=8080
 ENV HOSTNAME=0.0.0.0
 

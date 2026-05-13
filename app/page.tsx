@@ -1,10 +1,10 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
-import { Button } from '@/src/components/ui/button'
-import { Input } from '@/src/components/ui/input'
+import { type FormEvent, useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { Shield, BarChart3, Users, Smartphone, FileText, Bot, ChevronDown, CheckCircle2, ArrowRight, Sun, Moon, Send } from 'lucide-react'
+import { Button } from '@/src/components/ui/button'
+import { Input } from '@/src/components/ui/input'
 
 interface FormData {
   name: string
@@ -17,6 +17,23 @@ interface FormData {
   needDate: string
 }
 
+interface WaitlistResponse {
+  error?: string
+}
+
+type SubmitStatus = 'idle' | 'success' | 'error'
+
+const EMPTY_FORM_DATA: FormData = {
+  name: '',
+  email: '',
+  company: '',
+  position: '',
+  hectares: '',
+  species: '',
+  region: '',
+  needDate: ''
+}
+
 export default function Home() {
   const waitlistRef = useRef<HTMLElement>(null)
   const trustRef = useRef<HTMLElement>(null)
@@ -25,12 +42,13 @@ export default function Home() {
   const comoRef = useRef<HTMLElement>(null)
   const alertasRef = useRef<HTMLElement>(null)
   
-  const [formData, setFormData] = useState<FormData>({
-    name: '', email: '', company: '', position: '', hectares: '', species: '', region: '', needDate: ''
-  })
+  const [formData, setFormData] = useState<FormData>(EMPTY_FORM_DATA)
   const [showSticky, setShowSticky] = useState(false)
   const [visible, setVisible] = useState<Record<string, boolean>>({})
   const [isDark, setIsDark] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<SubmitStatus>('idle')
+  const [submitMessage, setSubmitMessage] = useState('')
 
   useEffect(() => {
     const onScroll = () => {
@@ -67,10 +85,34 @@ export default function Home() {
     document.documentElement.classList.toggle('dark')
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault()
-    alert('Gracias por inscribirte. Te contactaremos pronto.')
-    setFormData({ name: '', email: '', company: '', position: '', hectares: '', species: '', region: '', needDate: '' })
+    setIsSubmitting(true)
+    setSubmitStatus('idle')
+    setSubmitMessage('')
+
+    try {
+      const response = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      })
+      const result = await response.json().catch(() => ({})) as WaitlistResponse
+
+      if (!response.ok) {
+        throw new Error(result.error || 'No pudimos registrar tu inscripción. Intenta nuevamente.')
+      }
+
+      setSubmitStatus('success')
+      setSubmitMessage('Gracias por inscribirte. Te contactaremos pronto.')
+      setFormData(EMPTY_FORM_DATA)
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'No pudimos registrar tu inscripción. Intenta nuevamente.'
+      setSubmitStatus('error')
+      setSubmitMessage(message)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -408,7 +450,7 @@ export default function Home() {
           <div className="mb-16 text-center">
             <h2 className="text-3xl md:text-4xl text-semibold text-miido-navy dark:text-white mb-4">Alertas en WhatsApp</h2>
             <p className="text-lg text-light text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Recibe notificaciones en tiempo real cuando haya cupos disponibles en tu zona. Solo responde "Sí" y nosotros nos encargamos del resto.
+              Recibe notificaciones en tiempo real cuando haya cupos disponibles en tu zona. Solo responde &quot;Sí&quot; y nosotros nos encargamos del resto.
             </p>
           </div>
 
@@ -573,10 +615,10 @@ export default function Home() {
                   className="w-full p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-lg focus:border-miido-navy focus:ring-miido-navy/50"
                 >
                   <option value="">Selecciona rango</option>
-                  <option>{"<50ha"}</option>
-                  <option>50-100ha</option>
-                  <option>100-500ha</option>
-                  <option>500+ha</option>
+                  <option value="Menos de 50 ha">Menos de 50 ha</option>
+                  <option value="50 – 200 ha">50 – 200 ha</option>
+                  <option value="200 – 500 ha">200 – 500 ha</option>
+                  <option value="Más de 500 ha">Más de 500 ha</option>
                 </select>
               </div>
               <div>
@@ -590,9 +632,9 @@ export default function Home() {
                   <option>Palto</option>
                   <option>Cereza</option>
                   <option>Arándano</option>
-                  <option>Uva</option>
+                  <option>Uva de mesa</option>
                   <option>Manzana</option>
-                  <option>Otro</option>
+                  <option>Otra</option>
                 </select>
               </div>
             </div>
@@ -606,20 +648,20 @@ export default function Home() {
               >
                 <option value="">Selecciona región</option>
                 <option>Arica y Parinacota</option>
-                <option>Tarapaca</option>
+                <option>Tarapacá</option>
                 <option>Antofagasta</option>
                 <option>Atacama</option>
                 <option>Coquimbo</option>
-                <option>Valparaiso</option>
+                <option>Valparaíso</option>
                 <option>Metropolitana</option>
-                <option>OHiggins</option>
+                <option>O&apos;Higgins</option>
                 <option>Maule</option>
-                <option>Nuble</option>
-                <option>Biobio</option>
-                <option>La Araucania</option>
-                <option>Los Rios</option>
+                <option>Ñuble</option>
+                <option>Biobío</option>
+                <option>La Araucanía</option>
+                <option>Los Ríos</option>
                 <option>Los Lagos</option>
-                <option>Aysen</option>
+                <option>Aysén</option>
                 <option>Magallanes</option>
               </select>
             </div>
@@ -635,10 +677,24 @@ export default function Home() {
             
             <Button 
               type="submit" 
+              disabled={isSubmitting}
               className="w-full bg-miido-lime text-miido-navy hover:bg-miido-lime/90 dark:hover:bg-miido-lime/80 text-lg font-bold py-6 rounded-lg mt-8 shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300"
             >
-              Inscribirme a la lista de espera →
+              {isSubmitting ? 'Enviando...' : 'Inscribirme a la lista de espera →'}
             </Button>
+
+            {submitMessage && (
+              <p
+                aria-live="polite"
+                className={`text-center text-sm font-medium mt-4 ${
+                  submitStatus === 'success'
+                    ? 'text-miido-navy dark:text-miido-lime'
+                    : 'text-red-600 dark:text-red-400'
+                }`}
+              >
+                {submitMessage}
+              </p>
+            )}
             
             <p className="text-center text-sm text-light text-gray-500 dark:text-gray-400 mt-4">
               Te contactaremos en menos de 24 horas hábiles.
