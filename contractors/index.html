@@ -1856,10 +1856,30 @@
 
       if (!valid) return;
 
-      // TODO: fetch('/api/waitlist', { method: 'POST', body: new FormData(form) })
+      const submitBtn = form.querySelector('.btn-submit');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando...';
 
-      form.style.display = 'none';
-      successMsg.style.display = 'block';
+      fetch('https://formspree.io/f/xykovkrv', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(res => {
+        if (res.ok) {
+          form.style.display = 'none';
+          successMsg.style.display = 'block';
+        } else {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Inscribirme a la lista de espera';
+          alert('Hubo un error al enviar. Intenta de nuevo.');
+        }
+      })
+      .catch(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Inscribirme a la lista de espera';
+        alert('Hubo un error al enviar. Intenta de nuevo.');
+      });
     });
   </script>
 
