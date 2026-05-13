@@ -1,23 +1,29 @@
 /**
  * @type {import('next').NextConfig}
  */
-const isProd = process.env.NODE_ENV === 'production';
-const isExport = process.env.EXPORT === 'true'; // Use EXPORT=true npm run build for static export
+const isExport = process.env.EXPORT === 'true';
+const isContractorsDeploy = process.env.DEPLOY_TARGET === 'contractors';
 
 const nextConfig = {
-  output: isExport ? 'export' : undefined, // Static export only when EXPORT=true
+  output: isExport ? 'export' : 'standalone',
   distDir: isExport ? 'dist' : '.next',
   images: {
     unoptimized: true,
   },
 
-  // Configuración de Webpack
   webpack: (config) => {
     config.resolve.fallback = {
       ...config.resolve.fallback,
       canvas: false,
     };
     return config;
+  },
+
+  async rewrites() {
+    if (!isContractorsDeploy) return [];
+    return [
+      { source: '/', destination: '/contractors/index.html' },
+    ];
   },
 };
 

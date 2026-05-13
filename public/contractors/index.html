@@ -1831,11 +1831,11 @@
       });
     });
 
-    // Form submit (placeholder — conecta tu endpoint en producción)
     const form = document.getElementById('waitlist-form');
     const successMsg = document.getElementById('form-success');
+    const submitBtn = form.querySelector('.btn-submit');
 
-    form.addEventListener('submit', e => {
+    form.addEventListener('submit', async e => {
       e.preventDefault();
 
       let valid = true;
@@ -1855,10 +1855,29 @@
 
       if (!valid) return;
 
-      // TODO: fetch('/api/waitlist', { method: 'POST', body: new FormData(form) })
+      const originalBtnText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando…';
 
-      form.style.display = 'none';
-      successMsg.style.display = 'block';
+      const payload = Object.fromEntries(new FormData(form).entries());
+
+      try {
+        const res = await fetch('/api/waitlist', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({}));
+          throw new Error(err.error || 'No pudimos registrar tu inscripción.');
+        }
+        form.style.display = 'none';
+        successMsg.style.display = 'block';
+      } catch (err) {
+        alert(err.message || 'Hubo un problema al enviar el formulario. Intenta nuevamente.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
+      }
     });
   </script>
 
