@@ -1,0 +1,240 @@
+.page {
+  --ink: #1b2420;
+  --ink-soft: #46514b;
+  --line: #dfe4e0;
+  --paper: #fbfbf8;
+  --panel: #f2f4f0;
+  --accent: #2f5d45;
+  --accent-soft: #e7efe9;
+  --flag-bg: #fff6e6;
+  --flag-line: #e8c97a;
+  --flag-ink: #6b4e12;
+  --maxw: 760px;
+
+  min-height: 100vh;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-text-size-adjust: 100%;
+}
+
+.page * {
+  box-sizing: border-box;
+}
+
+.page :global(.wrap) {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 48px 24px 96px;
+}
+
+.page :global(header.doc) {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 28px;
+  margin-bottom: 36px;
+}
+
+.page :global(.eyebrow) {
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  margin: 0 0 10px;
+}
+
+.page h1 {
+  font-family: "Newsreader", Georgia, serif;
+  font-weight: 500;
+  font-size: 2.45rem;
+  line-height: 1.12;
+  margin: 0 0 14px;
+  letter-spacing: -0.01em;
+}
+
+.page :global(.meta) {
+  font-size: 14.5px;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+.page :global(.meta) strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.page h2 {
+  font-family: "Newsreader", Georgia, serif;
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  margin: 46px 0 12px;
+  padding-top: 8px;
+  letter-spacing: -0.01em;
+}
+
+.page h2 :global(.num) {
+  color: var(--accent);
+  font-size: 1.05rem;
+  vertical-align: 0.12em;
+  margin-right: 0.5em;
+  font-family: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 600;
+}
+
+.page h3 {
+  font-size: 1.02rem;
+  font-weight: 600;
+  margin: 26px 0 6px;
+}
+
+.page p {
+  margin: 0 0 14px;
+  color: var(--ink-soft);
+}
+
+.page p:global(.lead) {
+  color: var(--ink);
+}
+
+.page ul {
+  margin: 0 0 16px;
+  padding-left: 0;
+  list-style: none;
+}
+
+.page li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 9px;
+  color: var(--ink-soft);
+}
+
+.page li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 11px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.page strong {
+  color: var(--ink);
+}
+
+.page a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.page :global(.ph) {
+  background: var(--accent-soft);
+  color: var(--accent);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.92em;
+  white-space: nowrap;
+}
+
+.page :global(.flag) {
+  background: var(--flag-bg);
+  border: 1px solid var(--flag-line);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin: 16px 0;
+  font-size: 14.5px;
+  color: var(--flag-ink);
+}
+
+.page :global(.flag) b {
+  color: var(--flag-ink);
+}
+
+.page :global(.flag)::before {
+  content: "⚑ Revisar antes de publicar";
+  display: block;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.page :global(.card) {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 20px 22px;
+  margin: 18px 0;
+}
+
+.page :global(.card) h3:first-child {
+  margin-top: 0;
+}
+
+.page table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 8px 0 18px;
+  font-size: 15px;
+}
+
+.page td,
+.page th {
+  text-align: left;
+  vertical-align: top;
+  padding: 9px 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.page th {
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--panel);
+}
+
+.page td {
+  color: var(--ink-soft);
+}
+
+.page :global(footer.doc) {
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.page nav a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.page nav a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 520px) {
+  .page {
+    font-size: 16px;
+  }
+
+  .page :global(.wrap) {
+    padding: 32px 18px 72px;
+  }
+
+  .page h1 {
+    font-size: 2rem;
+  }
+
+  .page h2 {
+    font-size: 1.3rem;
+  }
+}
