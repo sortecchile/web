@@ -251,8 +251,17 @@
     .hero {
       position: relative;
       padding: 100px 0 110px;
-      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(183,228,210,0.18) 0%, transparent 70%);
+      background:
+        radial-gradient(ellipse 90% 70% at 50% 0%, rgba(183,228,210,0.28) 0%, transparent 60%),
+        radial-gradient(circle at 80% 80%, rgba(79,168,140,0.08) 0%, transparent 40%),
+        radial-gradient(circle at 20% 60%, rgba(47,125,105,0.06) 0%, transparent 35%);
       overflow: hidden;
+      animation: heroBgPulse 8s ease-in-out infinite;
+    }
+
+    @keyframes heroBgPulse {
+      0%, 100% { background-size: 100% 100%, 100% 100%, 100% 100%; }
+      50% { background-size: 110% 110%, 120% 120%, 115% 115%; }
     }
 
     .hero__particles {
@@ -266,57 +275,57 @@
       position: absolute;
       border-radius: 50%;
       opacity: 0;
-      animation: particleFloat 8s ease-in-out infinite;
+      animation: particleFloat 6s ease-in-out infinite;
     }
 
-    .hero__particle:nth-child(1) { width: 6px; height: 6px; background: rgba(79,168,140,0.25); top: 15%; left: 8%; animation-delay: 0s; animation-duration: 7s; }
-    .hero__particle:nth-child(2) { width: 4px; height: 4px; background: rgba(183,228,210,0.35); top: 25%; right: 12%; animation-delay: 1.5s; animation-duration: 9s; }
-    .hero__particle:nth-child(3) { width: 8px; height: 8px; background: rgba(47,125,105,0.15); top: 60%; left: 15%; animation-delay: 3s; animation-duration: 10s; }
-    .hero__particle:nth-child(4) { width: 5px; height: 5px; background: rgba(123,197,167,0.3); top: 45%; right: 20%; animation-delay: 2s; animation-duration: 8s; }
-    .hero__particle:nth-child(5) { width: 3px; height: 3px; background: rgba(79,168,140,0.3); top: 70%; left: 25%; animation-delay: 4s; animation-duration: 11s; }
-    .hero__particle:nth-child(6) { width: 7px; height: 7px; background: rgba(183,228,210,0.2); top: 20%; left: 75%; animation-delay: 1s; animation-duration: 9s; }
+    .hero__particle:nth-child(1) { width: 12px; height: 12px; background: rgba(79,168,140,0.4); top: 15%; left: 8%; animation-delay: 0s; animation-duration: 5s; }
+    .hero__particle:nth-child(2) { width: 8px; height: 8px; background: rgba(183,228,210,0.5); top: 25%; right: 12%; animation-delay: 1s; animation-duration: 6s; }
+    .hero__particle:nth-child(3) { width: 14px; height: 14px; background: rgba(47,125,105,0.3); top: 60%; left: 15%; animation-delay: 2s; animation-duration: 7s; }
+    .hero__particle:nth-child(4) { width: 10px; height: 10px; background: rgba(123,197,167,0.45); top: 45%; right: 20%; animation-delay: 1.5s; animation-duration: 5.5s; }
+    .hero__particle:nth-child(5) { width: 6px; height: 6px; background: rgba(79,168,140,0.5); top: 70%; left: 25%; animation-delay: 3s; animation-duration: 6.5s; }
+    .hero__particle:nth-child(6) { width: 11px; height: 11px; background: rgba(183,228,210,0.35); top: 20%; left: 75%; animation-delay: 0.5s; animation-duration: 5s; }
 
     .hero__geo {
       position: absolute;
       pointer-events: none;
-      opacity: 0.07;
+      opacity: 0;
     }
 
     .hero__geo--1 {
-      top: 12%;
-      left: 5%;
-      width: 80px;
-      height: 80px;
-      border: 2px solid var(--green-2);
+      top: 10%;
+      left: 4%;
+      width: 120px;
+      height: 120px;
+      border: 2.5px solid var(--green-2);
       border-radius: 50%;
-      animation: geoSpin 20s linear infinite, geoFadeIn 1.5s ease-out 0.5s forwards;
+      animation: geoSpin 14s linear infinite, geoFadeIn 1s ease-out 0.3s forwards;
     }
 
     .hero__geo--2 {
-      bottom: 20%;
-      right: 6%;
-      width: 60px;
-      height: 60px;
-      border: 2px solid rgba(183,228,210,0.5);
+      bottom: 15%;
+      right: 5%;
+      width: 90px;
+      height: 90px;
+      border: 2.5px solid rgba(183,228,210,0.6);
       transform: rotate(45deg);
-      animation: geoPulse 6s ease-in-out infinite, geoFadeIn 1.5s ease-out 0.8s forwards;
+      animation: geoPulse 4s ease-in-out infinite, geoFadeIn 1s ease-out 0.6s forwards;
     }
 
     .hero__geo--3 {
-      top: 50%;
-      right: 15%;
-      width: 40px;
-      height: 40px;
-      border: 2px solid rgba(79,168,140,0.3);
-      border-radius: 8px;
-      animation: geoFloat 7s ease-in-out infinite, geoFadeIn 1.5s ease-out 1.1s forwards;
+      top: 45%;
+      right: 10%;
+      width: 65px;
+      height: 65px;
+      border: 2.5px solid rgba(79,168,140,0.4);
+      border-radius: 12px;
+      animation: geoFloat 5s ease-in-out infinite, geoFadeIn 1s ease-out 0.9s forwards;
     }
 
     @keyframes particleFloat {
-      0%, 100% { opacity: 0; transform: translateY(0) scale(1); }
-      20% { opacity: 1; }
-      80% { opacity: 1; }
-      100% { opacity: 0; transform: translateY(-60px) scale(0.5); }
+      0% { opacity: 0; transform: translateY(0) scale(0.5); }
+      15% { opacity: 0.8; transform: scale(1); }
+      85% { opacity: 0.8; }
+      100% { opacity: 0; transform: translateY(-100px) scale(0.3); }
     }
 
     @keyframes geoSpin {
@@ -325,18 +334,18 @@
     }
 
     @keyframes geoPulse {
-      0%, 100% { transform: rotate(45deg) scale(1); opacity: 0.07; }
-      50% { transform: rotate(45deg) scale(1.1); opacity: 0.12; }
+      0%, 100% { transform: rotate(45deg) scale(1); }
+      50% { transform: rotate(45deg) scale(1.15); }
     }
 
     @keyframes geoFloat {
       0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-15px) rotate(10deg); }
+      50% { transform: translateY(-25px) rotate(15deg); }
     }
 
     @keyframes geoFadeIn {
       from { opacity: 0; }
-      to { opacity: 0.07; }
+      to { opacity: 0.18; }
     }
 
     .hero__grid {
@@ -363,8 +372,8 @@
       text-align: center;
       color: var(--foreground);
       opacity: 0;
-      transform: translateY(30px);
-      animation: heroSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+      transform: translateY(50px);
+      animation: heroSlideUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
     }
 
     @keyframes heroSlideUp {
@@ -373,29 +382,31 @@
 
     .hero__highlight {
       background: linear-gradient(
-        135deg,
-        #B7E4D2 0%,
-        #7BC5A7 25%,
-        #4FA88C 50%,
-        #2F7D69 75%,
-        #B7E4D2 100%
+        90deg,
+        #2F7D69 0%,
+        #4FA88C 20%,
+        #B7E4D2 40%,
+        #4FA88C 60%,
+        #2F7D69 80%,
+        #4FA88C 100%
       );
-      background-size: 200% auto;
+      background-size: 300% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      animation: shimmer 4s linear infinite;
+      animation: shimmer 2.5s ease-in-out infinite;
     }
 
     @keyframes shimmer {
-      to { background-position: 200% center; }
+      0% { background-position: 0% center; }
+      100% { background-position: 300% center; }
     }
 
     .hero__sub {
       margin-bottom: 40px;
       opacity: 0;
-      transform: translateY(20px);
-      animation: heroSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+      transform: translateY(40px);
+      animation: heroSlideUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
     }
 
     .hero__actions {
@@ -406,21 +417,31 @@
       flex-wrap: wrap;
       margin-bottom: 18px;
       opacity: 0;
-      transform: translateY(20px);
-      animation: heroSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
+      transform: translateY(40px) scale(0.95);
+      animation: heroActionsIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
+    }
+
+    @keyframes heroActionsIn {
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     .hero__actions .btn-primary {
       position: relative;
       overflow: hidden;
+      animation: btnPulse 3s ease-in-out 2s infinite;
+    }
+
+    @keyframes btnPulse {
+      0%, 100% { box-shadow: 0 4px 15px -3px rgba(45,122,102,0.3); }
+      50% { box-shadow: 0 8px 30px -3px rgba(45,122,102,0.5); transform: translateY(-2px); }
     }
 
     .hero__actions .btn-primary::before {
       content: '';
       position: absolute;
-      inset: -2px;
+      inset: -4px;
       border-radius: inherit;
-      background: linear-gradient(135deg, rgba(79,168,140,0.4), rgba(47,125,105,0.6));
+      background: linear-gradient(135deg, rgba(79,168,140,0.5), rgba(47,125,105,0.7), rgba(183,228,210,0.4));
       opacity: 0;
       transition: opacity 0.3s;
       z-index: -1;
