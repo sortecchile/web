@@ -1994,7 +1994,17 @@
         { title: 'One-click confirmation', desc: 'The worker replies "I\'m interested" and is enrolled. No paperwork, no calls.' },
         { title: 'Crews assembled faster', desc: 'From 3 days to 30 minutes. While you fill a spreadsheet, we already have the team.' }
       ],
-      notif: { title: '+12 workers confirmed', sub: 'in the last 8 minutes' }
+      notif: { title: '+12 workers confirmed', sub: 'in the last 8 minutes' },
+      waSubtitle: 'online',
+      waInput: 'Message',
+      bubbles: [
+        '<strong>🌿 New job available</strong>Hi Pedro. There\'s <b>avocado pruning</b> near you:<br>📍 Fundo Santa Elena, Quillota<br>📅 Mon 20 to Fri 24 May<br>💰 $35,000/day + bonus',
+        '¿Interested? Only <b>4 spots</b> left.',
+        'I\'m interested 👍',
+        '<strong>✅ Confirmed</strong>You\'re enrolled in the crew. Transport and schedule details will arrive on Sunday.',
+        'Perfect, thanks 🙌'
+      ],
+      bubbleCta: '✓ I\'m interested'
     },
     s4: {
       step: 'How we do it',
@@ -2093,6 +2103,19 @@
       originals.s3.notif.title = notifText.querySelector('strong')?.textContent.trim();
       originals.s3.notif.sub = notifText.querySelector('span')?.textContent.trim();
     }
+
+    originals.s3.waSubtitle = q('.wa__subtitle')?.textContent.trim();
+    originals.s3.waInput = q('.wa__input-box')?.textContent.trim();
+    originals.s3.bubbles = [];
+    originals.s3.bubbleCta = q('.bubble__cta')?.textContent.trim();
+    qa('.wa__chat .bubble').forEach((el, i) => {
+      const clone = el.cloneNode(true);
+      const time = clone.querySelector('.bubble__time');
+      if (time) time.remove();
+      const cta = clone.querySelector('.bubble__cta');
+      if (cta) cta.remove();
+      originals.s3.bubbles[i] = clone.innerHTML.trim();
+    });
 
     const comoSection = q('#como');
     if (comoSection) {
@@ -2242,6 +2265,23 @@
       notifText.querySelector('strong').textContent = data.title;
       notifText.querySelector('span').textContent = data.sub;
     }
+
+    const waSubtitle = q('.wa__subtitle');
+    if (waSubtitle) waSubtitle.textContent = isEn ? en.s3.waSubtitle : originals.s3.waSubtitle;
+    const waInput = q('.wa__input-box');
+    if (waInput) waInput.textContent = isEn ? en.s3.waInput : originals.s3.waInput;
+    const bubbleCta = q('.bubble__cta');
+    if (bubbleCta) bubbleCta.textContent = isEn ? en.s3.bubbleCta : originals.s3.bubbleCta;
+    qa('.wa__chat .bubble').forEach((el, i) => {
+      const bubbleData = isEn ? en.s3.bubbles : originals.s3.bubbles;
+      if (bubbleData[i]) {
+        const time = el.querySelector('.bubble__time');
+        const cta = el.querySelector('.bubble__cta');
+        const timeHTML = time ? time.outerHTML : '';
+        const ctaHTML = cta ? cta.outerHTML : '';
+        el.innerHTML = bubbleData[i] + ctaHTML + timeHTML;
+      }
+    });
 
     const comoSection = q('#como');
     if (comoSection) {
