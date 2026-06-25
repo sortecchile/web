@@ -2254,6 +2254,13 @@
       applyLang(btn.textContent.trim() === 'EN' ? 'en' : 'es');
     });
   });
+
+  const browserLang = (navigator.language || navigator.userLanguage || 'es').slice(0, 2);
+  if (browserLang !== 'es') {
+    document.querySelectorAll('.lang-toggle__btn').forEach(b => b.classList.remove('lang-toggle__btn--active'));
+    document.querySelector('.lang-toggle__btn:last-child').classList.add('lang-toggle__btn--active');
+    applyLang('en');
+  }
 })();
 </script>
 </body>
