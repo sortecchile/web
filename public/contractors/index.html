@@ -250,58 +250,186 @@
     /* ============================================================ HERO */
     .hero {
       position: relative;
-      padding: 80px 0 96px;
-      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(183,228,210,0.15) 0%, transparent 70%);
+      padding: 100px 0 110px;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(183,228,210,0.18) 0%, transparent 70%);
+      overflow: hidden;
+    }
+
+    .hero__particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .hero__particle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0;
+      animation: particleFloat 8s ease-in-out infinite;
+    }
+
+    .hero__particle:nth-child(1) { width: 6px; height: 6px; background: rgba(79,168,140,0.25); top: 15%; left: 8%; animation-delay: 0s; animation-duration: 7s; }
+    .hero__particle:nth-child(2) { width: 4px; height: 4px; background: rgba(183,228,210,0.35); top: 25%; right: 12%; animation-delay: 1.5s; animation-duration: 9s; }
+    .hero__particle:nth-child(3) { width: 8px; height: 8px; background: rgba(47,125,105,0.15); top: 60%; left: 15%; animation-delay: 3s; animation-duration: 10s; }
+    .hero__particle:nth-child(4) { width: 5px; height: 5px; background: rgba(123,197,167,0.3); top: 45%; right: 20%; animation-delay: 2s; animation-duration: 8s; }
+    .hero__particle:nth-child(5) { width: 3px; height: 3px; background: rgba(79,168,140,0.3); top: 70%; left: 25%; animation-delay: 4s; animation-duration: 11s; }
+    .hero__particle:nth-child(6) { width: 7px; height: 7px; background: rgba(183,228,210,0.2); top: 20%; left: 75%; animation-delay: 1s; animation-duration: 9s; }
+
+    .hero__geo {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0.07;
+    }
+
+    .hero__geo--1 {
+      top: 12%;
+      left: 5%;
+      width: 80px;
+      height: 80px;
+      border: 2px solid var(--green-2);
+      border-radius: 50%;
+      animation: geoSpin 20s linear infinite, geoFadeIn 1.5s ease-out 0.5s forwards;
+    }
+
+    .hero__geo--2 {
+      bottom: 20%;
+      right: 6%;
+      width: 60px;
+      height: 60px;
+      border: 2px solid rgba(183,228,210,0.5);
+      transform: rotate(45deg);
+      animation: geoPulse 6s ease-in-out infinite, geoFadeIn 1.5s ease-out 0.8s forwards;
+    }
+
+    .hero__geo--3 {
+      top: 50%;
+      right: 15%;
+      width: 40px;
+      height: 40px;
+      border: 2px solid rgba(79,168,140,0.3);
+      border-radius: 8px;
+      animation: geoFloat 7s ease-in-out infinite, geoFadeIn 1.5s ease-out 1.1s forwards;
+    }
+
+    @keyframes particleFloat {
+      0%, 100% { opacity: 0; transform: translateY(0) scale(1); }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { opacity: 0; transform: translateY(-60px) scale(0.5); }
+    }
+
+    @keyframes geoSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes geoPulse {
+      0%, 100% { transform: rotate(45deg) scale(1); opacity: 0.07; }
+      50% { transform: rotate(45deg) scale(1.1); opacity: 0.12; }
+    }
+
+    @keyframes geoFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(10deg); }
+    }
+
+    @keyframes geoFadeIn {
+      from { opacity: 0; }
+      to { opacity: 0.07; }
     }
 
     .hero__grid {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
 
-.hero__content {
-  max-width: 900px;
-  margin: 0 auto;
-}
+    .hero__content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
 
-.hero__headline {
-  font-family: var(--font-serif);
-  font-weight: 700;
-  font-size: clamp(44px, 5.5vw, 64px);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-  margin-bottom: 40px;
-  text-align: center;
-  color: var(--foreground);
-}
+    .hero__headline {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: clamp(44px, 5.5vw, 64px);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 40px;
+      text-align: center;
+      color: var(--foreground);
+      opacity: 0;
+      transform: translateY(30px);
+      animation: heroSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+    }
 
-.hero__highlight {
-  background: linear-gradient(
-    135deg,
-    #B7E4D2 0%,
-    #7BC5A7 35%,
-    #4FA88C 70%,
-    #2F7D69 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
+    @keyframes heroSlideUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-.hero__sub {
-  margin-bottom: 40px;
-}
+    .hero__highlight {
+      background: linear-gradient(
+        135deg,
+        #B7E4D2 0%,
+        #7BC5A7 25%,
+        #4FA88C 50%,
+        #2F7D69 75%,
+        #B7E4D2 100%
+      );
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 4s linear infinite;
+    }
 
-.hero__actions {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 32px;
-  flex-wrap: wrap;
-  margin-bottom: 18px;
-}
+    @keyframes shimmer {
+      to { background-position: 200% center; }
+    }
+
+    .hero__sub {
+      margin-bottom: 40px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: heroSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+    }
+
+    .hero__actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: heroSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
+    }
+
+    .hero__actions .btn-primary {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero__actions .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      background: linear-gradient(135deg, rgba(79,168,140,0.4), rgba(47,125,105,0.6));
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: -1;
+      filter: blur(12px);
+    }
+
+    .hero__actions .btn-primary:hover::before {
+      opacity: 1;
+    }
 
     .btn-secondary {
       display: inline-flex;
@@ -1410,6 +1538,7 @@
     @media (max-width: 600px) {
       section { padding: 64px 0; }
       .hero { padding: 48px 0 64px; }
+      .hero__geo { display: none; }
       .form-card { padding: 24px 20px; }
       .form__grid { grid-template-columns: 1fr; }
       .como__grid { grid-template-columns: 1fr; }
@@ -1449,24 +1578,40 @@
   </nav>
 
   <!-- =========================================================== HERO -->
-  <<section class="hero">
+  <section class="hero">
+
+  <!-- Floating particles -->
+  <div class="hero__particles">
+    <div class="hero__particle"></div>
+    <div class="hero__particle"></div>
+    <div class="hero__particle"></div>
+    <div class="hero__particle"></div>
+    <div class="hero__particle"></div>
+    <div class="hero__particle"></div>
+  </div>
+
+  <!-- Geometric accents -->
+  <div class="hero__geo hero__geo--1"></div>
+  <div class="hero__geo hero__geo--2"></div>
+  <div class="hero__geo hero__geo--3"></div>
+
   <div class="container">
     <div class="hero__grid">
 
       <div class="hero__content">
 
-        <h1 class="hero__headline reveal" data-i18n-html="hero.headline">
+        <h1 class="hero__headline" data-i18n-html="hero.headline">
           El <span class="hero__highlight">contratista agrícola</span> que
           opera tu campo <span class="hero__highlight">todo el año</span>.
           <br>Formal, medible, sin sorpresas.
         </h1>
 
-        <p class="hero__sub reveal reveal-delay-1" data-i18n="hero.sub">
+        <p class="hero__sub" data-i18n="hero.sub">
           Desde plantación hasta packing. Cuadrillas agrícolas formales,
           productividad visible en tiempo real y cumplimiento laboral bajo Ley 20.123.
         </p>
 
-        <div class="hero__actions reveal reveal-delay-2">
+        <div class="hero__actions">
           <a href="#waitlist" class="btn-primary btn-primary--lg" data-i18n="hero.cta1">
             Inscríbete a la lista de espera
           </a>
