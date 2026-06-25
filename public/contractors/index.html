@@ -510,6 +510,43 @@
 
     .section-head { text-align: center; margin-bottom: 64px; }
 
+    /* ============================================================ CLIENTES */
+    .clientes {
+      padding: 48px 0 56px;
+      background: var(--muted);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .clientes__title {
+      text-align: center;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted-foreground);
+      margin-bottom: 40px;
+    }
+    .clientes__logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 80px;
+      flex-wrap: wrap;
+    }
+    .clientes__logo {
+      height: 64px;
+      width: auto;
+      opacity: 0.85;
+      transition: opacity 0.3s;
+      object-fit: contain;
+    }
+    .clientes__logo:hover { opacity: 1; }
+    @media (max-width: 600px) {
+      .clientes__logos { gap: 48px; }
+      .clientes__logo { height: 52px; }
+    }
+
     /* ============================================================ QUÉ HACEMOS */
     .que-hacemos {
       background: var(--background);
@@ -1461,6 +1498,17 @@
 </section>
 
 
+  <!-- =========================================================== CLIENTES -->
+  <section class="clientes reveal">
+    <div class="container">
+      <p class="clientes__title" data-i18n="clientes.title">Empresas que ya confían en nosotros</p>
+      <div class="clientes__logos">
+        <img src="westfalia.png" alt="Westfalia Fruit" class="clientes__logo" />
+        <img src="garces-fruit.svg" alt="Garces Fruit" class="clientes__logo" />
+      </div>
+    </div>
+  </section>
+
   <!-- =========================================================== QUÉ HACEMOS -->
   <section class="que-hacemos" id="que-hacemos">
     <div class="container">
@@ -1907,6 +1955,7 @@
 (function() {
   const en = {
     nav: { que: 'What we do', como: 'How it works', waitlist: 'Waitlist', cta: 'Sign up' },
+    clientes: { title: 'Companies that already trust us' },
     hero: {
       headline: 'The <span class="hero__highlight">agricultural contractor</span> that runs your farm <span class="hero__highlight">all year round</span>. Formal, measurable, no surprises.',
       sub: 'From planting to packing. Formal agricultural crews, real-time productivity visibility and labor compliance under Chilean Law 20.123.',
