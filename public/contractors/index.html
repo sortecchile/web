@@ -524,16 +524,67 @@
       background: white;
       border: 1px solid var(--border);
       border-radius: 16px;
-      box-shadow: 0 12px 40px -12px rgba(15,23,42,0.1);
+      box-shadow: 0 16px 48px -12px rgba(15,23,42,0.12), 0 0 0 1px rgba(0,0,0,0.03);
       overflow: hidden;
       font-family: var(--font-sans);
     }
 
+    /* Ticker */
+    .dash__ticker {
+      background: #0f172a;
+      color: white;
+      padding: 8px 16px;
+      font-size: 11px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow: hidden;
+      height: 32px;
+    }
+
+    .dash__ticker-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #22c55e;
+      flex-shrink: 0;
+      animation: dotPulse 2s ease-in-out infinite;
+    }
+
+    .dash__ticker-track {
+      position: relative;
+      flex: 1;
+      height: 16px;
+      overflow: hidden;
+    }
+
+    .dash__ticker-item {
+      position: absolute;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: tickerCycle 12s ease-in-out infinite;
+    }
+
+    .dash__ticker-item:nth-child(1) { animation-delay: 0s; }
+    .dash__ticker-item:nth-child(2) { animation-delay: 4s; }
+    .dash__ticker-item:nth-child(3) { animation-delay: 8s; }
+
+    @keyframes tickerCycle {
+      0%, 2% { opacity: 0; transform: translateY(16px); }
+      5%, 28% { opacity: 1; transform: translateY(0); }
+      33%, 100% { opacity: 0; transform: translateY(-16px); }
+    }
+
+    .dash__ticker-item span { color: #4FA88C; }
+
+    /* Header */
     .dash__header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 16px 20px;
+      padding: 14px 18px;
       border-bottom: 1px solid var(--border);
       background: #fafbfc;
     }
@@ -542,7 +593,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 600;
       color: var(--foreground);
       letter-spacing: 0.02em;
@@ -559,7 +610,7 @@
 
     @keyframes dotPulse {
       0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
-      50% { opacity: 0.7; box-shadow: 0 0 0 4px rgba(34,197,94,0); }
+      50% { opacity: 0.7; box-shadow: 0 0 0 5px rgba(34,197,94,0); }
     }
 
     .dash__badge {
@@ -572,12 +623,13 @@
     }
 
     .dash__body {
-      padding: 20px;
+      padding: 18px;
     }
 
+    /* Job info */
     .dash__job {
-      margin-bottom: 20px;
-      padding-bottom: 16px;
+      margin-bottom: 16px;
+      padding-bottom: 14px;
       border-bottom: 1px solid var(--border);
     }
 
@@ -596,61 +648,187 @@
       gap: 4px;
     }
 
+    /* Metrics */
     .dash__metrics {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 20px;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 16px;
     }
 
     .dash__metric {
       background: #f8faf9;
       border-radius: 10px;
-      padding: 14px 12px;
+      padding: 12px 8px;
       text-align: center;
       opacity: 0;
       transform: translateY(10px);
     }
 
     .dash__metric:nth-child(1) { animation: metricIn 0.5s ease-out 1.2s forwards; }
-    .dash__metric:nth-child(2) { animation: metricIn 0.5s ease-out 1.5s forwards; }
-    .dash__metric:nth-child(3) { animation: metricIn 0.5s ease-out 1.8s forwards; }
+    .dash__metric:nth-child(2) { animation: metricIn 0.5s ease-out 1.4s forwards; }
+    .dash__metric:nth-child(3) { animation: metricIn 0.5s ease-out 1.6s forwards; }
+    .dash__metric:nth-child(4) { animation: metricIn 0.5s ease-out 1.8s forwards; }
 
     @keyframes metricIn {
       to { opacity: 1; transform: translateY(0); }
     }
 
     .dash__metric-val {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 800;
       color: var(--foreground);
       letter-spacing: -0.02em;
       line-height: 1;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
 
-    .dash__metric-val span {
-      font-size: 13px;
-      font-weight: 600;
-    }
+    .dash__metric-val span { font-size: 12px; font-weight: 600; }
 
     .dash__metric-label {
-      font-size: 10px;
+      font-size: 9px;
       color: var(--muted-foreground);
       text-transform: uppercase;
       letter-spacing: 0.04em;
       font-weight: 600;
     }
 
+    /* Progress bar */
+    .dash__progress {
+      margin-bottom: 16px;
+      opacity: 0;
+      animation: metricIn 0.5s ease-out 2s forwards;
+    }
+
+    .dash__progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .dash__progress-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted-foreground);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .dash__progress-val {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--foreground);
+    }
+
+    .dash__progress-bar {
+      height: 6px;
+      background: var(--muted);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .dash__progress-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, #4FA88C, #2F7D69);
+      border-radius: 3px;
+      animation: progressFill 2s cubic-bezier(0.16, 1, 0.3, 1) 2.2s forwards;
+    }
+
+    @keyframes progressFill {
+      to { width: 85%; }
+    }
+
+    /* Year timeline */
+    .dash__timeline {
+      margin-bottom: 16px;
+      opacity: 0;
+      animation: metricIn 0.5s ease-out 2.4s forwards;
+    }
+
+    .dash__timeline-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--muted-foreground);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-bottom: 8px;
+    }
+
+    .dash__months {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 3px;
+    }
+
+    .dash__month {
+      text-align: center;
+      font-size: 8px;
+      font-weight: 600;
+      color: var(--muted-foreground);
+      letter-spacing: 0.02em;
+    }
+
+    .dash__month-bar {
+      height: 18px;
+      border-radius: 3px;
+      margin-bottom: 3px;
+      opacity: 0;
+      transform: scaleY(0);
+      transform-origin: bottom;
+    }
+
+    .dash__month:nth-child(1) .dash__month-bar,
+    .dash__month:nth-child(2) .dash__month-bar { background: #c4b5fd; animation: barGrow 0.3s ease-out 2.6s forwards; }
+    .dash__month:nth-child(3) .dash__month-bar,
+    .dash__month:nth-child(4) .dash__month-bar { background: #93c5fd; animation: barGrow 0.3s ease-out 2.7s forwards; }
+    .dash__month:nth-child(5) .dash__month-bar,
+    .dash__month:nth-child(6) .dash__month-bar { background: #86efac; animation: barGrow 0.3s ease-out 2.8s forwards; }
+    .dash__month:nth-child(7) .dash__month-bar,
+    .dash__month:nth-child(8) .dash__month-bar { background: #fdba74; animation: barGrow 0.3s ease-out 2.9s forwards; }
+    .dash__month:nth-child(9) .dash__month-bar,
+    .dash__month:nth-child(10) .dash__month-bar { background: #86efac; animation: barGrow 0.3s ease-out 3.0s forwards; }
+    .dash__month:nth-child(11) .dash__month-bar,
+    .dash__month:nth-child(12) .dash__month-bar { background: #fca5a5; animation: barGrow 0.3s ease-out 3.1s forwards; }
+
+    @keyframes barGrow {
+      to { opacity: 1; transform: scaleY(1); }
+    }
+
+    .dash__timeline-legend {
+      display: flex;
+      gap: 8px;
+      margin-top: 6px;
+      flex-wrap: wrap;
+    }
+
+    .dash__legend-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 8px;
+      color: var(--muted-foreground);
+      font-weight: 600;
+    }
+
+    .dash__legend-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* Crew */
     .dash__crew {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .dash__crew-label {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 600;
       color: var(--muted-foreground);
       text-transform: uppercase;
@@ -663,12 +841,12 @@
     }
 
     .dash__avatar {
-      width: 28px;
-      height: 28px;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
       border: 2px solid white;
-      margin-left: -8px;
-      font-size: 10px;
+      margin-left: -7px;
+      font-size: 9px;
       font-weight: 700;
       color: white;
       display: flex;
@@ -678,12 +856,12 @@
       transform: scale(0.5);
     }
 
-    .dash__avatar:nth-child(1) { background: #4FA88C; animation: avatarPop 0.3s ease-out 2.0s forwards; }
-    .dash__avatar:nth-child(2) { background: #3b82f6; animation: avatarPop 0.3s ease-out 2.15s forwards; }
-    .dash__avatar:nth-child(3) { background: #f97316; animation: avatarPop 0.3s ease-out 2.3s forwards; }
-    .dash__avatar:nth-child(4) { background: #8b5cf6; animation: avatarPop 0.3s ease-out 2.45s forwards; }
-    .dash__avatar:nth-child(5) { background: #2F7D69; animation: avatarPop 0.3s ease-out 2.6s forwards; }
-    .dash__avatar:nth-child(6) { background: #64748b; animation: avatarPop 0.3s ease-out 2.75s forwards; }
+    .dash__avatar:nth-child(1) { background: #4FA88C; animation: avatarPop 0.3s ease-out 3.2s forwards; }
+    .dash__avatar:nth-child(2) { background: #3b82f6; animation: avatarPop 0.3s ease-out 3.3s forwards; }
+    .dash__avatar:nth-child(3) { background: #f97316; animation: avatarPop 0.3s ease-out 3.4s forwards; }
+    .dash__avatar:nth-child(4) { background: #8b5cf6; animation: avatarPop 0.3s ease-out 3.5s forwards; }
+    .dash__avatar:nth-child(5) { background: #2F7D69; animation: avatarPop 0.3s ease-out 3.6s forwards; }
+    .dash__avatar:nth-child(6) { background: #64748b; animation: avatarPop 0.3s ease-out 3.7s forwards; }
 
     @keyframes avatarPop {
       to { opacity: 1; transform: scale(1); }
@@ -692,24 +870,84 @@
     .dash__avatar--more {
       background: var(--muted) !important;
       color: var(--muted-foreground) !important;
-      font-size: 9px;
+      font-size: 8px;
     }
 
+    /* Activity feed */
+    .dash__feed {
+      margin-bottom: 14px;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+    }
+
+    .dash__feed-title {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--muted-foreground);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-bottom: 10px;
+    }
+
+    .dash__feed-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 0;
+      font-size: 11px;
+      color: var(--foreground);
+      opacity: 0;
+      transform: translateX(-10px);
+    }
+
+    .dash__feed-item:nth-child(2) { animation: feedIn 0.4s ease-out 3.8s forwards; }
+    .dash__feed-item:nth-child(3) { animation: feedIn 0.4s ease-out 4.2s forwards; }
+    .dash__feed-item:nth-child(4) { animation: feedIn 0.4s ease-out 4.6s forwards; }
+    .dash__feed-item:nth-child(5) { animation: feedIn 0.4s ease-out 5.0s forwards; }
+
+    @keyframes feedIn {
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .dash__feed-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 11px;
+    }
+
+    .dash__feed-icon--green { background: #dcfce7; }
+    .dash__feed-icon--blue { background: #dbeafe; }
+    .dash__feed-icon--orange { background: #ffedd5; }
+    .dash__feed-icon--purple { background: #ede9fe; }
+
+    .dash__feed-time {
+      margin-left: auto;
+      font-size: 9px;
+      color: var(--muted-foreground);
+      flex-shrink: 0;
+    }
+
+    /* Compliance */
     .dash__compliance {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       flex-wrap: wrap;
       opacity: 0;
-      animation: metricIn 0.5s ease-out 3s forwards;
+      animation: metricIn 0.5s ease-out 5.4s forwards;
     }
 
     .dash__tag {
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 600;
-      padding: 5px 10px;
+      padding: 4px 8px;
       border-radius: 6px;
       border: 1px solid var(--border);
       color: var(--foreground);
@@ -1758,6 +1996,16 @@
       <!-- Animated dashboard visual -->
       <div class="hero__visual">
         <div class="dash">
+          <!-- Live ticker -->
+          <div class="dash__ticker">
+            <div class="dash__ticker-dot"></div>
+            <div class="dash__ticker-track">
+              <div class="dash__ticker-item dash__ticker-1">Cuadrilla armada en <span>30 min</span> — Fundo Santa Elena</div>
+              <div class="dash__ticker-item dash__ticker-2"><span>+40%</span> menos rotación vs contratista tradicional</div>
+              <div class="dash__ticker-item dash__ticker-3">F30-1 limpio · Cotizaciones al día · <span>0 multas</span></div>
+            </div>
+          </div>
+
           <div class="dash__header">
             <div class="dash__status">
               <div class="dash__dot"></div>
@@ -1765,6 +2013,7 @@
             </div>
             <div class="dash__badge dash__badge-text">Ley 20.123</div>
           </div>
+
           <div class="dash__body">
             <div class="dash__job">
               <div class="dash__job-name dash__job-name-text">Cosecha Cereza</div>
@@ -1774,6 +2023,7 @@
               </div>
             </div>
 
+            <!-- 4 Metrics -->
             <div class="dash__metrics">
               <div class="dash__metric">
                 <div class="dash__metric-val" data-target="32">0</div>
@@ -1784,11 +2034,53 @@
                 <div class="dash__metric-label dash__metric-label-2">Asistencia</div>
               </div>
               <div class="dash__metric">
-                <div class="dash__metric-val"><span data-target="12">0</span>.<span data-target="4" data-single="true">0</span> <span>Kg</span></div>
+                <div class="dash__metric-val"><span data-target="12">0</span>.<span data-target="4" data-single="true">0</span></div>
                 <div class="dash__metric-label dash__metric-label-3">Kg/HH</div>
+              </div>
+              <div class="dash__metric">
+                <div class="dash__metric-val"><span data-target="4">0</span>.<span data-target="2" data-single="true">0</span></div>
+                <div class="dash__metric-label dash__metric-label-4">Ha/día</div>
               </div>
             </div>
 
+            <!-- Progress bar -->
+            <div class="dash__progress">
+              <div class="dash__progress-header">
+                <span class="dash__progress-label dash__progress-label-text">Cuadrilla armada</span>
+                <span class="dash__progress-val">27/32</span>
+              </div>
+              <div class="dash__progress-bar">
+                <div class="dash__progress-fill"></div>
+              </div>
+            </div>
+
+            <!-- Year timeline -->
+            <div class="dash__timeline">
+              <div class="dash__timeline-label dash__timeline-label-text">Cobertura 12 meses</div>
+              <div class="dash__months">
+                <div class="dash__month"><div class="dash__month-bar"></div>E</div>
+                <div class="dash__month"><div class="dash__month-bar"></div>F</div>
+                <div class="dash__month"><div class="dash__month-bar"></div>M</div>
+                <div class="dash__month"><div class="dash__month-bar"></div>A</div>
+                <div class="dash__month"><div class="dash__month-bar"></div>M</div>
+                <div class="dash__month"><div class="dash__month-bar"></div>J</div>
+                <div class="dash__month"><div class="dash__month-bar"></div>J</div>
+                <div class="dash__month"><div class="dash__month-bar"></div>A</div>
+                <div class="dash__month"><div class="dash__month-bar"></div>S</div>
+                <div class="dash__month"><div class="dash__month-bar"></div>O</div>
+                <div class="dash__month"><div class="dash__month-bar"></div>N</div>
+                <div class="dash__month"><div class="dash__month-bar"></div>D</div>
+              </div>
+              <div class="dash__timeline-legend">
+                <div class="dash__legend-item"><div class="dash__legend-dot" style="background:#c4b5fd"></div>Poda</div>
+                <div class="dash__legend-item"><div class="dash__legend-dot" style="background:#93c5fd"></div>Raleo</div>
+                <div class="dash__legend-item"><div class="dash__legend-dot" style="background:#86efac"></div>Amarra</div>
+                <div class="dash__legend-item"><div class="dash__legend-dot" style="background:#fdba74"></div>Cosecha</div>
+                <div class="dash__legend-item"><div class="dash__legend-dot" style="background:#fca5a5"></div>Packing</div>
+              </div>
+            </div>
+
+            <!-- Crew -->
             <div class="dash__crew">
               <span class="dash__crew-label dash__crew-label-text">Cuadrilla</span>
               <div class="dash__avatars">
@@ -1801,17 +2093,43 @@
               </div>
             </div>
 
+            <!-- Activity feed -->
+            <div class="dash__feed">
+              <div class="dash__feed-title dash__feed-title-text">Actividad reciente</div>
+              <div class="dash__feed-item">
+                <div class="dash__feed-icon dash__feed-icon--green">✓</div>
+                <span class="dash__feed-text-1">Juan Rojas confirmó asistencia</span>
+                <span class="dash__feed-time">9:41</span>
+              </div>
+              <div class="dash__feed-item">
+                <div class="dash__feed-icon dash__feed-icon--blue">📊</div>
+                <span class="dash__feed-text-2">Productividad cuadrilla A: 14.2 Kg/HH</span>
+                <span class="dash__feed-time">9:38</span>
+              </div>
+              <div class="dash__feed-item">
+                <div class="dash__feed-icon dash__feed-icon--orange">📋</div>
+                <span class="dash__feed-text-3">F30-1 actualizado automáticamente</span>
+                <span class="dash__feed-time">9:30</span>
+              </div>
+              <div class="dash__feed-item">
+                <div class="dash__feed-icon dash__feed-icon--purple">🎯</div>
+                <span class="dash__feed-text-4">María López: +15 puntos productividad</span>
+                <span class="dash__feed-time">9:22</span>
+              </div>
+            </div>
+
+            <!-- Compliance -->
             <div class="dash__compliance">
               <div class="dash__tag">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                 <span class="dash__tag-1">F30-1 al día</span>
               </div>
               <div class="dash__tag">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                 <span class="dash__tag-2">Cotizaciones pagadas</span>
               </div>
               <div class="dash__tag">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                 <span class="dash__tag-3">Data en tiempo real</span>
               </div>
             </div>
@@ -2377,7 +2695,18 @@
       metric1: 'Workers',
       metric2: 'Attendance',
       metric3: 'Kg/MH',
+      metric4: 'Ha/day',
       crew: 'Crew',
+      progress: 'Crew assembled',
+      timeline: '12-month coverage',
+      feedTitle: 'Recent activity',
+      feed1: 'Juan Rojas confirmed attendance',
+      feed2: 'Crew A productivity: 14.2 Kg/MH',
+      feed3: 'F30-1 updated automatically',
+      feed4: 'María López: +15 productivity points',
+      ticker1: 'Crew assembled in <span>30 min</span> — Fundo Santa Elena',
+      ticker2: '<span>+40%</span> less turnover vs traditional contractor',
+      ticker3: 'Clean F30-1 · Social security paid · <span>0 fines</span>',
       tag1: 'F30-1 up to date',
       tag2: 'Social security paid',
       tag3: 'Real-time data'
@@ -2689,7 +3018,7 @@
     const fabSpan = q('.fab span');
     if (fabSpan) fabSpan.textContent = isEn ? en.fab : originals.fab;
 
-    const dashEls = {
+    const dashText = {
       status: q('.dash__status-text'),
       badge: q('.dash__badge-text'),
       jobName: q('.dash__job-name-text'),
@@ -2697,17 +3026,32 @@
       metric1: q('.dash__metric-label-1'),
       metric2: q('.dash__metric-label-2'),
       metric3: q('.dash__metric-label-3'),
+      metric4: q('.dash__metric-label-4'),
       crew: q('.dash__crew-label-text'),
+      progress: q('.dash__progress-label-text'),
+      timeline: q('.dash__timeline-label-text'),
+      feedTitle: q('.dash__feed-title-text'),
+      feed1: q('.dash__feed-text-1'),
+      feed2: q('.dash__feed-text-2'),
+      feed3: q('.dash__feed-text-3'),
+      feed4: q('.dash__feed-text-4'),
       tag1: q('.dash__tag-1'),
       tag2: q('.dash__tag-2'),
       tag3: q('.dash__tag-3')
     };
+    const dashHtml = {
+      ticker1: q('.dash__ticker-1'),
+      ticker2: q('.dash__ticker-2'),
+      ticker3: q('.dash__ticker-3')
+    };
     if (!originals.dash) {
       originals.dash = {};
-      Object.keys(dashEls).forEach(k => { if (dashEls[k]) originals.dash[k] = dashEls[k].textContent.trim(); });
+      Object.keys(dashText).forEach(k => { if (dashText[k]) originals.dash[k] = dashText[k].textContent.trim(); });
+      Object.keys(dashHtml).forEach(k => { if (dashHtml[k]) originals.dash[k] = dashHtml[k].innerHTML; });
     }
     const dashSrc = isEn ? en.dash : originals.dash;
-    Object.keys(dashEls).forEach(k => { if (dashEls[k] && dashSrc[k]) dashEls[k].textContent = dashSrc[k]; });
+    Object.keys(dashText).forEach(k => { if (dashText[k] && dashSrc[k]) dashText[k].textContent = dashSrc[k]; });
+    Object.keys(dashHtml).forEach(k => { if (dashHtml[k] && dashSrc[k]) dashHtml[k].innerHTML = dashSrc[k]; });
   }
 
   document.querySelectorAll('.lang-toggle__btn').forEach(btn => {
