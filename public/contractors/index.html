@@ -266,27 +266,26 @@
 
 
     .hero__grid {
-      display: flex;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
       align-items: center;
-      text-align: center;
       position: relative;
       z-index: 1;
     }
 
     .hero__content {
-      max-width: 900px;
-      margin: 0 auto;
+      max-width: 560px;
     }
 
     .hero__headline {
       font-family: var(--font-serif);
       font-weight: 700;
-      font-size: clamp(44px, 5.5vw, 64px);
+      font-size: clamp(36px, 4.5vw, 54px);
       line-height: 1.1;
       letter-spacing: -0.02em;
-      margin-bottom: 40px;
-      text-align: center;
+      margin-bottom: 32px;
+      text-align: left;
       color: var(--foreground);
       opacity: 0;
       transform: translateY(50px);
@@ -319,7 +318,8 @@
     }
 
     .hero__sub {
-      margin-bottom: 40px;
+      margin-bottom: 32px;
+      text-align: left;
       opacity: 0;
       transform: translateY(40px);
       animation: heroSlideUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
@@ -327,7 +327,7 @@
 
     .hero__actions {
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       gap: 32px;
       flex-wrap: wrap;
@@ -511,6 +511,213 @@
       font-weight: 700;
       font-size: 14px;
       letter-spacing: -0.01em;
+    }
+
+    /* ===== HERO DASHBOARD VISUAL ===== */
+    .hero__visual {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: heroSlideUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+    }
+
+    .dash {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 12px 40px -12px rgba(15,23,42,0.1);
+      overflow: hidden;
+      font-family: var(--font-sans);
+    }
+
+    .dash__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      background: #fafbfc;
+    }
+
+    .dash__status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--foreground);
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .dash__dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: dotPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes dotPulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
+      50% { opacity: 0.7; box-shadow: 0 0 0 4px rgba(34,197,94,0); }
+    }
+
+    .dash__badge {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .dash__body {
+      padding: 20px;
+    }
+
+    .dash__job {
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dash__job-name {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--foreground);
+      margin-bottom: 4px;
+    }
+
+    .dash__job-loc {
+      font-size: 12px;
+      color: var(--muted-foreground);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .dash__metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .dash__metric {
+      background: #f8faf9;
+      border-radius: 10px;
+      padding: 14px 12px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    .dash__metric:nth-child(1) { animation: metricIn 0.5s ease-out 1.2s forwards; }
+    .dash__metric:nth-child(2) { animation: metricIn 0.5s ease-out 1.5s forwards; }
+    .dash__metric:nth-child(3) { animation: metricIn 0.5s ease-out 1.8s forwards; }
+
+    @keyframes metricIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .dash__metric-val {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--foreground);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .dash__metric-val span {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .dash__metric-label {
+      font-size: 10px;
+      color: var(--muted-foreground);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 600;
+    }
+
+    .dash__crew {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .dash__crew-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted-foreground);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .dash__avatars {
+      display: flex;
+      margin-left: 8px;
+    }
+
+    .dash__avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid white;
+      margin-left: -8px;
+      font-size: 10px;
+      font-weight: 700;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: scale(0.5);
+    }
+
+    .dash__avatar:nth-child(1) { background: #4FA88C; animation: avatarPop 0.3s ease-out 2.0s forwards; }
+    .dash__avatar:nth-child(2) { background: #3b82f6; animation: avatarPop 0.3s ease-out 2.15s forwards; }
+    .dash__avatar:nth-child(3) { background: #f97316; animation: avatarPop 0.3s ease-out 2.3s forwards; }
+    .dash__avatar:nth-child(4) { background: #8b5cf6; animation: avatarPop 0.3s ease-out 2.45s forwards; }
+    .dash__avatar:nth-child(5) { background: #2F7D69; animation: avatarPop 0.3s ease-out 2.6s forwards; }
+    .dash__avatar:nth-child(6) { background: #64748b; animation: avatarPop 0.3s ease-out 2.75s forwards; }
+
+    @keyframes avatarPop {
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .dash__avatar--more {
+      background: var(--muted) !important;
+      color: var(--muted-foreground) !important;
+      font-size: 9px;
+    }
+
+    .dash__compliance {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: metricIn 0.5s ease-out 3s forwards;
+    }
+
+    .dash__tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      color: var(--foreground);
+    }
+
+    .dash__tag svg {
+      color: #22c55e;
+      flex-shrink: 0;
     }
 
     /* Wave decorativa al final del hero (igual a miido.ai) */
@@ -1463,6 +1670,9 @@
     /* ============================================================ RESPONSIVE */
     @media (max-width: 1000px) {
       .hero__grid { grid-template-columns: 1fr; gap: 48px; }
+      .hero__content { max-width: 100%; }
+      .hero__headline, .hero__sub { text-align: center; }
+      .hero__actions { justify-content: center; }
       .por-que__grid { grid-template-columns: 1fr; gap: 40px; }
       .alertas__grid { grid-template-columns: 1fr; gap: 48px; }
       .phone__notif { right: 0; }
@@ -1543,6 +1753,70 @@
           </a>
         </div>
 
+      </div>
+
+      <!-- Animated dashboard visual -->
+      <div class="hero__visual">
+        <div class="dash">
+          <div class="dash__header">
+            <div class="dash__status">
+              <div class="dash__dot"></div>
+              <span class="dash__status-text">Operación activa</span>
+            </div>
+            <div class="dash__badge dash__badge-text">Ley 20.123</div>
+          </div>
+          <div class="dash__body">
+            <div class="dash__job">
+              <div class="dash__job-name dash__job-name-text">Cosecha Cereza</div>
+              <div class="dash__job-loc">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span class="dash__job-loc-text">Fundo Santa Elena, Quillota</span>
+              </div>
+            </div>
+
+            <div class="dash__metrics">
+              <div class="dash__metric">
+                <div class="dash__metric-val" data-target="32">0</div>
+                <div class="dash__metric-label dash__metric-label-1">Workers</div>
+              </div>
+              <div class="dash__metric">
+                <div class="dash__metric-val"><span data-target="94">0</span>%</div>
+                <div class="dash__metric-label dash__metric-label-2">Asistencia</div>
+              </div>
+              <div class="dash__metric">
+                <div class="dash__metric-val"><span data-target="12">0</span>.<span data-target="4" data-single="true">0</span> <span>Kg</span></div>
+                <div class="dash__metric-label dash__metric-label-3">Kg/HH</div>
+              </div>
+            </div>
+
+            <div class="dash__crew">
+              <span class="dash__crew-label dash__crew-label-text">Cuadrilla</span>
+              <div class="dash__avatars">
+                <div class="dash__avatar">JR</div>
+                <div class="dash__avatar">ML</div>
+                <div class="dash__avatar">CP</div>
+                <div class="dash__avatar">AS</div>
+                <div class="dash__avatar">FG</div>
+                <div class="dash__avatar dash__avatar--more">+27</div>
+              </div>
+            </div>
+
+            <div class="dash__compliance">
+              <div class="dash__tag">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span class="dash__tag-1">F30-1 al día</span>
+              </div>
+              <div class="dash__tag">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span class="dash__tag-2">Cotizaciones pagadas</span>
+              </div>
+              <div class="dash__tag">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span class="dash__tag-3">Data en tiempo real</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -2094,7 +2368,20 @@
       badges: ['Secure data', '2 min', 'No cost']
     },
     footer: { email: 'nicolas@miido.ai', city: 'Santiago, Chile', privacy: 'Privacy policy' },
-    fab: 'Talk to us!'
+    fab: 'Talk to us!',
+    dash: {
+      status: 'Active operation',
+      badge: 'Law 20.123',
+      jobName: 'Cherry Harvest',
+      jobLoc: 'Fundo Santa Elena, Quillota',
+      metric1: 'Workers',
+      metric2: 'Attendance',
+      metric3: 'Kg/MH',
+      crew: 'Crew',
+      tag1: 'F30-1 up to date',
+      tag2: 'Social security paid',
+      tag3: 'Real-time data'
+    }
   };
 
   let originals = null;
@@ -2401,6 +2688,26 @@
 
     const fabSpan = q('.fab span');
     if (fabSpan) fabSpan.textContent = isEn ? en.fab : originals.fab;
+
+    const dashEls = {
+      status: q('.dash__status-text'),
+      badge: q('.dash__badge-text'),
+      jobName: q('.dash__job-name-text'),
+      jobLoc: q('.dash__job-loc-text'),
+      metric1: q('.dash__metric-label-1'),
+      metric2: q('.dash__metric-label-2'),
+      metric3: q('.dash__metric-label-3'),
+      crew: q('.dash__crew-label-text'),
+      tag1: q('.dash__tag-1'),
+      tag2: q('.dash__tag-2'),
+      tag3: q('.dash__tag-3')
+    };
+    if (!originals.dash) {
+      originals.dash = {};
+      Object.keys(dashEls).forEach(k => { if (dashEls[k]) originals.dash[k] = dashEls[k].textContent.trim(); });
+    }
+    const dashSrc = isEn ? en.dash : originals.dash;
+    Object.keys(dashEls).forEach(k => { if (dashEls[k] && dashSrc[k]) dashEls[k].textContent = dashSrc[k]; });
   }
 
   document.querySelectorAll('.lang-toggle__btn').forEach(btn => {
@@ -2417,6 +2724,22 @@
     document.querySelector('.lang-toggle__btn:last-child').classList.add('lang-toggle__btn--active');
     applyLang('en');
   }
+  document.querySelectorAll('[data-target]').forEach(el => {
+    const target = parseInt(el.getAttribute('data-target'));
+    const single = el.hasAttribute('data-single');
+    const duration = 1800;
+    const delay = 1400;
+    setTimeout(() => {
+      const start = performance.now();
+      function tick(now) {
+        const t = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - t, 3);
+        el.textContent = Math.round(target * ease);
+        if (t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }, delay);
+  });
 })();
 </script>
 </body>
