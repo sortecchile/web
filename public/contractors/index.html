@@ -604,13 +604,14 @@
     .proc__scene {
       position: absolute;
       inset: 0;
-      padding: 28px 24px;
+      padding: 20px 20px;
       opacity: 0;
       transform: translateX(30px);
       pointer-events: none;
       display: flex;
       flex-direction: column;
       visibility: hidden;
+      overflow-y: auto;
     }
 
     .proc__scene.active {
@@ -630,17 +631,17 @@
     .proc__scene-title {
       font-family: var(--font-serif);
       font-weight: 700;
-      font-size: 20px;
+      font-size: 18px;
       color: var(--foreground);
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       line-height: 1.2;
     }
 
     .proc__scene-desc {
-      font-size: 13px;
+      font-size: 12px;
       color: var(--muted-foreground);
-      line-height: 1.5;
-      margin-bottom: 20px;
+      line-height: 1.4;
+      margin-bottom: 14px;
     }
 
     /* Scene 1: Recruitment - matching animation */
@@ -721,89 +722,123 @@
       flex-shrink: 0;
     }
 
-    /* Scene 2: Assignment - timer */
-    .assign__timer {
-      text-align: center;
-      margin: 10px 0 20px;
-    }
-
-    .assign__time {
-      font-size: 52px;
-      font-weight: 800;
-      color: var(--foreground);
-      letter-spacing: -0.03em;
-      line-height: 1;
-    }
-
-    .assign__time span { color: #4FA88C; }
-
-    .assign__label {
-      font-size: 12px;
-      color: var(--muted-foreground);
-      margin-top: 4px;
-      font-weight: 600;
-    }
-
-    .assign__bar-wrap {
-      margin-top: 16px;
-    }
-
-    .assign__bar-label {
-      display: flex;
-      justify-content: space-between;
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--muted-foreground);
-      margin-bottom: 6px;
-    }
-
-    .assign__bar {
-      height: 8px;
-      background: var(--muted);
-      border-radius: 4px;
+    /* Scene 2: WhatsApp conversation */
+    .wa {
+      border-radius: 10px;
       overflow: hidden;
+      border: 1px solid #d1d5db;
+      flex: 1;
     }
 
-    .assign__bar-fill {
-      height: 100%;
-      width: 0;
-      background: linear-gradient(90deg, #4FA88C, #22c55e);
-      border-radius: 4px;
-      transition: width 2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .scene-active .assign__bar-fill { width: 85%; }
-
-    .assign__avatars {
+    .wa__header {
+      background: #075e54;
+      color: white;
+      padding: 8px 12px;
       display: flex;
-      justify-content: center;
-      margin-top: 16px;
-      gap: 4px;
+      align-items: center;
+      gap: 8px;
     }
 
-    .assign__av {
+    .wa__header-avatar {
       width: 28px;
       height: 28px;
       border-radius: 50%;
+      background: #25d366;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 9px;
-      font-weight: 700;
-      color: white;
-      opacity: 0;
-      transform: scale(0);
-      transition: all 0.3s;
+      font-size: 14px;
+      flex-shrink: 0;
     }
 
-    .scene-active .assign__av:nth-child(1) { opacity: 1; transform: scale(1); transition-delay: 0.3s; }
-    .scene-active .assign__av:nth-child(2) { opacity: 1; transform: scale(1); transition-delay: 0.5s; }
-    .scene-active .assign__av:nth-child(3) { opacity: 1; transform: scale(1); transition-delay: 0.7s; }
-    .scene-active .assign__av:nth-child(4) { opacity: 1; transform: scale(1); transition-delay: 0.9s; }
-    .scene-active .assign__av:nth-child(5) { opacity: 1; transform: scale(1); transition-delay: 1.1s; }
-    .scene-active .assign__av:nth-child(6) { opacity: 1; transform: scale(1); transition-delay: 1.3s; }
-    .scene-active .assign__av:nth-child(7) { opacity: 1; transform: scale(1); transition-delay: 1.5s; }
-    .scene-active .assign__av:nth-child(8) { opacity: 1; transform: scale(1); transition-delay: 1.7s; }
+    .wa__header-info { flex: 1; }
+
+    .wa__header-name {
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .wa__header-status {
+      font-size: 9px;
+      opacity: 0.8;
+    }
+
+    .wa__chat {
+      background: #ece5dd;
+      padding: 8px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5c1 0 2 1 2 2s-1 2-2 2-2-1-2-2 1-2 2-2' fill='%23d4cfc6' opacity='.3'/%3E%3C/svg%3E");
+    }
+
+    .wa__msg {
+      max-width: 85%;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 11px;
+      line-height: 1.4;
+      position: relative;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.4s ease-out;
+    }
+
+    .scene-active .wa__msg:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+    .scene-active .wa__msg:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.6s; }
+    .scene-active .wa__msg:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 1.0s; }
+    .scene-active .wa__msg:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 1.4s; }
+    .scene-active .wa__msg:nth-child(5) { opacity: 1; transform: translateY(0); transition-delay: 1.8s; }
+    .scene-active .wa__msg:nth-child(6) { opacity: 1; transform: translateY(0); transition-delay: 2.2s; }
+
+    .wa__msg--bot {
+      background: white;
+      align-self: flex-start;
+      border-top-left-radius: 2px;
+      box-shadow: 0 1px 1px rgba(0,0,0,0.08);
+    }
+
+    .wa__msg--user {
+      background: #dcf8c6;
+      align-self: flex-end;
+      border-top-right-radius: 2px;
+      box-shadow: 0 1px 1px rgba(0,0,0,0.08);
+    }
+
+    .wa__msg-sender {
+      font-size: 10px;
+      font-weight: 700;
+      margin-bottom: 2px;
+      color: #075e54;
+    }
+
+    .wa__msg-time {
+      font-size: 9px;
+      color: #667781;
+      text-align: right;
+      margin-top: 2px;
+    }
+
+    .wa__msg--bot .wa__msg-sender { color: #25d366; }
+
+    .wa__result {
+      text-align: center;
+      margin-top: 4px;
+      opacity: 0;
+      transition: opacity 0.5s ease-out 3.2s;
+    }
+
+    .scene-active .wa__result { opacity: 1; }
+
+    .wa__result-badge {
+      display: inline-block;
+      background: #dcfce7;
+      color: #15803d;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 12px;
+    }
 
     /* Scene 3: Supervision - live metrics */
     .super__metrics {
@@ -2167,30 +2202,47 @@
               </div>
             </div>
 
-            <!-- Scene 2: Assignment timer -->
+            <!-- Scene 2: WhatsApp conversation -->
             <div class="proc__scene" data-scene="1">
-              <div class="proc__scene-title" data-proc-title2>Cuadrilla armada en minutos</div>
-              <div class="proc__scene-desc" data-proc-desc2>Notificación por WhatsApp, confirmación automática, cuadrilla completa antes de empezar la jornada.</div>
-              <div class="assign__timer">
-                <div class="assign__time"><span class="assign__min" data-target-timer="30">0</span><span> min</span></div>
-                <div class="assign__label" data-proc-assign-label>Tiempo promedio de armado</div>
-              </div>
-              <div class="assign__bar-wrap">
-                <div class="assign__bar-label">
-                  <span data-proc-assign-crew>Cuadrilla</span>
-                  <span>27/32</span>
+              <div class="proc__scene-title" data-proc-title2>Asignación por WhatsApp</div>
+              <div class="wa">
+                <div class="wa__header">
+                  <div class="wa__header-avatar">🌱</div>
+                  <div class="wa__header-info">
+                    <div class="wa__header-name">MIIDO Bot</div>
+                    <div class="wa__header-status" data-wa-status>en línea</div>
+                  </div>
                 </div>
-                <div class="assign__bar"><div class="assign__bar-fill"></div></div>
-              </div>
-              <div class="assign__avatars">
-                <div class="assign__av" style="background:#4FA88C">JR</div>
-                <div class="assign__av" style="background:#3b82f6">ML</div>
-                <div class="assign__av" style="background:#f97316">CP</div>
-                <div class="assign__av" style="background:#8b5cf6">AS</div>
-                <div class="assign__av" style="background:#2F7D69">FG</div>
-                <div class="assign__av" style="background:#0ea5e9">RV</div>
-                <div class="assign__av" style="background:#e11d48">LM</div>
-                <div class="assign__av" style="background:#64748b;font-size:8px">+25</div>
+                <div class="wa__chat">
+                  <div class="wa__msg wa__msg--bot">
+                    <div class="wa__msg-sender">MIIDO Bot</div>
+                    <span data-wa-msg1>🍒 <b>Nueva faena disponible</b><br>Cosecha Cereza · Fundo Santa Elena<br>Mañana 7:00 AM · $18.500/día<br>¿Confirmas asistencia?</span>
+                    <div class="wa__msg-time">6:42 AM</div>
+                  </div>
+                  <div class="wa__msg wa__msg--user">
+                    <span data-wa-msg2>Sí, confirmo ✅</span>
+                    <div class="wa__msg-time">6:43 AM ✓✓</div>
+                  </div>
+                  <div class="wa__msg wa__msg--bot">
+                    <div class="wa__msg-sender">MIIDO Bot</div>
+                    <span data-wa-msg3>✅ Confirmado, Juan. Bus en Paradero 14, Las Rejas. Sale 6:15 AM.</span>
+                    <div class="wa__msg-time">6:43 AM</div>
+                  </div>
+                  <div class="wa__msg wa__msg--bot">
+                    <div class="wa__msg-sender">MIIDO Bot</div>
+                    <span data-wa-msg4>📊 Tu récord: <b>14.2 Kg/HH</b> · Ranking <b>#3</b><br>¡Hoy puedes subir al #2! 💪</span>
+                    <div class="wa__msg-time">6:44 AM</div>
+                  </div>
+                  <div class="wa__msg wa__msg--user">
+                    <span data-wa-msg5>Vamos con todo 🔥</span>
+                    <div class="wa__msg-time">6:44 AM ✓✓</div>
+                  </div>
+                  <div class="wa__msg wa__msg--bot">
+                    <div class="wa__msg-sender">MIIDO Bot</div>
+                    <span data-wa-msg6>🟢 <b>Cuadrilla lista:</b> 27/32 en 28 min<br>F30-1 generado · Cotizaciones al día</span>
+                    <div class="wa__msg-time">7:10 AM</div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -2863,8 +2915,12 @@
       step1: 'Recruit', step2: 'Assign', step3: 'Supervise',
       step4: 'Gamify', step5: 'Comply', step6: 'Improve',
       title1: 'Smart recruitment', desc1: 'AI matches worker profiles with job requirements to find the perfect fit.',
-      title2: 'Crew assembled in minutes', desc2: 'WhatsApp notification, automatic confirmation, full crew before the workday starts.',
-      assignLabel: 'Average assembly time', assignCrew: 'Crew',
+      title2: 'WhatsApp assignment',
+      waStatus: 'online',
+      waMsg1: '🍒 <b>New job available</b><br>Cherry Harvest · Fundo Santa Elena<br>Tomorrow 7:00 AM · $18,500/day<br>Confirm attendance?',
+      waMsg2: 'Yes, confirmed ✅', waMsg3: '✅ Confirmed, Juan. Bus at Stop 14, Las Rejas. Departs 6:15 AM.',
+      waMsg4: '📊 Your record: <b>14.2 Kg/MH</b> · Ranking <b>#3</b><br>Today you can reach #2! 💪',
+      waMsg5: 'Let\'s go 🔥', waMsg6: '🟢 <b>Crew ready:</b> 27/32 in 28 min<br>F30-1 generated · Social security up to date',
       title3: 'Real-time supervision', desc3: 'Live metrics from the field. Each worker reports progress from their phone.',
       met1: 'Active workers', met2: 'Attendance',
       title4: 'Gamification + Points', desc4: 'Each worker earns points for attendance, productivity, and punctuality. Weekly ranking drives continuous improvement.',
@@ -3182,12 +3238,12 @@
     const fabSpan = q('.fab span');
     if (fabSpan) fabSpan.textContent = isEn ? en.fab : originals.fab;
 
-    const procEls = {
+    const procText = {
       step1: q('[data-proc-step1]'), step2: q('[data-proc-step2]'), step3: q('[data-proc-step3]'),
       step4: q('[data-proc-step4]'), step5: q('[data-proc-step5]'), step6: q('[data-proc-step6]'),
       title1: q('[data-proc-title1]'), desc1: q('[data-proc-desc1]'),
-      title2: q('[data-proc-title2]'), desc2: q('[data-proc-desc2]'),
-      assignLabel: q('[data-proc-assign-label]'), assignCrew: q('[data-proc-assign-crew]'),
+      title2: q('[data-proc-title2]'),
+      waStatus: q('[data-wa-status]'), waMsg2: q('[data-wa-msg2]'), waMsg5: q('[data-wa-msg5]'),
       title3: q('[data-proc-title3]'), desc3: q('[data-proc-desc3]'),
       met1: q('[data-proc-met1]'), met2: q('[data-proc-met2]'),
       title4: q('[data-proc-title4]'), desc4: q('[data-proc-desc4]'),
@@ -3200,16 +3256,20 @@
       feedAtt: q('[data-proc-feed-att]'), feedArm: q('[data-proc-feed-arm]'),
       feedAtt2: q('[data-proc-feed-att2]'), feedArm2: q('[data-proc-feed-arm2]')
     };
+    const procHtml = {
+      waMsg1: q('[data-wa-msg1]'), waMsg3: q('[data-wa-msg3]'),
+      waMsg4: q('[data-wa-msg4]'), waMsg6: q('[data-wa-msg6]')
+    };
     if (!originals.proc) {
       originals.proc = {};
-      Object.keys(procEls).forEach(k => { if (procEls[k]) originals.proc[k] = procEls[k].textContent.trim(); });
+      Object.keys(procText).forEach(k => { if (procText[k]) originals.proc[k] = procText[k].textContent.trim(); });
+      Object.keys(procHtml).forEach(k => { if (procHtml[k]) originals.proc[k] = procHtml[k].innerHTML; });
     }
     const pSrc = isEn ? en.proc : originals.proc;
-    Object.keys(procEls).forEach(k => {
-      if (procEls[k] && pSrc[k]) procEls[k].textContent = pSrc[k];
-    });
-    if (isEn && procEls.feedAtt2) procEls.feedAtt2.textContent = pSrc.feedAtt;
-    if (isEn && procEls.feedArm2) procEls.feedArm2.textContent = pSrc.feedArm;
+    Object.keys(procText).forEach(k => { if (procText[k] && pSrc[k]) procText[k].textContent = pSrc[k]; });
+    Object.keys(procHtml).forEach(k => { if (procHtml[k] && pSrc[k]) procHtml[k].innerHTML = pSrc[k]; });
+    if (isEn && procText.feedAtt2) procText.feedAtt2.textContent = pSrc.feedAtt;
+    if (isEn && procText.feedArm2) procText.feedArm2.textContent = pSrc.feedArm;
   }
 
   document.querySelectorAll('.lang-toggle__btn').forEach(btn => {
@@ -3281,12 +3341,12 @@
       btn.addEventListener('click', () => {
         clearInterval(timer);
         goToScene(parseInt(btn.getAttribute('data-step')));
-        timer = setInterval(() => goToScene((current + 1) % 6), 4000);
+        timer = setInterval(() => goToScene((current + 1) % 6), 6000);
       });
     });
 
     animateCounters(scenes[0]);
-    timer = setInterval(() => goToScene((current + 1) % 6), 4000);
+    timer = setInterval(() => goToScene((current + 1) % 6), 6000);
   }
 })();
 </script>
