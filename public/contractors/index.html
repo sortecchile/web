@@ -521,26 +521,26 @@
     }
 
 
-    /* Phone Mockup */
+    /* Phone with Carousel */
     .phone {
-      width: 280px;
+      width: 300px;
       margin: 0 auto;
       position: relative;
     }
 
     .phone__frame {
       background: #1a1a2e;
-      border-radius: 36px;
+      border-radius: 40px;
       padding: 12px;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.1) inset;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.08) inset;
       position: relative;
     }
 
     .phone__notch {
       width: 90px;
-      height: 22px;
+      height: 24px;
       background: #1a1a2e;
-      border-radius: 0 0 14px 14px;
+      border-radius: 0 0 16px 16px;
       position: absolute;
       top: 12px;
       left: 50%;
@@ -550,18 +550,16 @@
 
     .phone__screen {
       background: #f8faf9;
-      border-radius: 26px;
+      border-radius: 30px;
       overflow: hidden;
-      position: relative;
     }
 
-    /* Status bar */
     .phone__status {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 8px 20px 4px;
-      font-size: 10px;
+      padding: 10px 24px 4px;
+      font-size: 11px;
       font-weight: 600;
       color: #1e293b;
       background: white;
@@ -574,28 +572,23 @@
       font-size: 9px;
     }
 
-    /* App header */
-    .app__header {
+    .app-hdr {
       background: white;
-      padding: 8px 14px 10px;
+      padding: 6px 16px 8px;
       border-bottom: 1px solid #e5e7eb;
-    }
-
-    .app__header-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
-    .app__logo {
+    .app-hdr__logo {
       font-family: var(--font-serif);
       font-weight: 800;
-      font-size: 14px;
+      font-size: 15px;
       color: var(--foreground);
-      letter-spacing: -0.03em;
     }
 
-    .app__live {
+    .app-hdr__live {
       display: flex;
       align-items: center;
       gap: 4px;
@@ -607,228 +600,338 @@
       border-radius: 10px;
     }
 
-    .app__live-dot {
+    .app-hdr__dot {
       width: 5px;
       height: 5px;
       border-radius: 50%;
       background: #22c55e;
-      animation: pulse 2s infinite;
+      animation: livePulse 2s infinite;
     }
 
-    @keyframes pulse {
+    @keyframes livePulse {
       0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
+      50% { opacity: 0.3; }
     }
 
-    /* Operation card */
-    .app__op {
-      margin: 10px;
+    .app-tabs {
+      display: flex;
       background: white;
-      border-radius: 12px;
-      padding: 10px 12px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-      border: 1px solid #e5e7eb;
-      opacity: 0;
-      transform: translateY(10px);
-      animation: phoneIn 0.5s ease-out 0.8s forwards;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 0 4px;
     }
 
-    @keyframes phoneIn {
-      to { opacity: 1; transform: translateY(0); }
+    .app-tab {
+      flex: 1;
+      padding: 7px 0 5px;
+      text-align: center;
+      font-size: 7.5px;
+      font-weight: 600;
+      color: var(--muted-foreground);
+      cursor: pointer;
+      border: none;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+      white-space: nowrap;
+      background: none;
     }
 
-    .app__op-badge {
-      font-size: 8px;
-      font-weight: 700;
-      text-transform: uppercase;
+    .app-tab.active {
       color: #4FA88C;
-      letter-spacing: 0.05em;
-      margin-bottom: 4px;
+      border-bottom-color: #4FA88C;
     }
 
-    .app__op-name {
+    .app-tab__icon {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 1px;
+    }
+
+    .app-scenes {
+      position: relative;
+      min-height: 320px;
+      overflow: hidden;
+    }
+
+    .app-sc {
+      position: absolute;
+      inset: 0;
+      padding: 10px 12px;
+      opacity: 0;
+      visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .app-sc.active {
+      opacity: 1;
+      visibility: visible;
+      z-index: 2;
+      animation: scSlide 0.4s ease-out;
+    }
+
+    @keyframes scSlide {
+      from { opacity: 0; transform: translateX(16px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .app-sc__title {
       font-family: var(--font-serif);
       font-weight: 700;
       font-size: 14px;
       color: var(--foreground);
-      margin-bottom: 2px;
     }
 
-    .app__op-loc {
-      font-size: 10px;
+    .app-sc__desc {
+      font-size: 9.5px;
       color: var(--muted-foreground);
+      line-height: 1.4;
+    }
+
+    /* S1: Recruit */
+    .sc-match {
       display: flex;
       align-items: center;
-      gap: 3px;
-    }
-
-    /* Metrics grid */
-    .app__metrics {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin: 0 10px;
-    }
-
-    .app__metric {
-      background: white;
-      border-radius: 10px;
-      padding: 10px;
-      border: 1px solid #e5e7eb;
+      gap: 7px;
+      padding: 5px 8px;
+      border-radius: 8px;
+      font-size: 9.5px;
       opacity: 0;
-      transform: translateY(8px);
+      transform: translateX(-8px);
+      transition: all 0.3s ease-out;
     }
 
-    .app__metric:nth-child(1) { animation: phoneIn 0.4s ease-out 1.1s forwards; }
-    .app__metric:nth-child(2) { animation: phoneIn 0.4s ease-out 1.3s forwards; }
-    .app__metric:nth-child(3) { animation: phoneIn 0.4s ease-out 1.5s forwards; }
-    .app__metric:nth-child(4) { animation: phoneIn 0.4s ease-out 1.7s forwards; }
+    .sc-match--w { background: #f0fdf4; border: 1px solid #bbf7d0; color: #15803d; }
+    .sc-match--j { background: #eff6ff; border: 1px solid #bfdbfe; color: #1d4ed8; }
 
-    .app__metric-val {
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--foreground);
-      line-height: 1;
-    }
+    .active.on .sc-match:nth-child(1) { opacity: 1; transform: none; transition-delay: .1s; }
+    .active.on .sc-match:nth-child(2) { opacity: 1; transform: none; transition-delay: .25s; }
+    .active.on .sc-match:nth-child(3) { opacity: 1; transform: none; transition-delay: .4s; }
+    .active.on .sc-match:nth-child(4) { opacity: 1; transform: none; transition-delay: .55s; }
+    .active.on .sc-match:nth-child(5) { opacity: 1; transform: none; transition-delay: .7s; }
+    .active.on .sc-match:nth-child(6) { opacity: 1; transform: none; transition-delay: .85s; }
+    .active.on .sc-match:nth-child(7) { opacity: 1; transform: none; transition-delay: 1s; }
 
-    .app__metric-label {
-      font-size: 9px;
-      color: var(--muted-foreground);
-      margin-top: 2px;
-    }
-
-    .app__metric-trend {
-      font-size: 8px;
-      color: #22c55e;
-      font-weight: 600;
-      margin-top: 2px;
-    }
-
-    /* Notification popup */
-    .app__notif {
-      margin: 8px 10px;
-      background: white;
-      border-radius: 10px;
-      padding: 8px 10px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      border: 1px solid #bbf7d0;
-      box-shadow: 0 2px 8px rgba(34,197,94,0.12);
-      opacity: 0;
-      transform: translateY(8px);
-      animation: phoneIn 0.4s ease-out 2.0s forwards;
-    }
-
-    .app__notif-icon {
-      width: 28px;
-      height: 28px;
+    .sc-av {
+      width: 20px;
+      height: 20px;
       border-radius: 50%;
-      background: #25d366;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px;
-      flex-shrink: 0;
-    }
-
-    .app__notif-body {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .app__notif-title {
-      font-size: 10px;
+      font-size: 7px;
       font-weight: 700;
-      color: var(--foreground);
-    }
-
-    .app__notif-text {
-      font-size: 9px;
-      color: var(--muted-foreground);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .app__notif-time {
-      font-size: 8px;
-      color: var(--muted-foreground);
+      color: white;
       flex-shrink: 0;
     }
 
-    /* Activity mini feed */
-    .app__feed {
-      margin: 8px 10px 12px;
-      background: white;
-      border-radius: 10px;
-      padding: 8px 10px;
-      border: 1px solid #e5e7eb;
+    .sc-arrow {
+      font-size: 9px;
+      color: #4FA88C;
+      text-align: center;
       opacity: 0;
-      transform: translateY(8px);
-      animation: phoneIn 0.4s ease-out 2.4s forwards;
+      transition: opacity .3s ease-out .5s;
     }
+    .active.on .sc-arrow { opacity: 1; }
 
-    .app__feed-title {
-      font-size: 9px;
-      font-weight: 700;
-      color: var(--muted-foreground);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 6px;
-    }
-
-    .app__feed-item {
+    /* S2: WhatsApp */
+    .sc-wa {
+      background: #ece5dd;
+      border-radius: 10px;
+      padding: 8px;
       display: flex;
-      align-items: center;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .sc-wa__msg {
+      max-width: 88%;
+      padding: 4px 7px;
+      border-radius: 7px;
+      font-size: 8.5px;
+      line-height: 1.3;
+      opacity: 0;
+      transform: translateY(5px);
+      transition: all .3s ease-out;
+    }
+
+    .sc-wa__msg--b { background: white; align-self: flex-start; border-top-left-radius: 2px; }
+    .sc-wa__msg--u { background: #dcf8c6; align-self: flex-end; border-top-right-radius: 2px; }
+    .sc-wa__sender { font-size: 7.5px; font-weight: 700; color: #25d366; margin-bottom: 1px; }
+    .sc-wa__time { font-size: 6.5px; color: #667781; text-align: right; margin-top: 1px; }
+
+    .active.on .sc-wa__msg:nth-child(1) { opacity: 1; transform: none; transition-delay: .1s; }
+    .active.on .sc-wa__msg:nth-child(2) { opacity: 1; transform: none; transition-delay: .5s; }
+    .active.on .sc-wa__msg:nth-child(3) { opacity: 1; transform: none; transition-delay: .9s; }
+    .active.on .sc-wa__msg:nth-child(4) { opacity: 1; transform: none; transition-delay: 1.3s; }
+    .active.on .sc-wa__msg:nth-child(5) { opacity: 1; transform: none; transition-delay: 1.7s; }
+
+    /* S3: Supervise */
+    .sc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 6px;
-      padding: 3px 0;
-      font-size: 9px;
-      color: var(--foreground);
     }
 
-    .app__feed-dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .app__feed-time {
-      margin-left: auto;
-      color: var(--muted-foreground);
-      font-size: 8px;
-      flex-shrink: 0;
-    }
-
-    /* Floating second notification */
-    .phone__float-notif {
-      position: absolute;
-      top: 60px;
-      left: -30px;
-      right: -30px;
+    .sc-card {
       background: white;
-      border-radius: 14px;
-      padding: 10px 12px;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 8px;
+      opacity: 0;
+      transform: scale(.92);
+      transition: all .3s ease-out;
+    }
+
+    .active.on .sc-card:nth-child(1) { opacity: 1; transform: none; transition-delay: .1s; }
+    .active.on .sc-card:nth-child(2) { opacity: 1; transform: none; transition-delay: .2s; }
+    .active.on .sc-card:nth-child(3) { opacity: 1; transform: none; transition-delay: .3s; }
+    .active.on .sc-card:nth-child(4) { opacity: 1; transform: none; transition-delay: .4s; }
+
+    .sc-card__val { font-size: 20px; font-weight: 800; color: var(--foreground); line-height: 1; }
+    .sc-card__lbl { font-size: 8.5px; color: var(--muted-foreground); margin-top: 1px; }
+    .sc-card__up { font-size: 7.5px; color: #22c55e; font-weight: 600; margin-top: 1px; }
+
+    /* S4: Gamify */
+    .sc-prof {
       display: flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      padding: 8px;
+      background: white;
+      border-radius: 10px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .sc-prof__av {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #4FA88C;
+      color: white;
+      font-weight: 800;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sc-prof__name { font-weight: 700; font-size: 11px; color: var(--foreground); }
+    .sc-prof__role { font-size: 8.5px; color: var(--muted-foreground); }
+    .sc-prof__stars { margin-left: auto; color: #f59e0b; font-size: 9px; }
+
+    .sc-pts {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 6px;
+    }
+
+    .sc-pt {
+      text-align: center;
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 8px 4px;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: all .3s ease-out;
+    }
+
+    .active.on .sc-pt:nth-child(1) { opacity: 1; transform: none; transition-delay: .2s; }
+    .active.on .sc-pt:nth-child(2) { opacity: 1; transform: none; transition-delay: .4s; }
+    .active.on .sc-pt:nth-child(3) { opacity: 1; transform: none; transition-delay: .6s; }
+
+    .sc-pt__val { font-size: 18px; font-weight: 800; color: #4FA88C; }
+    .sc-pt__lbl { font-size: 7.5px; color: var(--muted-foreground); margin-top: 1px; text-transform: uppercase; letter-spacing: .04em; }
+
+    /* S5: Comply */
+    .sc-chk {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 8px;
+      background: white;
+      border-radius: 10px;
       border: 1px solid #e5e7eb;
       opacity: 0;
-      transform: translateY(-10px);
-      animation: floatIn 0.5s ease-out 2.8s forwards;
-      z-index: 20;
+      transform: translateX(-8px);
+      transition: all .3s ease-out;
     }
 
-    @keyframes floatIn {
-      to { opacity: 1; transform: translateY(0); }
+    .active.on .sc-chk:nth-child(1) { opacity: 1; transform: none; transition-delay: .1s; }
+    .active.on .sc-chk:nth-child(2) { opacity: 1; transform: none; transition-delay: .3s; }
+    .active.on .sc-chk:nth-child(3) { opacity: 1; transform: none; transition-delay: .5s; }
+    .active.on .sc-chk:nth-child(4) { opacity: 1; transform: none; transition-delay: .7s; }
+
+    .sc-chk__ico {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #dcfce7;
+      color: #22c55e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
     }
 
-    .phone__float-notif .app__notif-icon {
+    .sc-chk__t { font-size: 10.5px; font-weight: 700; color: var(--foreground); }
+    .sc-chk__s { font-size: 8.5px; color: var(--muted-foreground); }
+
+    /* S6: Improve */
+    .sc-cmp {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .sc-ssn {
+      text-align: center;
+      padding: 8px 4px;
+      border-radius: 10px;
+      opacity: 0;
+      transform: scale(.92);
+      transition: all .4s ease-out;
+    }
+
+    .sc-ssn--old { background: #fef2f2; border: 1px solid #fecaca; }
+    .sc-ssn--new { background: #f0fdf4; border: 1px solid #bbf7d0; }
+
+    .active.on .sc-ssn--old { opacity: 1; transform: none; transition-delay: .1s; }
+    .active.on .sc-ssn--new { opacity: 1; transform: none; transition-delay: .4s; }
+
+    .sc-ssn__lbl { font-size: 8.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 4px; }
+    .sc-ssn--old .sc-ssn__lbl { color: #dc2626; }
+    .sc-ssn--new .sc-ssn__lbl { color: #16a34a; }
+
+    .sc-sv { font-size: 16px; font-weight: 800; color: var(--foreground); }
+    .sc-sl { font-size: 7.5px; color: var(--muted-foreground); margin-bottom: 3px; }
+    .sc-cmp__arrow { font-size: 16px; color: #4FA88C; opacity: 0; transition: opacity .3s ease-out .3s; }
+    .active.on .sc-cmp__arrow { opacity: 1; }
+
+    /* Progress dots */
+    .app-dots {
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      padding: 8px 0 14px;
+      background: #f8faf9;
+    }
+
+    .app-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #d1d5db;
+      transition: all .3s;
+    }
+
+    .app-dot.active {
       background: #4FA88C;
+      width: 16px;
+      border-radius: 3px;
     }
-
 
     /* Wave decorativa al final del hero (igual a miido.ai) */
     .hero__wave {
@@ -1783,7 +1886,7 @@
       .hero__content { max-width: 100%; }
       .hero__headline, .hero__sub { text-align: center; }
       .hero__actions { justify-content: center; }
-      .phone { width: 240px; }
+      .phone { width: 260px; }
       .phone__float-notif { left: -10px; right: -10px; }
       .por-que__grid { grid-template-columns: 1fr; gap: 40px; }
       .alertas__grid { grid-template-columns: 1fr; gap: 48px; }
@@ -1867,7 +1970,7 @@
 
       </div>
 
-      <!-- Phone Mockup -->
+      <!-- Phone Carousel -->
       <div class="hero__visual">
         <div class="phone">
           <div class="phone__frame">
@@ -1875,74 +1978,110 @@
             <div class="phone__screen">
               <div class="phone__status">
                 <span>9:41</span>
-                <div class="phone__status-icons">
-                  <span>●●●●</span>
-                  <span>WiFi</span>
-                  <span>100%</span>
-                </div>
+                <div class="phone__status-icons">●●●● WiFi 100%</div>
               </div>
-              <div class="app__header">
-                <div class="app__header-top">
-                  <div class="app__logo">MIIDO</div>
-                  <div class="app__live">
-                    <div class="app__live-dot"></div>
-                    <span data-app-live>En vivo</span>
+              <div class="app-hdr">
+                <div class="app-hdr__logo">MIIDO</div>
+                <div class="app-hdr__live"><div class="app-hdr__dot"></div><span data-p-live>En vivo</span></div>
+              </div>
+              <div class="app-tabs" id="appTabs">
+                <button class="app-tab active" data-tab="0"><span class="app-tab__icon">🎯</span><span data-t1>Recluta</span></button>
+                <button class="app-tab" data-tab="1"><span class="app-tab__icon">💬</span><span data-t2>Asigna</span></button>
+                <button class="app-tab" data-tab="2"><span class="app-tab__icon">📊</span><span data-t3>Supervisa</span></button>
+                <button class="app-tab" data-tab="3"><span class="app-tab__icon">🏆</span><span data-t4>Gamifica</span></button>
+                <button class="app-tab" data-tab="4"><span class="app-tab__icon">✅</span><span data-t5>Cumple</span></button>
+                <button class="app-tab" data-tab="5"><span class="app-tab__icon">📈</span><span data-t6>Mejora</span></button>
+              </div>
+              <div class="app-scenes" id="appScenes">
+
+                <!-- S1: Recruit -->
+                <div class="app-sc active on" data-scene="0">
+                  <div class="app-sc__title" data-s1t>Reclutamiento inteligente</div>
+                  <div class="app-sc__desc" data-s1d>IA cruza perfiles con requisitos de la faena.</div>
+                  <div class="sc-match sc-match--w"><div class="sc-av" style="background:#4FA88C">JR</div>Juan R. · Cosecha · 4.8★</div>
+                  <div class="sc-arrow">↓ match</div>
+                  <div class="sc-match sc-match--j">🍒 Cosecha Cereza — Quillota</div>
+                  <div class="sc-match sc-match--w"><div class="sc-av" style="background:#3b82f6">ML</div>María L. · Poda · 4.6★</div>
+                  <div class="sc-arrow">↓ match</div>
+                  <div class="sc-match sc-match--j">✂️ Poda Uva — Casablanca</div>
+                </div>
+
+                <!-- S2: Assign (WhatsApp) -->
+                <div class="app-sc" data-scene="1">
+                  <div class="app-sc__title" data-s2t>Asignación por WhatsApp</div>
+                  <div class="sc-wa">
+                    <div class="sc-wa__msg sc-wa__msg--b"><div class="sc-wa__sender">MIIDO Bot</div><span data-wa1>🍒 <b>Nueva faena</b><br>Cosecha Cereza · Quillota<br>Mañana 7AM · $18.500/día</span><div class="sc-wa__time">6:42</div></div>
+                    <div class="sc-wa__msg sc-wa__msg--u"><span data-wa2>Sí, confirmo ✅</span><div class="sc-wa__time">6:43 ✓✓</div></div>
+                    <div class="sc-wa__msg sc-wa__msg--b"><div class="sc-wa__sender">MIIDO Bot</div><span data-wa3>✅ Confirmado. Bus Paradero 14, 6:15 AM</span><div class="sc-wa__time">6:43</div></div>
+                    <div class="sc-wa__msg sc-wa__msg--b"><div class="sc-wa__sender">MIIDO Bot</div><span data-wa4>📊 Tu récord: <b>14.2 Kg/HH</b> · #3<br>¡Hoy puedes subir al #2! 💪</span><div class="sc-wa__time">6:44</div></div>
+                    <div class="sc-wa__msg sc-wa__msg--u"><span data-wa5>Vamos 🔥</span><div class="sc-wa__time">6:44 ✓✓</div></div>
                   </div>
                 </div>
+
+                <!-- S3: Supervise -->
+                <div class="app-sc" data-scene="2">
+                  <div class="app-sc__title" data-s3t>Supervisión en tiempo real</div>
+                  <div class="app-sc__desc" data-s3d>Métricas vivas desde el terreno.</div>
+                  <div class="sc-grid">
+                    <div class="sc-card"><div class="sc-card__val"><span data-target="32">0</span></div><div class="sc-card__lbl" data-m1>Workers</div><div class="sc-card__up">↑ 100%</div></div>
+                    <div class="sc-card"><div class="sc-card__val"><span data-target="94">0</span>%</div><div class="sc-card__lbl" data-m2>Asistencia</div><div class="sc-card__up">↑ 12%</div></div>
+                    <div class="sc-card"><div class="sc-card__val"><span data-target="12">0</span>.4</div><div class="sc-card__lbl">Kg/HH</div><div class="sc-card__up">↑ 8%</div></div>
+                    <div class="sc-card"><div class="sc-card__val"><span data-target="4">0</span>.2</div><div class="sc-card__lbl">Ha/día</div><div class="sc-card__up">↑ 15%</div></div>
+                  </div>
+                </div>
+
+                <!-- S4: Gamify -->
+                <div class="app-sc" data-scene="3">
+                  <div class="app-sc__title" data-s4t>Gamificación + Puntos</div>
+                  <div class="sc-prof"><div class="sc-prof__av">JR</div><div><div class="sc-prof__name">Juan Rojas</div><div class="sc-prof__role" data-g-role>Cosechero · Nivel Oro</div></div><div class="sc-prof__stars">★★★★★</div></div>
+                  <div class="sc-pts">
+                    <div class="sc-pt"><div class="sc-pt__val"><span data-target="847">0</span></div><div class="sc-pt__lbl" data-g1>Puntos</div></div>
+                    <div class="sc-pt"><div class="sc-pt__val"><span data-target="98">0</span>%</div><div class="sc-pt__lbl" data-g2>Asistencia</div></div>
+                    <div class="sc-pt"><div class="sc-pt__val">#<span data-target="3">0</span></div><div class="sc-pt__lbl" data-g3>Ranking</div></div>
+                  </div>
+                </div>
+
+                <!-- S5: Comply -->
+                <div class="app-sc" data-scene="4">
+                  <div class="app-sc__title" data-s5t>Compliance automático</div>
+                  <div class="app-sc__desc" data-s5d>Ley 20.123 cubierta con data real.</div>
+                  <div class="sc-chk"><div class="sc-chk__ico"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="sc-chk__t">F30-1</div><div class="sc-chk__s" data-c1>Data biométrica real</div></div></div>
+                  <div class="sc-chk"><div class="sc-chk__ico"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="sc-chk__t" data-c2t>Cotizaciones</div><div class="sc-chk__s" data-c2>Pago verificado y al día</div></div></div>
+                  <div class="sc-chk"><div class="sc-chk__ico"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="sc-chk__t">Ley 20.123</div><div class="sc-chk__s" data-c3>Responsabilidad subsidiaria</div></div></div>
+                  <div class="sc-chk"><div class="sc-chk__ico"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="sc-chk__t" data-c4t>Auditoría</div><div class="sc-chk__s" data-c4>Trazabilidad completa</div></div></div>
+                </div>
+
+                <!-- S6: Improve -->
+                <div class="app-sc" data-scene="5">
+                  <div class="app-sc__title" data-s6t>Mejora cada temporada</div>
+                  <div class="app-sc__desc" data-s6d>El sistema aprende y optimiza.</div>
+                  <div class="sc-cmp">
+                    <div class="sc-ssn sc-ssn--old">
+                      <div class="sc-ssn__lbl" data-cmp-old>Temp. 1</div>
+                      <div class="sc-sv">72%</div><div class="sc-sl" data-cmp-att>Asistencia</div>
+                      <div class="sc-sv">8.1</div><div class="sc-sl">Kg/HH</div>
+                      <div class="sc-sv">45m</div><div class="sc-sl" data-cmp-arm>Armado</div>
+                    </div>
+                    <div class="sc-cmp__arrow">→</div>
+                    <div class="sc-ssn sc-ssn--new">
+                      <div class="sc-ssn__lbl" data-cmp-new>Temp. 3</div>
+                      <div class="sc-sv">94%</div><div class="sc-sl" data-cmp-att2>Asistencia</div>
+                      <div class="sc-sv">12.4</div><div class="sc-sl">Kg/HH</div>
+                      <div class="sc-sv">30m</div><div class="sc-sl" data-cmp-arm2>Armado</div>
+                    </div>
+                  </div>
+                </div>
+
               </div>
-              <div class="app__op">
-                <div class="app__op-badge" data-app-badge>Operación activa</div>
-                <div class="app__op-name" data-app-job>Cosecha Cereza</div>
-                <div class="app__op-loc">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                  <span data-app-loc>Fundo Santa Elena, Quillota</span>
-                </div>
-              </div>
-              <div class="app__metrics">
-                <div class="app__metric">
-                  <div class="app__metric-val"><span data-target="32">0</span></div>
-                  <div class="app__metric-label" data-app-m1>Workers</div>
-                  <div class="app__metric-trend">↑ 100%</div>
-                </div>
-                <div class="app__metric">
-                  <div class="app__metric-val"><span data-target="94">0</span>%</div>
-                  <div class="app__metric-label" data-app-m2>Asistencia</div>
-                  <div class="app__metric-trend">↑ 12%</div>
-                </div>
-                <div class="app__metric">
-                  <div class="app__metric-val"><span data-target="12">0</span>.4</div>
-                  <div class="app__metric-label">Kg/HH</div>
-                  <div class="app__metric-trend">↑ 8%</div>
-                </div>
-                <div class="app__metric">
-                  <div class="app__metric-val"><span data-target="4">0</span>.2</div>
-                  <div class="app__metric-label">Ha/día</div>
-                  <div class="app__metric-trend">↑ 15%</div>
-                </div>
-              </div>
-              <div class="app__notif">
-                <div class="app__notif-icon">💬</div>
-                <div class="app__notif-body">
-                  <div class="app__notif-title">WhatsApp</div>
-                  <div class="app__notif-text" data-app-wa>Juan Rojas confirmó asistencia ✅</div>
-                </div>
-                <div class="app__notif-time">9:41</div>
-              </div>
-              <div class="app__feed">
-                <div class="app__feed-title" data-app-feed-title>Actividad</div>
-                <div class="app__feed-item"><div class="app__feed-dot" style="background:#22c55e"></div><span data-app-f1>María López: +15 pts</span><span class="app__feed-time">9:38</span></div>
-                <div class="app__feed-item"><div class="app__feed-dot" style="background:#3b82f6"></div><span data-app-f2>Cuadrilla A: 14.2 Kg/HH</span><span class="app__feed-time">9:30</span></div>
-                <div class="app__feed-item"><div class="app__feed-dot" style="background:#f97316"></div><span data-app-f3>F30-1 actualizado</span><span class="app__feed-time">9:22</span></div>
+              <div class="app-dots">
+                <div class="app-dot active"></div>
+                <div class="app-dot"></div>
+                <div class="app-dot"></div>
+                <div class="app-dot"></div>
+                <div class="app-dot"></div>
+                <div class="app-dot"></div>
               </div>
             </div>
-          </div>
-          <div class="phone__float-notif">
-            <div class="app__notif-icon">🟢</div>
-            <div class="app__notif-body">
-              <div class="app__notif-title" data-app-crew-title>Cuadrilla lista</div>
-              <div class="app__notif-text" data-app-crew-text>27/32 confirmados en 28 min</div>
-            </div>
-            <div class="app__notif-time">ahora</div>
           </div>
         </div>
       </div>
@@ -2497,11 +2636,24 @@
     },
     footer: { email: 'nicolas@miido.ai', city: 'Santiago, Chile', privacy: 'Privacy policy' },
     fab: 'Talk to us!',
-    app: {
-      live: 'Live', badge: 'Active operation', job: 'Cherry Harvest', loc: 'Fundo Santa Elena, Quillota',
-      m1: 'Workers', m2: 'Attendance', wa: 'Juan Rojas confirmed attendance ✅',
-      feedTitle: 'Activity', f1: 'María López: +15 pts', f2: 'Crew A: 14.2 Kg/MH', f3: 'F30-1 updated',
-      crewTitle: 'Crew ready', crewText: '27/32 confirmed in 28 min'
+    proc: {
+      live: 'Live',
+      t1: 'Recruit', t2: 'Assign', t3: 'Supervise', t4: 'Gamify', t5: 'Comply', t6: 'Improve',
+      s1t: 'Smart recruitment', s1d: 'AI matches profiles with job requirements.',
+      s2t: 'WhatsApp assignment',
+      wa1: '🍒 <b>New job</b><br>Cherry Harvest · Quillota<br>Tomorrow 7AM · $18,500/day',
+      wa2: 'Yes, confirmed ✅', wa3: '✅ Confirmed. Bus Stop 14, 6:15 AM',
+      wa4: '📊 Your record: <b>14.2 Kg/MH</b> · #3<br>Today you can move to #2! 💪',
+      wa5: "Let's go 🔥",
+      s3t: 'Real-time supervision', s3d: 'Live metrics from the field.',
+      m1: 'Workers', m2: 'Attendance',
+      s4t: 'Gamification + Points', gRole: 'Harvester · Gold Level',
+      g1: 'Points', g2: 'Attendance', g3: 'Ranking',
+      s5t: 'Automatic compliance', s5d: 'Law 20.123 covered with real data.',
+      c1: 'Real biometric data', c2t: 'Contributions', c2: 'Payment verified and up to date',
+      c3: 'Subsidiary liability', c4t: 'Audit', c4: 'Full traceability',
+      s6t: 'Improve every season', s6d: 'The system learns and optimizes.',
+      cmpOld: 'Season 1', cmpNew: 'Season 3', cmpAtt: 'Attendance', cmpArm: 'Assembly'
     }
   };
 
@@ -2810,18 +2962,36 @@
     const fabSpan = q('.fab span');
     if (fabSpan) fabSpan.textContent = isEn ? en.fab : originals.fab;
 
-    const appEls = {
-      live: q('[data-app-live]'), badge: q('[data-app-badge]'), job: q('[data-app-job]'), loc: q('[data-app-loc]'),
-      m1: q('[data-app-m1]'), m2: q('[data-app-m2]'), wa: q('[data-app-wa]'),
-      feedTitle: q('[data-app-feed-title]'), f1: q('[data-app-f1]'), f2: q('[data-app-f2]'), f3: q('[data-app-f3]'),
-      crewTitle: q('[data-app-crew-title]'), crewText: q('[data-app-crew-text]')
+    const procText = {
+      live: q('[data-p-live]'),
+      t1: q('[data-t1]'), t2: q('[data-t2]'), t3: q('[data-t3]'),
+      t4: q('[data-t4]'), t5: q('[data-t5]'), t6: q('[data-t6]'),
+      s1t: q('[data-s1t]'), s1d: q('[data-s1d]'),
+      s2t: q('[data-s2t]'),
+      s3t: q('[data-s3t]'), s3d: q('[data-s3d]'),
+      m1: q('[data-m1]'), m2: q('[data-m2]'),
+      s4t: q('[data-s4t]'), gRole: q('[data-g-role]'),
+      g1: q('[data-g1]'), g2: q('[data-g2]'), g3: q('[data-g3]'),
+      s5t: q('[data-s5t]'), s5d: q('[data-s5d]'),
+      c1: q('[data-c1]'), c2t: q('[data-c2t]'), c2: q('[data-c2]'),
+      c3: q('[data-c3]'), c4t: q('[data-c4t]'), c4: q('[data-c4]'),
+      s6t: q('[data-s6t]'), s6d: q('[data-s6d]'),
+      cmpOld: q('[data-cmp-old]'), cmpNew: q('[data-cmp-new]'),
+      cmpAtt: q('[data-cmp-att]'), cmpArm: q('[data-cmp-arm]')
     };
-    if (!originals.app) {
-      originals.app = {};
-      Object.keys(appEls).forEach(k => { if (appEls[k]) originals.app[k] = appEls[k].textContent.trim(); });
+    const procHtml = {
+      wa1: q('[data-wa1]'), wa2: q('[data-wa2]'), wa3: q('[data-wa3]'),
+      wa4: q('[data-wa4]'), wa5: q('[data-wa5]')
+    };
+    if (!originals.proc) {
+      originals.proc = { text: {}, html: {} };
+      Object.keys(procText).forEach(k => { if (procText[k]) originals.proc.text[k] = procText[k].textContent.trim(); });
+      Object.keys(procHtml).forEach(k => { if (procHtml[k]) originals.proc.html[k] = procHtml[k].innerHTML; });
     }
-    const aSrc = isEn ? en.app : originals.app;
-    Object.keys(appEls).forEach(k => { if (appEls[k] && aSrc[k]) appEls[k].textContent = aSrc[k]; });
+    const pSrc = isEn ? en.proc : originals.proc.text;
+    Object.keys(procText).forEach(k => { if (procText[k] && pSrc[k]) procText[k].textContent = pSrc[k]; });
+    const phSrc = isEn ? en.proc : originals.proc.html;
+    Object.keys(procHtml).forEach(k => { if (procHtml[k] && phSrc[k]) procHtml[k].innerHTML = phSrc[k]; });
   }
 
   document.querySelectorAll('.lang-toggle__btn').forEach(btn => {
@@ -2838,23 +3008,64 @@
     document.querySelector('.lang-toggle__btn:last-child').classList.add('lang-toggle__btn--active');
     applyLang('en');
   }
-  // Animate phone metric counters
-  document.querySelectorAll('[data-target]').forEach(el => {
-    const target = parseInt(el.getAttribute('data-target'));
-    const duration = 1800;
-    const delay = 1400;
-    setTimeout(() => {
-      const start = performance.now();
-      function tick(now) {
-        const t = Math.min((now - start) / duration, 1);
-        const ease = 1 - Math.pow(1 - t, 3);
-        el.textContent = Math.round(target * ease);
-        if (t < 1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-    }, delay);
-  });
 })();
+
+  // Carousel auto-cycle
+  (function() {
+    const scenes = document.querySelectorAll('.app-sc');
+    const tabs = document.querySelectorAll('.app-tab');
+    const dots = document.querySelectorAll('.app-dot');
+    let current = 0;
+    let timer;
+
+    function goTo(idx) {
+      scenes.forEach(s => { s.classList.remove('active', 'on'); });
+      tabs.forEach(t => t.classList.remove('active'));
+      dots.forEach(d => d.classList.remove('active'));
+
+      scenes[idx].classList.add('active');
+      tabs[idx].classList.add('active');
+      dots[idx].classList.add('active');
+
+      setTimeout(() => scenes[idx].classList.add('on'), 50);
+
+      animateCounters(scenes[idx]);
+      current = idx;
+    }
+
+    function animateCounters(scene) {
+      scene.querySelectorAll('[data-target]').forEach(el => {
+        const target = parseInt(el.getAttribute('data-target'));
+        el.textContent = '0';
+        const start = performance.now();
+        const duration = 1200;
+        function tick(now) {
+          const t = Math.min((now - start) / duration, 1);
+          el.textContent = Math.round(target * t);
+          if (t < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      });
+    }
+
+    function next() { goTo((current + 1) % scenes.length); }
+
+    function startCycle() {
+      clearInterval(timer);
+      timer = setInterval(next, 5000);
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        goTo(parseInt(tab.getAttribute('data-tab')));
+        startCycle();
+      });
+    });
+
+    animateCounters(scenes[0]);
+    startCycle();
+  })();
+
 </script>
 </body>
 </html>
