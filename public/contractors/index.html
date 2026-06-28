@@ -588,21 +588,22 @@
     /* Scene container */
     .proc__scene-wrap {
       position: relative;
-      min-height: 460px;
       overflow: hidden;
+      transition: height 0.4s ease-out;
     }
 
     .proc__scene {
       position: absolute;
-      inset: 0;
-      padding: 20px 20px;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 24px 24px;
       opacity: 0;
       transform: translateX(30px);
       pointer-events: none;
       display: flex;
       flex-direction: column;
       visibility: hidden;
-      overflow-y: auto;
     }
 
     .proc__scene.active {
@@ -3312,6 +3313,15 @@
       }
     }
 
+    const wrap = proc.querySelector('.proc__scene-wrap');
+
+    function fitHeight(idx) {
+      scenes[idx].style.position = 'relative';
+      const h = scenes[idx].scrollHeight;
+      scenes[idx].style.position = '';
+      wrap.style.height = h + 'px';
+    }
+
     function goToScene(idx) {
       steps.forEach((s, i) => s.classList.toggle('active', i === idx));
       scenes.forEach((s, i) => {
@@ -3320,6 +3330,7 @@
       });
       dots.forEach((d, i) => d.classList.toggle('active', i === idx));
       current = idx;
+      fitHeight(idx);
       setTimeout(() => {
         scenes[idx].classList.add('scene-active');
         animateCounters(scenes[idx]);
@@ -3334,6 +3345,7 @@
       });
     });
 
+    fitHeight(0);
     animateCounters(scenes[0]);
     timer = setInterval(() => goToScene((current + 1) % 6), 6000);
   }
