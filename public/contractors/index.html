@@ -396,18 +396,9 @@
       color: var(--muted-foreground);
     }
 
-    /* Mockup ilustrativo del hero — workflow de cuadrillas */
+    /* Hero visual — process visualizer */
     .hero__visual {
       position: relative;
-      background: #fafafa;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 32px 24px;
-      background-image:
-        radial-gradient(circle, #cbd5e1 1px, transparent 1px);
-      background-size: 18px 18px;
-      min-height: 460px;
-      overflow: hidden;
     }
 
     .workflow {
@@ -520,352 +511,487 @@
       animation: heroSlideUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
     }
 
-
-    /* Phone with Carousel */
-    .phone {
-      width: 300px;
-      margin: 0 auto;
-      position: relative;
-    }
-
-    .phone__frame {
-      background: #1a1a2e;
-      border-radius: 40px;
-      padding: 12px;
-      box-shadow: 0 25px 60px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.08) inset;
-      position: relative;
-    }
-
-    .phone__notch {
-      width: 90px;
-      height: 24px;
-      background: #1a1a2e;
-      border-radius: 0 0 16px 16px;
-      position: absolute;
-      top: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10;
-    }
-
-    .phone__screen {
-      background: #f8faf9;
-      border-radius: 30px;
+    .proc {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 16px 48px -12px rgba(15,23,42,0.12);
       overflow: hidden;
+      font-family: var(--font-sans);
     }
 
-    .phone__status {
+    /* Step indicators */
+    .proc__steps {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 24px 4px;
-      font-size: 11px;
-      font-weight: 600;
-      color: #1e293b;
-      background: white;
+      background: #0f172a;
+      padding: 0;
     }
 
-    .phone__status-icons {
-      display: flex;
-      gap: 4px;
-      align-items: center;
-      font-size: 9px;
-    }
-
-    .app-hdr {
-      background: white;
-      padding: 6px 16px 8px;
-      border-bottom: 1px solid #e5e7eb;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .app-hdr__logo {
-      font-family: var(--font-serif);
-      font-weight: 800;
-      font-size: 15px;
-      color: var(--foreground);
-    }
-
-    .app-hdr__live {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 9px;
-      font-weight: 600;
-      color: #15803d;
-      background: #dcfce7;
-      padding: 3px 8px;
-      border-radius: 10px;
-    }
-
-    .app-hdr__dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: #22c55e;
-      animation: livePulse 2s infinite;
-    }
-
-    @keyframes livePulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-
-    .app-tabs {
-      display: flex;
-      background: white;
-      border-bottom: 1px solid #e5e7eb;
-      padding: 0 4px;
-    }
-
-    .app-tab {
+    .proc__step {
       flex: 1;
-      padding: 7px 0 5px;
+      padding: 12px 6px;
       text-align: center;
-      font-size: 7.5px;
-      font-weight: 600;
-      color: var(--muted-foreground);
       cursor: pointer;
       border: none;
-      border-bottom: 2px solid transparent;
-      transition: all 0.2s;
-      white-space: nowrap;
-      background: none;
-    }
-
-    .app-tab.active {
-      color: #4FA88C;
-      border-bottom-color: #4FA88C;
-    }
-
-    .app-tab__icon {
-      display: block;
-      font-size: 13px;
-      margin-bottom: 1px;
-    }
-
-    .app-scenes {
+      background: transparent;
+      color: rgba(255,255,255,0.4);
+      font-size: 10px;
+      font-weight: 600;
+      font-family: var(--font-sans);
+      letter-spacing: 0.02em;
+      transition: all 0.4s;
       position: relative;
-      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .proc__step::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: #4FA88C;
+      transform: scaleX(0);
+      transition: transform 0.4s;
+    }
+
+    .proc__step.active {
+      color: white;
+    }
+
+    .proc__step.active::after {
+      transform: scaleX(1);
+    }
+
+    .proc__step-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      transition: all 0.4s;
+    }
+
+    .proc__step.active .proc__step-num {
+      background: #4FA88C;
+      box-shadow: 0 0 12px rgba(79,168,140,0.5);
+    }
+
+    /* Scene container */
+    .proc__scene-wrap {
+      position: relative;
+      min-height: 460px;
       overflow: hidden;
     }
 
-    .app-sc {
+    .proc__scene {
       position: absolute;
       inset: 0;
-      padding: 10px 12px;
+      padding: 20px 20px;
       opacity: 0;
-      visibility: hidden;
+      transform: translateX(30px);
+      pointer-events: none;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      visibility: hidden;
+      overflow-y: auto;
     }
 
-    .app-sc.active {
+    .proc__scene.active {
       opacity: 1;
-      visibility: visible;
+      transform: translateX(0);
+      pointer-events: auto;
       z-index: 2;
-      animation: scSlide 0.4s ease-out;
+      visibility: visible;
+      animation: sceneEnter 0.5s ease-out;
     }
 
-    @keyframes scSlide {
-      from { opacity: 0; transform: translateX(16px); }
+    @keyframes sceneEnter {
+      from { opacity: 0; transform: translateX(30px); }
       to { opacity: 1; transform: translateX(0); }
     }
 
-    .app-sc__title {
+    .proc__scene-title {
       font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--foreground);
+      margin-bottom: 4px;
+      line-height: 1.2;
+    }
+
+    .proc__scene-desc {
+      font-size: 12px;
+      color: var(--muted-foreground);
+      line-height: 1.4;
+      margin-bottom: 14px;
+    }
+
+    /* Scene 1: Recruitment - matching animation */
+    .match__grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .match__col {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .match__worker, .match__job {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      opacity: 0;
+      transform: translateX(-15px);
+    }
+
+    .match__job {
+      transform: translateX(15px);
+    }
+
+    .match__worker { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
+    .match__job { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+
+    .scene-active .match__worker:nth-child(1),
+    .scene-active .match__job:nth-child(1) { animation: matchIn 0.4s ease-out 0.2s forwards; }
+    .scene-active .match__worker:nth-child(2),
+    .scene-active .match__job:nth-child(2) { animation: matchIn 0.4s ease-out 0.4s forwards; }
+    .scene-active .match__worker:nth-child(3),
+    .scene-active .match__job:nth-child(3) { animation: matchIn 0.4s ease-out 0.6s forwards; }
+
+    @keyframes matchIn { to { opacity: 1; transform: translateX(0); } }
+
+    .match__lines {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .match__line {
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(90deg, #22c55e, #3b82f6);
+      border-radius: 1px;
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    .scene-active .match__line:nth-child(1) { animation: lineGrow 0.3s ease-out 0.8s forwards; }
+    .scene-active .match__line:nth-child(2) { animation: lineGrow 0.3s ease-out 1.0s forwards; }
+    .scene-active .match__line:nth-child(3) { animation: lineGrow 0.3s ease-out 1.2s forwards; }
+
+    @keyframes lineGrow { to { opacity: 1; transform: scaleX(1); } }
+
+    .match__avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #4FA88C;
+      color: white;
+      font-size: 9px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* Scene 2: WhatsApp conversation */
+    .wa {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #d1d5db;
+      flex: 1;
+    }
+
+    .wa__header {
+      background: #075e54;
+      color: white;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .wa__header-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #25d366;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .wa__header-info { flex: 1; }
+
+    .wa__header-name {
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .wa__header-status {
+      font-size: 9px;
+      opacity: 0.8;
+    }
+
+    .wa__chat {
+      background: #ece5dd;
+      padding: 8px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5c1 0 2 1 2 2s-1 2-2 2-2-1-2-2 1-2 2-2' fill='%23d4cfc6' opacity='.3'/%3E%3C/svg%3E");
+    }
+
+    .wa__msg {
+      max-width: 85%;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 11px;
+      line-height: 1.4;
+      position: relative;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.4s ease-out;
+    }
+
+    .scene-active .wa__msg:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.1s; }
+    .scene-active .wa__msg:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.6s; }
+    .scene-active .wa__msg:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 1.0s; }
+    .scene-active .wa__msg:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 1.4s; }
+    .scene-active .wa__msg:nth-child(5) { opacity: 1; transform: translateY(0); transition-delay: 1.8s; }
+    .scene-active .wa__msg:nth-child(6) { opacity: 1; transform: translateY(0); transition-delay: 2.2s; }
+
+    .wa__msg--bot {
+      background: white;
+      align-self: flex-start;
+      border-top-left-radius: 2px;
+      box-shadow: 0 1px 1px rgba(0,0,0,0.08);
+    }
+
+    .wa__msg--user {
+      background: #dcf8c6;
+      align-self: flex-end;
+      border-top-right-radius: 2px;
+      box-shadow: 0 1px 1px rgba(0,0,0,0.08);
+    }
+
+    .wa__msg-sender {
+      font-size: 10px;
+      font-weight: 700;
+      margin-bottom: 2px;
+      color: #075e54;
+    }
+
+    .wa__msg-time {
+      font-size: 9px;
+      color: #667781;
+      text-align: right;
+      margin-top: 2px;
+    }
+
+    .wa__msg--bot .wa__msg-sender { color: #25d366; }
+
+    .wa__result {
+      text-align: center;
+      margin-top: 4px;
+      opacity: 0;
+      transition: opacity 0.5s ease-out 3.2s;
+    }
+
+    .scene-active .wa__result { opacity: 1; }
+
+    .wa__result-badge {
+      display: inline-block;
+      background: #dcfce7;
+      color: #15803d;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 12px;
+    }
+
+    /* Scene 3: Supervision - live metrics */
+    .super__metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .super__card {
+      background: #f8faf9;
+      border-radius: 10px;
+      padding: 14px;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: all 0.4s;
+    }
+
+    .scene-active .super__card:nth-child(1) { opacity: 1; transform: scale(1); transition-delay: 0.2s; }
+    .scene-active .super__card:nth-child(2) { opacity: 1; transform: scale(1); transition-delay: 0.4s; }
+    .scene-active .super__card:nth-child(3) { opacity: 1; transform: scale(1); transition-delay: 0.6s; }
+    .scene-active .super__card:nth-child(4) { opacity: 1; transform: scale(1); transition-delay: 0.8s; }
+
+    .super__card-val {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--foreground);
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+
+    .super__card-label {
+      font-size: 10px;
+      color: var(--muted-foreground);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .super__card-trend {
+      font-size: 10px;
+      font-weight: 700;
+      color: #22c55e;
+      margin-top: 4px;
+    }
+
+    /* Scene 4: Gamification - points */
+    .gami__profile {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px;
+      background: #f8faf9;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      opacity: 0;
+      transition: opacity 0.4s 0.2s;
+    }
+
+    .scene-active .gami__profile { opacity: 1; }
+
+    .gami__avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #4FA88C;
+      color: white;
+      font-weight: 700;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gami__info { flex: 1; }
+
+    .gami__name {
       font-weight: 700;
       font-size: 14px;
       color: var(--foreground);
     }
 
-    .app-sc__desc {
-      font-size: 9.5px;
-      color: var(--muted-foreground);
-      line-height: 1.4;
-    }
-
-    /* S1: Recruit */
-    .sc-match {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      padding: 5px 8px;
-      border-radius: 8px;
-      font-size: 9.5px;
-      opacity: 0;
-      transform: translateX(-8px);
-      transition: all 0.3s ease-out;
-    }
-
-    .sc-match--w { background: #f0fdf4; border: 1px solid #bbf7d0; color: #15803d; }
-    .sc-match--j { background: #eff6ff; border: 1px solid #bfdbfe; color: #1d4ed8; }
-
-    .active.on .sc-match:nth-child(1) { opacity: 1; transform: none; transition-delay: .1s; }
-    .active.on .sc-match:nth-child(2) { opacity: 1; transform: none; transition-delay: .25s; }
-    .active.on .sc-match:nth-child(3) { opacity: 1; transform: none; transition-delay: .4s; }
-    .active.on .sc-match:nth-child(4) { opacity: 1; transform: none; transition-delay: .55s; }
-    .active.on .sc-match:nth-child(5) { opacity: 1; transform: none; transition-delay: .7s; }
-    .active.on .sc-match:nth-child(6) { opacity: 1; transform: none; transition-delay: .85s; }
-    .active.on .sc-match:nth-child(7) { opacity: 1; transform: none; transition-delay: 1s; }
-
-    .sc-av {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 7px;
-      font-weight: 700;
-      color: white;
-      flex-shrink: 0;
-    }
-
-    .sc-arrow {
-      font-size: 9px;
-      color: #4FA88C;
-      text-align: center;
-      opacity: 0;
-      transition: opacity .3s ease-out .5s;
-    }
-    .active.on .sc-arrow { opacity: 1; }
-
-    /* S2: WhatsApp */
-    .sc-wa {
-      background: #ece5dd;
-      border-radius: 10px;
-      padding: 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-
-    .sc-wa__msg {
-      max-width: 88%;
-      padding: 4px 7px;
-      border-radius: 7px;
-      font-size: 8.5px;
-      line-height: 1.3;
-      opacity: 0;
-      transform: translateY(5px);
-      transition: all .3s ease-out;
-    }
-
-    .sc-wa__msg--b { background: white; align-self: flex-start; border-top-left-radius: 2px; }
-    .sc-wa__msg--u { background: #dcf8c6; align-self: flex-end; border-top-right-radius: 2px; }
-    .sc-wa__sender { font-size: 7.5px; font-weight: 700; color: #25d366; margin-bottom: 1px; }
-    .sc-wa__time { font-size: 6.5px; color: #667781; text-align: right; margin-top: 1px; }
-
-    .active.on .sc-wa__msg:nth-child(1) { opacity: 1; transform: none; transition-delay: .1s; }
-    .active.on .sc-wa__msg:nth-child(2) { opacity: 1; transform: none; transition-delay: .5s; }
-    .active.on .sc-wa__msg:nth-child(3) { opacity: 1; transform: none; transition-delay: .9s; }
-    .active.on .sc-wa__msg:nth-child(4) { opacity: 1; transform: none; transition-delay: 1.3s; }
-    .active.on .sc-wa__msg:nth-child(5) { opacity: 1; transform: none; transition-delay: 1.7s; }
-
-    /* S3: Supervise */
-    .sc-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
-    }
-
-    .sc-card {
-      background: white;
-      border: 1px solid #e5e7eb;
-      border-radius: 10px;
-      padding: 8px;
-      opacity: 0;
-      transform: scale(.92);
-      transition: all .3s ease-out;
-    }
-
-    .active.on .sc-card:nth-child(1) { opacity: 1; transform: none; transition-delay: .1s; }
-    .active.on .sc-card:nth-child(2) { opacity: 1; transform: none; transition-delay: .2s; }
-    .active.on .sc-card:nth-child(3) { opacity: 1; transform: none; transition-delay: .3s; }
-    .active.on .sc-card:nth-child(4) { opacity: 1; transform: none; transition-delay: .4s; }
-
-    .sc-card__val { font-size: 20px; font-weight: 800; color: var(--foreground); line-height: 1; }
-    .sc-card__lbl { font-size: 8.5px; color: var(--muted-foreground); margin-top: 1px; }
-    .sc-card__up { font-size: 7.5px; color: #22c55e; font-weight: 600; margin-top: 1px; }
-
-    /* S4: Gamify */
-    .sc-prof {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px;
-      background: white;
-      border-radius: 10px;
-      border: 1px solid #e5e7eb;
-    }
-
-    .sc-prof__av {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: #4FA88C;
-      color: white;
-      font-weight: 800;
+    .gami__role {
       font-size: 11px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      color: var(--muted-foreground);
     }
 
-    .sc-prof__name { font-weight: 700; font-size: 11px; color: var(--foreground); }
-    .sc-prof__role { font-size: 8.5px; color: var(--muted-foreground); }
-    .sc-prof__stars { margin-left: auto; color: #f59e0b; font-size: 9px; }
+    .gami__stars {
+      color: #f59e0b;
+      font-size: 14px;
+      letter-spacing: 2px;
+    }
 
-    .sc-pts {
+    .gami__points {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      gap: 6px;
+      gap: 8px;
     }
 
-    .sc-pt {
+    .gami__point {
       text-align: center;
+      padding: 10px 6px;
+      border-radius: 8px;
       background: white;
-      border: 1px solid #e5e7eb;
-      border-radius: 10px;
-      padding: 8px 4px;
+      border: 1px solid var(--border);
       opacity: 0;
-      transform: translateY(6px);
-      transition: all .3s ease-out;
+      transform: translateY(8px);
+      transition: all 0.3s;
     }
 
-    .active.on .sc-pt:nth-child(1) { opacity: 1; transform: none; transition-delay: .2s; }
-    .active.on .sc-pt:nth-child(2) { opacity: 1; transform: none; transition-delay: .4s; }
-    .active.on .sc-pt:nth-child(3) { opacity: 1; transform: none; transition-delay: .6s; }
+    .scene-active .gami__point:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.4s; }
+    .scene-active .gami__point:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.6s; }
+    .scene-active .gami__point:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.8s; }
 
-    .sc-pt__val { font-size: 18px; font-weight: 800; color: #4FA88C; }
-    .sc-pt__lbl { font-size: 7.5px; color: var(--muted-foreground); margin-top: 1px; text-transform: uppercase; letter-spacing: .04em; }
+    .gami__point-val {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--foreground);
+      line-height: 1;
+    }
 
-    /* S5: Comply */
-    .sc-chk {
+    .gami__point-val span { color: #4FA88C; font-size: 12px; }
+
+    .gami__point-label {
+      font-size: 9px;
+      color: var(--muted-foreground);
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-top: 3px;
+    }
+
+    /* Scene 5: Compliance - checkmarks */
+    .compl__items {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .compl__item {
       display: flex;
       align-items: center;
-      gap: 7px;
-      padding: 7px 8px;
-      background: white;
+      gap: 12px;
+      padding: 12px 14px;
       border-radius: 10px;
-      border: 1px solid #e5e7eb;
+      background: white;
+      border: 1px solid var(--border);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--foreground);
       opacity: 0;
-      transform: translateX(-8px);
-      transition: all .3s ease-out;
+      transform: translateX(-20px);
+      transition: all 0.4s;
     }
 
-    .active.on .sc-chk:nth-child(1) { opacity: 1; transform: none; transition-delay: .1s; }
-    .active.on .sc-chk:nth-child(2) { opacity: 1; transform: none; transition-delay: .3s; }
-    .active.on .sc-chk:nth-child(3) { opacity: 1; transform: none; transition-delay: .5s; }
-    .active.on .sc-chk:nth-child(4) { opacity: 1; transform: none; transition-delay: .7s; }
+    .scene-active .compl__item:nth-child(1) { opacity: 1; transform: translateX(0); transition-delay: 0.2s; }
+    .scene-active .compl__item:nth-child(2) { opacity: 1; transform: translateX(0); transition-delay: 0.5s; }
+    .scene-active .compl__item:nth-child(3) { opacity: 1; transform: translateX(0); transition-delay: 0.8s; }
+    .scene-active .compl__item:nth-child(4) { opacity: 1; transform: translateX(0); transition-delay: 1.1s; }
 
-    .sc-chk__ico {
-      width: 18px;
-      height: 18px;
+    .compl__check {
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
       background: #dcfce7;
       color: #22c55e;
@@ -875,61 +1001,96 @@
       flex-shrink: 0;
     }
 
-    .sc-chk__t { font-size: 10.5px; font-weight: 700; color: var(--foreground); }
-    .sc-chk__s { font-size: 8.5px; color: var(--muted-foreground); }
+    .compl__item-sub {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--muted-foreground);
+      margin-top: 2px;
+    }
 
-    /* S6: Improve */
-    .sc-cmp {
+    /* Scene 6: Feedback - improvement */
+    .feed__compare {
       display: grid;
       grid-template-columns: 1fr auto 1fr;
-      gap: 6px;
+      gap: 12px;
       align-items: center;
     }
 
-    .sc-ssn {
-      text-align: center;
-      padding: 8px 4px;
+    .feed__season {
+      padding: 14px;
       border-radius: 10px;
+      text-align: center;
       opacity: 0;
-      transform: scale(.92);
-      transition: all .4s ease-out;
+      transform: scale(0.9);
+      transition: all 0.5s;
     }
 
-    .sc-ssn--old { background: #fef2f2; border: 1px solid #fecaca; }
-    .sc-ssn--new { background: #f0fdf4; border: 1px solid #bbf7d0; }
+    .scene-active .feed__season:nth-child(1) { opacity: 1; transform: scale(1); transition-delay: 0.2s; }
+    .scene-active .feed__season:nth-child(3) { opacity: 1; transform: scale(1); transition-delay: 0.6s; }
 
-    .active.on .sc-ssn--old { opacity: 1; transform: none; transition-delay: .1s; }
-    .active.on .sc-ssn--new { opacity: 1; transform: none; transition-delay: .4s; }
+    .feed__season--old { background: #fef2f2; border: 1px solid #fecaca; }
+    .feed__season--new { background: #f0fdf4; border: 1px solid #bbf7d0; }
 
-    .sc-ssn__lbl { font-size: 8.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 4px; }
-    .sc-ssn--old .sc-ssn__lbl { color: #dc2626; }
-    .sc-ssn--new .sc-ssn__lbl { color: #16a34a; }
+    .feed__season-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
+    }
 
-    .sc-sv { font-size: 16px; font-weight: 800; color: var(--foreground); }
-    .sc-sl { font-size: 7.5px; color: var(--muted-foreground); margin-bottom: 3px; }
-    .sc-cmp__arrow { font-size: 16px; color: #4FA88C; opacity: 0; transition: opacity .3s ease-out .3s; }
-    .active.on .sc-cmp__arrow { opacity: 1; }
+    .feed__season--old .feed__season-label { color: #dc2626; }
+    .feed__season--new .feed__season-label { color: #16a34a; }
+
+    .feed__stat {
+      margin-bottom: 8px;
+    }
+
+    .feed__stat-val {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--foreground);
+      line-height: 1;
+    }
+
+    .feed__stat-label {
+      font-size: 9px;
+      color: var(--muted-foreground);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .feed__arrow {
+      font-size: 24px;
+      color: #4FA88C;
+      font-weight: 700;
+      opacity: 0;
+      transition: opacity 0.4s 0.4s;
+    }
+
+    .scene-active .feed__arrow { opacity: 1; }
 
     /* Progress dots */
-    .app-dots {
+    .proc__progress {
       display: flex;
       justify-content: center;
-      gap: 4px;
-      padding: 8px 0 14px;
-      background: #f8faf9;
+      gap: 6px;
+      padding: 12px;
+      background: #fafbfc;
+      border-top: 1px solid var(--border);
     }
 
-    .app-dot {
+    .proc__prog-dot {
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: #d1d5db;
-      transition: all .3s;
+      background: var(--border);
+      transition: all 0.3s;
     }
 
-    .app-dot.active {
+    .proc__prog-dot.active {
       background: #4FA88C;
-      width: 16px;
+      width: 20px;
       border-radius: 3px;
     }
 
@@ -1886,7 +2047,7 @@
       .hero__content { max-width: 100%; }
       .hero__headline, .hero__sub { text-align: center; }
       .hero__actions { justify-content: center; }
-      .phone { width: 260px; }
+      
       .phone__float-notif { left: -10px; right: -10px; }
       .por-que__grid { grid-template-columns: 1fr; gap: 40px; }
       .alertas__grid { grid-template-columns: 1fr; gap: 48px; }
@@ -1970,118 +2131,218 @@
 
       </div>
 
-      <!-- Phone Carousel -->
+      <!-- Interactive Process Visualizer -->
       <div class="hero__visual">
-        <div class="phone">
-          <div class="phone__frame">
-            <div class="phone__notch"></div>
-            <div class="phone__screen">
-              <div class="phone__status">
-                <span>9:41</span>
-                <div class="phone__status-icons">●●●● WiFi 100%</div>
-              </div>
-              <div class="app-hdr">
-                <div class="app-hdr__logo">MIIDO</div>
-                <div class="app-hdr__live"><div class="app-hdr__dot"></div><span data-p-live>En vivo</span></div>
-              </div>
-              <div class="app-tabs" id="appTabs">
-                <button class="app-tab active" data-tab="0"><span class="app-tab__icon">🎯</span><span data-t1>Recluta</span></button>
-                <button class="app-tab" data-tab="1"><span class="app-tab__icon">💬</span><span data-t2>Asigna</span></button>
-                <button class="app-tab" data-tab="2"><span class="app-tab__icon">📊</span><span data-t3>Supervisa</span></button>
-                <button class="app-tab" data-tab="3"><span class="app-tab__icon">🏆</span><span data-t4>Gamifica</span></button>
-                <button class="app-tab" data-tab="4"><span class="app-tab__icon">✅</span><span data-t5>Cumple</span></button>
-                <button class="app-tab" data-tab="5"><span class="app-tab__icon">📈</span><span data-t6>Mejora</span></button>
-              </div>
-              <div class="app-scenes" id="appScenes">
+        <div class="proc" id="procViz">
+          <!-- Step indicators -->
+          <div class="proc__steps">
+            <button class="proc__step active" data-step="0">
+              <div class="proc__step-num">1</div>
+              <span class="proc__step-label" data-proc-step1>Recluta</span>
+            </button>
+            <button class="proc__step" data-step="1">
+              <div class="proc__step-num">2</div>
+              <span class="proc__step-label" data-proc-step2>Asigna</span>
+            </button>
+            <button class="proc__step" data-step="2">
+              <div class="proc__step-num">3</div>
+              <span class="proc__step-label" data-proc-step3>Supervisa</span>
+            </button>
+            <button class="proc__step" data-step="3">
+              <div class="proc__step-num">4</div>
+              <span class="proc__step-label" data-proc-step4>Gamifica</span>
+            </button>
+            <button class="proc__step" data-step="4">
+              <div class="proc__step-num">5</div>
+              <span class="proc__step-label" data-proc-step5>Cumple</span>
+            </button>
+            <button class="proc__step" data-step="5">
+              <div class="proc__step-num">6</div>
+              <span class="proc__step-label" data-proc-step6>Mejora</span>
+            </button>
+          </div>
 
-                <!-- S1: Recruit -->
-                <div class="app-sc active on" data-scene="0">
-                  <div class="app-sc__title" data-s1t>Reclutamiento inteligente</div>
-                  <div class="app-sc__desc" data-s1d>IA cruza perfiles con requisitos de la faena.</div>
-                  <div class="sc-match sc-match--w"><div class="sc-av" style="background:#4FA88C">JR</div>Juan R. · Cosecha · 4.8★</div>
-                  <div class="sc-arrow">↓ match</div>
-                  <div class="sc-match sc-match--j">🍒 Cosecha Cereza — Quillota</div>
-                  <div class="sc-match sc-match--w"><div class="sc-av" style="background:#3b82f6">ML</div>María L. · Poda · 4.6★</div>
-                  <div class="sc-arrow">↓ match</div>
-                  <div class="sc-match sc-match--j">✂️ Poda Uva — Casablanca</div>
+          <!-- Scenes -->
+          <div class="proc__scene-wrap">
+
+            <!-- Scene 1: Recruitment matching -->
+            <div class="proc__scene active scene-active" data-scene="0">
+              <div class="proc__scene-title" data-proc-title1>Reclutamiento inteligente</div>
+              <div class="proc__scene-desc" data-proc-desc1>IA cruza perfiles de workers con requisitos de la faena para encontrar el match perfecto.</div>
+              <div class="match__grid">
+                <div class="match__col">
+                  <div class="match__worker"><div class="match__avatar" style="background:#4FA88C">JR</div> Juan R. · Cosecha · 4.8★</div>
+                  <div class="match__worker"><div class="match__avatar" style="background:#3b82f6">ML</div> María L. · Poda · 4.6★</div>
+                  <div class="match__worker"><div class="match__avatar" style="background:#f97316">CP</div> Carlos P. · Raleo · 4.9★</div>
                 </div>
-
-                <!-- S2: Assign (WhatsApp) -->
-                <div class="app-sc" data-scene="1">
-                  <div class="app-sc__title" data-s2t>Asignación por WhatsApp</div>
-                  <div class="sc-wa">
-                    <div class="sc-wa__msg sc-wa__msg--b"><div class="sc-wa__sender">MIIDO Bot</div><span data-wa1>🍒 <b>Nueva faena</b><br>Cosecha Cereza · Quillota<br>Mañana 7AM · $18.500/día</span><div class="sc-wa__time">6:42</div></div>
-                    <div class="sc-wa__msg sc-wa__msg--u"><span data-wa2>Sí, confirmo ✅</span><div class="sc-wa__time">6:43 ✓✓</div></div>
-                    <div class="sc-wa__msg sc-wa__msg--b"><div class="sc-wa__sender">MIIDO Bot</div><span data-wa3>✅ Confirmado. Bus Paradero 14, 6:15 AM</span><div class="sc-wa__time">6:43</div></div>
-                    <div class="sc-wa__msg sc-wa__msg--b"><div class="sc-wa__sender">MIIDO Bot</div><span data-wa4>📊 Tu récord: <b>14.2 Kg/HH</b> · #3<br>¡Hoy puedes subir al #2! 💪</span><div class="sc-wa__time">6:44</div></div>
-                    <div class="sc-wa__msg sc-wa__msg--u"><span data-wa5>Vamos 🔥</span><div class="sc-wa__time">6:44 ✓✓</div></div>
-                  </div>
+                <div class="match__lines">
+                  <div class="match__line"></div>
+                  <div class="match__line"></div>
+                  <div class="match__line"></div>
                 </div>
-
-                <!-- S3: Supervise -->
-                <div class="app-sc" data-scene="2">
-                  <div class="app-sc__title" data-s3t>Supervisión en tiempo real</div>
-                  <div class="app-sc__desc" data-s3d>Métricas vivas desde el terreno.</div>
-                  <div class="sc-grid">
-                    <div class="sc-card"><div class="sc-card__val"><span data-target="32">0</span></div><div class="sc-card__lbl" data-m1>Workers</div><div class="sc-card__up">↑ 100%</div></div>
-                    <div class="sc-card"><div class="sc-card__val"><span data-target="94">0</span>%</div><div class="sc-card__lbl" data-m2>Asistencia</div><div class="sc-card__up">↑ 12%</div></div>
-                    <div class="sc-card"><div class="sc-card__val"><span data-target="12">0</span>.4</div><div class="sc-card__lbl">Kg/HH</div><div class="sc-card__up">↑ 8%</div></div>
-                    <div class="sc-card"><div class="sc-card__val"><span data-target="4">0</span>.2</div><div class="sc-card__lbl">Ha/día</div><div class="sc-card__up">↑ 15%</div></div>
-                  </div>
+                <div class="match__col">
+                  <div class="match__job">🍒 Cosecha Cereza — Quillota</div>
+                  <div class="match__job">✂️ Poda Uva — Casablanca</div>
+                  <div class="match__job">🍇 Raleo Uva — Rancagua</div>
                 </div>
-
-                <!-- S4: Gamify -->
-                <div class="app-sc" data-scene="3">
-                  <div class="app-sc__title" data-s4t>Gamificación + Puntos</div>
-                  <div class="sc-prof"><div class="sc-prof__av">JR</div><div><div class="sc-prof__name">Juan Rojas</div><div class="sc-prof__role" data-g-role>Cosechero · Nivel Oro</div></div><div class="sc-prof__stars">★★★★★</div></div>
-                  <div class="sc-pts">
-                    <div class="sc-pt"><div class="sc-pt__val"><span data-target="847">0</span></div><div class="sc-pt__lbl" data-g1>Puntos</div></div>
-                    <div class="sc-pt"><div class="sc-pt__val"><span data-target="98">0</span>%</div><div class="sc-pt__lbl" data-g2>Asistencia</div></div>
-                    <div class="sc-pt"><div class="sc-pt__val">#<span data-target="3">0</span></div><div class="sc-pt__lbl" data-g3>Ranking</div></div>
-                  </div>
-                </div>
-
-                <!-- S5: Comply -->
-                <div class="app-sc" data-scene="4">
-                  <div class="app-sc__title" data-s5t>Compliance automático</div>
-                  <div class="app-sc__desc" data-s5d>Ley 20.123 cubierta con data real.</div>
-                  <div class="sc-chk"><div class="sc-chk__ico"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="sc-chk__t">F30-1</div><div class="sc-chk__s" data-c1>Data biométrica real</div></div></div>
-                  <div class="sc-chk"><div class="sc-chk__ico"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="sc-chk__t" data-c2t>Cotizaciones</div><div class="sc-chk__s" data-c2>Pago verificado y al día</div></div></div>
-                  <div class="sc-chk"><div class="sc-chk__ico"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="sc-chk__t">Ley 20.123</div><div class="sc-chk__s" data-c3>Responsabilidad subsidiaria</div></div></div>
-                  <div class="sc-chk"><div class="sc-chk__ico"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="sc-chk__t" data-c4t>Auditoría</div><div class="sc-chk__s" data-c4>Trazabilidad completa</div></div></div>
-                </div>
-
-                <!-- S6: Improve -->
-                <div class="app-sc" data-scene="5">
-                  <div class="app-sc__title" data-s6t>Mejora cada temporada</div>
-                  <div class="app-sc__desc" data-s6d>El sistema aprende y optimiza.</div>
-                  <div class="sc-cmp">
-                    <div class="sc-ssn sc-ssn--old">
-                      <div class="sc-ssn__lbl" data-cmp-old>Temp. 1</div>
-                      <div class="sc-sv">72%</div><div class="sc-sl" data-cmp-att>Asistencia</div>
-                      <div class="sc-sv">8.1</div><div class="sc-sl">Kg/HH</div>
-                      <div class="sc-sv">45m</div><div class="sc-sl" data-cmp-arm>Armado</div>
-                    </div>
-                    <div class="sc-cmp__arrow">→</div>
-                    <div class="sc-ssn sc-ssn--new">
-                      <div class="sc-ssn__lbl" data-cmp-new>Temp. 3</div>
-                      <div class="sc-sv">94%</div><div class="sc-sl" data-cmp-att2>Asistencia</div>
-                      <div class="sc-sv">12.4</div><div class="sc-sl">Kg/HH</div>
-                      <div class="sc-sv">30m</div><div class="sc-sl" data-cmp-arm2>Armado</div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-              <div class="app-dots">
-                <div class="app-dot active"></div>
-                <div class="app-dot"></div>
-                <div class="app-dot"></div>
-                <div class="app-dot"></div>
-                <div class="app-dot"></div>
-                <div class="app-dot"></div>
               </div>
             </div>
+
+            <!-- Scene 2: WhatsApp conversation -->
+            <div class="proc__scene" data-scene="1">
+              <div class="proc__scene-title" data-proc-title2>Asignación por WhatsApp</div>
+              <div class="wa">
+                <div class="wa__header">
+                  <div class="wa__header-avatar">🌱</div>
+                  <div class="wa__header-info">
+                    <div class="wa__header-name">MIIDO Bot</div>
+                    <div class="wa__header-status" data-wa-status>en línea</div>
+                  </div>
+                </div>
+                <div class="wa__chat">
+                  <div class="wa__msg wa__msg--bot">
+                    <div class="wa__msg-sender">MIIDO Bot</div>
+                    <span data-wa-msg1>🍒 <b>Nueva faena disponible</b><br>Cosecha Cereza · Fundo Santa Elena<br>Mañana 7:00 AM · $18.500/día<br>¿Confirmas asistencia?</span>
+                    <div class="wa__msg-time">6:42 AM</div>
+                  </div>
+                  <div class="wa__msg wa__msg--user">
+                    <span data-wa-msg2>Sí, confirmo ✅</span>
+                    <div class="wa__msg-time">6:43 AM ✓✓</div>
+                  </div>
+                  <div class="wa__msg wa__msg--bot">
+                    <div class="wa__msg-sender">MIIDO Bot</div>
+                    <span data-wa-msg3>✅ Confirmado, Juan. Bus en Paradero 14, Las Rejas. Sale 6:15 AM.</span>
+                    <div class="wa__msg-time">6:43 AM</div>
+                  </div>
+                  <div class="wa__msg wa__msg--bot">
+                    <div class="wa__msg-sender">MIIDO Bot</div>
+                    <span data-wa-msg4>📊 Tu récord: <b>14.2 Kg/HH</b> · Ranking <b>#3</b><br>¡Hoy puedes subir al #2! 💪</span>
+                    <div class="wa__msg-time">6:44 AM</div>
+                  </div>
+                  <div class="wa__msg wa__msg--user">
+                    <span data-wa-msg5>Vamos con todo 🔥</span>
+                    <div class="wa__msg-time">6:44 AM ✓✓</div>
+                  </div>
+                  <div class="wa__msg wa__msg--bot">
+                    <div class="wa__msg-sender">MIIDO Bot</div>
+                    <span data-wa-msg6>🟢 <b>Cuadrilla lista:</b> 27/32 en 28 min<br>F30-1 generado · Cotizaciones al día</span>
+                    <div class="wa__msg-time">7:10 AM</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Scene 3: Supervision live metrics -->
+            <div class="proc__scene" data-scene="2">
+              <div class="proc__scene-title" data-proc-title3>Supervisión en tiempo real</div>
+              <div class="proc__scene-desc" data-proc-desc3>Métricas vivas desde el terreno. Cada worker reporta avance desde su celular.</div>
+              <div class="super__metrics">
+                <div class="super__card">
+                  <div class="super__card-val"><span data-target="32">0</span></div>
+                  <div class="super__card-label" data-proc-met1>Workers activos</div>
+                  <div class="super__card-trend">↑ 100%</div>
+                </div>
+                <div class="super__card">
+                  <div class="super__card-val"><span data-target="94">0</span>%</div>
+                  <div class="super__card-label" data-proc-met2>Asistencia</div>
+                  <div class="super__card-trend">↑ 12% vs ayer</div>
+                </div>
+                <div class="super__card">
+                  <div class="super__card-val"><span data-target="12">0</span>.4</div>
+                  <div class="super__card-label">Kg/HH</div>
+                  <div class="super__card-trend">↑ 8% vs semana</div>
+                </div>
+                <div class="super__card">
+                  <div class="super__card-val"><span data-target="4">0</span>.2</div>
+                  <div class="super__card-label">Ha/día</div>
+                  <div class="super__card-trend">↑ 15% vs temp.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Scene 4: Gamification -->
+            <div class="proc__scene" data-scene="3">
+              <div class="proc__scene-title" data-proc-title4>Gamificación + Puntos</div>
+              <div class="proc__scene-desc" data-proc-desc4>Cada worker acumula puntos por asistencia, productividad y puntualidad. Ranking semanal motiva mejora continua.</div>
+              <div class="gami__profile">
+                <div class="gami__avatar">JR</div>
+                <div class="gami__info">
+                  <div class="gami__name">Juan Rojas</div>
+                  <div class="gami__role" data-proc-gami-role>Cosechero · Nivel Oro</div>
+                </div>
+                <div class="gami__stars">★★★★★</div>
+              </div>
+              <div class="gami__points">
+                <div class="gami__point">
+                  <div class="gami__point-val"><span data-target="847">0</span></div>
+                  <div class="gami__point-label" data-proc-gami1>Puntos</div>
+                </div>
+                <div class="gami__point">
+                  <div class="gami__point-val"><span data-target="98">0</span><span>%</span></div>
+                  <div class="gami__point-label" data-proc-gami2>Asistencia</div>
+                </div>
+                <div class="gami__point">
+                  <div class="gami__point-val">#<span data-target="3">0</span></div>
+                  <div class="gami__point-label" data-proc-gami3>Ranking</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Scene 5: Compliance -->
+            <div class="proc__scene" data-scene="4">
+              <div class="proc__scene-title" data-proc-title5>Compliance automático</div>
+              <div class="proc__scene-desc" data-proc-desc5>Ley 20.123 cubierta. F30-1, cotizaciones y reportes se generan en automático con data real.</div>
+              <div class="compl__items">
+                <div class="compl__item">
+                  <div class="compl__check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+                  <div><div>F30-1</div><div class="compl__item-sub" data-proc-compl1>Generado con data biométrica real</div></div>
+                </div>
+                <div class="compl__item">
+                  <div class="compl__check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+                  <div><div data-proc-compl2-title>Cotizaciones</div><div class="compl__item-sub" data-proc-compl2>Pago verificado y al día</div></div>
+                </div>
+                <div class="compl__item">
+                  <div class="compl__check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+                  <div><div data-proc-compl3-title>Ley 20.123</div><div class="compl__item-sub" data-proc-compl3>Responsabilidad subsidiaria cubierta</div></div>
+                </div>
+                <div class="compl__item">
+                  <div class="compl__check"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+                  <div><div data-proc-compl4-title>Auditoría</div><div class="compl__item-sub" data-proc-compl4>Trazabilidad completa de cada jornada</div></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Scene 6: Feedback loop -->
+            <div class="proc__scene" data-scene="5">
+              <div class="proc__scene-title" data-proc-title6>Mejora cada temporada</div>
+              <div class="proc__scene-desc" data-proc-desc6>El sistema aprende. Cada ciclo la IA optimiza asignaciones, predice ausentismo y mejora productividad.</div>
+              <div class="feed__compare">
+                <div class="feed__season feed__season--old">
+                  <div class="feed__season-label" data-proc-feed-old>Temporada 1</div>
+                  <div class="feed__stat"><div class="feed__stat-val">72%</div><div class="feed__stat-label" data-proc-feed-att>Asistencia</div></div>
+                  <div class="feed__stat"><div class="feed__stat-val">8.1</div><div class="feed__stat-label">Kg/HH</div></div>
+                  <div class="feed__stat"><div class="feed__stat-val">45 min</div><div class="feed__stat-label" data-proc-feed-arm>Armado</div></div>
+                </div>
+                <div class="feed__arrow">→</div>
+                <div class="feed__season feed__season--new">
+                  <div class="feed__season-label" data-proc-feed-new>Temporada 3</div>
+                  <div class="feed__stat"><div class="feed__stat-val">94%</div><div class="feed__stat-label" data-proc-feed-att2>Asistencia</div></div>
+                  <div class="feed__stat"><div class="feed__stat-val">12.4</div><div class="feed__stat-label">Kg/HH</div></div>
+                  <div class="feed__stat"><div class="feed__stat-val">30 min</div><div class="feed__stat-label" data-proc-feed-arm2>Armado</div></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Progress dots -->
+          <div class="proc__progress">
+            <div class="proc__prog-dot active"></div>
+            <div class="proc__prog-dot"></div>
+            <div class="proc__prog-dot"></div>
+            <div class="proc__prog-dot"></div>
+            <div class="proc__prog-dot"></div>
+            <div class="proc__prog-dot"></div>
           </div>
         </div>
       </div>
@@ -2637,23 +2898,24 @@
     footer: { email: 'nicolas@miido.ai', city: 'Santiago, Chile', privacy: 'Privacy policy' },
     fab: 'Talk to us!',
     proc: {
-      live: 'Live',
-      t1: 'Recruit', t2: 'Assign', t3: 'Supervise', t4: 'Gamify', t5: 'Comply', t6: 'Improve',
-      s1t: 'Smart recruitment', s1d: 'AI matches profiles with job requirements.',
-      s2t: 'WhatsApp assignment',
-      wa1: '🍒 <b>New job</b><br>Cherry Harvest · Quillota<br>Tomorrow 7AM · $18,500/day',
-      wa2: 'Yes, confirmed ✅', wa3: '✅ Confirmed. Bus Stop 14, 6:15 AM',
-      wa4: '📊 Your record: <b>14.2 Kg/MH</b> · #3<br>Today you can move to #2! 💪',
-      wa5: "Let's go 🔥",
-      s3t: 'Real-time supervision', s3d: 'Live metrics from the field.',
-      m1: 'Workers', m2: 'Attendance',
-      s4t: 'Gamification + Points', gRole: 'Harvester · Gold Level',
-      g1: 'Points', g2: 'Attendance', g3: 'Ranking',
-      s5t: 'Automatic compliance', s5d: 'Law 20.123 covered with real data.',
-      c1: 'Real biometric data', c2t: 'Contributions', c2: 'Payment verified and up to date',
-      c3: 'Subsidiary liability', c4t: 'Audit', c4: 'Full traceability',
-      s6t: 'Improve every season', s6d: 'The system learns and optimizes.',
-      cmpOld: 'Season 1', cmpNew: 'Season 3', cmpAtt: 'Attendance', cmpArm: 'Assembly'
+      step1: 'Recruit', step2: 'Assign', step3: 'Supervise',
+      step4: 'Gamify', step5: 'Comply', step6: 'Improve',
+      title1: 'Smart recruitment', desc1: 'AI matches worker profiles with job requirements to find the perfect fit.',
+      title2: 'WhatsApp assignment',
+      waStatus: 'online',
+      waMsg1: '🍒 <b>New job available</b><br>Cherry Harvest · Fundo Santa Elena<br>Tomorrow 7:00 AM · $18,500/day<br>Confirm attendance?',
+      waMsg2: 'Yes, confirmed ✅', waMsg3: '✅ Confirmed, Juan. Bus at Stop 14, Las Rejas. Departs 6:15 AM.',
+      waMsg4: '📊 Your record: <b>14.2 Kg/MH</b> · Ranking <b>#3</b><br>Today you can reach #2! 💪',
+      waMsg5: 'Let\'s go 🔥', waMsg6: '🟢 <b>Crew ready:</b> 27/32 in 28 min<br>F30-1 generated · Social security up to date',
+      title3: 'Real-time supervision', desc3: 'Live metrics from the field. Each worker reports progress from their phone.',
+      met1: 'Active workers', met2: 'Attendance',
+      title4: 'Gamification + Points', desc4: 'Each worker earns points for attendance, productivity, and punctuality. Weekly ranking drives continuous improvement.',
+      gamiRole: 'Harvester · Gold Level', gami1: 'Points', gami2: 'Attendance', gami3: 'Ranking',
+      title5: 'Automatic compliance', desc5: 'Law 20.123 covered. F30-1, social security, and reports are auto-generated with real data.',
+      compl1: 'Generated with real biometric data', compl2Title: 'Social Security', compl2: 'Payment verified and up to date',
+      compl3Title: 'Law 20.123', compl3: 'Subsidiary liability covered', compl4Title: 'Audit', compl4: 'Full traceability of every workday',
+      title6: 'Improves every season', desc6: 'The system learns. Each cycle the AI optimizes assignments, predicts absenteeism, and boosts productivity.',
+      feedOld: 'Season 1', feedNew: 'Season 3', feedAtt: 'Attendance', feedArm: 'Assembly'
     }
   };
 
@@ -2963,35 +3225,37 @@
     if (fabSpan) fabSpan.textContent = isEn ? en.fab : originals.fab;
 
     const procText = {
-      live: q('[data-p-live]'),
-      t1: q('[data-t1]'), t2: q('[data-t2]'), t3: q('[data-t3]'),
-      t4: q('[data-t4]'), t5: q('[data-t5]'), t6: q('[data-t6]'),
-      s1t: q('[data-s1t]'), s1d: q('[data-s1d]'),
-      s2t: q('[data-s2t]'),
-      s3t: q('[data-s3t]'), s3d: q('[data-s3d]'),
-      m1: q('[data-m1]'), m2: q('[data-m2]'),
-      s4t: q('[data-s4t]'), gRole: q('[data-g-role]'),
-      g1: q('[data-g1]'), g2: q('[data-g2]'), g3: q('[data-g3]'),
-      s5t: q('[data-s5t]'), s5d: q('[data-s5d]'),
-      c1: q('[data-c1]'), c2t: q('[data-c2t]'), c2: q('[data-c2]'),
-      c3: q('[data-c3]'), c4t: q('[data-c4t]'), c4: q('[data-c4]'),
-      s6t: q('[data-s6t]'), s6d: q('[data-s6d]'),
-      cmpOld: q('[data-cmp-old]'), cmpNew: q('[data-cmp-new]'),
-      cmpAtt: q('[data-cmp-att]'), cmpArm: q('[data-cmp-arm]')
+      step1: q('[data-proc-step1]'), step2: q('[data-proc-step2]'), step3: q('[data-proc-step3]'),
+      step4: q('[data-proc-step4]'), step5: q('[data-proc-step5]'), step6: q('[data-proc-step6]'),
+      title1: q('[data-proc-title1]'), desc1: q('[data-proc-desc1]'),
+      title2: q('[data-proc-title2]'),
+      waStatus: q('[data-wa-status]'), waMsg2: q('[data-wa-msg2]'), waMsg5: q('[data-wa-msg5]'),
+      title3: q('[data-proc-title3]'), desc3: q('[data-proc-desc3]'),
+      met1: q('[data-proc-met1]'), met2: q('[data-proc-met2]'),
+      title4: q('[data-proc-title4]'), desc4: q('[data-proc-desc4]'),
+      gamiRole: q('[data-proc-gami-role]'), gami1: q('[data-proc-gami1]'), gami2: q('[data-proc-gami2]'), gami3: q('[data-proc-gami3]'),
+      title5: q('[data-proc-title5]'), desc5: q('[data-proc-desc5]'),
+      compl1: q('[data-proc-compl1]'), compl2Title: q('[data-proc-compl2-title]'), compl2: q('[data-proc-compl2]'),
+      compl3Title: q('[data-proc-compl3-title]'), compl3: q('[data-proc-compl3]'), compl4Title: q('[data-proc-compl4-title]'), compl4: q('[data-proc-compl4]'),
+      title6: q('[data-proc-title6]'), desc6: q('[data-proc-desc6]'),
+      feedOld: q('[data-proc-feed-old]'), feedNew: q('[data-proc-feed-new]'),
+      feedAtt: q('[data-proc-feed-att]'), feedArm: q('[data-proc-feed-arm]'),
+      feedAtt2: q('[data-proc-feed-att2]'), feedArm2: q('[data-proc-feed-arm2]')
     };
     const procHtml = {
-      wa1: q('[data-wa1]'), wa2: q('[data-wa2]'), wa3: q('[data-wa3]'),
-      wa4: q('[data-wa4]'), wa5: q('[data-wa5]')
+      waMsg1: q('[data-wa-msg1]'), waMsg3: q('[data-wa-msg3]'),
+      waMsg4: q('[data-wa-msg4]'), waMsg6: q('[data-wa-msg6]')
     };
     if (!originals.proc) {
-      originals.proc = { text: {}, html: {} };
-      Object.keys(procText).forEach(k => { if (procText[k]) originals.proc.text[k] = procText[k].textContent.trim(); });
-      Object.keys(procHtml).forEach(k => { if (procHtml[k]) originals.proc.html[k] = procHtml[k].innerHTML; });
+      originals.proc = {};
+      Object.keys(procText).forEach(k => { if (procText[k]) originals.proc[k] = procText[k].textContent.trim(); });
+      Object.keys(procHtml).forEach(k => { if (procHtml[k]) originals.proc[k] = procHtml[k].innerHTML; });
     }
-    const pSrc = isEn ? en.proc : originals.proc.text;
+    const pSrc = isEn ? en.proc : originals.proc;
     Object.keys(procText).forEach(k => { if (procText[k] && pSrc[k]) procText[k].textContent = pSrc[k]; });
-    const phSrc = isEn ? en.proc : originals.proc.html;
-    Object.keys(procHtml).forEach(k => { if (procHtml[k] && phSrc[k]) procHtml[k].innerHTML = phSrc[k]; });
+    Object.keys(procHtml).forEach(k => { if (procHtml[k] && pSrc[k]) procHtml[k].innerHTML = pSrc[k]; });
+    if (isEn && procText.feedAtt2) procText.feedAtt2.textContent = pSrc.feedAtt;
+    if (isEn && procText.feedArm2) procText.feedArm2.textContent = pSrc.feedArm;
   }
 
   document.querySelectorAll('.lang-toggle__btn').forEach(btn => {
@@ -3010,62 +3274,70 @@
   }
 })();
 
-  // Carousel auto-cycle
-  (function() {
-    const scenes = document.querySelectorAll('.app-sc');
-    const tabs = document.querySelectorAll('.app-tab');
-    const dots = document.querySelectorAll('.app-dot');
+(function() {
+  // Process visualizer - auto-cycling interactive scenes
+  const proc = document.getElementById('procViz');
+  if (proc) {
+    const steps = proc.querySelectorAll('.proc__step');
+    const scenes = proc.querySelectorAll('.proc__scene');
+    const dots = proc.querySelectorAll('.proc__prog-dot');
     let current = 0;
-    let timer;
-
-    function goTo(idx) {
-      scenes.forEach(s => { s.classList.remove('active', 'on'); });
-      tabs.forEach(t => t.classList.remove('active'));
-      dots.forEach(d => d.classList.remove('active'));
-
-      scenes[idx].classList.add('active');
-      tabs[idx].classList.add('active');
-      dots[idx].classList.add('active');
-
-      setTimeout(() => scenes[idx].classList.add('on'), 50);
-
-      animateCounters(scenes[idx]);
-      current = idx;
-    }
+    let timer = null;
 
     function animateCounters(scene) {
       scene.querySelectorAll('[data-target]').forEach(el => {
         const target = parseInt(el.getAttribute('data-target'));
-        el.textContent = '0';
         const start = performance.now();
         const duration = 1200;
         function tick(now) {
           const t = Math.min((now - start) / duration, 1);
-          el.textContent = Math.round(target * t);
+          const ease = 1 - Math.pow(1 - t, 3);
+          el.textContent = Math.round(target * ease);
           if (t < 1) requestAnimationFrame(tick);
         }
         requestAnimationFrame(tick);
       });
+      const timerEl = scene.querySelector('[data-target-timer]');
+      if (timerEl) {
+        const target = parseInt(timerEl.getAttribute('data-target-timer'));
+        const start = performance.now();
+        const duration = 1500;
+        function tick(now) {
+          const t = Math.min((now - start) / duration, 1);
+          const ease = 1 - Math.pow(1 - t, 3);
+          timerEl.textContent = Math.round(target * ease);
+          if (t < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
     }
 
-    function next() { goTo((current + 1) % scenes.length); }
-
-    function startCycle() {
-      clearInterval(timer);
-      timer = setInterval(next, 5000);
+    function goToScene(idx) {
+      steps.forEach((s, i) => s.classList.toggle('active', i === idx));
+      scenes.forEach((s, i) => {
+        s.classList.remove('scene-active');
+        s.classList.toggle('active', i === idx);
+      });
+      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      current = idx;
+      setTimeout(() => {
+        scenes[idx].classList.add('scene-active');
+        animateCounters(scenes[idx]);
+      }, 50);
     }
 
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        goTo(parseInt(tab.getAttribute('data-tab')));
-        startCycle();
+    steps.forEach(btn => {
+      btn.addEventListener('click', () => {
+        clearInterval(timer);
+        goToScene(parseInt(btn.getAttribute('data-step')));
+        timer = setInterval(() => goToScene((current + 1) % 6), 6000);
       });
     });
 
     animateCounters(scenes[0]);
-    startCycle();
-  })();
-
+    timer = setInterval(() => goToScene((current + 1) % 6), 6000);
+  }
+})();
 </script>
 </body>
 </html>
