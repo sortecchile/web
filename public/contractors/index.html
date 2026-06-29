@@ -1903,7 +1903,63 @@
       font-size: 12.5px;
       line-height: 1.35;
       position: relative;
-      animation: bubbleIn 0.4s ease-out backwards;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .bubble.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .wa__typing {
+      align-self: flex-start;
+      background: #1f2c33;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border-top-left-radius: 2px;
+      display: none;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .wa__typing.show { display: flex; }
+
+    .wa__typing-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #8696a0;
+      animation: typingBounce 1.2s infinite;
+    }
+
+    .wa__typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .wa__typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typingBounce {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+      30% { transform: translateY(-4px); opacity: 1; }
+    }
+
+    .wa__input-box.typing {
+      color: #e9edef;
+      position: relative;
+    }
+
+    .wa__input-cursor {
+      display: inline-block;
+      width: 1px;
+      height: 13px;
+      background: #00a884;
+      margin-left: 1px;
+      vertical-align: middle;
+      animation: cursorBlink 0.8s step-end infinite;
+    }
+
+    @keyframes cursorBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
 
     .bubble--in {
@@ -1954,17 +2010,6 @@
       font-weight: 600;
     }
 
-    /* Animaciones por delay */
-    .bubble:nth-child(1) { animation-delay: 0.2s; }
-    .bubble:nth-child(2) { animation-delay: 0.7s; }
-    .bubble:nth-child(3) { animation-delay: 1.4s; }
-    .bubble:nth-child(4) { animation-delay: 2.1s; }
-    .bubble:nth-child(5) { animation-delay: 2.8s; }
-
-    @keyframes bubbleIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
 
     /* Input area */
     .wa__input {
@@ -2616,6 +2661,12 @@
                 <div class="bubble bubble--out">
                   Perfecto, gracias 🙌
                   <div class="bubble__time">9:43 <svg width="14" height="9" viewBox="0 0 16 11" fill="none"><path d="M11.071.653a.457.457 0 0 0-.304-.102.47.47 0 0 0-.381.178l-6.19 7.636-2.405-2.272a.498.498 0 0 0-.331-.127.488.488 0 0 0-.32.115l-.683.643a.428.428 0 0 0-.155.317.46.46 0 0 0 .124.336l3.234 3.262a.71.71 0 0 0 .51.236c.193 0 .375-.07.51-.236L11.5 1.515a.49.49 0 0 0 .121-.32.433.433 0 0 0-.156-.318l-.394-.224z" fill="%2353BDEB"/><path d="M15.071.653a.457.457 0 0 0-.304-.102.47.47 0 0 0-.381.178l-6.19 7.636-.272-.257-.69.738 1.005.961a.71.71 0 0 0 .51.236c.193 0 .375-.07.51-.236L15.5 1.515a.49.49 0 0 0 .121-.32.433.433 0 0 0-.156-.318l-.394-.224z" fill="%2353BDEB"/></svg></div>
+                </div>
+
+                <div class="wa__typing" id="waTyping">
+                  <div class="wa__typing-dot"></div>
+                  <div class="wa__typing-dot"></div>
+                  <div class="wa__typing-dot"></div>
                 </div>
 
               </div>
@@ -3273,6 +3324,95 @@
     document.querySelector('.lang-toggle__btn:last-child').classList.add('lang-toggle__btn--active');
     applyLang('en');
   }
+})();
+
+(function() {
+  const chat = document.querySelector('.alertas .wa__chat');
+  if (!chat) return;
+  const bubbles = chat.querySelectorAll('.bubble');
+  const typing = document.getElementById('waTyping');
+  const inputBox = document.querySelector('.wa__input-box');
+  const defaultInputText = inputBox ? inputBox.textContent : 'Mensaje';
+  let animated = false;
+
+  function getPlainText(bubble) {
+    const clone = bubble.cloneNode(true);
+    const time = clone.querySelector('.bubble__time');
+    if (time) time.remove();
+    const cta = clone.querySelector('.bubble__cta');
+    if (cta) cta.remove();
+    return clone.textContent.trim();
+  }
+
+  function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+  function showTypingDots() {
+    typing.classList.add('show');
+    chat.scrollTop = chat.scrollHeight;
+  }
+  function hideTypingDots() { typing.classList.remove('show'); }
+
+  function typeInInput(text) {
+    return new Promise(resolve => {
+      inputBox.classList.add('typing');
+      inputBox.innerHTML = '<span class="wa__input-cursor"></span>';
+      let i = 0;
+      const speed = Math.max(30, Math.min(60, 1200 / text.length));
+      function tick() {
+        if (i < text.length) {
+          inputBox.innerHTML = text.slice(0, i + 1) + '<span class="wa__input-cursor"></span>';
+          chat.scrollTop = chat.scrollHeight;
+          i++;
+          setTimeout(tick, speed);
+        } else {
+          setTimeout(resolve, 400);
+        }
+      }
+      tick();
+    });
+  }
+
+  function clearInput() {
+    inputBox.classList.remove('typing');
+    inputBox.textContent = defaultInputText;
+  }
+
+  function showBubble(b) {
+    b.classList.add('show');
+    chat.scrollTop = chat.scrollHeight;
+  }
+
+  async function runSequence() {
+    await sleep(600);
+    for (let i = 0; i < bubbles.length; i++) {
+      const b = bubbles[i];
+      const isOut = b.classList.contains('bubble--out');
+      if (isOut) {
+        const text = getPlainText(b);
+        await typeInInput(text);
+        clearInput();
+        showBubble(b);
+        await sleep(500);
+      } else {
+        showTypingDots();
+        await sleep(1200);
+        hideTypingDots();
+        showBubble(b);
+        await sleep(600);
+      }
+    }
+  }
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !animated) {
+        animated = true;
+        runSequence();
+        obs.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+  obs.observe(chat);
 })();
 
 (function() {
