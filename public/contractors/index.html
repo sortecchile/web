@@ -86,10 +86,47 @@
       padding: 0 24px;
     }
 
+    /* ============================================================ TOPBAR DT */
+    /* Acceso destacado al portal de fiscalización de la Dirección del Trabajo
+       (Art. 17 Res. 38 DT: el sitio comercial debe exhibir de forma visible
+       un acceso al portal de fiscalización). Sticky para que quede siempre
+       accesible, no solo al cargar la página. */
+    .dt-topbar {
+      position: sticky;
+      top: 0;
+      z-index: 101;
+      background: var(--primary);
+    }
+
+    .dt-topbar__inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 34px;
+    }
+
+    .dt-topbar__link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--primary-foreground);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .dt-topbar__link:hover {
+      opacity: 0.85;
+      text-decoration: underline;
+    }
+
+    .dt-topbar__text-short { display: none; }
+
     /* ============================================================ NAV */
     .nav {
       position: sticky;
-      top: 0;
+      top: 34px;
       z-index: 100;
       background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(10px);
@@ -2115,11 +2152,33 @@
       .lang-toggle { display: none; }
       .fab span { display: none; }
       .fab { padding: 14px; border-radius: 50%; }
+      .dt-topbar__link { font-size: 12px; }
+      .dt-topbar__text-full { display: none; }
+      .dt-topbar__text-short { display: inline; }
     }
   </style>
 </head>
 
 <body>
+
+  <!-- ============================================== TOPBAR FISCALIZACIÓN DT -->
+  <!-- Acceso destacado y permanente al portal de fiscalización de la
+       Dirección del Trabajo (Art. 17 Res. 38 DT). -->
+  <div class="dt-topbar">
+    <div class="container dt-topbar__inner">
+      <a
+        href="https://growers.miido.cl/fiscalizacion/login"
+        target="_blank"
+        rel="noopener"
+        class="dt-topbar__link"
+        aria-label="Portal de Fiscalización de la Dirección del Trabajo — se abre en una pestaña nueva"
+      >
+        <span class="dt-topbar__text-full">Portal de Fiscalización — Dirección del Trabajo</span>
+        <span class="dt-topbar__text-short">Portal Fiscalización DT</span>
+        <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
 
   <!-- =========================================================== NAV -->
   <nav class="nav">
@@ -2853,7 +2912,8 @@
         const target = document.querySelector(href);
         if (target) {
           e.preventDefault();
-          const navH = document.querySelector('.nav').offsetHeight;
+          const topbarEl = document.querySelector('.dt-topbar');
+          const navH = document.querySelector('.nav').offsetHeight + (topbarEl ? topbarEl.offsetHeight : 0);
           const top = target.getBoundingClientRect().top + window.scrollY - navH - 16;
           window.scrollTo({ top, behavior: 'smooth' });
         }
