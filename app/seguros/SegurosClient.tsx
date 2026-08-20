@@ -12,6 +12,10 @@ import { Input } from "@/src/components/ui/input"
 import { useDarkMode } from '../hooks/useDarkMode'
 
 const API_BASE = 'https://agrosafe.cl/api'
+// Endpoint propio de MIIDO para registrar cada lead en Notion (Google Apps Script que
+// guarda el token de Notion del lado servidor). Mientras esté vacío, el sitio funciona
+// igual enviando solo a AgroSafe; al pegar la URL /exec, se activa la copia en Notion.
+const CAPTURE_URL = 'https://script.google.com/macros/s/AKfycbxQJZFCFnONnLhkDEq_fBOwB-7ntJPy-P3dVo9_e-8azcVFdfapAWP0T1mJPUiS3eolHA/exec'
 const WA_NUMBER = '56942964199'
 const WA_COTIZAR = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hola, vengo de MIIDO y quiero cotizar un seguro para mi campo, mi flota o mi maquinaria.')}`
 const WA_POLIZA = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hola, vengo de MIIDO. Tengo una propuesta de otra corredora y quiero que me la mejoren. Les envío mi póliza / cotización.')}`
@@ -312,9 +316,16 @@ function LeadForm() {
     setEnviando(true)
     setMensajeError('')
     setAvisoPoliza('')
+
+    const ref = (typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('ref') : null) || ''
+    const productosLabels = PRODUCTOS.filter(p => tipos.includes(p.value)).map(p => p.label)
+
+    let agrosafeOk = false
+    let agrosafeId = ''
+    let agrosafeError = ''
+
+    // 1) Envío automático a AgroSafe
     try {
-      const params = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : null
-      const ref = params?.get('ref')
       const res = await fetch(`${API_BASE}/leads`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -328,31 +339,61 @@ function LeadForm() {
           ...(ref ? { ref } : {}),
         }),
       })
-      if (!res.ok) {
+      if (res.ok) {
+        agrosafeOk = true
+        const data = await res.json().catch(() => null)
+        agrosafeId = data?.id ? String(data.id) : ''
+        if (file && data?.id) {
+          try {
+            const fd = new FormData()
+            fd.append('file', file)
+            const up = await fetch(`${API_BASE}/leads/${data.id}/current-policy`, { method: 'POST', body: fd })
+            if (!up.ok) setAvisoPoliza('No pudimos adjuntar tu póliza, pero recibimos tu solicitud.')
+          } catch {
+            setAvisoPoliza('No pudimos adjuntar tu póliza, pero recibimos tu solicitud.')
+          }
+        }
+      } else {
         let detalle = ''
         try {
           const data = await res.json()
           if (typeof data?.detail === 'string') detalle = data.detail
         } catch { /* respuesta sin cuerpo JSON */ }
-        setMensajeError(detalle || 'No pudimos enviar tu solicitud. Intenta nuevamente.')
-        return
+        agrosafeError = detalle || 'No pudimos enviar tu solicitud. Intenta nuevamente.'
       }
-      const data = await res.json().catch(() => null)
-      if (file && data?.id) {
-        try {
-          const fd = new FormData()
-          fd.append('file', file)
-          const up = await fetch(`${API_BASE}/leads/${data.id}/current-policy`, { method: 'POST', body: fd })
-          if (!up.ok) setAvisoPoliza('No pudimos adjuntar tu póliza, pero recibimos tu solicitud.')
-        } catch {
-          setAvisoPoliza('No pudimos adjuntar tu póliza, pero recibimos tu solicitud.')
-        }
-      }
-      setEnviado(true)
     } catch {
-      setMensajeError('No pudimos enviar tu solicitud. Revisa tu conexión e intenta nuevamente.')
-    } finally {
-      setEnviando(false)
+      agrosafeError = 'No pudimos enviar tu solicitud. Revisa tu conexión e intenta nuevamente.'
+    }
+
+    // 2) Copia en Notion (best-effort, no bloquea la UX): se registra SIEMPRE,
+    //    incluso si el envío a AgroSafe falló, para tener trazabilidad completa.
+    if (CAPTURE_URL) {
+      try {
+        await fetch(CAPTURE_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          // text/plain evita el preflight CORS; el Apps Script hace JSON.parse del body.
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            nombre: nombre.trim(),
+            email: email.trim(),
+            rut: rut.trim(),
+            celular: celular.trim(),
+            productos: productosLabels,
+            polizaAdjunta: !!file,
+            origen: `web /seguros${ref ? ` · ref=${ref}` : ''}`,
+            enviadoAgroSafe: agrosafeOk ? 'Sí' : 'Falló',
+            leadIdAgroSafe: agrosafeId,
+          }),
+        })
+      } catch { /* la trazabilidad nunca debe romper el envío del usuario */ }
+    }
+
+    setEnviando(false)
+    if (agrosafeOk) {
+      setEnviado(true)
+    } else {
+      setMensajeError(agrosafeError || 'No pudimos enviar tu solicitud. Intenta nuevamente.')
     }
   }
 
