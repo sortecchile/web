@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import AgrosafeClient from "./AgrosafeClient";
+import SegurosClient from "./SegurosClient";
 
 export const metadata: Metadata = {
   title: "Seguros para el agro — MIIDO × AgroSafe",
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function AgrosafePage() {
-  return <AgrosafeClient />;
+  return <SegurosClient />;
 }

@@ -506,7 +506,7 @@ function LeadForm() {
   )
 }
 
-export default function AgrosafeClient() {
+export default function SegurosClient() {
   const { isDark, toggleDarkMode } = useDarkMode()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [openQuestion, setOpenQuestion] = useState<number | null>(null)
